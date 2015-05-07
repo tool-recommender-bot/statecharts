@@ -127,6 +127,11 @@ public class StatechartSpecificationItemProvider extends ScopedElementItemProvid
 		newChildDescriptors.add
 			(createChildParameter
 				(SGraphPackage.Literals.SCOPED_ELEMENT__SCOPES,
+				 StextFactory.eINSTANCE.createPortScope()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SGraphPackage.Literals.SCOPED_ELEMENT__SCOPES,
 				 StextFactory.eINSTANCE.createSimpleScope()));
 	}
 

@@ -9,6 +9,7 @@ import org.yakindu.base.base.NamedElement;
 import org.yakindu.base.expressions.expressions.Expression;
 import org.yakindu.base.types.Declaration;
 import org.yakindu.base.types.Event;
+import org.yakindu.base.types.MetaComposite;
 import org.yakindu.base.types.Operation;
 import org.yakindu.base.types.PackageMember;
 import org.yakindu.base.types.Property;
@@ -21,6 +22,7 @@ import org.yakindu.sct.model.sgraph.ReactionProperty;
 import org.yakindu.sct.model.sgraph.Scope;
 import org.yakindu.sct.model.sgraph.ScopedElement;
 import org.yakindu.sct.model.sgraph.Trigger;
+import org.yakindu.sct.model.stext.stext.*;
 import org.yakindu.sct.model.stext.stext.ActiveStateReferenceExpression;
 import org.yakindu.sct.model.stext.stext.AlwaysEvent;
 import org.yakindu.sct.model.stext.stext.BuiltinEventSpec;
@@ -97,7 +99,7 @@ public class StextSwitch<T> extends Switch<T> {
 	 * Checks whether this is a switch for the given package.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @parameter ePackage the package in question.
+	 * @param ePackage the package in question.
 	 * @return whether this is a switch for the given package.
 	 * @generated
 	 */
@@ -200,6 +202,15 @@ public class StextSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case StextPackage.PORT_SCOPE: {
+				PortScope portScope = (PortScope)theEObject;
+				T result = casePortScope(portScope);
+				if (result == null) result = caseStatechartScope(portScope);
+				if (result == null) result = caseNamedElement(portScope);
+				if (result == null) result = caseScope(portScope);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case StextPackage.IMPORT: {
 				Import import_ = (Import)theEObject;
 				T result = caseImport(import_);
@@ -213,6 +224,7 @@ public class StextSwitch<T> extends Switch<T> {
 				if (result == null) result = caseDeclaration(eventDefinition);
 				if (result == null) result = caseTypedElement(eventDefinition);
 				if (result == null) result = caseNamedElement(eventDefinition);
+				if (result == null) result = caseMetaComposite(eventDefinition);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -223,6 +235,7 @@ public class StextSwitch<T> extends Switch<T> {
 				if (result == null) result = caseDeclaration(variableDefinition);
 				if (result == null) result = caseTypedElement(variableDefinition);
 				if (result == null) result = caseNamedElement(variableDefinition);
+				if (result == null) result = caseMetaComposite(variableDefinition);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -234,6 +247,7 @@ public class StextSwitch<T> extends Switch<T> {
 				if (result == null) result = casePackageMember(operationDefinition);
 				if (result == null) result = caseTypedElement(operationDefinition);
 				if (result == null) result = caseNamedElement(operationDefinition);
+				if (result == null) result = caseMetaComposite(operationDefinition);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -244,6 +258,7 @@ public class StextSwitch<T> extends Switch<T> {
 				if (result == null) result = caseDeclaration(typeAliasDefinition);
 				if (result == null) result = caseTypedElement(typeAliasDefinition);
 				if (result == null) result = caseType(typeAliasDefinition);
+				if (result == null) result = caseMetaComposite(typeAliasDefinition);
 				if (result == null) result = casePackageMember(typeAliasDefinition);
 				if (result == null) result = caseNamedElement(typeAliasDefinition);
 				if (result == null) result = defaultCase(theEObject);
@@ -256,6 +271,7 @@ public class StextSwitch<T> extends Switch<T> {
 				if (result == null) result = caseDeclaration(localReaction);
 				if (result == null) result = caseTypedElement(localReaction);
 				if (result == null) result = caseNamedElement(localReaction);
+				if (result == null) result = caseMetaComposite(localReaction);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -567,6 +583,21 @@ public class StextSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseImportScope(ImportScope object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Port Scope</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Port Scope</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T casePortScope(PortScope object) {
 		return null;
 	}
 
@@ -987,6 +1018,21 @@ public class StextSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseTypedElement(TypedElement object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Meta Composite</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Meta Composite</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseMetaComposite(MetaComposite object) {
 		return null;
 	}
 

@@ -486,6 +486,79 @@ public interface StextPackage extends EPackage {
 	int IMPORT_SCOPE_FEATURE_COUNT = STATECHART_SCOPE_FEATURE_COUNT + 1;
 
 	/**
+	 * The meta object id for the '{@link org.yakindu.sct.model.stext.stext.impl.PortScopeImpl <em>Port Scope</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.yakindu.sct.model.stext.stext.impl.PortScopeImpl
+	 * @see org.yakindu.sct.model.stext.stext.impl.StextPackageImpl#getPortScope()
+	 * @generated
+	 */
+	int PORT_SCOPE = 12;
+
+	/**
+	 * The feature id for the '<em><b>Declarations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PORT_SCOPE__DECLARATIONS = STATECHART_SCOPE__DECLARATIONS;
+
+	/**
+	 * The feature id for the '<em><b>Events</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PORT_SCOPE__EVENTS = STATECHART_SCOPE__EVENTS;
+
+	/**
+	 * The feature id for the '<em><b>Variables</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PORT_SCOPE__VARIABLES = STATECHART_SCOPE__VARIABLES;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PORT_SCOPE__NAME = STATECHART_SCOPE_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Direction</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PORT_SCOPE__DIRECTION = STATECHART_SCOPE_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Type</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PORT_SCOPE__TYPE = STATECHART_SCOPE_FEATURE_COUNT + 2;
+
+	/**
+	 * The number of structural features of the '<em>Port Scope</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PORT_SCOPE_FEATURE_COUNT = STATECHART_SCOPE_FEATURE_COUNT + 3;
+
+	/**
 	 * The meta object id for the '{@link org.yakindu.sct.model.stext.stext.impl.ImportImpl <em>Import</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -493,7 +566,7 @@ public interface StextPackage extends EPackage {
 	 * @see org.yakindu.sct.model.stext.stext.impl.StextPackageImpl#getImport()
 	 * @generated
 	 */
-	int IMPORT = 12;
+	int IMPORT = 13;
 
 	/**
 	 * The feature id for the '<em><b>Imported Namespace</b></em>' attribute.
@@ -521,7 +594,7 @@ public interface StextPackage extends EPackage {
 	 * @see org.yakindu.sct.model.stext.stext.impl.StextPackageImpl#getEventDefinition()
 	 * @generated
 	 */
-	int EVENT_DEFINITION = 13;
+	int EVENT_DEFINITION = 14;
 
 	/**
 	 * The feature id for the '<em><b>Type</b></em>' reference.
@@ -551,6 +624,24 @@ public interface StextPackage extends EPackage {
 	int EVENT_DEFINITION__NAME = TypesPackage.EVENT__NAME;
 
 	/**
+	 * The feature id for the '<em><b>Meta Features</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EVENT_DEFINITION__META_FEATURES = TypesPackage.EVENT__META_FEATURES;
+
+	/**
+	 * The feature id for the '<em><b>Owning Type</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EVENT_DEFINITION__OWNING_TYPE = TypesPackage.EVENT__OWNING_TYPE;
+
+	/**
 	 * The feature id for the '<em><b>Direction</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -576,7 +667,7 @@ public interface StextPackage extends EPackage {
 	 * @see org.yakindu.sct.model.stext.stext.impl.StextPackageImpl#getVariableDefinition()
 	 * @generated
 	 */
-	int VARIABLE_DEFINITION = 14;
+	int VARIABLE_DEFINITION = 15;
 
 	/**
 	 * The feature id for the '<em><b>Type</b></em>' reference.
@@ -604,6 +695,24 @@ public interface StextPackage extends EPackage {
 	 * @ordered
 	 */
 	int VARIABLE_DEFINITION__NAME = TypesPackage.PROPERTY__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Meta Features</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VARIABLE_DEFINITION__META_FEATURES = TypesPackage.PROPERTY__META_FEATURES;
+
+	/**
+	 * The feature id for the '<em><b>Owning Type</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VARIABLE_DEFINITION__OWNING_TYPE = TypesPackage.PROPERTY__OWNING_TYPE;
 
 	/**
 	 * The feature id for the '<em><b>Const</b></em>' attribute.
@@ -658,7 +767,7 @@ public interface StextPackage extends EPackage {
 	 * @see org.yakindu.sct.model.stext.stext.impl.StextPackageImpl#getOperationDefinition()
 	 * @generated
 	 */
-	int OPERATION_DEFINITION = 15;
+	int OPERATION_DEFINITION = 16;
 
 	/**
 	 * The feature id for the '<em><b>Type</b></em>' reference.
@@ -688,6 +797,24 @@ public interface StextPackage extends EPackage {
 	int OPERATION_DEFINITION__NAME = TypesPackage.OPERATION__NAME;
 
 	/**
+	 * The feature id for the '<em><b>Meta Features</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPERATION_DEFINITION__META_FEATURES = TypesPackage.OPERATION__META_FEATURES;
+
+	/**
+	 * The feature id for the '<em><b>Owning Type</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPERATION_DEFINITION__OWNING_TYPE = TypesPackage.OPERATION__OWNING_TYPE;
+
+	/**
 	 * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -713,7 +840,7 @@ public interface StextPackage extends EPackage {
 	 * @see org.yakindu.sct.model.stext.stext.impl.StextPackageImpl#getTypeAliasDefinition()
 	 * @generated
 	 */
-	int TYPE_ALIAS_DEFINITION = 16;
+	int TYPE_ALIAS_DEFINITION = 17;
 
 	/**
 	 * The feature id for the '<em><b>Type</b></em>' reference.
@@ -761,13 +888,31 @@ public interface StextPackage extends EPackage {
 	int TYPE_ALIAS_DEFINITION__ABSTRACT = TypesPackage.TYPE_ALIAS__ABSTRACT;
 
 	/**
+	 * The feature id for the '<em><b>Meta Features</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TYPE_ALIAS_DEFINITION__META_FEATURES = TypesPackage.TYPE_ALIAS_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Owning Type</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TYPE_ALIAS_DEFINITION__OWNING_TYPE = TypesPackage.TYPE_ALIAS_FEATURE_COUNT + 1;
+
+	/**
 	 * The number of structural features of the '<em>Type Alias Definition</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TYPE_ALIAS_DEFINITION_FEATURE_COUNT = TypesPackage.TYPE_ALIAS_FEATURE_COUNT + 0;
+	int TYPE_ALIAS_DEFINITION_FEATURE_COUNT = TypesPackage.TYPE_ALIAS_FEATURE_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.sct.model.stext.stext.impl.LocalReactionImpl <em>Local Reaction</em>}' class.
@@ -777,7 +922,7 @@ public interface StextPackage extends EPackage {
 	 * @see org.yakindu.sct.model.stext.stext.impl.StextPackageImpl#getLocalReaction()
 	 * @generated
 	 */
-	int LOCAL_REACTION = 17;
+	int LOCAL_REACTION = 18;
 
 	/**
 	 * The feature id for the '<em><b>Trigger</b></em>' containment reference.
@@ -834,13 +979,31 @@ public interface StextPackage extends EPackage {
 	int LOCAL_REACTION__NAME = SGraphPackage.REACTION_FEATURE_COUNT + 2;
 
 	/**
+	 * The feature id for the '<em><b>Meta Features</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LOCAL_REACTION__META_FEATURES = SGraphPackage.REACTION_FEATURE_COUNT + 3;
+
+	/**
+	 * The feature id for the '<em><b>Owning Type</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LOCAL_REACTION__OWNING_TYPE = SGraphPackage.REACTION_FEATURE_COUNT + 4;
+
+	/**
 	 * The number of structural features of the '<em>Local Reaction</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int LOCAL_REACTION_FEATURE_COUNT = SGraphPackage.REACTION_FEATURE_COUNT + 3;
+	int LOCAL_REACTION_FEATURE_COUNT = SGraphPackage.REACTION_FEATURE_COUNT + 5;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.sct.model.stext.stext.impl.TransitionReactionImpl <em>Transition Reaction</em>}' class.
@@ -850,7 +1013,7 @@ public interface StextPackage extends EPackage {
 	 * @see org.yakindu.sct.model.stext.stext.impl.StextPackageImpl#getTransitionReaction()
 	 * @generated
 	 */
-	int TRANSITION_REACTION = 18;
+	int TRANSITION_REACTION = 19;
 
 	/**
 	 * The feature id for the '<em><b>Trigger</b></em>' containment reference.
@@ -896,7 +1059,7 @@ public interface StextPackage extends EPackage {
 	 * @see org.yakindu.sct.model.stext.stext.impl.StextPackageImpl#getGuard()
 	 * @generated
 	 */
-	int GUARD = 19;
+	int GUARD = 20;
 
 	/**
 	 * The feature id for the '<em><b>Expression</b></em>' containment reference.
@@ -924,7 +1087,7 @@ public interface StextPackage extends EPackage {
 	 * @see org.yakindu.sct.model.stext.stext.impl.StextPackageImpl#getEntryPointSpec()
 	 * @generated
 	 */
-	int ENTRY_POINT_SPEC = 20;
+	int ENTRY_POINT_SPEC = 21;
 
 	/**
 	 * The feature id for the '<em><b>Entrypoint</b></em>' attribute.
@@ -952,7 +1115,7 @@ public interface StextPackage extends EPackage {
 	 * @see org.yakindu.sct.model.stext.stext.impl.StextPackageImpl#getExitPointSpec()
 	 * @generated
 	 */
-	int EXIT_POINT_SPEC = 21;
+	int EXIT_POINT_SPEC = 22;
 
 	/**
 	 * The feature id for the '<em><b>Exitpoint</b></em>' attribute.
@@ -980,7 +1143,7 @@ public interface StextPackage extends EPackage {
 	 * @see org.yakindu.sct.model.stext.stext.impl.StextPackageImpl#getEventSpec()
 	 * @generated
 	 */
-	int EVENT_SPEC = 22;
+	int EVENT_SPEC = 23;
 
 	/**
 	 * The number of structural features of the '<em>Event Spec</em>' class.
@@ -999,7 +1162,7 @@ public interface StextPackage extends EPackage {
 	 * @see org.yakindu.sct.model.stext.stext.impl.StextPackageImpl#getRegularEventSpec()
 	 * @generated
 	 */
-	int REGULAR_EVENT_SPEC = 23;
+	int REGULAR_EVENT_SPEC = 24;
 
 	/**
 	 * The feature id for the '<em><b>Event</b></em>' containment reference.
@@ -1027,7 +1190,7 @@ public interface StextPackage extends EPackage {
 	 * @see org.yakindu.sct.model.stext.stext.impl.StextPackageImpl#getTimeEventSpec()
 	 * @generated
 	 */
-	int TIME_EVENT_SPEC = 24;
+	int TIME_EVENT_SPEC = 25;
 
 	/**
 	 * The feature id for the '<em><b>Type</b></em>' attribute.
@@ -1073,7 +1236,7 @@ public interface StextPackage extends EPackage {
 	 * @see org.yakindu.sct.model.stext.stext.impl.StextPackageImpl#getBuiltinEventSpec()
 	 * @generated
 	 */
-	int BUILTIN_EVENT_SPEC = 25;
+	int BUILTIN_EVENT_SPEC = 26;
 
 	/**
 	 * The number of structural features of the '<em>Builtin Event Spec</em>' class.
@@ -1092,7 +1255,7 @@ public interface StextPackage extends EPackage {
 	 * @see org.yakindu.sct.model.stext.stext.impl.StextPackageImpl#getEntryEvent()
 	 * @generated
 	 */
-	int ENTRY_EVENT = 26;
+	int ENTRY_EVENT = 27;
 
 	/**
 	 * The number of structural features of the '<em>Entry Event</em>' class.
@@ -1111,7 +1274,7 @@ public interface StextPackage extends EPackage {
 	 * @see org.yakindu.sct.model.stext.stext.impl.StextPackageImpl#getExitEvent()
 	 * @generated
 	 */
-	int EXIT_EVENT = 27;
+	int EXIT_EVENT = 28;
 
 	/**
 	 * The number of structural features of the '<em>Exit Event</em>' class.
@@ -1130,7 +1293,7 @@ public interface StextPackage extends EPackage {
 	 * @see org.yakindu.sct.model.stext.stext.impl.StextPackageImpl#getAlwaysEvent()
 	 * @generated
 	 */
-	int ALWAYS_EVENT = 28;
+	int ALWAYS_EVENT = 29;
 
 	/**
 	 * The number of structural features of the '<em>Always Event</em>' class.
@@ -1149,7 +1312,7 @@ public interface StextPackage extends EPackage {
 	 * @see org.yakindu.sct.model.stext.stext.impl.StextPackageImpl#getSimpleScope()
 	 * @generated
 	 */
-	int SIMPLE_SCOPE = 29;
+	int SIMPLE_SCOPE = 30;
 
 	/**
 	 * The feature id for the '<em><b>Declarations</b></em>' containment reference list.
@@ -1195,7 +1358,7 @@ public interface StextPackage extends EPackage {
 	 * @see org.yakindu.sct.model.stext.stext.impl.StextPackageImpl#getReactionTrigger()
 	 * @generated
 	 */
-	int REACTION_TRIGGER = 30;
+	int REACTION_TRIGGER = 31;
 
 	/**
 	 * The feature id for the '<em><b>Triggers</b></em>' containment reference list.
@@ -1232,7 +1395,7 @@ public interface StextPackage extends EPackage {
 	 * @see org.yakindu.sct.model.stext.stext.impl.StextPackageImpl#getDefaultTrigger()
 	 * @generated
 	 */
-	int DEFAULT_TRIGGER = 31;
+	int DEFAULT_TRIGGER = 32;
 
 	/**
 	 * The number of structural features of the '<em>Default Trigger</em>' class.
@@ -1251,7 +1414,7 @@ public interface StextPackage extends EPackage {
 	 * @see org.yakindu.sct.model.stext.stext.impl.StextPackageImpl#getReactionEffect()
 	 * @generated
 	 */
-	int REACTION_EFFECT = 32;
+	int REACTION_EFFECT = 33;
 
 	/**
 	 * The feature id for the '<em><b>Actions</b></em>' containment reference list.
@@ -1279,7 +1442,7 @@ public interface StextPackage extends EPackage {
 	 * @see org.yakindu.sct.model.stext.stext.impl.StextPackageImpl#getEventRaisingExpression()
 	 * @generated
 	 */
-	int EVENT_RAISING_EXPRESSION = 33;
+	int EVENT_RAISING_EXPRESSION = 34;
 
 	/**
 	 * The feature id for the '<em><b>Event</b></em>' containment reference.
@@ -1316,7 +1479,7 @@ public interface StextPackage extends EPackage {
 	 * @see org.yakindu.sct.model.stext.stext.impl.StextPackageImpl#getEventValueReferenceExpression()
 	 * @generated
 	 */
-	int EVENT_VALUE_REFERENCE_EXPRESSION = 34;
+	int EVENT_VALUE_REFERENCE_EXPRESSION = 35;
 
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' containment reference.
@@ -1344,7 +1507,7 @@ public interface StextPackage extends EPackage {
 	 * @see org.yakindu.sct.model.stext.stext.impl.StextPackageImpl#getActiveStateReferenceExpression()
 	 * @generated
 	 */
-	int ACTIVE_STATE_REFERENCE_EXPRESSION = 35;
+	int ACTIVE_STATE_REFERENCE_EXPRESSION = 36;
 
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' reference.
@@ -1365,6 +1528,16 @@ public interface StextPackage extends EPackage {
 	int ACTIVE_STATE_REFERENCE_EXPRESSION_FEATURE_COUNT = ExpressionsPackage.EXPRESSION_FEATURE_COUNT + 1;
 
 	/**
+	 * The meta object id for the '{@link org.yakindu.sct.model.stext.stext.PortDirection <em>Port Direction</em>}' enum.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.yakindu.sct.model.stext.stext.PortDirection
+	 * @see org.yakindu.sct.model.stext.stext.impl.StextPackageImpl#getPortDirection()
+	 * @generated
+	 */
+	int PORT_DIRECTION = 37;
+
+	/**
 	 * The meta object id for the '{@link org.yakindu.sct.model.stext.stext.TimeEventType <em>Time Event Type</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1372,7 +1545,7 @@ public interface StextPackage extends EPackage {
 	 * @see org.yakindu.sct.model.stext.stext.impl.StextPackageImpl#getTimeEventType()
 	 * @generated
 	 */
-	int TIME_EVENT_TYPE = 36;
+	int TIME_EVENT_TYPE = 38;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.sct.model.stext.stext.TimeUnit <em>Time Unit</em>}' enum.
@@ -1382,7 +1555,7 @@ public interface StextPackage extends EPackage {
 	 * @see org.yakindu.sct.model.stext.stext.impl.StextPackageImpl#getTimeUnit()
 	 * @generated
 	 */
-	int TIME_UNIT = 37;
+	int TIME_UNIT = 39;
 
 
 	/**
@@ -1581,6 +1754,38 @@ public interface StextPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getImportScope_Imports();
+
+	/**
+	 * Returns the meta object for class '{@link org.yakindu.sct.model.stext.stext.PortScope <em>Port Scope</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Port Scope</em>'.
+	 * @see org.yakindu.sct.model.stext.stext.PortScope
+	 * @generated
+	 */
+	EClass getPortScope();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.yakindu.sct.model.stext.stext.PortScope#getDirection <em>Direction</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Direction</em>'.
+	 * @see org.yakindu.sct.model.stext.stext.PortScope#getDirection()
+	 * @see #getPortScope()
+	 * @generated
+	 */
+	EAttribute getPortScope_Direction();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.yakindu.sct.model.stext.stext.PortScope#getType <em>Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Type</em>'.
+	 * @see org.yakindu.sct.model.stext.stext.PortScope#getType()
+	 * @see #getPortScope()
+	 * @generated
+	 */
+	EReference getPortScope_Type();
 
 	/**
 	 * Returns the meta object for class '{@link org.yakindu.sct.model.stext.stext.Import <em>Import</em>}'.
@@ -1999,6 +2204,16 @@ public interface StextPackage extends EPackage {
 	EReference getActiveStateReferenceExpression_Value();
 
 	/**
+	 * Returns the meta object for enum '{@link org.yakindu.sct.model.stext.stext.PortDirection <em>Port Direction</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for enum '<em>Port Direction</em>'.
+	 * @see org.yakindu.sct.model.stext.stext.PortDirection
+	 * @generated
+	 */
+	EEnum getPortDirection();
+
+	/**
 	 * Returns the meta object for enum '{@link org.yakindu.sct.model.stext.stext.TimeEventType <em>Time Event Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2215,6 +2430,32 @@ public interface StextPackage extends EPackage {
 		 * @generated
 		 */
 		EReference IMPORT_SCOPE__IMPORTS = eINSTANCE.getImportScope_Imports();
+
+		/**
+		 * The meta object literal for the '{@link org.yakindu.sct.model.stext.stext.impl.PortScopeImpl <em>Port Scope</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.yakindu.sct.model.stext.stext.impl.PortScopeImpl
+		 * @see org.yakindu.sct.model.stext.stext.impl.StextPackageImpl#getPortScope()
+		 * @generated
+		 */
+		EClass PORT_SCOPE = eINSTANCE.getPortScope();
+
+		/**
+		 * The meta object literal for the '<em><b>Direction</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PORT_SCOPE__DIRECTION = eINSTANCE.getPortScope_Direction();
+
+		/**
+		 * The meta object literal for the '<em><b>Type</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference PORT_SCOPE__TYPE = eINSTANCE.getPortScope_Type();
 
 		/**
 		 * The meta object literal for the '{@link org.yakindu.sct.model.stext.stext.impl.ImportImpl <em>Import</em>}' class.
@@ -2583,6 +2824,16 @@ public interface StextPackage extends EPackage {
 		 * @generated
 		 */
 		EReference ACTIVE_STATE_REFERENCE_EXPRESSION__VALUE = eINSTANCE.getActiveStateReferenceExpression_Value();
+
+		/**
+		 * The meta object literal for the '{@link org.yakindu.sct.model.stext.stext.PortDirection <em>Port Direction</em>}' enum.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.yakindu.sct.model.stext.stext.PortDirection
+		 * @see org.yakindu.sct.model.stext.stext.impl.StextPackageImpl#getPortDirection()
+		 * @generated
+		 */
+		EEnum PORT_DIRECTION = eINSTANCE.getPortDirection();
 
 		/**
 		 * The meta object literal for the '{@link org.yakindu.sct.model.stext.stext.TimeEventType <em>Time Event Type</em>}' enum.

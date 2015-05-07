@@ -130,6 +130,15 @@ public interface StextFactory extends EFactory {
 	ImportScope createImportScope();
 
 	/**
+	 * Returns a new object of class '<em>Port Scope</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Port Scope</em>'.
+	 * @generated
+	 */
+	PortScope createPortScope();
+
+	/**
 	 * Returns a new object of class '<em>Import</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

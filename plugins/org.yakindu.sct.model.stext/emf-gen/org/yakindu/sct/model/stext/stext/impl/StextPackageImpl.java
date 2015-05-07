@@ -32,6 +32,8 @@ import org.yakindu.sct.model.stext.stext.InterfaceScope;
 import org.yakindu.sct.model.stext.stext.InternalScope;
 import org.yakindu.sct.model.stext.stext.LocalReaction;
 import org.yakindu.sct.model.stext.stext.OperationDefinition;
+import org.yakindu.sct.model.stext.stext.PortDirection;
+import org.yakindu.sct.model.stext.stext.PortScope;
 import org.yakindu.sct.model.stext.stext.ReactionEffect;
 import org.yakindu.sct.model.stext.stext.ReactionTrigger;
 import org.yakindu.sct.model.stext.stext.RegularEventSpec;
@@ -143,6 +145,13 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage {
 	 * @generated
 	 */
 	private EClass importScopeEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass portScopeEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -311,6 +320,13 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage {
 	 * @generated
 	 */
 	private EClass activeStateReferenceExpressionEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EEnum portDirectionEEnum = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -560,6 +576,33 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage {
 	 */
 	public EReference getImportScope_Imports() {
 		return (EReference)importScopeEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getPortScope() {
+		return portScopeEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getPortScope_Direction() {
+		return (EAttribute)portScopeEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getPortScope_Type() {
+		return (EReference)portScopeEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -927,6 +970,15 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EEnum getPortDirection() {
+		return portDirectionEEnum;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EEnum getTimeEventType() {
 		return timeEventTypeEEnum;
 	}
@@ -999,6 +1051,10 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage {
 		importScopeEClass = createEClass(IMPORT_SCOPE);
 		createEReference(importScopeEClass, IMPORT_SCOPE__IMPORTS);
 
+		portScopeEClass = createEClass(PORT_SCOPE);
+		createEAttribute(portScopeEClass, PORT_SCOPE__DIRECTION);
+		createEReference(portScopeEClass, PORT_SCOPE__TYPE);
+
 		importEClass = createEClass(IMPORT);
 		createEAttribute(importEClass, IMPORT__IMPORTED_NAMESPACE);
 
@@ -1064,6 +1120,7 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage {
 		createEReference(activeStateReferenceExpressionEClass, ACTIVE_STATE_REFERENCE_EXPRESSION__VALUE);
 
 		// Create enums
+		portDirectionEEnum = createEEnum(PORT_DIRECTION);
 		timeEventTypeEEnum = createEEnum(TIME_EVENT_TYPE);
 		timeUnitEEnum = createEEnum(TIME_UNIT);
 	}
@@ -1111,6 +1168,8 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage {
 		interfaceScopeEClass.getESuperTypes().add(theBasePackage.getNamedElement());
 		internalScopeEClass.getESuperTypes().add(this.getStatechartScope());
 		importScopeEClass.getESuperTypes().add(this.getStatechartScope());
+		portScopeEClass.getESuperTypes().add(this.getStatechartScope());
+		portScopeEClass.getESuperTypes().add(theBasePackage.getNamedElement());
 		eventDefinitionEClass.getESuperTypes().add(theTypesPackage.getEvent());
 		variableDefinitionEClass.getESuperTypes().add(theTypesPackage.getProperty());
 		operationDefinitionEClass.getESuperTypes().add(theTypesPackage.getOperation());
@@ -1166,6 +1225,10 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage {
 
 		initEClass(importScopeEClass, ImportScope.class, "ImportScope", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getImportScope_Imports(), this.getImport(), null, "imports", null, 0, -1, ImportScope.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(portScopeEClass, PortScope.class, "PortScope", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getPortScope_Direction(), this.getPortDirection(), "direction", null, 0, 1, PortScope.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getPortScope_Type(), theTypesPackage.getType(), null, "type", null, 0, 1, PortScope.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(importEClass, Import.class, "Import", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getImport_ImportedNamespace(), ecorePackage.getEString(), "importedNamespace", null, 0, 1, Import.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1232,6 +1295,10 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage {
 		initEReference(getActiveStateReferenceExpression_Value(), theSGraphPackage.getState(), null, "value", null, 0, 1, ActiveStateReferenceExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize enums and add enum literals
+		initEEnum(portDirectionEEnum, PortDirection.class, "PortDirection");
+		addEEnumLiteral(portDirectionEEnum, PortDirection.REQUIRES);
+		addEEnumLiteral(portDirectionEEnum, PortDirection.PROVIDES);
+
 		initEEnum(timeEventTypeEEnum, TimeEventType.class, "TimeEventType");
 		addEEnumLiteral(timeEventTypeEEnum, TimeEventType.AFTER);
 		addEEnumLiteral(timeEventTypeEEnum, TimeEventType.EVERY);

@@ -46,7 +46,7 @@ StateScope returns sgraph::Scope:
 	{SimpleScope} (declarations+=(LocalReaction))*;
 
 StatechartScope:
-	InterfaceScope | InternalScope | ImportScope;
+	InterfaceScope | InternalScope | ImportScope | PortScope;
 
 NamedInterfaceScope returns base::NamedElement:
 	InterfaceScope;
@@ -61,6 +61,17 @@ InternalScope:
 	
 ImportScope:
 	 {ImportScope} 'import' ':' (imports+=Import)*;
+
+
+NamedPortScope returns base::NamedElement:
+	PortScope;
+
+PortScope:
+	 {PortScope} 'port' (name=XID) (direction=PortDirection) (type=[types::Type|FQN]) ;
+	 
+enum PortDirection:
+	REQUIRES = 'requires' | PROVIDES = 'provides';
+	
 
 Import:
 	importedNamespace=QIDWithWildcards;
@@ -173,7 +184,7 @@ enum TimeUnit:
 	second='s' | millisecond='ms' | microsecond='us' | nanosecond='ns';
 
 XID:
-	ID | 'namespace' | 'interface' | 'internal' | 'event' | 'local' | 'in' | 'out' | 'var' | 'readonly' | 'external' |
+	ID | 'namespace' | 'interface' | 'internal' | 'import' | 'port' | 'event' | 'local' | 'in' | 'out' | 'var' | 'readonly' | 'external' |
 	'operation' | 'default' | 'else' | 'entry' | 'exit' | 'always' | 'oncycle' | 'raise' | 'valueof' | 'active';
 
 FQN:

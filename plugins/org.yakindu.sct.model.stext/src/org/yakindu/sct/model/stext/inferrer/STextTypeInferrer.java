@@ -75,7 +75,7 @@ public class STextTypeInferrer extends ExpressionsTypeInferrer {
 	}
 
 	public Object infer(EventValueReferenceExpression e) {
-		EventDefinition definition = deresolve(e.getValue());
+		Event definition = deresolve(e.getValue());
 		if (definition != null)
 			return inferTypeDispatch(definition.getType() != null ? definition.getType() : getType(VOID));
 		return inferTypeDispatch(e.getValue());
@@ -94,19 +94,19 @@ public class STextTypeInferrer extends ExpressionsTypeInferrer {
 
 	}
 
-	protected EventDefinition deresolve(Expression e) {
+	protected Event deresolve(Expression e) {
 		// TODO This is ugly -> reuse the TypeTrace to determine the context in
 		// infer(EventDefinition)
 		if (e instanceof ElementReferenceExpression) {
 			EObject reference = ((ElementReferenceExpression) e).getReference();
-			if (reference instanceof EventDefinition) {
-				return (EventDefinition) reference;
+			if (reference instanceof Event) {
+				return (Event) reference;
 			}
 		}
 		if (e instanceof FeatureCall) {
 			EObject reference = ((FeatureCall) e).getFeature();
-			if (reference instanceof EventDefinition) {
-				return (EventDefinition) reference;
+			if (reference instanceof Event) {
+				return (Event) reference;
 			}
 		}
 		return null;

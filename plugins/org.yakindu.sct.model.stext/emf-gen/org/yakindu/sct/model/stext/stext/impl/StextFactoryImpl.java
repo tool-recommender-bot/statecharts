@@ -8,6 +8,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
+import org.yakindu.sct.model.stext.stext.*;
 import org.yakindu.sct.model.stext.stext.ActiveStateReferenceExpression;
 import org.yakindu.sct.model.stext.stext.AlwaysEvent;
 import org.yakindu.sct.model.stext.stext.BuiltinEventSpec;
@@ -105,6 +106,7 @@ public class StextFactoryImpl extends EFactoryImpl implements StextFactory {
 			case StextPackage.INTERFACE_SCOPE: return createInterfaceScope();
 			case StextPackage.INTERNAL_SCOPE: return createInternalScope();
 			case StextPackage.IMPORT_SCOPE: return createImportScope();
+			case StextPackage.PORT_SCOPE: return createPortScope();
 			case StextPackage.IMPORT: return createImport();
 			case StextPackage.EVENT_DEFINITION: return createEventDefinition();
 			case StextPackage.VARIABLE_DEFINITION: return createVariableDefinition();
@@ -142,6 +144,8 @@ public class StextFactoryImpl extends EFactoryImpl implements StextFactory {
 	@Override
 	public Object createFromString(EDataType eDataType, String initialValue) {
 		switch (eDataType.getClassifierID()) {
+			case StextPackage.PORT_DIRECTION:
+				return createPortDirectionFromString(eDataType, initialValue);
 			case StextPackage.TIME_EVENT_TYPE:
 				return createTimeEventTypeFromString(eDataType, initialValue);
 			case StextPackage.TIME_UNIT:
@@ -159,6 +163,8 @@ public class StextFactoryImpl extends EFactoryImpl implements StextFactory {
 	@Override
 	public String convertToString(EDataType eDataType, Object instanceValue) {
 		switch (eDataType.getClassifierID()) {
+			case StextPackage.PORT_DIRECTION:
+				return convertPortDirectionToString(eDataType, instanceValue);
 			case StextPackage.TIME_EVENT_TYPE:
 				return convertTimeEventTypeToString(eDataType, instanceValue);
 			case StextPackage.TIME_UNIT:
@@ -286,6 +292,16 @@ public class StextFactoryImpl extends EFactoryImpl implements StextFactory {
 	public ImportScope createImportScope() {
 		ImportScopeImpl importScope = new ImportScopeImpl();
 		return importScope;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public PortScope createPortScope() {
+		PortScopeImpl portScope = new PortScopeImpl();
+		return portScope;
 	}
 
 	/**
@@ -526,6 +542,26 @@ public class StextFactoryImpl extends EFactoryImpl implements StextFactory {
 	public ActiveStateReferenceExpression createActiveStateReferenceExpression() {
 		ActiveStateReferenceExpressionImpl activeStateReferenceExpression = new ActiveStateReferenceExpressionImpl();
 		return activeStateReferenceExpression;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public PortDirection createPortDirectionFromString(EDataType eDataType, String initialValue) {
+		PortDirection result = PortDirection.get(initialValue);
+		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertPortDirectionToString(EDataType eDataType, Object instanceValue) {
+		return instanceValue == null ? null : instanceValue.toString();
 	}
 
 	/**

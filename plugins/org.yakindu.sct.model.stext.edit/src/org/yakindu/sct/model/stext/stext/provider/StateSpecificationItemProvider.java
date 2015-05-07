@@ -177,6 +177,11 @@ public class StateSpecificationItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(StextPackage.Literals.STATE_SPECIFICATION__SCOPE,
+				 StextFactory.eINSTANCE.createPortScope()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(StextPackage.Literals.STATE_SPECIFICATION__SCOPE,
 				 StextFactory.eINSTANCE.createSimpleScope()));
 
 		newChildDescriptors.add

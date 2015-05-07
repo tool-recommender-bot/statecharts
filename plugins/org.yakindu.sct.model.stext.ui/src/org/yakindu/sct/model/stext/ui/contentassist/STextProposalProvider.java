@@ -96,7 +96,7 @@ public class STextProposalProvider extends AbstractSTextProposalProvider {
 			FeatureCall featureCall = (FeatureCall) currentModel;
 			if (!(featureCall.getFeature() instanceof Operation)) {
 				suppressKeywords.add(grammarAccess.getFeatureCallAccess()
-						.getOperationCallLeftParenthesisKeyword_1_3_0_0());
+						.getOperationCallLeftParenthesisKeyword_1_2_0_0());
 			}
 		}
 		if (currentModel instanceof ElementReferenceExpression) {

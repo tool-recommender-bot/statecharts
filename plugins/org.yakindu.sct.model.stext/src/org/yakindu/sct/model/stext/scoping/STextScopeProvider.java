@@ -11,6 +11,7 @@
  */
 package org.yakindu.sct.model.stext.scoping;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.logging.Log;
@@ -31,12 +32,15 @@ import org.eclipse.xtext.scoping.impl.ImportNormalizer;
 import org.eclipse.xtext.scoping.impl.SimpleScope;
 import org.eclipse.xtext.util.PolymorphicDispatcher.ErrorHandler;
 import org.eclipse.xtext.util.Strings;
+import org.yakindu.base.base.NamedElement;
 import org.yakindu.base.expressions.expressions.ElementReferenceExpression;
 import org.yakindu.base.expressions.expressions.Expression;
 import org.yakindu.base.expressions.expressions.FeatureCall;
+import org.yakindu.base.expressions.expressions.MetaCall;
 import org.yakindu.base.types.ComplexType;
 import org.yakindu.base.types.Declaration;
 import org.yakindu.base.types.EnumerationType;
+import org.yakindu.base.types.MetaComposite;
 import org.yakindu.base.types.TypesPackage;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
 import org.yakindu.sct.model.sgraph.Scope;
@@ -45,6 +49,7 @@ import org.yakindu.sct.model.stext.scoping.ContextPredicateProvider.EmptyPredica
 import org.yakindu.sct.model.stext.stext.ImportScope;
 import org.yakindu.sct.model.stext.stext.InterfaceScope;
 import org.yakindu.sct.model.stext.stext.InternalScope;
+import org.yakindu.sct.model.stext.stext.PortScope;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
@@ -131,6 +136,37 @@ public class STextScopeProvider extends AbstractDeclarativeScopeProvider {
 				enumerations.getAllElements()));
 	}
 
+
+	public IScope scope_FeatureCall_feature(final MetaCall context, EReference reference) {
+
+		Predicate<IEObjectDescription> predicate = calculateFilterPredicate(context, reference);
+
+		Expression owner = context.getOwner();
+		EObject element = null;
+		if (owner instanceof ElementReferenceExpression) {
+			element = ((ElementReferenceExpression) owner).getReference();
+		} else if (owner instanceof FeatureCall) {
+			element = ((FeatureCall) owner).getFeature();
+		} else {
+			return getDelegate().getScope(context, reference);
+		}
+
+		IScope scope = IScope.NULLSCOPE;
+
+		if (element instanceof MetaComposite ) {
+			MetaComposite feature = (MetaComposite)element;
+
+			if (feature.getMetaFeatures().size() > 0) {
+				scope = Scopes.scopeFor(feature.getMetaFeatures(), scope);
+				scope = new FilteringScope(scope, predicate);
+			}
+		}
+
+		return scope;
+	}
+
+
+	
 	public IScope scope_FeatureCall_feature(final FeatureCall context, EReference reference) {
 
 		Predicate<IEObjectDescription> predicate = calculateFilterPredicate(context, reference);
@@ -152,6 +188,14 @@ public class STextScopeProvider extends AbstractDeclarativeScopeProvider {
 			scope = new FilteringScope(scope, predicate);
 		}
 
+		if (element instanceof PortScope) {
+			PortScope port = (PortScope) element;
+			if ( port.getType() != null && port.getType() instanceof ComplexType ) {
+				scope = Scopes.scopeFor(((ComplexType) port.getType()).getAllFeatures(), scope);
+				scope = new FilteringScope(scope, predicate);
+			}
+		}
+
 		if (element instanceof ComplexType) {
 			scope = Scopes.scopeFor(((ComplexType) element).getAllFeatures(), scope);
 			scope = new FilteringScope(scope, predicate);
@@ -163,8 +207,15 @@ public class STextScopeProvider extends AbstractDeclarativeScopeProvider {
 		}
 
 		if (element instanceof Declaration && ((Declaration) element).getType() instanceof ComplexType) {
-			scope = Scopes.scopeFor(((ComplexType) ((Declaration) element).getType()).getAllFeatures(), scope);
-			scope = new FilteringScope(scope, predicate);
+			Declaration feature = (Declaration)element;
+			List<Declaration> features = new ArrayList<Declaration>();
+
+			if (feature.getType() instanceof ComplexType) {
+				features.addAll(((ComplexType) feature.getType()).getAllFeatures());
+				scope = Scopes.scopeFor(features, scope);
+				scope = new FilteringScope(scope, predicate);
+			}
+
 		}
 
 		return scope;
@@ -195,8 +246,8 @@ public class STextScopeProvider extends AbstractDeclarativeScopeProvider {
 			return IScope.NULLSCOPE;
 		EList<Scope> scopes = statechart.getScopes();
 		for (Scope scope : scopes) {
-			if (scope instanceof InterfaceScope) {
-				String name = ((InterfaceScope) scope).getName();
+			if (scope instanceof NamedElement) {
+				String name = ((NamedElement) scope).getName();
 				if (name != null && name.trim().length() > 0) {
 					scopeCandidates.add(scope);
 				}
