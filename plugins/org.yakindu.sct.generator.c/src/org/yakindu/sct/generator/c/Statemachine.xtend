@@ -64,10 +64,10 @@ class Statemachine {
 			/*! Initializes the «type» state machine data structures. Must be called before first usage.*/
 			extern void «functionPrefix»init(«type»* handle);
 			
-			/*! Activates the state machine */
+			/*! Activates the state machine. */
 			extern void «functionPrefix»enter(«type»* handle);
 			
-			/*! Deactivates the state machine */
+			/*! Deactivates the state machine. */
 			extern void «functionPrefix»exit(«type»* handle);
 			
 			/*! Performs a 'run to completion' step. */
