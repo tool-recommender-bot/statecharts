@@ -83,7 +83,12 @@ public class STextProposalProvider extends AbstractSTextProposalProvider {
 		}
 
 		if (currentModel instanceof FeatureCall) {
-			suppressKeywords(suppressKeywords, (FeatureCall) currentModel);
+
+			FeatureCall featureCall = (FeatureCall) currentModel;
+			if (!(featureCall.getFeature() instanceof Operation)) {
+				suppressKeywords.add(grammarAccess.getFeatureCallAccess()
+						.getOperationCallLeftParenthesisKeyword_1_2_0_0());
+			}
 		}
 		if (currentModel instanceof ElementReferenceExpression) {
 			suppressKeywords(suppressKeywords, (ElementReferenceExpression) currentModel);
@@ -130,7 +135,7 @@ public class STextProposalProvider extends AbstractSTextProposalProvider {
 
 	private void suppressKeywords(List<Keyword> suppressKeywords, FeatureCall featureCall) {
 		if (!(featureCall.getFeature() instanceof Operation)) {
-			suppressKeywords.add(grammarAccess.getFeatureCallAccess().getOperationCallLeftParenthesisKeyword_1_3_0_0());
+			suppressKeywords.add(grammarAccess.getFeatureCallAccess().getOperationCallLeftParenthesisKeyword_1_2_0_0());
 		}
 	}
 

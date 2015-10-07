@@ -241,6 +241,11 @@ public class NumericalUnaryExpressionItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(ExpressionsPackage.Literals.NUMERICAL_UNARY_EXPRESSION__OPERAND,
+				 ExpressionsFactory.eINSTANCE.createMetaCall()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.NUMERICAL_UNARY_EXPRESSION__OPERAND,
 				 ExpressionsFactory.eINSTANCE.createElementReferenceExpression()));
 
 		newChildDescriptors.add

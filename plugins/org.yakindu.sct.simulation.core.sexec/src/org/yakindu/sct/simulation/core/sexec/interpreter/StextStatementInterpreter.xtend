@@ -129,11 +129,11 @@ class StextStatementInterpreter extends AbstractStatementInterpreter {
 		if (assignment.operator == AssignmentOperator::ASSIGN) {
 
 			//Strong typing, use the type of the scopeVariable instead of using new runtime type
-			scopeVariable.value = if(result != null) typeCast(result, scopeVariable.type) else null
+			scopeVariable.value = result; //if(result != null) typeCast(result, scopeVariable.type) else null
 		} else {
 			var operator = AbstractStatementInterpreter::assignFunctionMap.get(assignment.operator.getName())
 			scopeVariable.value = if (result != null)
-				typeCast(evaluate(operator, scopeVariable.getValue, result), scopeVariable.type)
+				evaluate(operator, scopeVariable.getValue, result) //typeCast(evaluate(operator, scopeVariable.getValue, result), scopeVariable.type)
 			else
 				null
 		}

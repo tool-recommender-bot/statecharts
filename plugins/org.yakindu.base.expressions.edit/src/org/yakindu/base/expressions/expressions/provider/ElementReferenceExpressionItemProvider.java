@@ -260,6 +260,11 @@ public class ElementReferenceExpressionItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(ExpressionsPackage.Literals.ELEMENT_REFERENCE_EXPRESSION__ARGS,
+				 ExpressionsFactory.eINSTANCE.createMetaCall()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.ELEMENT_REFERENCE_EXPRESSION__ARGS,
 				 ExpressionsFactory.eINSTANCE.createElementReferenceExpression()));
 
 		newChildDescriptors.add

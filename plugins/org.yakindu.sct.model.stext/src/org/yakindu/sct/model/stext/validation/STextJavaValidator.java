@@ -48,6 +48,7 @@ import org.yakindu.base.expressions.expressions.ElementReferenceExpression;
 import org.yakindu.base.expressions.expressions.Expression;
 import org.yakindu.base.expressions.expressions.ExpressionsPackage;
 import org.yakindu.base.expressions.expressions.FeatureCall;
+import org.yakindu.base.expressions.expressions.MetaCall;
 import org.yakindu.base.expressions.validation.ExpressionsJavaValidator;
 import org.yakindu.base.types.Declaration;
 import org.yakindu.base.types.Direction;
@@ -493,7 +494,7 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 
 	@Check(CheckType.FAST)
 	public void checkOperationArguments_FeatureCall(final FeatureCall call) {
-		if (call.getFeature() instanceof Operation) {
+		if (call.getFeature() instanceof Operation && (! (call.eContainer() instanceof MetaCall)) ) {
 			Operation operation = (Operation) call.getFeature();
 			EList<Parameter> parameters = operation.getParameters();
 			EList<Expression> args = call.getArgs();
@@ -505,7 +506,7 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 
 	@Check(CheckType.FAST)
 	public void checkOperationArguments_TypedElementReferenceExpression(final ElementReferenceExpression call) {
-		if (call.getReference() instanceof Operation) {
+		if (call.getReference() instanceof Operation && (! (call.eContainer() instanceof MetaCall))) {
 			Operation operation = (Operation) call.getReference();
 			EList<Parameter> parameters = operation.getParameters();
 			EList<Expression> args = call.getArgs();

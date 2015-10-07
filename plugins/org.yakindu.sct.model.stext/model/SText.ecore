@@ -34,6 +34,14 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="imports" upperBound="-1"
         eType="#//Import" containment="true"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PortScope" eSuperTypes="#//StatechartScope ../../org.yakindu.base.types/model/base.ecore#//NamedElement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="direction" eType="#//PortDirection"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="ecore:EClass ../../org.yakindu.base.types/model/types.ecore#//Type"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="PortDirection">
+    <eLiterals name="REQUIRES"/>
+    <eLiterals name="PROVIDES" value="1" literal="PROVIDES"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Import">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="importedNamespace" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>

@@ -86,7 +86,7 @@ PrimitiveValueExpression returns Expression:
 	{PrimitiveValueExpression} value=Literal;
 
 FeatureCall returns Expression:
-	ElementReferenceExpression ({FeatureCall.owner=current} '.' feature=[ecore::EObject]
+	ElementReferenceExpression ((({FeatureCall.owner=current} '.') | ({MetaCall.owner=current} '@')) feature=[ecore::EObject]
 	(=> operationCall?='('
 	(args+=Expression (',' args+=Expression)*)?
 	')')?)*;

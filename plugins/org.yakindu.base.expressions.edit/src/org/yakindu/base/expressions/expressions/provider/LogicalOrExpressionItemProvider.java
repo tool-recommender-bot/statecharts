@@ -210,6 +210,11 @@ public class LogicalOrExpressionItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(ExpressionsPackage.Literals.LOGICAL_OR_EXPRESSION__LEFT_OPERAND,
+				 ExpressionsFactory.eINSTANCE.createMetaCall()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.LOGICAL_OR_EXPRESSION__LEFT_OPERAND,
 				 ExpressionsFactory.eINSTANCE.createElementReferenceExpression()));
 
 		newChildDescriptors.add
@@ -296,6 +301,11 @@ public class LogicalOrExpressionItemProvider
 			(createChildParameter
 				(ExpressionsPackage.Literals.LOGICAL_OR_EXPRESSION__RIGHT_OPERAND,
 				 ExpressionsFactory.eINSTANCE.createFeatureCall()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.LOGICAL_OR_EXPRESSION__RIGHT_OPERAND,
+				 ExpressionsFactory.eINSTANCE.createMetaCall()));
 
 		newChildDescriptors.add
 			(createChildParameter

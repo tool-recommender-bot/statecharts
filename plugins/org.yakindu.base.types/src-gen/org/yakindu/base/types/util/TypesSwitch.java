@@ -16,6 +16,7 @@ import org.yakindu.base.types.Domain;
 import org.yakindu.base.types.EnumerationType;
 import org.yakindu.base.types.Enumerator;
 import org.yakindu.base.types.Event;
+import org.yakindu.base.types.MetaComposite;
 import org.yakindu.base.types.Operation;
 import org.yakindu.base.types.PackageMember;
 import org.yakindu.base.types.Parameter;
@@ -103,6 +104,7 @@ public class TypesSwitch<T> extends Switch<T> {
 				T result = caseDeclaration(declaration);
 				if (result == null) result = caseTypedElement(declaration);
 				if (result == null) result = caseNamedElement(declaration);
+				if (result == null) result = caseMetaComposite(declaration);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -113,6 +115,7 @@ public class TypesSwitch<T> extends Switch<T> {
 				if (result == null) result = casePackageMember(operation);
 				if (result == null) result = caseTypedElement(operation);
 				if (result == null) result = caseNamedElement(operation);
+				if (result == null) result = caseMetaComposite(operation);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -122,6 +125,7 @@ public class TypesSwitch<T> extends Switch<T> {
 				if (result == null) result = caseDeclaration(property);
 				if (result == null) result = caseTypedElement(property);
 				if (result == null) result = caseNamedElement(property);
+				if (result == null) result = caseMetaComposite(property);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -145,6 +149,7 @@ public class TypesSwitch<T> extends Switch<T> {
 				if (result == null) result = caseDeclaration(event);
 				if (result == null) result = caseTypedElement(event);
 				if (result == null) result = caseNamedElement(event);
+				if (result == null) result = caseMetaComposite(event);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -235,6 +240,12 @@ public class TypesSwitch<T> extends Switch<T> {
 				if (result == null) result = caseType(typeAlias);
 				if (result == null) result = casePackageMember(typeAlias);
 				if (result == null) result = caseNamedElement(typeAlias);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case TypesPackage.META_COMPOSITE: {
+				MetaComposite metaComposite = (MetaComposite)theEObject;
+				T result = caseMetaComposite(metaComposite);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -530,6 +541,21 @@ public class TypesSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseTypeAlias(TypeAlias object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Meta Composite</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Meta Composite</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseMetaComposite(MetaComposite object) {
 		return null;
 	}
 

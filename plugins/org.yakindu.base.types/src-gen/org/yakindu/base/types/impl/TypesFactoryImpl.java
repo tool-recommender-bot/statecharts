@@ -18,6 +18,7 @@ import org.yakindu.base.types.Domain;
 import org.yakindu.base.types.EnumerationType;
 import org.yakindu.base.types.Enumerator;
 import org.yakindu.base.types.Event;
+import org.yakindu.base.types.MetaComposite;
 import org.yakindu.base.types.Operation;
 import org.yakindu.base.types.PackageMember;
 import org.yakindu.base.types.Parameter;
@@ -91,6 +92,7 @@ public class TypesFactoryImpl extends EFactoryImpl implements TypesFactory {
 			case TypesPackage.RANGE_CONSTRAINT: return createRangeConstraint();
 			case TypesPackage.DOMAIN: return createDomain();
 			case TypesPackage.TYPE_ALIAS: return createTypeAlias();
+			case TypesPackage.META_COMPOSITE: return createMetaComposite();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -284,6 +286,16 @@ public class TypesFactoryImpl extends EFactoryImpl implements TypesFactory {
 	public TypeAlias createTypeAlias() {
 		TypeAliasImpl typeAlias = new TypeAliasImpl();
 		return typeAlias;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public MetaComposite createMetaComposite() {
+		MetaCompositeImpl metaComposite = new MetaCompositeImpl();
+		return metaComposite;
 	}
 
 	/**

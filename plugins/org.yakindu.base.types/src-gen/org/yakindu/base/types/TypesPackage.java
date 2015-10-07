@@ -286,13 +286,22 @@ public interface TypesPackage extends EPackage {
 	int DECLARATION__NAME = TYPED_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Meta Features</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DECLARATION__META_FEATURES = TYPED_ELEMENT_FEATURE_COUNT + 1;
+
+	/**
 	 * The number of structural features of the '<em>Declaration</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DECLARATION_FEATURE_COUNT = TYPED_ELEMENT_FEATURE_COUNT + 1;
+	int DECLARATION_FEATURE_COUNT = TYPED_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Type</b></em>' reference.
@@ -320,6 +329,15 @@ public interface TypesPackage extends EPackage {
 	 * @ordered
 	 */
 	int OPERATION__NAME = DECLARATION__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Meta Features</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPERATION__META_FEATURES = DECLARATION__META_FEATURES;
 
 	/**
 	 * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
@@ -365,6 +383,15 @@ public interface TypesPackage extends EPackage {
 	 * @ordered
 	 */
 	int PROPERTY__NAME = DECLARATION__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Meta Features</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROPERTY__META_FEATURES = DECLARATION__META_FEATURES;
 
 	/**
 	 * The feature id for the '<em><b>Const</b></em>' attribute.
@@ -484,6 +511,15 @@ public interface TypesPackage extends EPackage {
 	 * @ordered
 	 */
 	int EVENT__NAME = DECLARATION__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Meta Features</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EVENT__META_FEATURES = DECLARATION__META_FEATURES;
 
 	/**
 	 * The feature id for the '<em><b>Direction</b></em>' attribute.
@@ -1020,6 +1056,34 @@ public interface TypesPackage extends EPackage {
 	int TYPE_ALIAS_FEATURE_COUNT = TYPED_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
+	 * The meta object id for the '{@link org.yakindu.base.types.impl.MetaCompositeImpl <em>Meta Composite</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.yakindu.base.types.impl.MetaCompositeImpl
+	 * @see org.yakindu.base.types.impl.TypesPackageImpl#getMetaComposite()
+	 * @generated
+	 */
+	int META_COMPOSITE = 19;
+
+	/**
+	 * The feature id for the '<em><b>Meta Features</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int META_COMPOSITE__META_FEATURES = 0;
+
+	/**
+	 * The number of structural features of the '<em>Meta Composite</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int META_COMPOSITE_FEATURE_COUNT = 1;
+
+	/**
 	 * The meta object id for the '{@link org.yakindu.base.types.Direction <em>Direction</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1027,7 +1091,7 @@ public interface TypesPackage extends EPackage {
 	 * @see org.yakindu.base.types.impl.TypesPackageImpl#getDirection()
 	 * @generated
 	 */
-	int DIRECTION = 19;
+	int DIRECTION = 20;
 
 	/**
 	 * Returns the meta object for class '{@link org.yakindu.base.types.Package <em>Package</em>}'.
@@ -1484,6 +1548,27 @@ public interface TypesPackage extends EPackage {
 	EClass getTypeAlias();
 
 	/**
+	 * Returns the meta object for class '{@link org.yakindu.base.types.MetaComposite <em>Meta Composite</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Meta Composite</em>'.
+	 * @see org.yakindu.base.types.MetaComposite
+	 * @generated
+	 */
+	EClass getMetaComposite();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.yakindu.base.types.MetaComposite#getMetaFeatures <em>Meta Features</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Meta Features</em>'.
+	 * @see org.yakindu.base.types.MetaComposite#getMetaFeatures()
+	 * @see #getMetaComposite()
+	 * @generated
+	 */
+	EReference getMetaComposite_MetaFeatures();
+
+	/**
 	 * Returns the meta object for enum '{@link org.yakindu.base.types.Direction <em>Direction</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1896,6 +1981,24 @@ public interface TypesPackage extends EPackage {
 		 * @generated
 		 */
 		EClass TYPE_ALIAS = eINSTANCE.getTypeAlias();
+
+		/**
+		 * The meta object literal for the '{@link org.yakindu.base.types.impl.MetaCompositeImpl <em>Meta Composite</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.yakindu.base.types.impl.MetaCompositeImpl
+		 * @see org.yakindu.base.types.impl.TypesPackageImpl#getMetaComposite()
+		 * @generated
+		 */
+		EClass META_COMPOSITE = eINSTANCE.getMetaComposite();
+
+		/**
+		 * The meta object literal for the '<em><b>Meta Features</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference META_COMPOSITE__META_FEATURES = eINSTANCE.getMetaComposite_MetaFeatures();
 
 		/**
 		 * The meta object literal for the '{@link org.yakindu.base.types.Direction <em>Direction</em>}' enum.

@@ -243,6 +243,11 @@ public class ShiftExpressionItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(ExpressionsPackage.Literals.SHIFT_EXPRESSION__LEFT_OPERAND,
+				 ExpressionsFactory.eINSTANCE.createMetaCall()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.SHIFT_EXPRESSION__LEFT_OPERAND,
 				 ExpressionsFactory.eINSTANCE.createElementReferenceExpression()));
 
 		newChildDescriptors.add
@@ -329,6 +334,11 @@ public class ShiftExpressionItemProvider
 			(createChildParameter
 				(ExpressionsPackage.Literals.SHIFT_EXPRESSION__RIGHT_OPERAND,
 				 ExpressionsFactory.eINSTANCE.createFeatureCall()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.SHIFT_EXPRESSION__RIGHT_OPERAND,
+				 ExpressionsFactory.eINSTANCE.createMetaCall()));
 
 		newChildDescriptors.add
 			(createChildParameter

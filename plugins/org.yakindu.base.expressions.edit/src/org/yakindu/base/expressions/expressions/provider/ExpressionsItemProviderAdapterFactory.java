@@ -576,6 +576,29 @@ public class ExpressionsItemProviderAdapterFactory extends ExpressionsAdapterFac
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link org.yakindu.base.expressions.expressions.MetaCall} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected MetaCallItemProvider metaCallItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.yakindu.base.expressions.expressions.MetaCall}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createMetaCallAdapter() {
+		if (metaCallItemProvider == null) {
+			metaCallItemProvider = new MetaCallItemProvider(this);
+		}
+
+		return metaCallItemProvider;
+	}
+
+	/**
 	 * This keeps track of the one adapter used for all {@link org.yakindu.base.expressions.expressions.ElementReferenceExpression} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -765,6 +788,7 @@ public class ExpressionsItemProviderAdapterFactory extends ExpressionsAdapterFac
 		if (numericalUnaryExpressionItemProvider != null) numericalUnaryExpressionItemProvider.dispose();
 		if (primitiveValueExpressionItemProvider != null) primitiveValueExpressionItemProvider.dispose();
 		if (featureCallItemProvider != null) featureCallItemProvider.dispose();
+		if (metaCallItemProvider != null) metaCallItemProvider.dispose();
 		if (elementReferenceExpressionItemProvider != null) elementReferenceExpressionItemProvider.dispose();
 		if (parenthesizedExpressionItemProvider != null) parenthesizedExpressionItemProvider.dispose();
 		if (typeCastExpressionItemProvider != null) typeCastExpressionItemProvider.dispose();

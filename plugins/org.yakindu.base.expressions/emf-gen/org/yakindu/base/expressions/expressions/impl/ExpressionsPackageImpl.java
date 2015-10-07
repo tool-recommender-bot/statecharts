@@ -30,6 +30,7 @@ import org.yakindu.base.expressions.expressions.LogicalAndExpression;
 import org.yakindu.base.expressions.expressions.LogicalNotExpression;
 import org.yakindu.base.expressions.expressions.LogicalOrExpression;
 import org.yakindu.base.expressions.expressions.LogicalRelationExpression;
+import org.yakindu.base.expressions.expressions.MetaCall;
 import org.yakindu.base.expressions.expressions.MultiplicativeOperator;
 import org.yakindu.base.expressions.expressions.NullLiteral;
 import org.yakindu.base.expressions.expressions.NumericalAddSubtractExpression;
@@ -219,6 +220,13 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 	 * @generated
 	 */
 	private EClass featureCallEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass metaCallEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -946,6 +954,15 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getMetaCall() {
+		return metaCallEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getElementReferenceExpression() {
 		return elementReferenceExpressionEClass;
 	}
@@ -1194,6 +1211,8 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 		createEAttribute(featureCallEClass, FEATURE_CALL__OPERATION_CALL);
 		createEReference(featureCallEClass, FEATURE_CALL__ARGS);
 
+		metaCallEClass = createEClass(META_CALL);
+
 		elementReferenceExpressionEClass = createEClass(ELEMENT_REFERENCE_EXPRESSION);
 		createEReference(elementReferenceExpressionEClass, ELEMENT_REFERENCE_EXPRESSION__REFERENCE);
 		createEAttribute(elementReferenceExpressionEClass, ELEMENT_REFERENCE_EXPRESSION__OPERATION_CALL);
@@ -1268,6 +1287,7 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 		numericalUnaryExpressionEClass.getESuperTypes().add(this.getExpression());
 		primitiveValueExpressionEClass.getESuperTypes().add(this.getExpression());
 		featureCallEClass.getESuperTypes().add(this.getExpression());
+		metaCallEClass.getESuperTypes().add(this.getFeatureCall());
 		elementReferenceExpressionEClass.getESuperTypes().add(this.getExpression());
 		parenthesizedExpressionEClass.getESuperTypes().add(this.getExpression());
 		typeCastExpressionEClass.getESuperTypes().add(this.getExpression());
@@ -1362,6 +1382,8 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 		initEReference(getFeatureCall_Feature(), ecorePackage.getEObject(), null, "feature", null, 0, 1, FeatureCall.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getFeatureCall_OperationCall(), ecorePackage.getEBoolean(), "operationCall", null, 0, 1, FeatureCall.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getFeatureCall_Args(), this.getExpression(), null, "args", null, 0, -1, FeatureCall.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(metaCallEClass, MetaCall.class, "MetaCall", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(elementReferenceExpressionEClass, ElementReferenceExpression.class, "ElementReferenceExpression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getElementReferenceExpression_Reference(), ecorePackage.getEObject(), null, "reference", null, 0, 1, ElementReferenceExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

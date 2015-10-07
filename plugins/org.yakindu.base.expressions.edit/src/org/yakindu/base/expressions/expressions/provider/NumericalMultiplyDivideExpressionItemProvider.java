@@ -243,6 +243,11 @@ public class NumericalMultiplyDivideExpressionItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(ExpressionsPackage.Literals.NUMERICAL_MULTIPLY_DIVIDE_EXPRESSION__LEFT_OPERAND,
+				 ExpressionsFactory.eINSTANCE.createMetaCall()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.NUMERICAL_MULTIPLY_DIVIDE_EXPRESSION__LEFT_OPERAND,
 				 ExpressionsFactory.eINSTANCE.createElementReferenceExpression()));
 
 		newChildDescriptors.add
@@ -329,6 +334,11 @@ public class NumericalMultiplyDivideExpressionItemProvider
 			(createChildParameter
 				(ExpressionsPackage.Literals.NUMERICAL_MULTIPLY_DIVIDE_EXPRESSION__RIGHT_OPERAND,
 				 ExpressionsFactory.eINSTANCE.createFeatureCall()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.NUMERICAL_MULTIPLY_DIVIDE_EXPRESSION__RIGHT_OPERAND,
+				 ExpressionsFactory.eINSTANCE.createMetaCall()));
 
 		newChildDescriptors.add
 			(createChildParameter

@@ -47,7 +47,7 @@ public class DefaultTimingService implements ITimingService {
 
 	public void unscheduleTimeEvent(String eventName) {
 		TimerTask timerTask = timerTasks.get(eventName);
-		timerTask.cancel();
+		if (timerTask != null) timerTask.cancel();
 	}
 
 	public class TimeEventTask extends TimerTask {

@@ -6,6 +6,7 @@ import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
 
+import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
@@ -14,12 +15,15 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 
+import org.eclipse.emf.ecore.util.InternalEList;
 import org.yakindu.base.base.BasePackage;
 import org.yakindu.base.base.NamedElement;
 
 import org.yakindu.base.types.Declaration;
+import org.yakindu.base.types.MetaComposite;
 import org.yakindu.base.types.Type;
 import org.yakindu.base.types.TypesPackage;
 
@@ -33,6 +37,7 @@ import org.yakindu.base.types.TypesPackage;
  *   <li>{@link org.yakindu.base.types.impl.DeclarationImpl#getType <em>Type</em>}</li>
  *   <li>{@link org.yakindu.base.types.impl.DeclarationImpl#getTypeArguments <em>Type Arguments</em>}</li>
  *   <li>{@link org.yakindu.base.types.impl.DeclarationImpl#getName <em>Name</em>}</li>
+ *   <li>{@link org.yakindu.base.types.impl.DeclarationImpl#getMetaFeatures <em>Meta Features</em>}</li>
  * </ul>
  * </p>
  *
@@ -78,6 +83,16 @@ public abstract class DeclarationImpl extends EObjectImpl implements Declaration
 	 * @ordered
 	 */
 	protected String name = NAME_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getMetaFeatures() <em>Meta Features</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getMetaFeatures()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Declaration> metaFeatures;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -174,6 +189,32 @@ public abstract class DeclarationImpl extends EObjectImpl implements Declaration
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<Declaration> getMetaFeatures() {
+		if (metaFeatures == null) {
+			metaFeatures = new EObjectContainmentEList<Declaration>(Declaration.class, this, TypesPackage.DECLARATION__META_FEATURES);
+		}
+		return metaFeatures;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case TypesPackage.DECLARATION__META_FEATURES:
+				return ((InternalEList<?>)getMetaFeatures()).basicRemove(otherEnd, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
@@ -184,6 +225,8 @@ public abstract class DeclarationImpl extends EObjectImpl implements Declaration
 				return getTypeArguments();
 			case TypesPackage.DECLARATION__NAME:
 				return getName();
+			case TypesPackage.DECLARATION__META_FEATURES:
+				return getMetaFeatures();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -207,6 +250,10 @@ public abstract class DeclarationImpl extends EObjectImpl implements Declaration
 			case TypesPackage.DECLARATION__NAME:
 				setName((String)newValue);
 				return;
+			case TypesPackage.DECLARATION__META_FEATURES:
+				getMetaFeatures().clear();
+				getMetaFeatures().addAll((Collection<? extends Declaration>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -228,6 +275,9 @@ public abstract class DeclarationImpl extends EObjectImpl implements Declaration
 			case TypesPackage.DECLARATION__NAME:
 				setName(NAME_EDEFAULT);
 				return;
+			case TypesPackage.DECLARATION__META_FEATURES:
+				getMetaFeatures().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -246,6 +296,8 @@ public abstract class DeclarationImpl extends EObjectImpl implements Declaration
 				return typeArguments != null && !typeArguments.isEmpty();
 			case TypesPackage.DECLARATION__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+			case TypesPackage.DECLARATION__META_FEATURES:
+				return metaFeatures != null && !metaFeatures.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
@@ -263,6 +315,12 @@ public abstract class DeclarationImpl extends EObjectImpl implements Declaration
 				default: return -1;
 			}
 		}
+		if (baseClass == MetaComposite.class) {
+			switch (derivedFeatureID) {
+				case TypesPackage.DECLARATION__META_FEATURES: return TypesPackage.META_COMPOSITE__META_FEATURES;
+				default: return -1;
+			}
+		}
 		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
 	}
 
@@ -276,6 +334,12 @@ public abstract class DeclarationImpl extends EObjectImpl implements Declaration
 		if (baseClass == NamedElement.class) {
 			switch (baseFeatureID) {
 				case BasePackage.NAMED_ELEMENT__NAME: return TypesPackage.DECLARATION__NAME;
+				default: return -1;
+			}
+		}
+		if (baseClass == MetaComposite.class) {
+			switch (baseFeatureID) {
+				case TypesPackage.META_COMPOSITE__META_FEATURES: return TypesPackage.DECLARATION__META_FEATURES;
 				default: return -1;
 			}
 		}

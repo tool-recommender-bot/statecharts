@@ -17,6 +17,7 @@ import org.yakindu.base.types.Domain;
 import org.yakindu.base.types.EnumerationType;
 import org.yakindu.base.types.Enumerator;
 import org.yakindu.base.types.Event;
+import org.yakindu.base.types.MetaComposite;
 import org.yakindu.base.types.Operation;
 import org.yakindu.base.types.PackageMember;
 import org.yakindu.base.types.Parameter;
@@ -159,6 +160,10 @@ public class TypesAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseTypeAlias(TypeAlias object) {
 				return createTypeAliasAdapter();
+			}
+			@Override
+			public Adapter caseMetaComposite(MetaComposite object) {
+				return createMetaCompositeAdapter();
 			}
 			@Override
 			public Adapter caseNamedElement(NamedElement object) {
@@ -464,6 +469,20 @@ public class TypesAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createTypeAliasAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.yakindu.base.types.MetaComposite <em>Meta Composite</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.yakindu.base.types.MetaComposite
+	 * @generated
+	 */
+	public Adapter createMetaCompositeAdapter() {
 		return null;
 	}
 
