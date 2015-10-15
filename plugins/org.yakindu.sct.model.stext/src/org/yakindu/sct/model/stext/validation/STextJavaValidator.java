@@ -115,7 +115,7 @@ import com.google.inject.name.Named;
  * @auhor muelder
  * 
  */
-@ComposedChecks(validators = { SGraphJavaValidator.class, SCTResourceValidator.class, ExpressionsJavaValidator.class })
+@ComposedChecks(validators = { SGraphJavaValidator.class, SCTResourceValidator.class })
 public class STextJavaValidator extends AbstractSTextJavaValidator implements STextValidationMessages {
 
 	@Inject
@@ -132,19 +132,19 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 	@Inject
 	private ResourceDescriptionsProvider resourceDescriptionsProvider;
 
-	@Check
+	//@Check
 	public void checkExpression(VariableDefinition expression) {
 		if (expression.getType() == null || expression.getType().eIsProxy())
 			return;
 		typeInferrer.inferType(expression, this);
 	}
 
-	@Check
+	//@Check
 	public void checkExpression(TimeEventSpec expression) {
 		typeInferrer.inferType(expression, this);
 	}
 
-	@Check
+	//@Check
 	public void checkExpression(Guard expression) {
 		typeInferrer.inferType(expression, this);
 	}
