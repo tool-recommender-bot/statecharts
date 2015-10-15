@@ -63,7 +63,7 @@ public class ExpressionsJavaValidator extends org.yakindu.base.expressions.valid
 	@Inject
 	private ITypeSystem typeSystem;
 
-	@Check
+	//@Check
 	public void checkExpression(Expression expression) {
 		typeInferrer.inferType(expression, this);
 	}
