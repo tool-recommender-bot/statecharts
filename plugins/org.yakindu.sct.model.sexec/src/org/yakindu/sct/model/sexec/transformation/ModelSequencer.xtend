@@ -136,13 +136,13 @@ class ModelSequencer implements IModelSequencer {
 			}
 		}
 	}
-	
+
 	
 	def dispatch Declaration replaced(EObject ne) {
 		try {
 			var name = if (ne == null) "null" else ne.fullyQualifiedName
 			var type = if (ne == null) "unknown type" else ne.class.simpleName
-			var resource = if (ne == null) "unknown resource" else ne.eResource.URI.toString
+			var resource = if ( ne == null || ne.eResource == null || ne.eResource.URI == null) "unknown resource" else ne.eResource.URI.toString
 			
 			println("Replace with unknown EObject ("+type+") called: " + name + " in " + resource)
 			
