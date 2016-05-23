@@ -39,7 +39,7 @@ That's it. If you want to know more, take the time and work through the "Compreh
 
 h1(#oss_comprehensive-tutorial). Comprehensive tutorial
 
-This tutorial introduces YAKINDU Statechart Tools (SCT) which provides an integrated modeling environment for the specification and development of reactive, event-driven systems based on the concept of state machines or statecharts. It is an easy-to-use tool featuring sophisticated graphical statechart editing, validation and simulation of statecharts as well as code generation for C, C&#43;&#43;, or Java.
+This tutorial introduces YAKINDU Statechart Tools (SCT), which provides an integrated modeling environment for the specification and development of reactive, event-driven systems based on the concept of state machines or statecharts. It is an easy-to-use tool featuring sophisticated graphical statechart editing, validation and simulation of statecharts as well as code generation for C, C&#43;&#43;, or Java.
 
 This tutorial you will teach how to
 
@@ -318,6 +318,49 @@ p=. Light switch simulation in "on" state
 Click on _operate_ again, and the active state changes back to *Off*. Click on _operate_ several times and enjoy watching the state machine's behaviour.
 
 Stop the simulator by clicking at the little red termination button in the toolbar at the top.
+
+h2(#oss_introducing-advanced-concepts). Introducing advanced concepts
+
+This section introduces some advanced concepts of the "statechart language":30_statechart_language.html by enhancing the light switch example.
+
+It has been inspired by https://www.gira.de/gebaeudetechnik/produkte/automatische-lichtsteuerung/bewegungsmelder-360-ap.html.
+
+
+h3(#oss_introducing-variables-guard-conditions-and-actions). Introducing variables, guard conditions, and actions
+
+Add dimmer functionality to the light switch.
+
+The light switch receives another switch so that it now consists of two switches. The _on_ switch turns the light on and, when pressed repeatedly, increases the brightness in steps up to a maximum. The _off_ switch turns the light off.
+
+This section introduces variables (to store the brightness), guard conditions (to increase the brightness or not, depending on the value of the brightness variable), and modifying the brightness variable).
+
+h3(#oss_introducing-interfaces-timing-expressions-and-composite-states). Introducing interfaces, timing expressions, and composite states
+
+Add a motion sensor.
+
+If the light is turned off and the motion sensor triggers, the light is turned on with its lowest brighness. 30 seconds after the last detected motion the light is turned off. Operating the switch manually overrides the motion sensor mode, i.&nbsp;e. if the light is switched on manually or the dimmer functionality is used, it won't be switched of automatically. Turning the light off manually enganges the motion sensor again.
+
+This section introduces interfaces – one for the user, another one for the motion sensor –, timing expressions to automatically turn off the light, and composite states dealing with the ordinary light switch functionality in one composite state and dealing with the motion sensing functionality in the other composite state.
+
+h3(#oss_introducing-history-states). Introducing history states
+
+Add a twilight switch.
+
+During darkness (= sensor signals brightness values below a certain threshold for a certain time), the light is automatically turned on. It is turned off again in the morning after brightness has crossed the threshold for some time. It is not sensible to operate the light switch in motion sensing mode and in twilight mode at the same time.
+
+This section serves as a prerequisite for the next one.
+
+h3(#oss_introducing-operations). Introducing operations
+
+Add presense simulation.
+
+During darkness the light is turned on and off at random over "reasonable" periods of time, but only during the evening and morning hours. At night the light is turned on for a few minutes only, if at all. Manually turning on the light switch overrides the presence simulation. When turning off the light, the presence simulation is engaged again.
+
+This chapter introduces operations which are used to access data not available in the statechart language, i.&nbsp;e. time of day and random numbers.
+
+h3(#oss_uncovered). Uncovered concepts
+
+Orthogonal states, choice, synchronization, raising an event, built-in functions and more are not covered by enhancing the light switch example yet. Ideas are welcome!
 
 h2(#code-generation). Code generation
 
