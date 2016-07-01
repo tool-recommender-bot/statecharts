@@ -51,6 +51,7 @@ import org.yakindu.sct.model.stext.stext.ReactionTrigger
 import org.yakindu.sct.model.stext.stext.RegularEventSpec
 import org.yakindu.sct.model.stext.stext.TimeEventSpec
 import org.yakindu.base.expressions.expressions.ExpressionsFactory
+import java.util.Collection
 
 class BehaviorMapping {
 
@@ -252,7 +253,7 @@ class BehaviorMapping {
 	def dispatch Sequence mapEffect(ReactionEffect effect) {
 		if ( ! effect.actions.empty) {
 			val sequence = sexec.factory.createSequence
-			sequence.name = effect.reaction.id
+			sequence.name = effect.reaction.id()
 			sequence.steps.addAll( effect.actions.map( stmnt | stmnt.mapToExecution))
 			return sequence	
 		}	
@@ -603,9 +604,17 @@ class BehaviorMapping {
 					s.addEnterStepsForTargetsToSequence(targets, seq)
 			}
 		} else {
-			//in the case only sibling regions contain targets the region must be entered using the defaut enter sequence
-			seq.steps.add(it.enterSequences.defaultSequence.newCall)
+			// in the case only sibling regions contain targets the region must be entered 
+			// using the defaut enter sequence, if this exists
+			it.enterSequences.defaultSequence?.newCall?.addTo(seq.steps)
 		}
+	}
+	
+	
+	/** TODO: move... */
+	def <T> Collection<T> addTo(T it, Collection<T> c) {
+		c.add(it);
+		c
 	}
 	
 	

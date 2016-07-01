@@ -1,3 +1,4 @@
+
 h1(#oss_five-minutes-tutorial). Five-minutes tutorial
 
 The five-minutes tutorial gives you a brief introduction into YAKINDU Statechart Tools by a simple example. It models a light switch, which has the states _on_ and _off_. Operating the switch repeatedly turns the light on, off, back on again, and so forth. You can simulate this behavior in a dynamic statechart model. Here's how this looks like:
@@ -8,31 +9,36 @@ p=. Interactive light switch statechart simulation
 
 In the simulation screenshot above, the light switch is currently in the _on_ state. To toggle the light switch, the user clicks on _operate_ on the right-hand side of the window.
 
-h2(#oss_running-the-light-switch-simulation). Running the light switch simulation
+h2(#oss_importing-light-switch-example). Importing light switch example
 
 Now try this for yourself. We are assuming that you have already installed and started YAKINDU Statechart Tools. If you don't, please see the "Installation Guide":../Part1-Installation-Guide/00_installation.html for details.
 
-# If the "Welcome" page is still open, close it. !(standard-image small)images/5min_010_close_welcome.png(Closing the "Welcome" page)!
+# If the "Welcome" page is still open, close it. <p>!(standard-image small)images/5min_010_close_welcome.png(Closing the "Welcome" page)!</p>
 # In the main menu, select _File → New → Example…_.
 # In the dialog, select _YAKINDU SCT Examples → Light Switch Example_, then click _Next >_.
 # In the next dialog, click _Finish_. The sample project named _light_switch_ is created.
-# In the project explorer on the left-hand side of the window, open the _light_switch_ project by clicking on the small triangle left from the project name ("light_switch"). !(standard-image small)images/5min_020_expand_project.png(Expand project)!
-# Right-click on _LightSwitch.sct_ and select _Run As → Statechart Simulation_ in the context menu.
-# The statechart simulation starts and shows the light switch model in its _off_ state. The rectangle named *Off* is highlighted in red, meaning it is the active state. !(standard-image)images/light_switch_320_statechart_simulator_state_events.png(Light switch simulation in "off" state)!
-# At the right side of the window, click on the small triangle left from _internal_. This unhides the _operate_ link.
-# Click on _operate_. The light switch model's active state changes from *Off* to *On*. !(standard-image)images/light_switch_330_statechart_simulator_state_on.png(Light switch simulation in "on" state)!
-# Click on _operate_ again to switch off the light. Repeat as you see fit.
+# In the project explorer on the left-hand side of the window, open the _light_switch_ project by clicking on the small triangle left from the project name ("light_switch"). <p>!(standard-image small)images/5min_020_expand_project.png(Expand project)!</p>
+# The light switch statechart is defined in _LightSwitch.sct_. Double click on this file to open the model.
 
-h2(standard #oss_turning-the-light-switch-statechart-into-java-code). Turning the light switch statechart into Java code
+h2(#oss_running-the-light-switch-simulation). Simulating the light switch
+
+# Right-click on _LightSwitch.sct_ and select _Run As → Statechart Simulation_ in the context menu.
+# The statechart simulation starts and shows the light switch model in its _off_ state. The rectangle named *Off* is highlighted in red, meaning it is the active state. <p>!(standard-image)images/light_switch_320_statechart_simulator_state_events.png(Light switch simulation in "off" state)!</p>
+# At the right-bottom side of the window, the simulation view is located. In this view, you can change variable values and raise events during a simulation run. Click on the small triangle left from _internal_
+ to unfold the _operate_ link. This link represents the _operate_ event to switch the light on or off.
+# Click on the _operate_ link. The active state changes accordingly from *Off* to *On*. <p>!(standard-image)images/light_switch_330_statechart_simulator_state_on.png(Light switch simulation in "on" state)!</p>
+# Click on _operate_ again to switch off the light.
+
+h2(standard #oss_generating-statechart-code). Generating statechart code
 
 You have developed and tested your statechart model, and now you need it as a C, C++, or Java implementation? YAKINDU Statechart Tools can create it for you.
 
-As an example, let's take the light switch statechart and generate Java source code from it. Please proceed as follows:
+As an example, we will take the light switch statechart and generate Java source code from it. Please proceed as follows:
 
-# In the project explorer, right-click on _LightSwitch.sct_ and select _New → Code Generator Model_ in the context menu. !(standard-image)images/5min_110_new_code_generator_model.png(Creating a new code generator model)!
-# In the dialog, replace @default.sgen@ by @light_switch.sgen@, then click _Next >_. !(standard-image)images/5min_120_naming_the_code_generator_model.png(Naming the code generator model)!
-# In the next dialog, check the checkbox left from _LightSwitch.sct_, then click _Finish_. !(standard-image)images/5min_130_selecting_the_statechart_model.png(Selecting the statechart model)!
-# Java classes implementing the statechart model are generated. You'll find their source code in the folders _src_ and _src-gen_ within the _light_switch_ project. !(standard-image)images/5min_140_generated_java_source_code.png(Generated Java source code)!
+# In the project explorer, right-click on _LightSwitch.sct_ and select _New → Code Generator Model_ in the context menu. <p>!(standard-image)images/5min_110_new_code_generator_model.png(Creating a new code generator model)!</p>
+# In the dialog, replace @default.sgen@ by @light_switch.sgen@, then click _Next >_.
+# In the next dialog, check the checkbox left from _LightSwitch.sct_, then click _Finish_.
+# Java classes implementing the statechart model are generated. You can find the generated source code in the folders _src_ and _src-gen_ within the _light_switch_ project. <p>!(standard-image)images/5min_140_generated_java_source_code.png(Generated Java source code)!</p>
 
 That's it. If you want to know more, take the time and work through the "Comprehensive Tutorial":#oss_comprehensive-tutorial.
 
@@ -56,9 +62,9 @@ h2(#the-light-switch-example). The light switch example
 
 The most basic example of a state machine that actually does something is a light switch. In this scenario there is a light bulb and a switch to turn the bulb on and off. Of course there's also a power source and some electrical cabling to put it all together, but for the purpose of our model we can omit them.
 
-h3(#the-behaviour-of-a-light-switch). The behaviour of a light switch
+h3(#the-behavior-of-a-light-switch). The behavior of a light switch
 
-When modeling the light switch example as a statechart, we can disregard everything (even the bulb) except for the switch. The behaviour of the switch is very simple:
+When modeling the light switch example as a statechart, we can disregard everything (even the bulb) except for the switch. The behavior of the switch is very simple:
 
 * Initially the light switch is off, i. e. it is in its *Off* state.
 * If the light switch is operated while being in its *Off* state, it changes to its *On* state.
@@ -70,7 +76,7 @@ Now let's model the light switch as a statechart using YAKINDU Statechart Tools.
 
 # Creating an Eclipse project. It will serve as a container for the statechart model.
 # Modeling the light switch using the YAKINDU Statechart Tools editor. The result will be a static statechart model.
-# Simulating the model. We can play around with the model, operate the light switch and observe its behaviour.
+# Simulating the model. We can play around with the model, operate the light switch and observe its behavior.
 
 h3(#creating-an-eclipse-project). Creating an Eclipse project
 
@@ -278,7 +284,7 @@ table(scedit).
 
 h2(#simulating-the-light-switch-model). Simulating the light switch model
 
-Simulating a model means to execute it, raise events manually, have time events and run cycle-based events being triggered automatically, and observe its behaviour.
+Simulating a statechart model means to execute it, raise events manually, have time-based and other events being triggered automatically, and observe the model's behavior.
 
 Start the simulation by right-clicking on the _LightSwitch.sct_ file in the project explorer and selecting _Run As → Statechart Simulation_:
 
@@ -315,7 +321,7 @@ The transition arc leading from the *Off* state to the *On* state flashes briefl
 
 p=. Light switch simulation in "on" state
 
-Click on _operate_ again, and the active state changes back to *Off*. Click on _operate_ several times and enjoy watching the state machine's behaviour.
+Click on _operate_ again, and the active state changes back to *Off*. Click on _operate_ several times and enjoy watching the state machine's behavior.
 
 Stop the simulator by clicking at the little red termination button in the toolbar at the top.
 

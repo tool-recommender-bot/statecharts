@@ -321,6 +321,15 @@ public interface StextPackage extends EPackage {
 	int STATECHART_SCOPE__VARIABLES = SGraphPackage.SCOPE__VARIABLES;
 
 	/**
+	 * The feature id for the '<em><b>Reactions</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STATECHART_SCOPE__REACTIONS = SGraphPackage.SCOPE__REACTIONS;
+
+	/**
 	 * The number of structural features of the '<em>Statechart Scope</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -365,6 +374,15 @@ public interface StextPackage extends EPackage {
 	 * @ordered
 	 */
 	int INTERFACE_SCOPE__VARIABLES = STATECHART_SCOPE__VARIABLES;
+
+	/**
+	 * The feature id for the '<em><b>Reactions</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INTERFACE_SCOPE__REACTIONS = STATECHART_SCOPE__REACTIONS;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -422,6 +440,15 @@ public interface StextPackage extends EPackage {
 	int INTERNAL_SCOPE__VARIABLES = STATECHART_SCOPE__VARIABLES;
 
 	/**
+	 * The feature id for the '<em><b>Reactions</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INTERNAL_SCOPE__REACTIONS = STATECHART_SCOPE__REACTIONS;
+
+	/**
 	 * The number of structural features of the '<em>Internal Scope</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -466,6 +493,15 @@ public interface StextPackage extends EPackage {
 	 * @ordered
 	 */
 	int IMPORT_SCOPE__VARIABLES = STATECHART_SCOPE__VARIABLES;
+
+	/**
+	 * The feature id for the '<em><b>Reactions</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IMPORT_SCOPE__REACTIONS = STATECHART_SCOPE__REACTIONS;
 
 	/**
 	 * The feature id for the '<em><b>Imports</b></em>' containment reference list.
@@ -551,6 +587,24 @@ public interface StextPackage extends EPackage {
 	int EVENT_DEFINITION__NAME = TypesPackage.EVENT__NAME;
 
 	/**
+	 * The feature id for the '<em><b>Annotations</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EVENT_DEFINITION__ANNOTATIONS = TypesPackage.EVENT__ANNOTATIONS;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EVENT_DEFINITION__ID = TypesPackage.EVENT__ID;
+
+	/**
 	 * The feature id for the '<em><b>Direction</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -604,6 +658,24 @@ public interface StextPackage extends EPackage {
 	 * @ordered
 	 */
 	int VARIABLE_DEFINITION__NAME = TypesPackage.PROPERTY__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Annotations</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VARIABLE_DEFINITION__ANNOTATIONS = TypesPackage.PROPERTY__ANNOTATIONS;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VARIABLE_DEFINITION__ID = TypesPackage.PROPERTY__ID;
 
 	/**
 	 * The feature id for the '<em><b>Const</b></em>' attribute.
@@ -688,6 +760,24 @@ public interface StextPackage extends EPackage {
 	int OPERATION_DEFINITION__NAME = TypesPackage.OPERATION__NAME;
 
 	/**
+	 * The feature id for the '<em><b>Annotations</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPERATION_DEFINITION__ANNOTATIONS = TypesPackage.OPERATION__ANNOTATIONS;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPERATION_DEFINITION__ID = TypesPackage.OPERATION__ID;
+
+	/**
 	 * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -743,6 +833,24 @@ public interface StextPackage extends EPackage {
 	int TYPE_ALIAS_DEFINITION__NAME = TypesPackage.TYPE_ALIAS__NAME;
 
 	/**
+	 * The feature id for the '<em><b>Annotations</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TYPE_ALIAS_DEFINITION__ANNOTATIONS = TypesPackage.TYPE_ALIAS__ANNOTATIONS;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TYPE_ALIAS_DEFINITION__ID = TypesPackage.TYPE_ALIAS__ID;
+
+	/**
 	 * The feature id for the '<em><b>Constraint</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -759,6 +867,15 @@ public interface StextPackage extends EPackage {
 	 * @ordered
 	 */
 	int TYPE_ALIAS_DEFINITION__ABSTRACT = TypesPackage.TYPE_ALIAS__ABSTRACT;
+
+	/**
+	 * The feature id for the '<em><b>Visible</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TYPE_ALIAS_DEFINITION__VISIBLE = TypesPackage.TYPE_ALIAS__VISIBLE;
 
 	/**
 	 * The number of structural features of the '<em>Type Alias Definition</em>' class.
@@ -807,40 +924,13 @@ public interface StextPackage extends EPackage {
 	int LOCAL_REACTION__PROPERTIES = SGraphPackage.REACTION__PROPERTIES;
 
 	/**
-	 * The feature id for the '<em><b>Type</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LOCAL_REACTION__TYPE = SGraphPackage.REACTION_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Type Arguments</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LOCAL_REACTION__TYPE_ARGUMENTS = SGraphPackage.REACTION_FEATURE_COUNT + 1;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LOCAL_REACTION__NAME = SGraphPackage.REACTION_FEATURE_COUNT + 2;
-
-	/**
 	 * The number of structural features of the '<em>Local Reaction</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int LOCAL_REACTION_FEATURE_COUNT = SGraphPackage.REACTION_FEATURE_COUNT + 3;
+	int LOCAL_REACTION_FEATURE_COUNT = SGraphPackage.REACTION_FEATURE_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.sct.model.stext.stext.impl.TransitionReactionImpl <em>Transition Reaction</em>}' class.
@@ -1177,6 +1267,15 @@ public interface StextPackage extends EPackage {
 	 * @ordered
 	 */
 	int SIMPLE_SCOPE__VARIABLES = SGraphPackage.SCOPE__VARIABLES;
+
+	/**
+	 * The feature id for the '<em><b>Reactions</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SIMPLE_SCOPE__REACTIONS = SGraphPackage.SCOPE__REACTIONS;
 
 	/**
 	 * The number of structural features of the '<em>Simple Scope</em>' class.

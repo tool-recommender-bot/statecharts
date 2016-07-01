@@ -210,7 +210,7 @@ import org.yakindu.base.types.Event
 	
 	
 	def Check create r : sexecFactory.createCheck createCheck(Trigger tr){
-		r.name = tr.reaction.id
+		r.name = tr.reaction.id()
 	}
 
 //	def dispatch Check create r : sexecFactory.createCheck createCheck(DefaultTrigger tr){
@@ -221,13 +221,13 @@ import org.yakindu.base.types.Event
 //	}
 	
 	def Reaction create r : sexecFactory.createReaction create(Transition tr){
-		r.name = tr.id
+		r.name = tr.id()
 		r.transition = true
 		r.sourceElement = tr
 	}
 	
 	def Reaction create r : sexecFactory.createReaction create(LocalReaction lr){
-		r.name = lr.id
+		r.name = lr.id()
 		r.transition = false
 	}
 	
@@ -238,7 +238,7 @@ import org.yakindu.base.types.Event
 	} 
 
 	def Call newCall(Step step) {
-//	  if (step ==  null) throw new IllegalArgumentException("Attempt to create 'null' call.")
+		if (step ==  null) throw new IllegalArgumentException("Attempt to create 'null' call.")
 		val r = sexecFactory.createCall
 		r.step = step
 		r

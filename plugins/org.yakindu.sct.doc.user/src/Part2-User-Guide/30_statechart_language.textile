@@ -1,3 +1,4 @@
+
 h1(#the-statechart-language). The statechart language
 
 This chapter describes the statechart elements of the YAKINDU Statechart Tools (YAKINDU SCT) editor. The YAKINDU SCT meta model is the model of finite state machines. It is based on the view of a system that is defined by a finite number of states. The behavior of such a system is based on its active states. These states are determined by the history of the state machine. Very important are the theoretical models for state machines by Mealy and Moore. Mealy state machines associate actions with transitions. Moore machines associate actions with states (_entry_, _exit_). YAKINDU SCT can model both these types.
@@ -27,7 +28,7 @@ The *definition sections* is a textual statechart component. It contains definit
 
 Most objects defined in the definition section are _typed_. For example, a variable could be of type _integer_. As another example, the type of an operation is by defined by the number and types of its parameters and its return type, if any.
 
-A type system or *domain* specifies which types are available. YAKINDU Statechart Tools has a built-in type system. The Professional Edition allows for additional domains to be installed.
+A type system or *domain* specifies which types are available. YAKINDU Statechart Tools has a built-in type system. %(pro-feature)The Professional Edition allows for additional domains to be installed.%
 
 h2(#graphical-elements). Graphical elements
 
@@ -72,7 +73,7 @@ A region may have at most one default entry.
 
 h4(#named-entries). Named entries
 
-The "default entry":#default-entry specifies a single entry point into a region. A region can provide a multitude of additional or alternative entry points, thus implementing different kinds of behaviour, depending on which entry point has been taken. If a region comprises multiple entries, these entries must be _named_. An entry's name must be unique within its region.
+The "default entry":#default-entry specifies a single entry point into a region. A region can provide a multitude of additional or alternative entry points, thus implementing different kinds of behavior, depending on which entry point has been taken. If a region comprises multiple entries, these entries must be _named_. An entry's name must be unique within its region.
 
 The default entry implicitly has the name @default@. Alternatively, it is possible to explicitly give the name @default@ to the default entry. Semantically both variants are equivalent. Whether an entry has no name or it has the name @default@: in both cases the entry is called _default entry_.
 
