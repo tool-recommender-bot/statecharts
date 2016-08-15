@@ -22,72 +22,31 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.util.Strings;
 import org.yakindu.sct.commons.WorkspaceClassLoaderFactory;
 import org.yakindu.sct.generator.core.IExecutionFlowGenerator;
+import org.yakindu.sct.generator.core.ISCTGenerator;
 import org.yakindu.sct.generator.core.ISGraphGenerator;
-import org.yakindu.sct.generator.core.impl.AbstractSExecModelGenerator;
+import org.yakindu.sct.generator.core.execution.AbstractGenModelExecutor;
+import org.yakindu.sct.generator.core.filesystem.ISCTFileSystemAccess;
 import org.yakindu.sct.model.sexec.ExecutionFlow;
 import org.yakindu.sct.model.sgen.FeatureConfiguration;
 import org.yakindu.sct.model.sgen.FeatureParameterValue;
 import org.yakindu.sct.model.sgen.GeneratorEntry;
-import org.yakindu.sct.model.sgraph.Statechart;
 
 import com.google.inject.Inject;
 import com.google.inject.Injector;
 import com.google.inject.Module;
-import com.google.inject.util.Modules;
 
-/**
- * 
- * 
- * @author holger willebrandt - Initial contribution and API
- */
-@Deprecated
-public class GenericJavaBasedGenerator extends AbstractSExecModelGenerator {
+public class GenericJavaBasedGenerator extends AbstractGenModelExecutor {
 
 	@Inject
-	private Injector injector;
-	
-	@Override
-	public Module getOverridesModule(final GeneratorEntry entry) {
-		Module defaultModule = super.getOverridesModule(entry);
-
-		String overridingModuleClass = null;
-		FeatureConfiguration featureConfiguration = entry.getFeatureConfiguration(TEMPLATE_FEATURE);
-		if (featureConfiguration != null) {
-			FeatureParameterValue parameterValue = featureConfiguration.getParameterValue(CONFIGURATION_MODULE);
-			if (parameterValue != null) {
-				overridingModuleClass = parameterValue.getStringValue();
-			} 
-		}
-		if (!Strings.isEmpty(overridingModuleClass)) {
-			try {
-				Class<?> moduleClass = getClassLoader(entry).loadClass(overridingModuleClass);
-				if (Module.class.isAssignableFrom(moduleClass)) {
-					Module module = (Module) moduleClass.newInstance();
-					defaultModule = Modules.override(defaultModule).with(module);
-				}
-			} catch (Exception e) {
-				e.printStackTrace();
-				log.writeToConsole("Overriding module not found: " + overridingModuleClass);
-				log.writeToConsole(e);
-			}
-		}
-		return defaultModule;
-	}
-
-	protected ClassLoader getClassLoader(GeneratorEntry entry) {
-		IProject project = getLookupRoot(entry);
-		final ClassLoader classLoader = new WorkspaceClassLoaderFactory().createClassLoader(project,
-				getClass().getClassLoader());
-		return classLoader;
-	}
+	protected Injector injector;
 
 	@Override
-	public void runGenerator(Statechart statechart, GeneratorEntry entry) {
-		String templateClass = getTemplateClassName(entry);
+	protected void execute(ISCTFileSystemAccess access, GeneratorEntry entry) {
+		String templateClass = getClassName(entry);
 		final ClassLoader classLoader = getClassLoader(entry);
 		try {
-			Class<?> delegateGeneratorClass = (Class<?>) classLoader.loadClass(templateClass);
-			Object delegate = injector.getInstance(delegateGeneratorClass);
+			Class<?> generatorClass = (Class<?>) classLoader.loadClass(templateClass);
+			ISCTGenerator generator = injector.getInstance(generatorClass);
 
 			Class<?> iType_ = (Class<?>) getClass().getClassLoader()
 					.loadClass("org.yakindu.sct.generator.core.impl.IExecutionFlowGenerator");
@@ -97,10 +56,9 @@ public class GenericJavaBasedGenerator extends AbstractSExecModelGenerator {
 
 			ExecutionFlow flow = createExecutionFlow(statechart, entry);
 
-			if (coreFeatureHelper.isDumpSexec(entry)) {
+			if (coreFeatureHelper.serializeExecutionFlow(entry)) {
 				dumpSexec(entry, flow);
 			}
-
 
 			if (delegate instanceof IExecutionFlowGenerator) {
 				IExecutionFlowGenerator flowGenerator = (IExecutionFlowGenerator) delegate;
@@ -120,15 +78,41 @@ public class GenericJavaBasedGenerator extends AbstractSExecModelGenerator {
 		}
 	}
 
-	protected String getTemplateClassName(GeneratorEntry entry) {
+	public Module getOverridesModule(final GeneratorEntry entry) {
+		String overridingModuleClass = null;
+		FeatureConfiguration featureConfiguration = entry.getFeatureConfiguration(TEMPLATE_FEATURE);
+		if (featureConfiguration != null) {
+			FeatureParameterValue parameterValue = featureConfiguration.getParameterValue(CONFIGURATION_MODULE);
+			if (parameterValue != null) {
+				overridingModuleClass = parameterValue.getStringValue();
+			}
+		}
+		if (!Strings.isEmpty(overridingModuleClass)) {
+			try {
+				Class<?> moduleClass = getClassLoader(entry).loadClass(overridingModuleClass);
+				if (Module.class.isAssignableFrom(moduleClass)) {
+					return (Module) moduleClass.newInstance();
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+				log.writeToConsole("Overriding module not found: " + overridingModuleClass);
+			}
+		}
+		return null;
+	}
+
+	protected ClassLoader getClassLoader(GeneratorEntry entry) {
+		IProject project = getGeneratorProject(entry);
+		final ClassLoader classLoader = new WorkspaceClassLoaderFactory().createClassLoader(project,
+				getClass().getClassLoader());
+		return classLoader;
+	}
+
+	protected String getClassName(GeneratorEntry entry) {
 		return entry.getFeatureConfiguration(TEMPLATE_FEATURE).getParameterValue(GENERATOR_CLASS).getStringValue();
 	}
 
-	/**
-	 * resolve the project that defines the lookup path for the XpandFacade
-	 * 
-	 */
-	protected IProject getLookupRoot(GeneratorEntry entry) {
+	protected IProject getGeneratorProject(GeneratorEntry entry) {
 		IProject project = null;
 		FeatureConfiguration templateConfig = entry.getFeatureConfiguration(TEMPLATE_FEATURE);
 		FeatureParameterValue projectName = templateConfig.getParameterValue(GENERATOR_PROJECT);
@@ -141,4 +125,5 @@ public class GenericJavaBasedGenerator extends AbstractSExecModelGenerator {
 		}
 		return project;
 	}
+
 }

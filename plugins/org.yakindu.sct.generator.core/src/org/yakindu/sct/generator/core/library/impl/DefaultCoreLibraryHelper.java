@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2014 committers of YAKINDU and others.
+ * Copyright (c) 2016 committers of YAKINDU and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -70,7 +70,7 @@ public class DefaultCoreLibraryHelper implements ICoreLibraryHelper {
 	}
 
 	@Override
-	public boolean isDumpSexec(GeneratorEntry entry) {
+	public boolean serializeExecutionFlow(GeneratorEntry entry) {
 		FeatureParameterValue dumpSexec = entry.getFeatureParameterValue(DEBUG_FEATURE, DEBUG_FEATURE_DUMP_SEXEC);
 		if (dumpSexec == null) {
 			return false;

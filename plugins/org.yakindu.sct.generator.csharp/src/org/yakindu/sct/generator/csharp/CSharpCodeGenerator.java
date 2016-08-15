@@ -30,7 +30,7 @@ public class CSharpCodeGenerator extends AbstractSExecModelGenerator {
 	@Override
 	public void runGenerator(Statechart statechart, GeneratorEntry entry) {
 		ExecutionFlow flow = createExecutionFlow(statechart, entry);
-		if (coreFeatureHelper.isDumpSexec(entry)) {
+		if (coreFeatureHelper.serializeExecutionFlow(entry)) {
 			dumpSexec(entry, flow);
 		}
 		delegate.generate(flow, entry, sctFsa.getIFileSystemAccess());

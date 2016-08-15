@@ -29,7 +29,7 @@ import org.eclipse.xtext.generator.OutputConfiguration;
  * @author Johannes Dicks - Initial contribution and API
  *
  */
-public interface ISCTFileSystemAccess {
+public interface ISCTFileSystemAccess extends IFileSystemAccess {
 	
 	String TARGET_FOLDER_OUTPUT = IFileSystemAccess.DEFAULT_OUTPUT;
 	String LIBRARY_TARGET_FOLDER_OUTPUT = "LIBRARY_TARGET_FOLDER";

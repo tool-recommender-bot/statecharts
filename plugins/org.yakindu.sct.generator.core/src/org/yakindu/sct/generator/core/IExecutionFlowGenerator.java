@@ -21,23 +21,7 @@ import org.yakindu.sct.model.sgen.GeneratorEntry;
  * @author andreas muelder - Initial contribution and API
  * 
  */
-public interface IExecutionFlowGenerator {
+public interface IExecutionFlowGenerator extends ISCTGenerator {
 
-	/**
-	 * 
-	 * @param flow
-	 *            The {@link ExecutionFlow} to generate.
-	 * @param entry
-	 *            The {@link GeneratorEntry} that contains the configuration for
-	 *            the generation.
-	 * @param sctFsa
-	 *            A file system access that should be used for the generated
-	 *            artifacts. In case a separate libraryTargetFolder is specified
-	 *            in the Outlet feature of the generator entry, the file system
-	 *            access will not only provide a configuration for
-	 *            {@link #TARGET_FOLDER_OUTPUT}, but also for
-	 *            {@link #LIBRARY_TARGET_FOLDER_OUTPUT}.
-	 * 
-	 */
-	abstract void generate(ExecutionFlow flow, GeneratorEntry entry, IFileSystemAccess fsa);
+	void generate(ExecutionFlow flow, GeneratorEntry entry, IFileSystemAccess fsa);
 }

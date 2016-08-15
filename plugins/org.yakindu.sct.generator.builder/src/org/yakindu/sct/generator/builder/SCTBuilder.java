@@ -213,7 +213,7 @@ public class SCTBuilder extends IncrementalProjectBuilder {
 	}
 
 	protected void executeGenmodelGenerator(IResource resource) {
-		new GeneratorExecutor().executeGenerator(resource.getProject().getFile(resource.getProjectRelativePath()));
+		new GeneratorExecutorLookup().executeGenerator(resource.getProject().getFile(resource.getProjectRelativePath()));
 	}
 
 	protected void logGenmodelError(String resource) {

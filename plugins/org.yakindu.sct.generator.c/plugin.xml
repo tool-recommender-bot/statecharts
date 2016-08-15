@@ -4,7 +4,8 @@
    <extension
          point="org.yakindu.sct.generator.core.generator">
       <SCTGenerator
-            class="org.yakindu.sct.generator.c.CCodeGenerator"
+            executor="org.yakindu.sct.generator.core.execution.SExecGenModelExecutor"
+            bindings="org.yakindu.sct.generator.c.CCodeGeneratorModule"
             contentType="statechart"
             elementRefType="org.yakindu.sct.model.sgraph.Statechart"
             description="YAKINDU SCT C Code Generator"

@@ -31,7 +31,7 @@ import org.eclipse.ui.IObjectActionDelegate;
 import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.PlatformUI;
 import org.yakindu.sct.generator.builder.BuilderActivator;
-import org.yakindu.sct.generator.builder.GeneratorExecutor;
+import org.yakindu.sct.generator.builder.GeneratorExecutorLookup;
 import org.yakindu.sct.generator.core.GeneratorActivator;
 
 /**
@@ -43,10 +43,10 @@ public class GenerateModelAction implements IObjectActionDelegate {
 
 	private ISelection selection;
 
-	private GeneratorExecutor generatorExecutor;
+	private GeneratorExecutorLookup generatorExecutor;
 	
 	public GenerateModelAction() {
-		generatorExecutor = new GeneratorExecutor();
+		generatorExecutor = new GeneratorExecutorLookup();
 	}
 
 	public void run(IAction action) {

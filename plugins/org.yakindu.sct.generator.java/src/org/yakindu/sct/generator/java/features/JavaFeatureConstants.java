@@ -66,8 +66,4 @@ public final class JavaFeatureConstants implements IJavaFeatureConstants {
 	public static final String getStatemachineFactorySupport() {
 		return STATEMACHINE_FACTORY_SUPPORT;
 	}
-
-	public static final String getUseJavaIntForInteger() {
-		return USE_JAVA_INT_FOR_INTEGER;
-	}
 }

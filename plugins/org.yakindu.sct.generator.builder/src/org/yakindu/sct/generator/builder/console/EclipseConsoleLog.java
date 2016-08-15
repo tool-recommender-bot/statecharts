@@ -20,22 +20,22 @@ import org.eclipse.ui.console.IConsole;
 import org.eclipse.ui.console.IConsoleManager;
 import org.eclipse.ui.console.MessageConsole;
 import org.eclipse.ui.console.MessageConsoleStream;
-import org.yakindu.sct.generator.core.impl.IGeneratorLog;
+import org.yakindu.sct.generator.core.execution.IGeneratorLog;
 
 /**
  * @author Johannes Dicks - Initial contribution and API
  */
 public class EclipseConsoleLog implements IGeneratorLog {
-	
+
 	public static final String SCT_GENERATOR_CONSOLE = "SCT Generator Console";
-	
+
 	private MessageConsoleStream info;
 	private MessageConsoleStream error;
-	
+
 	public EclipseConsoleLog() {
 		init();
 	}
-	
+
 	public void init() {
 		if (Platform.isRunning()) {
 			info = getConsole().newMessageStream();
@@ -51,12 +51,13 @@ public class EclipseConsoleLog implements IGeneratorLog {
 		for (int i = 0; i < existing.length; i++) {
 			if (SCT_GENERATOR_CONSOLE.equals(existing[i].getName())) {
 				return (MessageConsole) existing[i];
-			} 
+			}
 		}
 		MessageConsole myConsole = new MessageConsole(SCT_GENERATOR_CONSOLE, null);
-		conMan.addConsoles(new IConsole[]{myConsole});
+		conMan.addConsoles(new IConsole[] { myConsole });
 		return myConsole;
 	}
+
 	public void close() throws Throwable {
 		info.close();
 		error.close();

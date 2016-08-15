@@ -21,7 +21,7 @@ import org.yakindu.sct.model.sgraph.Statechart;
  * 
  */
 
-public interface ISGraphGenerator {
+public interface ISGraphGenerator extends ISCTGenerator {
 
 	void generate(Statechart statechart, GeneratorEntry entry, IFileSystemAccess fsa);
 

@@ -28,10 +28,6 @@
         name="TimerService"
         optional="true"
         parameterType="BOOLEAN"/>
-    <parameters
-        name="UseJavaIntForInteger"
-        optional="true"
-        parameterType="BOOLEAN"/>
   </types>
   <types name="RunnableWrapper"
       comment="Generates a runnable wrapper for the state machine"

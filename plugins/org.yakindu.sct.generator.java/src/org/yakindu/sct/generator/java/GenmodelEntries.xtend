@@ -57,10 +57,6 @@ class GenmodelEntries {
 		generalFeatures?.getParameterValue(IJavaFeatureConstants::INTERFACE_OBSERVER_SUPPORT)
 	}
 
-	def private FeatureParameterValue getUseJavaIntForInteger(GeneratorEntry it) {
-		generalFeatures?.getParameterValue(IJavaFeatureConstants::USE_JAVA_INT_FOR_INTEGER)
-	}
-
 	def getLicenseText(GeneratorEntry it) {
 		if (licenseTextParameter != null) {
 			return "/** " + licenseTextParameter.stringValue.trim + " */"
@@ -93,7 +89,6 @@ class GenmodelEntries {
 	def getImplementationPackagePath(ExecutionFlow it, GeneratorEntry entry) {
 		getImplementationPackageName(entry).replace('.', '/')
 
-	//entry.basePackagePath+"/"+entry.getImplementationSuffix(it).toLowerCase
 	}
 
 	def createTimerService(GeneratorEntry it) {
@@ -113,13 +108,6 @@ class GenmodelEntries {
 	def createInterfaceObserver(GeneratorEntry it) {
 		if (interfaceObserverSupportParameter != null) {
 			return interfaceObserverSupportParameter.booleanValue
-		}
-		return false
-	}
-
-	def useJavaInt(GeneratorEntry it) {
-		if (useJavaIntForInteger != null) {
-			return useJavaIntForInteger.booleanValue
 		}
 		return false
 	}

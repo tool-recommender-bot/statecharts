@@ -14,8 +14,8 @@ package org.yakindu.sct.domain.generic.modules;
 import org.eclipse.xtext.service.AbstractGenericModule;
 import org.yakindu.sct.generator.builder.console.EclipseConsoleLog;
 import org.yakindu.sct.generator.builder.efs.EFSResourceFileSystemAccess;
+import org.yakindu.sct.generator.core.execution.IGeneratorLog;
 import org.yakindu.sct.generator.core.filesystem.ISCTFileSystemAccess;
-import org.yakindu.sct.generator.core.impl.IGeneratorLog;
 
 /**
  * @author Johannes Dicks - Initial contribution and API

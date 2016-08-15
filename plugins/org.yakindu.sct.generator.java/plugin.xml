@@ -4,7 +4,8 @@
    <extension
          point="org.yakindu.sct.generator.core.generator">
        <SCTGenerator
-            class="org.yakindu.sct.generator.java.JavaCodeGenerator"
+            executor="org.yakindu.sct.generator.core.SExecGenModelExecutor"
+            bindings="org.yakindu.sct.generator.java.JavaGeneratorModule"
             description="YAKINDU SCT Java Code Generator"
             contentType="statechart"
             elementRefType="org.yakindu.sct.model.sgraph.Statechart"
@@ -13,9 +14,6 @@
             name="YAKINDU SCT Java Code Generator">
           <FeatureLibrary
                 library_id="org.yakindu.generator.core.features">
-          </FeatureLibrary>
-          <FeatureLibrary
-                library_id="org.yakindu.generator.core.features.sctbase">
           </FeatureLibrary>
           <FeatureLibrary
                 library_id="org.yakindu.sct.generator.feature.java">

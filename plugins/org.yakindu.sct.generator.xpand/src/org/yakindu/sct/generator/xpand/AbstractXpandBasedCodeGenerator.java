@@ -80,7 +80,7 @@ public abstract class AbstractXpandBasedCodeGenerator extends AbstractSExecModel
 		if (context.findDefinition(templatePath, targetType, paramTypes) != null) {
 			generatorFound = true;
 			ExecutionFlow flow = createExecutionFlow(statechart, entry);
-			if (coreFeatureHelper.isDumpSexec(entry)) {
+			if (coreFeatureHelper.serializeExecutionFlow(entry)) {
 				dumpSexec(entry, flow);
 			}
 			facade.evaluate(templatePath, flow, entry);
