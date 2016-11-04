@@ -21,5 +21,9 @@ import java.lang.annotation.Target;
 @Retention(RUNTIME)
 @Target(TYPE)
 public @interface PyTest {
-	String module();
+	/*
+	 * The path to the folder containing the tests.
+	 * Example: 'test_example.py' is located under 'py/Tests'.
+	 */
+	String path();
 }
