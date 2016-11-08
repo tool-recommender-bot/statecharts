@@ -1,4 +1,3 @@
-from .test_example import ExampleTests
 import unittest
 
 
