@@ -412,7 +412,7 @@ class Statemachine {
 		}
 		
 		«IF event.type != null && !isSame(event.type, getType(GenericTypeSystem.VOID))»
-			private void raise«event.name.asName»(«event.typeSpecifier.targetLanguageName» value) {
+			public void raise«event.name.asName»(«event.typeSpecifier.targetLanguageName» value) {
 				«event.symbol» = true;
 				«event.valueIdentifier» = value;
 				«IF entry.createInterfaceObserver»
@@ -427,7 +427,7 @@ class Statemachine {
 				return «event.valueIdentifier»;
 			}
 		«ELSE»
-			private void raise«event.name.asName»() {
+			public void raise«event.name.asName»() {
 				«event.symbol» = true;
 				«IF entry.createInterfaceObserver»
 					foreach («scope.interfaceListenerName» listener in listeners) {
@@ -445,7 +445,7 @@ class Statemachine {
 				«event.valueIdentifier» = value;
 			}
 			
-			private «event.typeSpecifier.targetLanguageName» get«event.name.asName»Value() {
+			public «event.typeSpecifier.targetLanguageName» get«event.name.asName»Value() {
 				«event.getIllegalAccessValidation()»
 				return «event.valueIdentifier»;
 			}
@@ -485,18 +485,18 @@ class Statemachine {
 	def protected internalScopeFunctions (ExecutionFlow flow) '''
 		«FOR event : flow.internalScopeEvents»
 			«IF event.type != null && !isSame(event.type, getType(GenericTypeSystem.VOID))»
-				private void raise«event.name.asEscapedName»(«event.typeSpecifier.targetLanguageName» value) {
+				public void raise«event.name.asEscapedName»(«event.typeSpecifier.targetLanguageName» value) {
 					«event.valueIdentifier» = value;
 					«event.symbol» = true;
 				}
 				
-				private «event.typeSpecifier.targetLanguageName» get«event.name.asEscapedName»Value() {
+				public «event.typeSpecifier.targetLanguageName» get«event.name.asEscapedName»Value() {
 					«event.getIllegalAccessValidation()»
 					return «event.valueIdentifier»;
 				}
 			«ELSE»
 			
-				private void raise«event.name.asEscapedName»() {
+				public void raise«event.name.asEscapedName»() {
 					«event.symbol» = true;
 				}
 				
