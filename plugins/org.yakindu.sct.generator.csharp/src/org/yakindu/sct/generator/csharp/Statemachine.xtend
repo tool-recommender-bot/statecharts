@@ -51,7 +51,7 @@ class Statemachine {
 		using «entry.namespaceName»;
 		«flow.createImports(entry)»
 		
-		namespace «entry.namespaceName»
+		namespace «entry.namespaceName».«flow.statemachineName»
 		{
 		
 			public class «flow.statemachineClassName» : «flow.statemachineInterfaceName» 
