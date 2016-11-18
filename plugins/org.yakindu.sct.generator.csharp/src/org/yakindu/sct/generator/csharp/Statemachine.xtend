@@ -160,6 +160,9 @@ class Statemachine {
 			«FOR scope : flow.interfaceScopes»
 			«scope.interfaceName.asEscapedIdentifier» = new «scope.getInterfaceImplName()»();
 			«ENDFOR»
+			«IF flow.timed»
+				timer = new TimerService();
+			«ENDIF»
 		}
 	'''
 	
@@ -177,6 +180,7 @@ class Statemachine {
 			«IF flow.hasHistory»
 			for (int i = 0; i < «flow.historyVector.size»; i++) {
 				historyVector[i] = State.NullState;
+			}
 			
 			«ENDIF»
 			clearEvents();

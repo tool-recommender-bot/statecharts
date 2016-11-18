@@ -48,7 +48,7 @@ class StatemachineInterface {
 			«ENDIF»
 			using «entry.namespaceName»;
 			
-			namespace «entry.namespaceName»
+			namespace «entry.namespaceName».«flow.statemachineName»
 			{
 				public interface «flow.statemachineInterfaceName» : «flow.statemachineInterfaceExtensions» {
 					«IF flow.internalScope != null»
