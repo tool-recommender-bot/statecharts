@@ -14,6 +14,7 @@ import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IProjectDescription;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Status;
@@ -316,6 +317,13 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor implement
 			e.printStackTrace();
 		}
 		super.dispose();
+	}
+	
+	@Override
+	protected void handleExceptionOnSave(CoreException exception, IProgressMonitor progressMonitor) {
+		DiagramActivator.getDefault().getLog()
+				.log(new Status(IStatus.ERROR, DiagramActivator.PLUGIN_ID, exception.getMessage(), exception));
+		super.handleExceptionOnSave(exception, progressMonitor);
 	}
 
 	@Override
