@@ -365,6 +365,7 @@
 				<module>../../test-plugins/org.yakindu.sct.refactoring.tests</module>
 				<module>../../test-plugins/org.yakindu.sct.generator.c.test</module>
 				<module>../../plugins/org.yakindu.base.types.test</module>
+				<module>../../plugins/org.yakindu.base.generator.test</module>
 				<!-- test feature -->
 				<module>../../features/org.yakindu.sct.test-feature</module>
 				<!-- test releng -->
@@ -386,6 +387,7 @@
 		<module>../../plugins/org.yakindu.base.expressions</module>
 		<module>../../plugins/org.yakindu.base.expressions.edit</module>
 		<module>../../plugins/org.yakindu.base.expressions.ui</module>
+		<module>../../plugins/org.yakindu.base.generator</module>
 		<module>../../plugins/org.yakindu.base.gmf.runtime</module>
 		<module>../../plugins/org.yakindu.sct.commons</module>
 		<module>../../plugins/org.yakindu.sct.compare</module>

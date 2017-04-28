@@ -15,11 +15,19 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="contents" upperBound="-1"
         eType="#//CodeElement"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Class" abstract="true" eSuperTypes="#//BlockBasedCodeElement #//VisibilityOwner"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Class" abstract="true" eSuperTypes="#//BlockBasedCodeElement #//VisibilityOwner">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="className" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="classMembers" upperBound="-1"
+        eType="#//ClassMember"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ClassDeclaration">
     <eStructuralFeatures xsi:type="ecore:EReference" name="parentClass" eType="#//Class"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Method" abstract="true" eSuperTypes="#//BlockBasedCodeElement #//ClassMember"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Method" abstract="true" eSuperTypes="#//BlockBasedCodeElement #//ClassMember">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="arguments" upperBound="-1"
+        eType="ecore:EClass ../../org.yakindu.base.types/model/types.ecore#//TypeSpecifier"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="ecore:EClass ../../org.yakindu.base.types/model/types.ecore#//Type"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="MethodDeclaration" eSuperTypes="#//LineBasedCodeElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="parentMethod" eType="#//Method"/>
   </eClassifiers>
@@ -43,5 +51,9 @@
     <eOperations name="generateText" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="text" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="SourceFile" eSuperTypes="#//CodeElement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="SourceFile" eSuperTypes="#//CodeElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="imports" upperBound="-1"
+        eType="#//SourceFile"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="file" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
 </ecore:EPackage>

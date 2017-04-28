@@ -293,6 +293,24 @@ public class GeneratorPackageImpl extends EPackageImpl implements GeneratorPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getClass_ClassName() {
+		return (EAttribute)classEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getClass_ClassMembers() {
+		return (EReference)classEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getClassDeclaration() {
 		return classDeclarationEClass;
 	}
@@ -313,6 +331,24 @@ public class GeneratorPackageImpl extends EPackageImpl implements GeneratorPacka
 	 */
 	public EClass getMethod() {
 		return methodEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getMethod_Arguments() {
+		return (EReference)methodEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getMethod_Type() {
+		return (EReference)methodEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -446,6 +482,24 @@ public class GeneratorPackageImpl extends EPackageImpl implements GeneratorPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getSourceFile_Imports() {
+		return (EReference)sourceFileEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getSourceFile_File() {
+		return (EAttribute)sourceFileEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EEnum getVisibility() {
 		return visibilityEEnum;
 	}
@@ -491,11 +545,15 @@ public class GeneratorPackageImpl extends EPackageImpl implements GeneratorPacka
 		createEOperation(blockBasedCodeElementEClass, BLOCK_BASED_CODE_ELEMENT___GENERATE_BLOCK_CONTENTS);
 
 		classEClass = createEClass(CLASS);
+		createEAttribute(classEClass, CLASS__CLASS_NAME);
+		createEReference(classEClass, CLASS__CLASS_MEMBERS);
 
 		classDeclarationEClass = createEClass(CLASS_DECLARATION);
 		createEReference(classDeclarationEClass, CLASS_DECLARATION__PARENT_CLASS);
 
 		methodEClass = createEClass(METHOD);
+		createEReference(methodEClass, METHOD__ARGUMENTS);
+		createEReference(methodEClass, METHOD__TYPE);
 
 		methodDeclarationEClass = createEClass(METHOD_DECLARATION);
 		createEReference(methodDeclarationEClass, METHOD_DECLARATION__PARENT_METHOD);
@@ -517,6 +575,8 @@ public class GeneratorPackageImpl extends EPackageImpl implements GeneratorPacka
 		createEOperation(commentEClass, COMMENT___GENERATE_TEXT);
 
 		sourceFileEClass = createEClass(SOURCE_FILE);
+		createEReference(sourceFileEClass, SOURCE_FILE__IMPORTS);
+		createEAttribute(sourceFileEClass, SOURCE_FILE__FILE);
 
 		// Create enums
 		visibilityEEnum = createEEnum(VISIBILITY);
@@ -544,6 +604,9 @@ public class GeneratorPackageImpl extends EPackageImpl implements GeneratorPacka
 		setName(eNAME);
 		setNsPrefix(eNS_PREFIX);
 		setNsURI(eNS_URI);
+
+		// Obtain other dependent packages
+		TypesPackage theTypesPackage = (TypesPackage)EPackage.Registry.INSTANCE.getEPackage(TypesPackage.eNS_URI);
 
 		// Create type parameters
 
@@ -582,11 +645,15 @@ public class GeneratorPackageImpl extends EPackageImpl implements GeneratorPacka
 		initEOperation(getBlockBasedCodeElement__GenerateBlockContents(), ecorePackage.getEString(), "generateBlockContents", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(classEClass, Generator.Class.class, "Class", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getClass_ClassName(), ecorePackage.getEString(), "className", null, 0, 1, Generator.Class.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getClass_ClassMembers(), this.getClassMember(), null, "classMembers", null, 0, -1, Generator.Class.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(classDeclarationEClass, ClassDeclaration.class, "ClassDeclaration", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getClassDeclaration_ParentClass(), this.getClass_(), null, "parentClass", null, 0, 1, ClassDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(methodEClass, Method.class, "Method", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getMethod_Arguments(), theTypesPackage.getTypeSpecifier(), null, "arguments", null, 0, -1, Method.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getMethod_Type(), theTypesPackage.getType(), null, "type", null, 0, 1, Method.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(methodDeclarationEClass, MethodDeclaration.class, "MethodDeclaration", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getMethodDeclaration_ParentMethod(), this.getMethod(), null, "parentMethod", null, 0, 1, MethodDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -611,6 +678,8 @@ public class GeneratorPackageImpl extends EPackageImpl implements GeneratorPacka
 		initEOperation(getComment__GenerateText(), ecorePackage.getEString(), "generateText", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(sourceFileEClass, SourceFile.class, "SourceFile", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getSourceFile_Imports(), this.getSourceFile(), null, "imports", null, 0, -1, SourceFile.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getSourceFile_File(), ecorePackage.getEString(), "file", null, 0, 1, SourceFile.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(visibilityEEnum, Visibility.class, "Visibility");

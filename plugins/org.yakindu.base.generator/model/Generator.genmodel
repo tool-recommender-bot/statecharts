@@ -2,8 +2,9 @@
 <genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
     xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.yakindu.base.generator/src" modelPluginID="org.yakindu.base.generator"
     modelName="Generator" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
+    testsDirectory="/org.yakindu.base.generator.test/src" testSuiteClass="Generator.tests.GeneratorAllTests"
     importerID="org.eclipse.emf.importer.ecore" complianceLevel="8.0" copyrightFields="false"
-    usedGenPackages="../../org.yakindu.base.types/model/base.genmodel#//base ../../org.yakindu.base.types/model/types.genmodel#//types"
+    testsPluginID="org.yakindu.base.generator.test" usedGenPackages="../../org.yakindu.base.types/model/base.genmodel#//base ../../org.yakindu.base.types/model/types.genmodel#//types"
     operationReflection="true" importOrganizing="true">
   <foreignModel>Generator.ecore</foreignModel>
   <genPackages prefix="Generator" disposableProviderFactory="true" ecorePackage="Generator.ecore#/">
@@ -23,11 +24,17 @@
       <genOperations ecoreOperation="Generator.ecore#//BlockBasedCodeElement/generateBlockEnd"/>
       <genOperations ecoreOperation="Generator.ecore#//BlockBasedCodeElement/generateBlockContents"/>
     </genClasses>
-    <genClasses image="false" ecoreClass="Generator.ecore#//Class"/>
+    <genClasses image="false" ecoreClass="Generator.ecore#//Class">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Generator.ecore#//Class/className"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Generator.ecore#//Class/classMembers"/>
+    </genClasses>
     <genClasses ecoreClass="Generator.ecore#//ClassDeclaration">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Generator.ecore#//ClassDeclaration/parentClass"/>
     </genClasses>
-    <genClasses image="false" ecoreClass="Generator.ecore#//Method"/>
+    <genClasses image="false" ecoreClass="Generator.ecore#//Method">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Generator.ecore#//Method/arguments"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Generator.ecore#//Method/type"/>
+    </genClasses>
     <genClasses ecoreClass="Generator.ecore#//MethodDeclaration">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Generator.ecore#//MethodDeclaration/parentMethod"/>
     </genClasses>
@@ -45,6 +52,9 @@
       <genOperations ecoreOperation="Generator.ecore#//Comment/generateCommentEnd"/>
       <genOperations ecoreOperation="Generator.ecore#//Comment/generateText"/>
     </genClasses>
-    <genClasses ecoreClass="Generator.ecore#//SourceFile"/>
+    <genClasses ecoreClass="Generator.ecore#//SourceFile">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Generator.ecore#//SourceFile/imports"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Generator.ecore#//SourceFile/file"/>
+    </genClasses>
   </genPackages>
 </genmodel:GenModel>

@@ -243,13 +243,31 @@ public interface GeneratorPackage extends EPackage {
 	int CLASS__VISIBILITY = BLOCK_BASED_CODE_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Class Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CLASS__CLASS_NAME = BLOCK_BASED_CODE_ELEMENT_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Class Members</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CLASS__CLASS_MEMBERS = BLOCK_BASED_CODE_ELEMENT_FEATURE_COUNT + 2;
+
+	/**
 	 * The number of structural features of the '<em>Class</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CLASS_FEATURE_COUNT = BLOCK_BASED_CODE_ELEMENT_FEATURE_COUNT + 1;
+	int CLASS_FEATURE_COUNT = BLOCK_BASED_CODE_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
 	 * The operation id for the '<em>Generate</em>' operation.
@@ -371,13 +389,31 @@ public interface GeneratorPackage extends EPackage {
 	int METHOD__VISIBILITY = BLOCK_BASED_CODE_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Arguments</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int METHOD__ARGUMENTS = BLOCK_BASED_CODE_ELEMENT_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Type</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int METHOD__TYPE = BLOCK_BASED_CODE_ELEMENT_FEATURE_COUNT + 2;
+
+	/**
 	 * The number of structural features of the '<em>Method</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int METHOD_FEATURE_COUNT = BLOCK_BASED_CODE_ELEMENT_FEATURE_COUNT + 1;
+	int METHOD_FEATURE_COUNT = BLOCK_BASED_CODE_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
 	 * The operation id for the '<em>Generate</em>' operation.
@@ -720,13 +756,31 @@ public interface GeneratorPackage extends EPackage {
 	int SOURCE_FILE = 12;
 
 	/**
+	 * The feature id for the '<em><b>Imports</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SOURCE_FILE__IMPORTS = CODE_ELEMENT_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>File</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SOURCE_FILE__FILE = CODE_ELEMENT_FEATURE_COUNT + 1;
+
+	/**
 	 * The number of structural features of the '<em>Source File</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SOURCE_FILE_FEATURE_COUNT = CODE_ELEMENT_FEATURE_COUNT + 0;
+	int SOURCE_FILE_FEATURE_COUNT = CODE_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The operation id for the '<em>Generate</em>' operation.
@@ -859,6 +913,28 @@ public interface GeneratorPackage extends EPackage {
 	EClass getClass_();
 
 	/**
+	 * Returns the meta object for the attribute '{@link Generator.Class#getClassName <em>Class Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Class Name</em>'.
+	 * @see Generator.Class#getClassName()
+	 * @see #getClass_()
+	 * @generated
+	 */
+	EAttribute getClass_ClassName();
+
+	/**
+	 * Returns the meta object for the reference list '{@link Generator.Class#getClassMembers <em>Class Members</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Class Members</em>'.
+	 * @see Generator.Class#getClassMembers()
+	 * @see #getClass_()
+	 * @generated
+	 */
+	EReference getClass_ClassMembers();
+
+	/**
 	 * Returns the meta object for class '{@link Generator.ClassDeclaration <em>Class Declaration</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -888,6 +964,28 @@ public interface GeneratorPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getMethod();
+
+	/**
+	 * Returns the meta object for the reference list '{@link Generator.Method#getArguments <em>Arguments</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Arguments</em>'.
+	 * @see Generator.Method#getArguments()
+	 * @see #getMethod()
+	 * @generated
+	 */
+	EReference getMethod_Arguments();
+
+	/**
+	 * Returns the meta object for the reference '{@link Generator.Method#getType <em>Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Type</em>'.
+	 * @see Generator.Method#getType()
+	 * @see #getMethod()
+	 * @generated
+	 */
+	EReference getMethod_Type();
 
 	/**
 	 * Returns the meta object for class '{@link Generator.MethodDeclaration <em>Method Declaration</em>}'.
@@ -1034,6 +1132,28 @@ public interface GeneratorPackage extends EPackage {
 	EClass getSourceFile();
 
 	/**
+	 * Returns the meta object for the reference list '{@link Generator.SourceFile#getImports <em>Imports</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Imports</em>'.
+	 * @see Generator.SourceFile#getImports()
+	 * @see #getSourceFile()
+	 * @generated
+	 */
+	EReference getSourceFile_Imports();
+
+	/**
+	 * Returns the meta object for the attribute '{@link Generator.SourceFile#getFile <em>File</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>File</em>'.
+	 * @see Generator.SourceFile#getFile()
+	 * @see #getSourceFile()
+	 * @generated
+	 */
+	EAttribute getSourceFile_File();
+
+	/**
 	 * Returns the meta object for enum '{@link Generator.Visibility <em>Visibility</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1155,6 +1275,22 @@ public interface GeneratorPackage extends EPackage {
 		EClass CLASS = eINSTANCE.getClass_();
 
 		/**
+		 * The meta object literal for the '<em><b>Class Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute CLASS__CLASS_NAME = eINSTANCE.getClass_ClassName();
+
+		/**
+		 * The meta object literal for the '<em><b>Class Members</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CLASS__CLASS_MEMBERS = eINSTANCE.getClass_ClassMembers();
+
+		/**
 		 * The meta object literal for the '{@link Generator.impl.ClassDeclarationImpl <em>Class Declaration</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1181,6 +1317,22 @@ public interface GeneratorPackage extends EPackage {
 		 * @generated
 		 */
 		EClass METHOD = eINSTANCE.getMethod();
+
+		/**
+		 * The meta object literal for the '<em><b>Arguments</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference METHOD__ARGUMENTS = eINSTANCE.getMethod_Arguments();
+
+		/**
+		 * The meta object literal for the '<em><b>Type</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference METHOD__TYPE = eINSTANCE.getMethod_Type();
 
 		/**
 		 * The meta object literal for the '{@link Generator.impl.MethodDeclarationImpl <em>Method Declaration</em>}' class.
@@ -1307,6 +1459,22 @@ public interface GeneratorPackage extends EPackage {
 		 * @generated
 		 */
 		EClass SOURCE_FILE = eINSTANCE.getSourceFile();
+
+		/**
+		 * The meta object literal for the '<em><b>Imports</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference SOURCE_FILE__IMPORTS = eINSTANCE.getSourceFile_Imports();
+
+		/**
+		 * The meta object literal for the '<em><b>File</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute SOURCE_FILE__FILE = eINSTANCE.getSourceFile_File();
 
 		/**
 		 * The meta object literal for the '{@link Generator.Visibility <em>Visibility</em>}' enum.
