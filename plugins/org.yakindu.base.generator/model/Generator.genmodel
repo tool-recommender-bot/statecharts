@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.yakindu.base.generator/src" modelPluginID="org.yakindu.base.generator"
+    modelName="Generator" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
+    importerID="org.eclipse.emf.importer.ecore" complianceLevel="8.0" copyrightFields="false"
+    usedGenPackages="../../org.yakindu.base.types/model/base.genmodel#//base ../../org.yakindu.base.types/model/types.genmodel#//types"
+    operationReflection="true" importOrganizing="true">
+  <foreignModel>Generator.ecore</foreignModel>
+  <genPackages prefix="Generator" disposableProviderFactory="true" ecorePackage="Generator.ecore#/">
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="Generator.ecore#//Visibility">
+      <genEnumLiterals ecoreEnumLiteral="Generator.ecore#//Visibility/public"/>
+      <genEnumLiterals ecoreEnumLiteral="Generator.ecore#//Visibility/protected"/>
+      <genEnumLiterals ecoreEnumLiteral="Generator.ecore#//Visibility/private"/>
+    </genEnums>
+    <genClasses image="false" ecoreClass="Generator.ecore#//CodeElement">
+      <genOperations ecoreOperation="Generator.ecore#//CodeElement/generate"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="Generator.ecore#//LineBasedCodeElement"/>
+    <genClasses image="false" ecoreClass="Generator.ecore#//BlockBasedCodeElement">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Generator.ecore#//BlockBasedCodeElement/contents"/>
+      <genOperations ecoreOperation="Generator.ecore#//BlockBasedCodeElement/generateBlockHeader"/>
+      <genOperations ecoreOperation="Generator.ecore#//BlockBasedCodeElement/generateBlockStart"/>
+      <genOperations ecoreOperation="Generator.ecore#//BlockBasedCodeElement/generateBlockEnd"/>
+      <genOperations ecoreOperation="Generator.ecore#//BlockBasedCodeElement/generateBlockContents"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="Generator.ecore#//Class"/>
+    <genClasses ecoreClass="Generator.ecore#//ClassDeclaration">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Generator.ecore#//ClassDeclaration/parentClass"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="Generator.ecore#//Method"/>
+    <genClasses ecoreClass="Generator.ecore#//MethodDeclaration">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Generator.ecore#//MethodDeclaration/parentMethod"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="Generator.ecore#//ClassMember"/>
+    <genClasses image="false" ecoreClass="Generator.ecore#//VisibilityOwner">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Generator.ecore#//VisibilityOwner/visibility"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="Generator.ecore#//Variable"/>
+    <genClasses image="false" ecoreClass="Generator.ecore#//VariableDeclaration">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Generator.ecore#//VariableDeclaration/parentVariable"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="Generator.ecore#//Comment">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Generator.ecore#//Comment/text"/>
+      <genOperations ecoreOperation="Generator.ecore#//Comment/generateCommentStart"/>
+      <genOperations ecoreOperation="Generator.ecore#//Comment/generateCommentEnd"/>
+      <genOperations ecoreOperation="Generator.ecore#//Comment/generateText"/>
+    </genClasses>
+    <genClasses ecoreClass="Generator.ecore#//SourceFile"/>
+  </genPackages>
+</genmodel:GenModel>

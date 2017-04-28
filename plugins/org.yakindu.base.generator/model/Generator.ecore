@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="Generator" nsURI="http://www.yakindu.org/base/generator" nsPrefix="Generator">
+  <eClassifiers xsi:type="ecore:EClass" name="CodeElement" abstract="true">
+    <eOperations name="generate" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="LineBasedCodeElement" abstract="true"
+      eSuperTypes="#//CodeElement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="BlockBasedCodeElement" abstract="true"
+      eSuperTypes="#//CodeElement">
+    <eOperations name="generateBlockHeader" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eOperations name="generateBlockStart" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eOperations name="generateBlockEnd" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eOperations name="generateBlockContents" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="contents" upperBound="-1"
+        eType="#//CodeElement"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Class" abstract="true" eSuperTypes="#//BlockBasedCodeElement #//VisibilityOwner"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ClassDeclaration">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parentClass" eType="#//Class"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Method" abstract="true" eSuperTypes="#//BlockBasedCodeElement #//ClassMember"/>
+  <eClassifiers xsi:type="ecore:EClass" name="MethodDeclaration" eSuperTypes="#//LineBasedCodeElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parentMethod" eType="#//Method"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ClassMember" abstract="true" eSuperTypes="#//VisibilityOwner"/>
+  <eClassifiers xsi:type="ecore:EEnum" name="Visibility">
+    <eLiterals name="public"/>
+    <eLiterals name="protected" value="1" literal="protected"/>
+    <eLiterals name="private" value="2" literal="private"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="VisibilityOwner" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="visibility" eType="#//Visibility"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Variable" abstract="true" eSuperTypes="#//ClassMember"/>
+  <eClassifiers xsi:type="ecore:EClass" name="VariableDeclaration" abstract="true"
+      eSuperTypes="#//LineBasedCodeElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parentVariable" eType="#//Variable"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Comment" abstract="true" eSuperTypes="#//LineBasedCodeElement">
+    <eOperations name="generateCommentStart" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eOperations name="generateCommentEnd" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eOperations name="generateText" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="text" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SourceFile" eSuperTypes="#//CodeElement"/>
+</ecore:EPackage>
