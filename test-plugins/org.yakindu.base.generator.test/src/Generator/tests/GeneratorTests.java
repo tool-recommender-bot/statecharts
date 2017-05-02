@@ -31,8 +31,10 @@ public class GeneratorTests extends TestSuite {
 	 */
 	public static Test suite() {
 		TestSuite suite = new GeneratorTests("Generator Tests");
+		suite.addTestSuite(LineBasedCodeElementTest.class);
 		suite.addTestSuite(MethodDeclarationTest.class);
 		suite.addTestSuite(SourceFileTest.class);
+		suite.addTestSuite(CodeExpressionTest.class);
 		return suite;
 	}
 

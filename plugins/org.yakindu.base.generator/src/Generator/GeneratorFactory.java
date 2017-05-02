@@ -22,6 +22,15 @@ public interface GeneratorFactory extends EFactory {
 	GeneratorFactory eINSTANCE = Generator.impl.GeneratorFactoryImpl.init();
 
 	/**
+	 * Returns a new object of class '<em>Line Based Code Element</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Line Based Code Element</em>'.
+	 * @generated
+	 */
+	LineBasedCodeElement createLineBasedCodeElement();
+
+	/**
 	 * Returns a new object of class '<em>Class Declaration</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -47,6 +56,15 @@ public interface GeneratorFactory extends EFactory {
 	 * @generated
 	 */
 	SourceFile createSourceFile();
+
+	/**
+	 * Returns a new object of class '<em>Code Expression</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Code Expression</em>'.
+	 * @generated
+	 */
+	CodeExpression createCodeExpression();
 
 	/**
 	 * Returns the package supported by this factory.

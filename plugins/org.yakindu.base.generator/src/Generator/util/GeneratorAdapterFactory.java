@@ -6,6 +6,7 @@ import Generator.BlockBasedCodeElement;
 import Generator.ClassDeclaration;
 import Generator.ClassMember;
 import Generator.CodeElement;
+import Generator.CodeExpression;
 import Generator.Comment;
 import Generator.GeneratorPackage;
 import Generator.LineBasedCodeElement;
@@ -130,6 +131,10 @@ public class GeneratorAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseSourceFile(SourceFile object) {
 				return createSourceFileAdapter();
+			}
+			@Override
+			public Adapter caseCodeExpression(CodeExpression object) {
+				return createCodeExpressionAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -330,6 +335,20 @@ public class GeneratorAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createSourceFileAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link Generator.CodeExpression <em>Code Expression</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see Generator.CodeExpression
+	 * @generated
+	 */
+	public Adapter createCodeExpressionAdapter() {
 		return null;
 	}
 

@@ -4,8 +4,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="CodeElement" abstract="true">
     <eOperations name="generate" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="LineBasedCodeElement" abstract="true"
-      eSuperTypes="#//CodeElement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="LineBasedCodeElement" eSuperTypes="#//CodeElement"/>
   <eClassifiers xsi:type="ecore:EClass" name="BlockBasedCodeElement" abstract="true"
       eSuperTypes="#//CodeElement">
     <eOperations name="generateBlockHeader" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -55,5 +54,8 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="imports" upperBound="-1"
         eType="#//SourceFile"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="file" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CodeExpression" eSuperTypes="#//LineBasedCodeElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="exp" eType="ecore:EClass ../../org.yakindu.base.expressions/model/Expressions.ecore#//Expression"/>
   </eClassifiers>
 </ecore:EPackage>

@@ -801,6 +801,52 @@ public interface GeneratorPackage extends EPackage {
 	int SOURCE_FILE_OPERATION_COUNT = CODE_ELEMENT_OPERATION_COUNT + 0;
 
 	/**
+	 * The meta object id for the '{@link Generator.impl.CodeExpressionImpl <em>Code Expression</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see Generator.impl.CodeExpressionImpl
+	 * @see Generator.impl.GeneratorPackageImpl#getCodeExpression()
+	 * @generated
+	 */
+	int CODE_EXPRESSION = 13;
+
+	/**
+	 * The feature id for the '<em><b>Exp</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CODE_EXPRESSION__EXP = LINE_BASED_CODE_ELEMENT_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Code Expression</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CODE_EXPRESSION_FEATURE_COUNT = LINE_BASED_CODE_ELEMENT_FEATURE_COUNT + 1;
+
+	/**
+	 * The operation id for the '<em>Generate</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CODE_EXPRESSION___GENERATE = LINE_BASED_CODE_ELEMENT___GENERATE;
+
+	/**
+	 * The number of operations of the '<em>Code Expression</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CODE_EXPRESSION_OPERATION_COUNT = LINE_BASED_CODE_ELEMENT_OPERATION_COUNT + 0;
+
+	/**
 	 * The meta object id for the '{@link Generator.Visibility <em>Visibility</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -808,7 +854,7 @@ public interface GeneratorPackage extends EPackage {
 	 * @see Generator.impl.GeneratorPackageImpl#getVisibility()
 	 * @generated
 	 */
-	int VISIBILITY = 13;
+	int VISIBILITY = 14;
 
 
 	/**
@@ -1154,6 +1200,27 @@ public interface GeneratorPackage extends EPackage {
 	EAttribute getSourceFile_File();
 
 	/**
+	 * Returns the meta object for class '{@link Generator.CodeExpression <em>Code Expression</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Code Expression</em>'.
+	 * @see Generator.CodeExpression
+	 * @generated
+	 */
+	EClass getCodeExpression();
+
+	/**
+	 * Returns the meta object for the reference '{@link Generator.CodeExpression#getExp <em>Exp</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Exp</em>'.
+	 * @see Generator.CodeExpression#getExp()
+	 * @see #getCodeExpression()
+	 * @generated
+	 */
+	EReference getCodeExpression_Exp();
+
+	/**
 	 * Returns the meta object for enum '{@link Generator.Visibility <em>Visibility</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1475,6 +1542,24 @@ public interface GeneratorPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute SOURCE_FILE__FILE = eINSTANCE.getSourceFile_File();
+
+		/**
+		 * The meta object literal for the '{@link Generator.impl.CodeExpressionImpl <em>Code Expression</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see Generator.impl.CodeExpressionImpl
+		 * @see Generator.impl.GeneratorPackageImpl#getCodeExpression()
+		 * @generated
+		 */
+		EClass CODE_EXPRESSION = eINSTANCE.getCodeExpression();
+
+		/**
+		 * The meta object literal for the '<em><b>Exp</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CODE_EXPRESSION__EXP = eINSTANCE.getCodeExpression_Exp();
 
 		/**
 		 * The meta object literal for the '{@link Generator.Visibility <em>Visibility</em>}' enum.

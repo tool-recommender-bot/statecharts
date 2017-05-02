@@ -6,6 +6,7 @@ import Generator.BlockBasedCodeElement;
 import Generator.ClassDeclaration;
 import Generator.ClassMember;
 import Generator.CodeElement;
+import Generator.CodeExpression;
 import Generator.Comment;
 import Generator.GeneratorPackage;
 import Generator.LineBasedCodeElement;
@@ -172,6 +173,14 @@ public class GeneratorSwitch<T> extends Switch<T> {
 				SourceFile sourceFile = (SourceFile)theEObject;
 				T result = caseSourceFile(sourceFile);
 				if (result == null) result = caseCodeElement(sourceFile);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case GeneratorPackage.CODE_EXPRESSION: {
+				CodeExpression codeExpression = (CodeExpression)theEObject;
+				T result = caseCodeExpression(codeExpression);
+				if (result == null) result = caseLineBasedCodeElement(codeExpression);
+				if (result == null) result = caseCodeElement(codeExpression);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -371,6 +380,21 @@ public class GeneratorSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseSourceFile(SourceFile object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Code Expression</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Code Expression</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseCodeExpression(CodeExpression object) {
 		return null;
 	}
 

@@ -3,8 +3,10 @@
 package Generator.impl;
 
 import Generator.ClassDeclaration;
+import Generator.CodeExpression;
 import Generator.GeneratorFactory;
 import Generator.GeneratorPackage;
+import Generator.LineBasedCodeElement;
 import Generator.MethodDeclaration;
 import Generator.SourceFile;
 import Generator.Visibility;
@@ -62,9 +64,11 @@ public class GeneratorFactoryImpl extends EFactoryImpl implements GeneratorFacto
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
+			case GeneratorPackage.LINE_BASED_CODE_ELEMENT: return createLineBasedCodeElement();
 			case GeneratorPackage.CLASS_DECLARATION: return createClassDeclaration();
 			case GeneratorPackage.METHOD_DECLARATION: return createMethodDeclaration();
 			case GeneratorPackage.SOURCE_FILE: return createSourceFile();
+			case GeneratorPackage.CODE_EXPRESSION: return createCodeExpression();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -105,6 +109,16 @@ public class GeneratorFactoryImpl extends EFactoryImpl implements GeneratorFacto
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public LineBasedCodeElement createLineBasedCodeElement() {
+		LineBasedCodeElementImpl lineBasedCodeElement = new LineBasedCodeElementImpl();
+		return lineBasedCodeElement;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public ClassDeclaration createClassDeclaration() {
 		ClassDeclarationImpl classDeclaration = new ClassDeclarationImpl();
 		return classDeclaration;
@@ -128,6 +142,16 @@ public class GeneratorFactoryImpl extends EFactoryImpl implements GeneratorFacto
 	public SourceFile createSourceFile() {
 		SourceFileImpl sourceFile = new SourceFileImpl();
 		return sourceFile;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public CodeExpression createCodeExpression() {
+		CodeExpressionImpl codeExpression = new CodeExpressionImpl();
+		return codeExpression;
 	}
 
 	/**

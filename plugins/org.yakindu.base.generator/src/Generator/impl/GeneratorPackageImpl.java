@@ -6,6 +6,7 @@ import Generator.BlockBasedCodeElement;
 import Generator.ClassDeclaration;
 import Generator.ClassMember;
 import Generator.CodeElement;
+import Generator.CodeExpression;
 import Generator.Comment;
 import Generator.GeneratorFactory;
 import Generator.GeneratorPackage;
@@ -17,7 +18,6 @@ import Generator.Variable;
 import Generator.VariableDeclaration;
 import Generator.Visibility;
 import Generator.VisibilityOwner;
-
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EEnum;
@@ -27,6 +27,7 @@ import org.eclipse.emf.ecore.EReference;
 
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
+import org.yakindu.base.expressions.expressions.ExpressionsPackage;
 import org.yakindu.base.types.TypesPackage;
 
 /**
@@ -132,6 +133,13 @@ public class GeneratorPackageImpl extends EPackageImpl implements GeneratorPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	private EClass codeExpressionEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	private EEnum visibilityEEnum = null;
 
 	/**
@@ -181,7 +189,7 @@ public class GeneratorPackageImpl extends EPackageImpl implements GeneratorPacka
 		isInited = true;
 
 		// Initialize simple dependencies
-		TypesPackage.eINSTANCE.eClass();
+		ExpressionsPackage.eINSTANCE.eClass();
 
 		// Create package meta-data objects
 		theGeneratorPackage.createPackageContents();
@@ -500,6 +508,24 @@ public class GeneratorPackageImpl extends EPackageImpl implements GeneratorPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getCodeExpression() {
+		return codeExpressionEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getCodeExpression_Exp() {
+		return (EReference)codeExpressionEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EEnum getVisibility() {
 		return visibilityEEnum;
 	}
@@ -578,6 +604,9 @@ public class GeneratorPackageImpl extends EPackageImpl implements GeneratorPacka
 		createEReference(sourceFileEClass, SOURCE_FILE__IMPORTS);
 		createEAttribute(sourceFileEClass, SOURCE_FILE__FILE);
 
+		codeExpressionEClass = createEClass(CODE_EXPRESSION);
+		createEReference(codeExpressionEClass, CODE_EXPRESSION__EXP);
+
 		// Create enums
 		visibilityEEnum = createEEnum(VISIBILITY);
 	}
@@ -607,6 +636,7 @@ public class GeneratorPackageImpl extends EPackageImpl implements GeneratorPacka
 
 		// Obtain other dependent packages
 		TypesPackage theTypesPackage = (TypesPackage)EPackage.Registry.INSTANCE.getEPackage(TypesPackage.eNS_URI);
+		ExpressionsPackage theExpressionsPackage = (ExpressionsPackage)EPackage.Registry.INSTANCE.getEPackage(ExpressionsPackage.eNS_URI);
 
 		// Create type parameters
 
@@ -625,13 +655,14 @@ public class GeneratorPackageImpl extends EPackageImpl implements GeneratorPacka
 		variableDeclarationEClass.getESuperTypes().add(this.getLineBasedCodeElement());
 		commentEClass.getESuperTypes().add(this.getLineBasedCodeElement());
 		sourceFileEClass.getESuperTypes().add(this.getCodeElement());
+		codeExpressionEClass.getESuperTypes().add(this.getLineBasedCodeElement());
 
 		// Initialize classes, features, and operations; add parameters
 		initEClass(codeElementEClass, CodeElement.class, "CodeElement", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEOperation(getCodeElement__Generate(), ecorePackage.getEString(), "generate", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		initEClass(lineBasedCodeElementEClass, LineBasedCodeElement.class, "LineBasedCodeElement", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEClass(lineBasedCodeElementEClass, LineBasedCodeElement.class, "LineBasedCodeElement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(blockBasedCodeElementEClass, BlockBasedCodeElement.class, "BlockBasedCodeElement", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getBlockBasedCodeElement_Contents(), this.getCodeElement(), null, "contents", null, 0, -1, BlockBasedCodeElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -680,6 +711,9 @@ public class GeneratorPackageImpl extends EPackageImpl implements GeneratorPacka
 		initEClass(sourceFileEClass, SourceFile.class, "SourceFile", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getSourceFile_Imports(), this.getSourceFile(), null, "imports", null, 0, -1, SourceFile.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getSourceFile_File(), ecorePackage.getEString(), "file", null, 0, 1, SourceFile.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(codeExpressionEClass, CodeExpression.class, "CodeExpression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getCodeExpression_Exp(), theExpressionsPackage.getExpression(), null, "exp", null, 0, 1, CodeExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(visibilityEEnum, Visibility.class, "Visibility");

@@ -12,5 +12,6 @@ Export-Package: Generator,
  Generator.util
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf.ecore;visibility:=reexport,
- org.yakindu.base.types;visibility:=reexport
+ org.yakindu.base.types;visibility:=reexport,
+ org.yakindu.base.expressions;visibility:=reexport
 Bundle-ActivationPolicy: lazy

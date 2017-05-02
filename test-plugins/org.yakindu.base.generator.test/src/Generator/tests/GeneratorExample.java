@@ -2,10 +2,10 @@
  */
 package Generator.tests;
 
-import Generator.ClassDeclaration;
 import Generator.GeneratorFactory;
 import Generator.GeneratorPackage;
 
+import Generator.LineBasedCodeElement;
 import java.io.File;
 import java.io.IOException;
 
@@ -60,7 +60,7 @@ public class GeneratorExample {
 			System.out.println("Enter a list of file paths or URIs that have content like this:");
 			try {
 				Resource resource = resourceSet.createResource(URI.createURI("http:///My.generator"));
-				ClassDeclaration root = GeneratorFactory.eINSTANCE.createClassDeclaration();
+				LineBasedCodeElement root = GeneratorFactory.eINSTANCE.createLineBasedCodeElement();
 				resource.getContents().add(root);
 				resource.save(System.out, null);
 			}

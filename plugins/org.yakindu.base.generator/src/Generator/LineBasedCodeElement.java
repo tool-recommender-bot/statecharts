@@ -2,7 +2,6 @@
  */
 package Generator;
 
-
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Line Based Code Element</b></em>'.
@@ -10,7 +9,7 @@ package Generator;
  *
  *
  * @see Generator.GeneratorPackage#getLineBasedCodeElement()
- * @model abstract="true"
+ * @model
  * @generated
  */
 public interface LineBasedCodeElement extends CodeElement {

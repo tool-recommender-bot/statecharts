@@ -4,7 +4,6 @@ package Generator.impl;
 
 import Generator.GeneratorPackage;
 import Generator.LineBasedCodeElement;
-
 import org.eclipse.emf.ecore.EClass;
 
 /**
@@ -14,7 +13,7 @@ import org.eclipse.emf.ecore.EClass;
  *
  * @generated
  */
-public abstract class LineBasedCodeElementImpl extends CodeElementImpl implements LineBasedCodeElement {
+public class LineBasedCodeElementImpl extends CodeElementImpl implements LineBasedCodeElement {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
