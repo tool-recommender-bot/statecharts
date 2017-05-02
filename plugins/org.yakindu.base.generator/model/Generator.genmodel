@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
-    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.yakindu.base.generator/src" modelPluginID="org.yakindu.base.generator"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.yakindu.base.generator/emf-gen" modelPluginID="org.yakindu.base.generator"
     modelName="Generator" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
     testsDirectory="/org.yakindu.base.generator.test/src" testSuiteClass="Generator.tests.GeneratorAllTests"
     importerID="org.eclipse.emf.importer.ecore" complianceLevel="8.0" copyrightFields="false"
     testsPluginID="org.yakindu.base.generator.test" usedGenPackages="../../org.yakindu.base.types/model/base.genmodel#//base ../../org.yakindu.base.expressions/model/Expressions.genmodel#//expressions ../../org.yakindu.base.types/model/types.genmodel#//types"
     operationReflection="true" importOrganizing="true">
   <foreignModel>Generator.ecore</foreignModel>
-  <genPackages prefix="Generator" disposableProviderFactory="true" ecorePackage="Generator.ecore#/">
+  <genPackages prefix="generator" basePackage="org.yakindu.base.generator" disposableProviderFactory="true"
+      ecorePackage="Generator.ecore#/">
     <genEnums typeSafeEnumCompatible="false" ecoreEnum="Generator.ecore#//Visibility">
       <genEnumLiterals ecoreEnumLiteral="Generator.ecore#//Visibility/public"/>
       <genEnumLiterals ecoreEnumLiteral="Generator.ecore#//Visibility/protected"/>
@@ -16,11 +17,7 @@
     <genClasses image="false" ecoreClass="Generator.ecore#//CodeElement">
       <genOperations ecoreOperation="Generator.ecore#//CodeElement/generate"/>
     </genClasses>
-    <genClasses image="false" ecoreClass="Generator.ecore#//LineBasedCodeElement">
-      <genOperations ecoreOperation="Generator.ecore#//LineBasedCodeElement/from">
-        <genParameters ecoreParameter="Generator.ecore#//LineBasedCodeElement/from/exp"/>
-      </genOperations>
-    </genClasses>
+    <genClasses image="false" ecoreClass="Generator.ecore#//LineBasedCodeElement"/>
     <genClasses image="false" ecoreClass="Generator.ecore#//BlockBasedCodeElement">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Generator.ecore#//BlockBasedCodeElement/contents"/>
       <genOperations ecoreOperation="Generator.ecore#//BlockBasedCodeElement/generateBlockHeader"/>
@@ -59,6 +56,9 @@
     <genClasses ecoreClass="Generator.ecore#//SourceFile">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Generator.ecore#//SourceFile/imports"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Generator.ecore#//SourceFile/file"/>
+    </genClasses>
+    <genClasses ecoreClass="Generator.ecore#//CodeExpression">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Generator.ecore#//CodeExpression/exp"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

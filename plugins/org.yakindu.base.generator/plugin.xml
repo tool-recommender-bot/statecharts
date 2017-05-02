@@ -10,7 +10,7 @@
       <!-- @generated Generator -->
       <package
             uri="http://www.yakindu.org/base/generator"
-            class="Generator.GeneratorPackage"
+            class="org.yakindu.base.generator.generator.generatorPackage"
             genModel="model/Generator.genmodel"/>
    </extension>
 

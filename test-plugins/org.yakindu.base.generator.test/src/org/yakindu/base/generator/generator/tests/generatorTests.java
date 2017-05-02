@@ -1,21 +1,19 @@
 /**
  */
-package Generator.tests;
+package org.yakindu.base.generator.generator.tests;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
 import junit.textui.TestRunner;
 
-import org.yakindu.base.generator.generator.tests.generatorTests;
-
 /**
  * <!-- begin-user-doc -->
- * A test suite for the '<em><b>Generator</b></em>' model.
+ * A test suite for the '<em><b>generator</b></em>' package.
  * <!-- end-user-doc -->
  * @generated
  */
-public class GeneratorAllTests extends TestSuite {
+public class generatorTests extends TestSuite {
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -32,8 +30,11 @@ public class GeneratorAllTests extends TestSuite {
 	 * @generated
 	 */
 	public static Test suite() {
-		TestSuite suite = new GeneratorAllTests("Generator Tests");
-		suite.addTest(generatorTests.suite());
+		TestSuite suite = new generatorTests("generator Tests");
+		suite.addTestSuite(LineBasedCodeElementTest.class);
+		suite.addTestSuite(MethodDeclarationTest.class);
+		suite.addTestSuite(SourceFileTest.class);
+		suite.addTestSuite(CodeExpressionTest.class);
 		return suite;
 	}
 
@@ -42,8 +43,8 @@ public class GeneratorAllTests extends TestSuite {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public GeneratorAllTests(String name) {
+	public generatorTests(String name) {
 		super(name);
 	}
 
-} //GeneratorAllTests
+} //generatorTests
