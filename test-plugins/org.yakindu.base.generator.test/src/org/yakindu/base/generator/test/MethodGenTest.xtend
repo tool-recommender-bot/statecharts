@@ -70,6 +70,31 @@ class MethodGenTest extends AbstractGeneratorTest {
 		generatesTo(exp, testMethod)
 	}
 	
+	@Test
+	def methodReturnTypeTest() {
+		testMethod.methodName = "returnFunc"
+		val returnType = typesFactory.toTypeSpecifier("integer")
+		testMethod.returnType = returnType
+		val exp = '''
+		integer returnFunc() {
+		}
+		'''
+		generatesTo(exp, testMethod)
+	}
+	
+	@Test
+	def methodVisibilityReturnTypeTest() {
+		testMethod.methodName = "returnFunc"
+		val returnType = typesFactory.toTypeSpecifier("integer")
+		testMethod.returnType = returnType
+		testMethod.visibility = Visibility.PRIVATE
+		val exp = '''
+		private integer returnFunc() {
+		}
+		'''
+		generatesTo(exp, testMethod)
+	}
+	
 	def List<ParameterGen> createTestParameters() {
 		val List<ParameterGen> params = newArrayList
 		var ts = typesFactory.toTypeSpecifier("integer")

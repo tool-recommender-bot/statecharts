@@ -1,10 +1,14 @@
 package org.yakindu.base.generator.templates
 
+import com.google.inject.Inject
 import org.yakindu.base.generator.MethodGen
+import org.yakindu.base.generator.templates.util.TypeSpecifierTemplate
 
 class MethodTemplate extends ContentTemplate {
+	@Inject extension TypeSpecifierTemplate
+	
 	def generate(MethodGen it) {'''
-		«generateVisibility»«methodName»(«generateParameters») {
+		«generateVisibility»«generateReturnType»«methodName»(«generateParameters») {
 			«generateContent»
 		}
 		'''
@@ -22,6 +26,14 @@ class MethodTemplate extends ContentTemplate {
 			""
 		} else {
 			'''«visibility» '''
+		}
+	}
+	
+	def generateReturnType(MethodGen it) {
+		if(returnType != null) {
+			generateTypeSpecifier(returnType) + " "
+		} else {
+			""
 		}
 	}
 }

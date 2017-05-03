@@ -91,6 +91,35 @@ public class MethodGenTest extends AbstractGeneratorTest {
     this.generatesTo(exp, this.testMethod);
   }
   
+  @Test
+  public void methodReturnTypeTest() {
+    this.testMethod.setMethodName("returnFunc");
+    final TypeSpecifier returnType = this.typesFactory.toTypeSpecifier("integer");
+    this.testMethod.setReturnType(returnType);
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("integer returnFunc() {");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    final String exp = _builder.toString();
+    this.generatesTo(exp, this.testMethod);
+  }
+  
+  @Test
+  public void methodVisibilityReturnTypeTest() {
+    this.testMethod.setMethodName("returnFunc");
+    final TypeSpecifier returnType = this.typesFactory.toTypeSpecifier("integer");
+    this.testMethod.setReturnType(returnType);
+    this.testMethod.setVisibility(Visibility.PRIVATE);
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("private integer returnFunc() {");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    final String exp = _builder.toString();
+    this.generatesTo(exp, this.testMethod);
+  }
+  
   public List<ParameterGen> createTestParameters() {
     final List<ParameterGen> params = CollectionLiterals.<ParameterGen>newArrayList();
     TypeSpecifier ts = this.typesFactory.toTypeSpecifier("integer");
