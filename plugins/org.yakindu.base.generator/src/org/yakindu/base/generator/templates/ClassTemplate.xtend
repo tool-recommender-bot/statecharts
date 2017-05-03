@@ -2,6 +2,10 @@ package org.yakindu.base.generator.templates
 
 import org.yakindu.base.generator.ClassGen
 
+/**
+ * Example implementation of a class template.
+ * Looks like Java, but is not guaranteed to be complete or correct.
+ */
 class ClassTemplate extends ContentTemplate {
 	
 	def generate(ClassGen it) {'''
