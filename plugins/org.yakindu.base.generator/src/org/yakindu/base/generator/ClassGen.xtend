@@ -16,6 +16,7 @@ class ClassGen extends CodeElement {
 	@Accessors protected String visibility
 	@Accessors protected ClassGen superClass
 	@Accessors protected List<ClassGen> interfaces
+	@Accessors protected List<ClassMember> classMembers
 
 	/*
 	 * The template gets injected, so this class is language independent.

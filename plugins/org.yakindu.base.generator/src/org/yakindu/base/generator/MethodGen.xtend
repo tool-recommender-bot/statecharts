@@ -6,7 +6,7 @@ import org.eclipse.xtend.lib.annotations.Accessors
 import org.yakindu.base.generator.templates.MethodTemplate
 import org.yakindu.base.types.TypeSpecifier
 
-class MethodGen extends CodeElement {
+class MethodGen extends CodeElement implements ClassMember {
 	@Accessors protected String methodName
 	@Accessors protected String visibility
 	@Accessors protected List<ParameterGen> parameters
