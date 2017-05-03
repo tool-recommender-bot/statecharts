@@ -177,6 +177,7 @@ public class GTestHelper {
 		command.add("-lstdc++");
 		command.add("-I/usr/local/include");
 		command.add("-pthread");
+		System.out.println(command.toString());
 		// command.add("-pg");
 		return command;
 	}
