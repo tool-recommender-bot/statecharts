@@ -1,38 +1,39 @@
 package org.yakindu.base.generator.test;
 
-import org.junit.Before;
+import static org.junit.Assert.assertEquals;
+
 import org.yakindu.base.generator.ClassGen;
 import org.yakindu.base.generator.CodeElement;
 import org.yakindu.base.generator.MethodGen;
+import org.yakindu.base.generator.ParameterGen;
+import org.yakindu.base.types.TypeSpecifier;
+import org.yakindu.base.types.util.TypesTestFactory;
 
-import com.google.inject.AbstractModule;
-import com.google.inject.Guice;
+import com.google.inject.Inject;
 import com.google.inject.Injector;
 
-import static org.junit.Assert.assertEquals;
-
 public class AbstractGeneratorTest {
-	protected Injector injector;
-	@Before
-	public void setUp() {
-		injector = Guice.createInjector(new AbstractModule() {
-			@Override
-			protected void configure() {
-				bind(ClassGen.class);
-				bind(MethodGen.class);
-			}
-		});
+	@Inject TypesTestFactory typesFactory;
+	@Inject ClassGen testClass;
+	@Inject MethodGen testMethod;
+	@Inject Injector injector;
+	
+	protected void generatesTo(String expected, CodeElement underTest) {
+		assertEquals(expected, underTest.generate().toString());
 	}
 	
 	protected ClassGen createClassGen() {
 		return injector.getInstance(ClassGen.class);
 	}
 	
-	protected MethodGen createMethodGen() {
-		return injector.getInstance(MethodGen.class);
+	protected ParameterGen createParameterGen() {
+		return injector.getInstance(ParameterGen.class);
 	}
 	
-	protected void generatesTo(String expected, CodeElement underTest) {
-		assertEquals(expected, underTest.generate().toString());
+	protected ParameterGen createParameterGen(TypeSpecifier ts, String name) {
+		ParameterGen p = createParameterGen();
+		p.setParameterType(ts);
+		p.setParameterName(name);
+		return p;
 	}
 }

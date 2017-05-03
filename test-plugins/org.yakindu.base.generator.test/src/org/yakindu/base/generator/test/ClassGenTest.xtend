@@ -1,18 +1,17 @@
 package org.yakindu.base.generator.test
 
-import com.google.inject.AbstractModule
-import com.google.inject.Guice
-import org.junit.Before
+import org.eclipse.xtext.junit4.InjectWith
+import org.eclipse.xtext.junit4.XtextRunner
 import org.junit.Test
-import org.yakindu.base.generator.ClassGen
+import org.junit.runner.RunWith
 import org.yakindu.base.generator.Visibility
+import org.yakindu.base.generator.test.util.GeneratorInjectorProvider
 
-import static org.junit.Assert.*
-
+@RunWith(XtextRunner)
+@InjectWith(GeneratorInjectorProvider)
 class ClassGenTest extends AbstractGeneratorTest {
 	@Test
 	def testSimpleClassLayout() {
-		val testClass = createClassGen
 		testClass.className = "testClass"
 		val exp = '''
 		class testClass {
@@ -23,7 +22,6 @@ class ClassGenTest extends AbstractGeneratorTest {
 	
 	@Test
 	def testVisibility() {
-		val testClass = createClassGen
 		testClass.className = "PrivateClass"
 		testClass.visibility = Visibility.PRIVATE
 		val exp = '''
