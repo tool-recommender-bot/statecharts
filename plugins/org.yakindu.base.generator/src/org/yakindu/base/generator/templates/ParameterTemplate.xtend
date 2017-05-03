@@ -7,7 +7,7 @@ import org.yakindu.base.generator.templates.util.TypeSpecifierTemplate
 class ParameterTemplate extends Template {
 	@Inject extension TypeSpecifierTemplate
 	def generate(ParameterGen it) {
-	'''«generateParameterType» «parameterName»'''
+	'''«IF isConst»const «ENDIF»«generateParameterType» «parameterName»'''
 	}
 	
 	def generateParameterType(ParameterGen it) {

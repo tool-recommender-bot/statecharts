@@ -6,6 +6,8 @@ import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
+import org.eclipse.xtext.xbase.lib.Functions.Function1;
+import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.yakindu.base.generator.ParameterGen;
@@ -84,6 +86,80 @@ public class MethodGenTest extends AbstractGeneratorTest {
     this.testMethod.addParameter(_get);
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("paramFunc(cmplx<string> p4) {");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    final String exp = _builder.toString();
+    this.generatesTo(exp, this.testMethod);
+  }
+  
+  @Test
+  public void methodConstParamTest1() {
+    this.testMethod.setMethodName("paramFunc");
+    List<ParameterGen> _createTestParameters = this.createTestParameters();
+    final Function1<ParameterGen, ParameterGen> _function = (ParameterGen it) -> {
+      ParameterGen _xblockexpression = null;
+      {
+        it.setIsConst(true);
+        _xblockexpression = it;
+      }
+      return _xblockexpression;
+    };
+    final List<ParameterGen> params = ListExtensions.<ParameterGen, ParameterGen>map(_createTestParameters, _function);
+    ParameterGen _get = params.get(0);
+    this.testMethod.addParameter(_get);
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("paramFunc(const integer p1) {");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    final String exp = _builder.toString();
+    this.generatesTo(exp, this.testMethod);
+  }
+  
+  @Test
+  public void methodConstParamTest2() {
+    this.testMethod.setMethodName("paramFunc");
+    List<ParameterGen> _createTestParameters = this.createTestParameters();
+    final Function1<ParameterGen, ParameterGen> _function = (ParameterGen it) -> {
+      ParameterGen _xblockexpression = null;
+      {
+        it.setIsConst(true);
+        _xblockexpression = it;
+      }
+      return _xblockexpression;
+    };
+    final List<ParameterGen> params = ListExtensions.<ParameterGen, ParameterGen>map(_createTestParameters, _function);
+    ParameterGen _get = params.get(0);
+    this.testMethod.addParameter(_get);
+    ParameterGen _get_1 = params.get(1);
+    this.testMethod.addParameter(_get_1);
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("paramFunc(const integer p1, const boolean p2) {");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    final String exp = _builder.toString();
+    this.generatesTo(exp, this.testMethod);
+  }
+  
+  @Test
+  public void methodConstParamTest3() {
+    this.testMethod.setMethodName("paramFunc");
+    List<ParameterGen> _createTestParameters = this.createTestParameters();
+    final Function1<ParameterGen, ParameterGen> _function = (ParameterGen it) -> {
+      ParameterGen _xblockexpression = null;
+      {
+        it.setIsConst(true);
+        _xblockexpression = it;
+      }
+      return _xblockexpression;
+    };
+    final List<ParameterGen> params = ListExtensions.<ParameterGen, ParameterGen>map(_createTestParameters, _function);
+    ParameterGen _get = params.get(3);
+    this.testMethod.addParameter(_get);
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("paramFunc(const cmplx<string> p4) {");
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();

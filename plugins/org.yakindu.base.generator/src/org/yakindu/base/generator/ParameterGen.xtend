@@ -8,6 +8,7 @@ import org.yakindu.base.types.TypeSpecifier
 class ParameterGen extends CodeElement {
 	@Accessors protected TypeSpecifier parameterType
 	@Accessors protected String parameterName
+	@Accessors protected boolean isConst
 	
 	@Inject ParameterTemplate template
 	

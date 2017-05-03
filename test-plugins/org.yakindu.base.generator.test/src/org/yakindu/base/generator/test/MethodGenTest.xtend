@@ -71,6 +71,43 @@ class MethodGenTest extends AbstractGeneratorTest {
 	}
 	
 	@Test
+	def methodConstParamTest1() {
+		testMethod.methodName = "paramFunc"
+		val params = createTestParameters.map([isConst = true; it])
+		testMethod.addParameter(params.get(0))
+		val exp = '''
+		paramFunc(const integer p1) {
+		}
+		'''
+		generatesTo(exp, testMethod)
+	}
+	
+	@Test
+	def methodConstParamTest2() {
+		testMethod.methodName = "paramFunc"
+		val params = createTestParameters.map([isConst = true; it])
+		testMethod.addParameter(params.get(0))
+		testMethod.addParameter(params.get(1))
+		val exp = '''
+		paramFunc(const integer p1, const boolean p2) {
+		}
+		'''
+		generatesTo(exp, testMethod)
+	}
+	
+	@Test
+	def methodConstParamTest3() {
+		testMethod.methodName = "paramFunc"
+		val params = createTestParameters.map([isConst = true; it])
+		testMethod.addParameter(params.get(3))
+		val exp = '''
+		paramFunc(const cmplx<string> p4) {
+		}
+		'''
+		generatesTo(exp, testMethod)
+	}
+	
+	@Test
 	def methodReturnTypeTest() {
 		testMethod.methodName = "returnFunc"
 		val returnType = typesFactory.toTypeSpecifier("integer")
