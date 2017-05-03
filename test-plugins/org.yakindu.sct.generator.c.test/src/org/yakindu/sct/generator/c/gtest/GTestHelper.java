@@ -175,6 +175,7 @@ public class GTestHelper {
 		command.add("-lgtest");
 		command.add("-lgtest_main");
 		command.add("-lstdc++");
+		command.add("-I/usr/local/include");
 		command.add("-pthread");
 		// command.add("-pg");
 		return command;
