@@ -5,7 +5,7 @@ import java.util.List
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.yakindu.base.generator.templates.ClassTemplate
 
-class ClassGen implements CodeElement {
+class ClassGen extends CodeElement {
 	@Accessors protected String className;
 	@Accessors protected String namespace;
 	@Accessors protected String visibility;
