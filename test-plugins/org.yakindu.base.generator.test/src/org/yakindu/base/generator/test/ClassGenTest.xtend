@@ -9,37 +9,27 @@ import org.yakindu.base.generator.Visibility
 
 import static org.junit.Assert.*
 
-class ClassGenTest {
-	ClassGen testclass
-
-	@Before
-	def void setUp() {
-		val injector = Guice.createInjector(new AbstractModule() {
-			override configure() {
-				bind(ClassGen)
-			}
-		})
-		testclass = injector.getInstance(ClassGen)
-	}
-
+class ClassGenTest extends AbstractGeneratorTest {
 	@Test
 	def testSimpleClassLayout() {
-		testclass.className = "testClass"
+		val testClass = createClassGen
+		testClass.className = "testClass"
 		val exp = '''
 		class testClass {
 		}
 		'''
-		assertEquals(exp, testclass.generate)
+		generatesTo(exp, testClass)
 	}
 	
 	@Test
 	def testVisibility() {
-		testclass.className = "PrivateClass"
-		testclass.visibility = Visibility.PRIVATE
+		val testClass = createClassGen
+		testClass.className = "PrivateClass"
+		testClass.visibility = Visibility.PRIVATE
 		val exp = '''
 		private class PrivateClass {
 		}
 		'''
-		assertEquals(exp, testclass.generate)
+		generatesTo(exp, testClass)
 	}
 }

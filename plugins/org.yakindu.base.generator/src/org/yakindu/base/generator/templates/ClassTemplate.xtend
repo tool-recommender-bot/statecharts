@@ -9,9 +9,9 @@ import org.yakindu.base.generator.ClassGen
 class ClassTemplate extends ContentTemplate {
 	
 	def generate(ClassGen it) {'''
-	«generateVisibility»class «className» «generateExtends»«generateImplements»{
-		«generateContent»
-	}
+		«generateVisibility»class «className» «generateExtends»«generateImplements»{
+			«generateContent»
+		}
 	'''
 	}
 	
