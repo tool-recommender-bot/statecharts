@@ -8,26 +8,26 @@
     operationReflection="true" importOrganizing="true">
   <foreignModel>Generator.ecore</foreignModel>
   <genPackages prefix="generator" basePackage="org.yakindu.base.generator" disposableProviderFactory="true"
-      ecorePackage="Generator.ecore#/">
+      adapterFactory="false" ecorePackage="Generator.ecore#/">
     <genEnums typeSafeEnumCompatible="false" ecoreEnum="Generator.ecore#//Visibility">
       <genEnumLiterals ecoreEnumLiteral="Generator.ecore#//Visibility/public"/>
       <genEnumLiterals ecoreEnumLiteral="Generator.ecore#//Visibility/protected"/>
       <genEnumLiterals ecoreEnumLiteral="Generator.ecore#//Visibility/private"/>
     </genEnums>
+    <genClasses ecoreClass="Generator.ecore#//Template">
+      <genOperations ecoreOperation="Generator.ecore#//Template/generate"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="Generator.ecore#//ContentTemplate">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Generator.ecore#//ContentTemplate/content"/>
+      <genOperations ecoreOperation="Generator.ecore#//ContentTemplate/generateContents"/>
+    </genClasses>
+    <genClasses ecoreClass="Generator.ecore#//ClassTemplate"/>
     <genClasses image="false" ecoreClass="Generator.ecore#//CodeElement">
       <genOperations ecoreOperation="Generator.ecore#//CodeElement/generate"/>
     </genClasses>
-    <genClasses image="false" ecoreClass="Generator.ecore#//LineBasedCodeElement"/>
-    <genClasses image="false" ecoreClass="Generator.ecore#//BlockBasedCodeElement">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Generator.ecore#//BlockBasedCodeElement/contents"/>
-      <genOperations ecoreOperation="Generator.ecore#//BlockBasedCodeElement/generateBlockHeader"/>
-      <genOperations ecoreOperation="Generator.ecore#//BlockBasedCodeElement/generateBlockStart"/>
-      <genOperations ecoreOperation="Generator.ecore#//BlockBasedCodeElement/generateBlockEnd"/>
-      <genOperations ecoreOperation="Generator.ecore#//BlockBasedCodeElement/generateBlockContents"/>
-    </genClasses>
-    <genClasses image="false" ecoreClass="Generator.ecore#//Class">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Generator.ecore#//Class/className"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Generator.ecore#//Class/classMembers"/>
+    <genClasses ecoreClass="Generator.ecore#//GenClass">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Generator.ecore#//GenClass/classMembers"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Generator.ecore#//GenClass/template"/>
     </genClasses>
     <genClasses ecoreClass="Generator.ecore#//ClassDeclaration">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Generator.ecore#//ClassDeclaration/parentClass"/>
@@ -59,6 +59,10 @@
     </genClasses>
     <genClasses ecoreClass="Generator.ecore#//CodeExpression">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Generator.ecore#//CodeExpression/exp"/>
+    </genClasses>
+    <genClasses ecoreClass="Generator.ecore#//ClassAttributes">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Generator.ecore#//ClassAttributes/className"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Generator.ecore#//ClassAttributes/namespace"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>
