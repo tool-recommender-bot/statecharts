@@ -16,7 +16,11 @@ class MethodTemplate {
 	}
 	
 	def generateContent(MethodGen it) {
-		''''''
+		'''
+		«FOR ce : methodBody»
+		«ce.generate»
+		«ENDFOR»
+		'''
 	}
 	
 	def generateParameters(MethodGen it) {

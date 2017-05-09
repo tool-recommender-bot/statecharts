@@ -16,3 +16,5 @@ Require-Bundle: org.eclipse.xtext.junit4,
  org.eclipse.emf.ecore.xmi;visibility:=reexport,
  org.junit;visibility:=reexport
 Bundle-ActivationPolicy: lazy
+Import-Package: org.yakindu.sct.domain.extension,
+ org.yakindu.sct.model.stext.test.util

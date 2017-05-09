@@ -131,22 +131,4 @@ class MethodGenTest extends AbstractGeneratorTest {
 		'''
 		generatesTo(exp, testMethod)
 	}
-	
-	def List<ParameterGen> createTestParameters() {
-		val List<ParameterGen> params = newArrayList
-		var ts = typesFactory.toTypeSpecifier("integer")
-		var p = createParameterGen(ts, "p1")
-		params.add(p)
-		ts = typesFactory.toTypeSpecifier("boolean")
-		p = createParameterGen(ts, "p2")
-		params.add(p)
-		ts = typesFactory.toTypeSpecifier("string")
-		p = createParameterGen(ts, "p3")
-		params.add(p)
-		var cmplx = typesFactory.toTypeSpecifier(typesFactory.createComplexType("cmplx"))
-		cmplx.typeArguments.add(ts)
-		p = createParameterGen(cmplx, "p4")
-		params.add(p)
-		return params
-	}
 }

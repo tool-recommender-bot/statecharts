@@ -20,7 +20,6 @@ import org.yakindu.base.expressions.expressions.UnaryExpression
  * @author Rene Beckmann - Initial contribution and API
  */
 class Expressions {
-	
 	def dispatch CharSequence code(BinaryExpression expression) {
 		expression.leftOperand.code.toString.trim + " " + expression.operator.literal.toString.trim + " " + expression.rightOperand.code
 	}

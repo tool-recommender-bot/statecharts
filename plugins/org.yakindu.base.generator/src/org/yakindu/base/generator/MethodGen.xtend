@@ -15,6 +15,11 @@ class MethodGen extends CodeElement implements ClassMember {
 	
 	@Inject MethodTemplate template
 	
+	new() {
+		methodBody = newArrayList
+		parameters = newArrayList
+	}
+	
 	override generate() {
 		template.generate(this)
 	}

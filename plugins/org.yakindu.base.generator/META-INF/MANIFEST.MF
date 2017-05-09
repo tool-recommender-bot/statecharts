@@ -12,5 +12,6 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf.ecore;visibility:=reexport,
  org.yakindu.base.types;visibility:=reexport,
  org.yakindu.base.expressions;visibility:=reexport,
- org.yakindu.sct.model.stext;visibility:=reexport
+ org.yakindu.sct.model.stext;visibility:=reexport,
+ org.yakindu.sct.model.sexec;bundle-version="2.9.3"
 Bundle-ActivationPolicy: lazy

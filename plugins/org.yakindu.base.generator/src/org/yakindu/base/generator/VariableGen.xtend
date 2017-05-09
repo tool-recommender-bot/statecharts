@@ -25,6 +25,6 @@ class VariableGen extends CodeElement implements ClassMember {
 	}
 	
 	override generate() {
-		template.generate(this)
+		template.generate(this).toString
 	}
 }

@@ -17,6 +17,7 @@ class ClassGen extends CodeElement {
 	@Accessors protected ClassGen superClass
 	@Accessors protected List<ClassGen> interfaces
 	@Accessors protected List<ClassMember> classMembers
+	protected String scope;
 
 	/*
 	 * The template gets injected, so this class is language independent.
@@ -30,6 +31,7 @@ class ClassGen extends CodeElement {
 		superClass = null
 		interfaces = newArrayList
 		classMembers = newArrayList
+		scope = "interface this: "
 	}
 	
 	override generate() {
@@ -52,6 +54,14 @@ class ClassGen extends CodeElement {
 		}
 		constructorMethod.visibility = Visibility.PUBLIC
 		constructorMethod.methodName = this.className
+		for(p : parameters) {
+			val assignment = parser.parseExpression('''this.«p.parameterName» = «p.parameterName»''', "", scope)
+//			constructorMethod.addToBody(assignment)
+		}
 		addMember(constructorMethod)
+	}
+	
+	def addMemberVariable(String name, String type) {
+		scope += '''var «name»: «type» '''
 	}
 }
