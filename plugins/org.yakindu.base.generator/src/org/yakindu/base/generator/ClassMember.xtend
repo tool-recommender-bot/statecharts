@@ -1,5 +1,5 @@
 package org.yakindu.base.generator
 
-interface ClassMember {
+interface ClassMember extends ICodeElement {
 	def String getVisibility()
 }

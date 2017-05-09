@@ -1,18 +1,27 @@
 package org.yakindu.base.generator.templates
 
 import org.yakindu.base.generator.ClassGen
+import org.yakindu.base.generator.CodeElement
 
 /**
  * Example implementation of a class template.
  * Looks like Java, but is not guaranteed to be complete or correct.
  */
-class ClassTemplate extends ContentTemplate {
+class ClassTemplate {
 	
 	def generate(ClassGen it) {'''
 		«generateVisibility»class «className» «generateExtends»«generateImplements»{
 			«generateContent»
 		}
 	'''
+	}
+	
+	def generateContent(ClassGen it) {
+		'''
+		«FOR cm:classMembers»
+		«cm.generate()»
+		«ENDFOR»
+		'''
 	}
 	
 	def generateImplements(ClassGen it) {

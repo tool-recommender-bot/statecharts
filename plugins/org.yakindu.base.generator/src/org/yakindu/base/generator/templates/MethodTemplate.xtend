@@ -1,10 +1,11 @@
 package org.yakindu.base.generator.templates
 
 import com.google.inject.Inject
+import org.yakindu.base.generator.CodeElement
 import org.yakindu.base.generator.MethodGen
 import org.yakindu.base.generator.templates.util.TypeSpecifierTemplate
 
-class MethodTemplate extends ContentTemplate {
+class MethodTemplate {
 	@Inject extension TypeSpecifierTemplate
 	
 	def generate(MethodGen it) {'''
@@ -12,6 +13,10 @@ class MethodTemplate extends ContentTemplate {
 			«generateContent»
 		}
 		'''
+	}
+	
+	def generateContent(MethodGen it) {
+		''''''
 	}
 	
 	def generateParameters(MethodGen it) {

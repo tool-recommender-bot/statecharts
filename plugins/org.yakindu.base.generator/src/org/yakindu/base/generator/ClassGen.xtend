@@ -29,9 +29,29 @@ class ClassGen extends CodeElement {
 		visibility = ""
 		superClass = null
 		interfaces = newArrayList
+		classMembers = newArrayList
 	}
 	
 	override generate() {
 		template.generate(this).toString
+	}
+	
+	def addMember(ClassMember member) {
+		if(classMembers == null) {
+			classMembers = newArrayList
+		}
+		classMembers.add(member)
+	}
+	
+	def addConstructor(List<ParameterGen> parameters) {
+		val constructorMethod = injector.getInstance(MethodGen)
+		if(parameters == null) {
+			constructorMethod.parameters = newArrayList
+		} else {
+			constructorMethod.parameters = parameters
+		}
+		constructorMethod.visibility = Visibility.PUBLIC
+		constructorMethod.methodName = this.className
+		addMember(constructorMethod)
 	}
 }

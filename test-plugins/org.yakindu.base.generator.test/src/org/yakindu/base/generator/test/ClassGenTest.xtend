@@ -30,4 +30,17 @@ class ClassGenTest extends AbstractGeneratorTest {
 		'''
 		generatesTo(exp, testClass)
 	}
+	
+	@Test
+	def testConstructor() {
+		testClass.className = "hasConstructor"
+		testClass.addConstructor(newArrayList)
+		val exp = '''
+		class hasConstructor {
+			public hasConstructor() {
+			}
+		}
+		'''
+		generatesTo(exp, testClass)
+	}
 }
