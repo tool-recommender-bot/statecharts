@@ -29,7 +29,7 @@ public class GeneratorInjectorProvider implements IInjectorProvider {
 	}
 
 	protected Module getModule() {
-		return Modules.combine(new GeneratorModule(), new STextRuntimeTestModule(), new AbstractModule() {
+		return Modules.combine(new STextRuntimeTestModule(), new GeneratorModule(), new AbstractModule() {
 			@Override
 			protected void configure() {
 				bind(String.class).annotatedWith(Names.named(DomainRegistry.DOMAIN_ID))

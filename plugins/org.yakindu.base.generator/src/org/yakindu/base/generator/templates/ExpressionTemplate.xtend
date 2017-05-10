@@ -3,19 +3,18 @@ package org.yakindu.base.generator.templates
 import com.google.inject.Inject
 import org.eclipse.emf.ecore.EObject
 import org.yakindu.base.expressions.expressions.AssignmentExpression
-import org.yakindu.base.expressions.expressions.AssignmentOperator
 import org.yakindu.base.expressions.expressions.BinaryExpression
 import org.yakindu.base.expressions.expressions.BoolLiteral
 import org.yakindu.base.expressions.expressions.ConditionalExpression
 import org.yakindu.base.expressions.expressions.DoubleLiteral
 import org.yakindu.base.expressions.expressions.ElementReferenceExpression
 import org.yakindu.base.expressions.expressions.Expression
+import org.yakindu.base.expressions.expressions.FeatureCall
 import org.yakindu.base.expressions.expressions.FloatLiteral
 import org.yakindu.base.expressions.expressions.HexLiteral
 import org.yakindu.base.expressions.expressions.IntLiteral
 import org.yakindu.base.expressions.expressions.LogicalRelationExpression
 import org.yakindu.base.expressions.expressions.NullLiteral
-import org.yakindu.base.expressions.expressions.PrimitiveValueExpression
 import org.yakindu.base.expressions.expressions.RelationalOperator
 import org.yakindu.base.expressions.expressions.StringLiteral
 import org.yakindu.base.expressions.expressions.UnaryExpression
@@ -25,6 +24,8 @@ import org.yakindu.base.types.inferrer.ITypeSystemInferrer
 import org.yakindu.base.types.typesystem.GenericTypeSystem
 import org.yakindu.base.types.typesystem.ITypeSystem
 import org.yakindu.sct.model.sexec.extensions.SExecExtensions
+import org.yakindu.sct.model.stext.stext.InterfaceScope
+import org.yakindu.sct.model.stext.stext.VariableDefinition
 
 class ExpressionTemplate extends Template {
 	@Inject extension SExecExtensions
@@ -103,7 +104,23 @@ class ExpressionTemplate extends Template {
 	
 	/* Assignment */
 	def dispatch String code(AssignmentExpression it) {
-		'''«varRef.code» «operator» «expression»'''
+		'''«varRef.code» «operator» «expression.code»'''
+	}
+	
+	def dispatch String code(FeatureCall it) {
+		'''«owner.code».«feature.code»'''
+	}
+	
+	def dispatch String code(VariableDefinition it) {
+		'''«name»'''
+	}
+	
+	def dispatch String code(ElementReferenceExpression it) {
+		'''«reference.code»'''
+	}
+	
+	def dispatch String code(InterfaceScope it) {
+		'''«name»'''
 	}
 
 	def dispatch String getContext(EObject it) {

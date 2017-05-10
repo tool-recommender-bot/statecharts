@@ -22,7 +22,15 @@ public class AbstractGeneratorTest {
 	@Inject Injector injector;
 	
 	protected void generatesTo(String expected, CodeElement underTest) {
-		assertEquals(expected, underTest.generate().toString());
+		try {
+			assertEquals(expected, underTest.generate().toString());
+		} catch(AssertionError e) {
+			System.out.println("Expected:");
+			System.out.println(expected);
+			System.out.println("But got:");
+			System.out.println(underTest.generate().toString());
+			throw(e);
+		}
 	}
 	
 	protected ClassGen createClassGen() {

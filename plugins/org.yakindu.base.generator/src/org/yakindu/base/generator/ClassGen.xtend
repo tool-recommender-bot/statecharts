@@ -3,6 +3,7 @@ package org.yakindu.base.generator
 import com.google.inject.Inject
 import java.util.List
 import org.eclipse.xtend.lib.annotations.Accessors
+import org.yakindu.base.expressions.expressions.Expression
 import org.yakindu.base.generator.templates.ClassTemplate
 
 /**
@@ -17,6 +18,7 @@ class ClassGen extends CodeElement {
 	@Accessors protected ClassGen superClass
 	@Accessors protected List<ClassGen> interfaces
 	@Accessors protected List<ClassMember> classMembers
+	protected String thisScope;
 	protected String scope;
 
 	/*
@@ -31,7 +33,8 @@ class ClassGen extends CodeElement {
 		superClass = null
 		interfaces = newArrayList
 		classMembers = newArrayList
-		scope = "interface this: "
+		thisScope = "interface this: "
+		scope = "internal: "
 	}
 	
 	override generate() {
@@ -45,6 +48,10 @@ class ClassGen extends CodeElement {
 		classMembers.add(member)
 	}
 	
+	def protected getScope() {
+		return thisScope + " " + scope
+	}
+	
 	def addConstructor(List<ParameterGen> parameters) {
 		val constructorMethod = injector.getInstance(MethodGen)
 		if(parameters == null) {
@@ -55,13 +62,18 @@ class ClassGen extends CodeElement {
 		constructorMethod.visibility = Visibility.PUBLIC
 		constructorMethod.methodName = this.className
 		for(p : parameters) {
-			val assignment = parser.parseExpression('''this.«p.parameterName» = «p.parameterName»''', "", scope)
-//			constructorMethod.addToBody(assignment)
+			addMemberVariable(p.parameterName, p.parameterType.type.name)
+			val assignment = parser.parseExpression('''this.«p.parameterName» = «p.parameterName»''', typeof(Expression).simpleName, getScope)
+			val exp = injector.getInstance(ExpressionGen)
+			exp.expression = assignment as Expression
+			constructorMethod.addToBody(exp)
 		}
 		addMember(constructorMethod)
 	}
 	
 	def addMemberVariable(String name, String type) {
-		scope += '''var «name»: «type» '''
+		val newScopeMember = '''var «name»: «type» '''
+		thisScope += newScopeMember
+		scope += newScopeMember
 	}
 }
