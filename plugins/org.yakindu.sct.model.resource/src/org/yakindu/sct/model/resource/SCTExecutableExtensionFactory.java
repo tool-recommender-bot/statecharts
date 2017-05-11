@@ -43,6 +43,7 @@ import com.google.inject.name.Names;
  * @author andreas muelder - Initial contribution and API
  * 
  */
+ @SuppressWarnings("restriction")
 public class SCTExecutableExtensionFactory extends AbstractGuiceAwareExecutableExtensionFactory {
 
 	@Override
