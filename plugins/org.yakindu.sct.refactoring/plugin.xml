@@ -34,7 +34,7 @@
             name="Fold Outgoing Actions">
       </command>
       <command
-            defaultHandler="org.yakindu.sct.refactoring.handlers.impl.RenameElementHandler"
+            defaultHandler="org.yakindu.sct.refactoring.refactor.xtext.RenameEmbeddedXtextReferenceHandler"
             description="Rename Element"
             id="com.yakindu.sct.refactoring.renameElement"
             name="Rename Element">
