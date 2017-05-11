@@ -56,13 +56,13 @@ public class RenameEmbeddedXtextReferenceHandler extends AbstractHandler {
 
     @Override
     public Object execute(final ExecutionEvent event) throws ExecutionException {
-        final EObject selectedCrossReferenceElement = getSelectedEObject();
+        final EObject selectedElement = getSelectedEObject();
 
-        Injector injector = contextUtil.getDomainInjectorForEmbeddedElement(selectedCrossReferenceElement);
+        Injector injector = contextUtil.getDomainInjectorForEmbeddedElement(selectedElement);
 
         IQualifiedNameProvider qualifiedNameProvider = injector.getInstance(IQualifiedNameProvider.class);
 
-        final EObject referredElement = getReferringElement(selectedCrossReferenceElement);
+        final EObject referredElement = getReferringElement(selectedElement);
 
         if (referredElement == null) {
             return null;
@@ -70,7 +70,7 @@ public class RenameEmbeddedXtextReferenceHandler extends AbstractHandler {
         final URI referredElementUri = EcoreUtil.getURI(referredElement);
         final IRenameElementContext renameElementContext =
                 new IRenameElementContext.Impl(referredElementUri, referredElement.eClass(), getActiveEditor(),
-                        getCurrentSelection(), selectedCrossReferenceElement.eResource().getURI());
+                        getCurrentSelection(), selectedElement.eResource().getURI());
 
         String originalName = getOriginalName(referredElement, qualifiedNameProvider);
 
@@ -137,7 +137,10 @@ public class RenameEmbeddedXtextReferenceHandler extends AbstractHandler {
     }
 
     protected EObject getReferringElement(final EObject selectedElement) {
-        EObject firstWithReference = null;
+    	
+    	//TODO handle e.g. variable definitions properly... the current implementation will return the first cross reference, for variable definition this would be the the type from base.types
+    	//covers multi selection... fails if e.g. a variable definition is selected
+    	EObject firstWithReference = null;
         if (!selectedElement.eCrossReferences().isEmpty())
             firstWithReference = selectedElement;
         else {

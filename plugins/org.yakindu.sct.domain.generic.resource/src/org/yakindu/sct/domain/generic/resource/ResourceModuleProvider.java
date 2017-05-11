@@ -11,6 +11,7 @@
 package org.yakindu.sct.domain.generic.resource;
 
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.xtext.parsetree.reconstr.ITransientValueService;
 import org.eclipse.xtext.ui.refactoring.IReferenceUpdater;
 import org.eclipse.xtext.ui.shared.SharedStateModule;
 import org.yakindu.sct.domain.extension.IDomain;
@@ -19,6 +20,7 @@ import org.yakindu.sct.model.stext.STextRuntimeModule;
 import org.yakindu.sct.model.stext.resource.StextResource;
 import org.yakindu.sct.model.stext.ui.STextUiModule;
 import org.yakindu.sct.model.stext.ui.internal.STextActivator;
+import org.yakindu.sct.refactoring.refactor.xtext.SCTTransientValueService;
 import org.yakindu.sct.refactoring.refactor.xtext.SCTXtextSpecificationReferenceUpdater;
 
 import com.google.inject.Binder;
@@ -30,6 +32,7 @@ import com.google.inject.util.Modules;
  * @author andreas muelder - Initial contribution and API
  * 
  */
+@SuppressWarnings("restriction")
 public class ResourceModuleProvider implements IModuleProvider {
 
 	@Override
@@ -40,11 +43,11 @@ public class ResourceModuleProvider implements IModuleProvider {
 		Module module = Modules.override(getLanguageRuntimeModule())
 				.with(new STextUiModule(STextActivator.getInstance()));
 		module = Modules.override(module).with(new Module() {
-			@SuppressWarnings("restriction")
 			@Override
 			public void configure(Binder binder) {
 				binder.bind(Resource.class).to(StextResource.class);
 				binder.bind(IReferenceUpdater.class).to(SCTXtextSpecificationReferenceUpdater.class);
+				binder.bind(ITransientValueService.class).to(SCTTransientValueService.class);
 				
 			}
 		});
