@@ -3,7 +3,6 @@ package org.yakindu.sct.refactoring.refactor.xtext;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
-import java.util.function.Consumer;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.SubMonitor;
@@ -21,7 +20,6 @@ import org.eclipse.xtext.util.ITextRegion;
 import org.yakindu.sct.model.sgraph.SpecificationElement;
 
 import com.google.common.collect.ArrayListMultimap;
-import com.google.common.collect.Collections2;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Multimap;
 import com.google.inject.Inject;
