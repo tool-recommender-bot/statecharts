@@ -1,6 +1,8 @@
 package org.yakindu.sct.refactoring.refactor.xtext;
 
 import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
 import java.util.function.Consumer;
 
 import org.eclipse.core.runtime.IProgressMonitor;
@@ -19,6 +21,8 @@ import org.eclipse.xtext.util.ITextRegion;
 import org.yakindu.sct.model.sgraph.SpecificationElement;
 
 import com.google.common.collect.ArrayListMultimap;
+import com.google.common.collect.Collections2;
+import com.google.common.collect.Lists;
 import com.google.common.collect.Multimap;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
@@ -84,14 +88,13 @@ public class SCTXtextSpecificationReferenceUpdater extends DefaultReferenceUpdat
                 changedResource.toPlatformString(true).replace("/" + changedResource.lastSegment(), ""));
         final CompositeChange resourceChange = new ResourceSavingChange(changeName, changedResource, resourceSet);
 
+        List<SCTSpecificationChange> listOfChanges=Lists.newArrayList(collection);
+		Collections.sort(listOfChanges, new SCTSpecificationChange.DescendingOffsetComparator());
         // sorts by offsets descending to ensure multiple changes can be applied to the same specification feature
-        collection.stream().sorted(new SCTSpecificationChange.DescendingOffsetComparator())
-                .forEach(new Consumer<SCTSpecificationChange>() {
-                    @Override
-                    public void accept(SCTSpecificationChange change) {
-                        resourceChange.add(change);
-                    }
-                });
+		
+		for (SCTSpecificationChange sctSpecificationChange : listOfChanges) {
+			resourceChange.add(sctSpecificationChange);
+		}
 
         return resourceChange;
     }
