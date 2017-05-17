@@ -774,7 +774,7 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 		EList<Annotation> annotations = element.getAnnotations();
 		for (Annotation annotation : annotations) {
 			EList<EObject> targets = annotation.getType().getTargets();
-			boolean found = Iterables.any(targets, new Predicate<EObject>() {
+			boolean found = targets.isEmpty() || Iterables.any(targets, new Predicate<EObject>() {
 				@Override
 				public boolean apply(EObject input) {
 					return ((EClass) input).isInstance(element);
