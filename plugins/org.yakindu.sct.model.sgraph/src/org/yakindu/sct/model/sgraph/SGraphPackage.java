@@ -615,13 +615,22 @@ public interface SGraphPackage extends EPackage {
 	int STATECHART__ANNOTATIONS = SPECIFICATION_ELEMENT_FEATURE_COUNT + 7;
 
 	/**
+	 * The feature id for the '<em><b>Type</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STATECHART__TYPE = SPECIFICATION_ELEMENT_FEATURE_COUNT + 8;
+
+	/**
 	 * The number of structural features of the '<em>Statechart</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int STATECHART_FEATURE_COUNT = SPECIFICATION_ELEMENT_FEATURE_COUNT + 8;
+	int STATECHART_FEATURE_COUNT = SPECIFICATION_ELEMENT_FEATURE_COUNT + 9;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.sct.model.sgraph.impl.EntryImpl <em>Entry</em>}' class.
@@ -1554,6 +1563,17 @@ public interface SGraphPackage extends EPackage {
 	EReference getStatechart_Annotations();
 
 	/**
+	 * Returns the meta object for the containment reference '{@link org.yakindu.sct.model.sgraph.Statechart#getType <em>Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Type</em>'.
+	 * @see org.yakindu.sct.model.sgraph.Statechart#getType()
+	 * @see #getStatechart()
+	 * @generated
+	 */
+	EReference getStatechart_Type();
+
+	/**
 	 * Returns the meta object for class '{@link org.yakindu.sct.model.sgraph.Entry <em>Entry</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2066,6 +2086,14 @@ public interface SGraphPackage extends EPackage {
 		 * @generated
 		 */
 		EReference STATECHART__ANNOTATIONS = eINSTANCE.getStatechart_Annotations();
+
+		/**
+		 * The meta object literal for the '<em><b>Type</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference STATECHART__TYPE = eINSTANCE.getStatechart_Type();
 
 		/**
 		 * The meta object literal for the '{@link org.yakindu.sct.model.sgraph.impl.EntryImpl <em>Entry</em>}' class.

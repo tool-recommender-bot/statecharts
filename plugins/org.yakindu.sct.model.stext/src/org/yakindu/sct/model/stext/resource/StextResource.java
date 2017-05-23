@@ -11,12 +11,19 @@
 
 package org.yakindu.sct.model.stext.resource;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Map;
+
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.parser.IParseResult;
 import org.yakindu.base.types.Annotation;
 import org.yakindu.sct.model.sgraph.Reaction;
 import org.yakindu.sct.model.sgraph.ReactionProperty;
+import org.yakindu.sct.model.sgraph.SGraphPackage;
 import org.yakindu.sct.model.sgraph.Scope;
 import org.yakindu.sct.model.sgraph.State;
 import org.yakindu.sct.model.sgraph.Statechart;
@@ -28,12 +35,17 @@ import org.yakindu.sct.model.stext.stext.StatechartSpecification;
 import org.yakindu.sct.model.stext.stext.TransitionReaction;
 import org.yakindu.sct.model.stext.stext.TransitionSpecification;
 
+import com.google.inject.Inject;
+
 /**
  * 
  * @author andreas muelder - Initial contribution and API
  * 
  */
 public class StextResource extends AbstractSCTResource {
+
+	@Inject
+	Statechart2TypeConverter converter;
 
 	public StextResource() {
 		this(null);
@@ -50,7 +62,7 @@ public class StextResource extends AbstractSCTResource {
 			builder.append("namespace " + statechart.getNamespace());
 			builder.append("\n");
 		}
-		for(Annotation annotation : statechart.getAnnotations()){
+		for (Annotation annotation : statechart.getAnnotations()) {
 			builder.append(serialize(annotation));
 			builder.append("\n");
 		}
@@ -59,8 +71,7 @@ public class StextResource extends AbstractSCTResource {
 			builder.append(serialize(scope));
 			builder.append("\n");
 		}
-		
-		
+
 		statechart.setSpecification(builder.toString());
 	}
 
@@ -107,13 +118,13 @@ public class StextResource extends AbstractSCTResource {
 		if (definitionScopes != null) {
 			statechart.getScopes().addAll(definitionScopes);
 		}
-		
+
 		statechart.getAnnotations().clear();
 		EList<ArgumentedAnnotation> annotations = rootASTElement.getAnnotations();
-		if(annotations != null){
+		if (annotations != null) {
 			statechart.getAnnotations().addAll(annotations);
 		}
-		
+
 	}
 
 	protected void parseState(State state) {
@@ -135,6 +146,33 @@ public class StextResource extends AbstractSCTResource {
 			transition.setTrigger(reaction.getTrigger());
 			transition.getProperties().addAll(reaction.getProperties());
 		}
+	}
+
+	@Override
+	public void doLoad(InputStream inputStream, Map<?, ?> options) throws IOException {
+		super.doLoad(inputStream, options);
+		Statechart statechart = (Statechart) EcoreUtil.getObjectByType(getContents(),
+				SGraphPackage.Literals.STATECHART);
+		statechart.setType(converter.convert(statechart));
+	}
+
+	@Override
+	public synchronized EObject getEObject(String uriFragment) {
+		if (uriFragment.equals("__type")) {
+			Statechart statechart = (Statechart) EcoreUtil.getObjectByType(getContents(),
+					SGraphPackage.Literals.STATECHART);
+			return statechart.getType();
+		}
+		return super.getEObject(uriFragment);
+	}
+
+	@Override
+	public synchronized String getURIFragment(EObject eObject) {
+		Statechart statechart = (Statechart) EcoreUtil.getObjectByType(getContents(),
+				SGraphPackage.Literals.STATECHART);
+		if (eObject != null && statechart != null && eObject == statechart.getType())
+			return "__type";
+		return super.getURIFragment(eObject);
 	}
 
 }

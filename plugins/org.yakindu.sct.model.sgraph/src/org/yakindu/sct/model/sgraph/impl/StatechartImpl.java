@@ -28,6 +28,7 @@ import org.yakindu.base.base.DomainElement;
 import org.yakindu.base.base.NamedElement;
 import org.yakindu.base.types.AnnotatableElement;
 import org.yakindu.base.types.Annotation;
+import org.yakindu.base.types.ComplexType;
 import org.yakindu.sct.model.sgraph.CompositeElement;
 import org.yakindu.sct.model.sgraph.Reaction;
 import org.yakindu.sct.model.sgraph.ReactiveElement;
@@ -52,6 +53,7 @@ import org.yakindu.sct.model.sgraph.Statechart;
  *   <li>{@link org.yakindu.sct.model.sgraph.impl.StatechartImpl#getDocumentation <em>Documentation</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sgraph.impl.StatechartImpl#getDomainID <em>Domain ID</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sgraph.impl.StatechartImpl#getAnnotations <em>Annotations</em>}</li>
+ *   <li>{@link org.yakindu.sct.model.sgraph.impl.StatechartImpl#getType <em>Type</em>}</li>
  * </ul>
  *
  * @generated
@@ -167,6 +169,16 @@ public class StatechartImpl extends SpecificationElementImpl implements
 	 * @ordered
 	 */
 	protected EList<Annotation> annotations;
+
+	/**
+	 * The cached value of the '{@link #getType() <em>Type</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getType()
+	 * @generated
+	 * @ordered
+	 */
+	protected ComplexType type;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -325,6 +337,72 @@ public class StatechartImpl extends SpecificationElementImpl implements
 	}
 
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ComplexType getType() {
+		if (type != null && type.eIsProxy()) {
+			InternalEObject oldType = (InternalEObject)type;
+			type = (ComplexType)eResolveProxy(oldType);
+			if (type != oldType) {
+				InternalEObject newType = (InternalEObject)type;
+				NotificationChain msgs = oldType.eInverseRemove(this, EOPPOSITE_FEATURE_BASE - SGraphPackage.STATECHART__TYPE, null, null);
+				if (newType.eInternalContainer() == null) {
+					msgs = newType.eInverseAdd(this, EOPPOSITE_FEATURE_BASE - SGraphPackage.STATECHART__TYPE, null, msgs);
+				}
+				if (msgs != null) msgs.dispatch();
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, SGraphPackage.STATECHART__TYPE, oldType, type));
+			}
+		}
+		return type;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ComplexType basicGetType() {
+		return type;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetType(ComplexType newType, NotificationChain msgs) {
+		ComplexType oldType = type;
+		type = newType;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, SGraphPackage.STATECHART__TYPE, oldType, newType);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setType(ComplexType newType) {
+		if (newType != type) {
+			NotificationChain msgs = null;
+			if (type != null)
+				msgs = ((InternalEObject)type).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - SGraphPackage.STATECHART__TYPE, null, msgs);
+			if (newType != null)
+				msgs = ((InternalEObject)newType).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - SGraphPackage.STATECHART__TYPE, null, msgs);
+			msgs = basicSetType(newType, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, SGraphPackage.STATECHART__TYPE, newType, newType));
+	}
+
+	/**
 	 * <!-- begin-user-doc --> 
 	 * <!-- end-user-doc -->
 	 * 
@@ -369,6 +447,8 @@ public class StatechartImpl extends SpecificationElementImpl implements
 				return ((InternalEList<?>)getRegions()).basicRemove(otherEnd, msgs);
 			case SGraphPackage.STATECHART__ANNOTATIONS:
 				return ((InternalEList<?>)getAnnotations()).basicRemove(otherEnd, msgs);
+			case SGraphPackage.STATECHART__TYPE:
+				return basicSetType(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -396,6 +476,9 @@ public class StatechartImpl extends SpecificationElementImpl implements
 				return getDomainID();
 			case SGraphPackage.STATECHART__ANNOTATIONS:
 				return getAnnotations();
+			case SGraphPackage.STATECHART__TYPE:
+				if (resolve) return getType();
+				return basicGetType();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -432,6 +515,9 @@ public class StatechartImpl extends SpecificationElementImpl implements
 				getAnnotations().clear();
 				getAnnotations().addAll((Collection<? extends Annotation>)newValue);
 				return;
+			case SGraphPackage.STATECHART__TYPE:
+				setType((ComplexType)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -464,6 +550,9 @@ public class StatechartImpl extends SpecificationElementImpl implements
 			case SGraphPackage.STATECHART__ANNOTATIONS:
 				getAnnotations().clear();
 				return;
+			case SGraphPackage.STATECHART__TYPE:
+				setType((ComplexType)null);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -491,6 +580,8 @@ public class StatechartImpl extends SpecificationElementImpl implements
 				return DOMAIN_ID_EDEFAULT == null ? domainID != null : !DOMAIN_ID_EDEFAULT.equals(domainID);
 			case SGraphPackage.STATECHART__ANNOTATIONS:
 				return annotations != null && !annotations.isEmpty();
+			case SGraphPackage.STATECHART__TYPE:
+				return type != null;
 		}
 		return super.eIsSet(featureID);
 	}
