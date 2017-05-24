@@ -20,8 +20,7 @@ import org.yakindu.base.generator.generator.AccessRestricted;
 import org.yakindu.base.generator.generator.GeneratorPackage;
 import org.yakindu.base.generator.generator.MethodGen;
 import org.yakindu.base.generator.generator.ParameterGen;
-
-import org.yakindu.base.generator.generator.Visibility;
+import org.yakindu.base.generator.generator.VisibilityValues;
 import org.yakindu.base.types.TypeSpecifier;
 
 /**
@@ -41,14 +40,24 @@ import org.yakindu.base.types.TypeSpecifier;
  */
 public class MethodGenImpl extends CodeElementImpl implements MethodGen {
 	/**
-	 * The cached value of the '{@link #getVisibility() <em>Visibility</em>}' containment reference.
+	 * The default value of the '{@link #getVisibility() <em>Visibility</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getVisibility()
 	 * @generated
 	 * @ordered
 	 */
-	protected Visibility visibility;
+	protected static final VisibilityValues VISIBILITY_EDEFAULT = VisibilityValues.NONE;
+
+	/**
+	 * The cached value of the '{@link #getVisibility() <em>Visibility</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getVisibility()
+	 * @generated
+	 * @ordered
+	 */
+	protected VisibilityValues visibility = VISIBILITY_EDEFAULT;
 
 	/**
 	 * The cached value of the '{@link #getParameters() <em>Parameters</em>}' containment reference list.
@@ -94,7 +103,7 @@ public class MethodGenImpl extends CodeElementImpl implements MethodGen {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Visibility getVisibility() {
+	public VisibilityValues getVisibility() {
 		return visibility;
 	}
 
@@ -103,33 +112,11 @@ public class MethodGenImpl extends CodeElementImpl implements MethodGen {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetVisibility(Visibility newVisibility, NotificationChain msgs) {
-		Visibility oldVisibility = visibility;
-		visibility = newVisibility;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, GeneratorPackage.METHOD_GEN__VISIBILITY, oldVisibility, newVisibility);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
-		return msgs;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setVisibility(Visibility newVisibility) {
-		if (newVisibility != visibility) {
-			NotificationChain msgs = null;
-			if (visibility != null)
-				msgs = ((InternalEObject)visibility).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - GeneratorPackage.METHOD_GEN__VISIBILITY, null, msgs);
-			if (newVisibility != null)
-				msgs = ((InternalEObject)newVisibility).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - GeneratorPackage.METHOD_GEN__VISIBILITY, null, msgs);
-			msgs = basicSetVisibility(newVisibility, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, GeneratorPackage.METHOD_GEN__VISIBILITY, newVisibility, newVisibility));
+	public void setVisibility(VisibilityValues newVisibility) {
+		VisibilityValues oldVisibility = visibility;
+		visibility = newVisibility == null ? VISIBILITY_EDEFAULT : newVisibility;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, GeneratorPackage.METHOD_GEN__VISIBILITY, oldVisibility, visibility));
 	}
 
 	/**
@@ -190,8 +177,6 @@ public class MethodGenImpl extends CodeElementImpl implements MethodGen {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case GeneratorPackage.METHOD_GEN__VISIBILITY:
-				return basicSetVisibility(null, msgs);
 			case GeneratorPackage.METHOD_GEN__PARAMETERS:
 				return ((InternalEList<?>)getParameters()).basicRemove(otherEnd, msgs);
 		}
@@ -227,7 +212,7 @@ public class MethodGenImpl extends CodeElementImpl implements MethodGen {
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case GeneratorPackage.METHOD_GEN__VISIBILITY:
-				setVisibility((Visibility)newValue);
+				setVisibility((VisibilityValues)newValue);
 				return;
 			case GeneratorPackage.METHOD_GEN__PARAMETERS:
 				getParameters().clear();
@@ -249,7 +234,7 @@ public class MethodGenImpl extends CodeElementImpl implements MethodGen {
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case GeneratorPackage.METHOD_GEN__VISIBILITY:
-				setVisibility((Visibility)null);
+				setVisibility(VISIBILITY_EDEFAULT);
 				return;
 			case GeneratorPackage.METHOD_GEN__PARAMETERS:
 				getParameters().clear();
@@ -270,7 +255,7 @@ public class MethodGenImpl extends CodeElementImpl implements MethodGen {
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case GeneratorPackage.METHOD_GEN__VISIBILITY:
-				return visibility != null;
+				return visibility != VISIBILITY_EDEFAULT;
 			case GeneratorPackage.METHOD_GEN__PARAMETERS:
 				return parameters != null && !parameters.isEmpty();
 			case GeneratorPackage.METHOD_GEN__RETURN_TYPE:
@@ -309,6 +294,22 @@ public class MethodGenImpl extends CodeElementImpl implements MethodGen {
 			}
 		}
 		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString() {
+		if (eIsProxy()) return super.toString();
+
+		StringBuffer result = new StringBuffer(super.toString());
+		result.append(" (visibility: ");
+		result.append(visibility);
+		result.append(')');
+		return result.toString();
 	}
 
 } //MethodGenImpl

@@ -27,10 +27,15 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="returnType" eType="ecore:EClass ../../org.yakindu.base.types/model/types.ecore#//TypeSpecifier"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="AccessRestricted">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="visibility" eType="#//Visibility"
-        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="visibility" eType="#//VisibilityValues"
+        defaultValueLiteral="NONE"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="VariableGen" eSuperTypes="#//CodeElement #//AccessRestricted ../../org.yakindu.base.types/model/types.ecore#//TypedElement"/>
   <eClassifiers xsi:type="ecore:EClass" name="ParameterGen" eSuperTypes="#//CodeElement ../../org.yakindu.base.types/model/types.ecore#//TypedElement"/>
-  <eClassifiers xsi:type="ecore:EClass" name="Visibility" abstract="true"/>
+  <eClassifiers xsi:type="ecore:EEnum" name="VisibilityValues">
+    <eLiterals name="NONE"/>
+    <eLiterals name="PUBLIC" value="1"/>
+    <eLiterals name="PROTECTED" value="2"/>
+    <eLiterals name="PRIVATE" value="3"/>
+  </eClassifiers>
 </ecore:EPackage>

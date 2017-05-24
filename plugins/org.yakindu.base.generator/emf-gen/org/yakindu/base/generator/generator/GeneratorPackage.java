@@ -233,7 +233,7 @@ public interface GeneratorPackage extends EPackage {
 	int CLASS_GEN__PARENT = CODE_ELEMENT__PARENT;
 
 	/**
-	 * The feature id for the '<em><b>Visibility</b></em>' containment reference.
+	 * The feature id for the '<em><b>Visibility</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -315,7 +315,7 @@ public interface GeneratorPackage extends EPackage {
 	int METHOD_GEN__PARENT = CODE_ELEMENT__PARENT;
 
 	/**
-	 * The feature id for the '<em><b>Visibility</b></em>' containment reference.
+	 * The feature id for the '<em><b>Visibility</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -361,7 +361,7 @@ public interface GeneratorPackage extends EPackage {
 	int ACCESS_RESTRICTED = 4;
 
 	/**
-	 * The feature id for the '<em><b>Visibility</b></em>' containment reference.
+	 * The feature id for the '<em><b>Visibility</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -425,7 +425,7 @@ public interface GeneratorPackage extends EPackage {
 	int VARIABLE_GEN__PARENT = CODE_ELEMENT__PARENT;
 
 	/**
-	 * The feature id for the '<em><b>Visibility</b></em>' containment reference.
+	 * The feature id for the '<em><b>Visibility</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -534,34 +534,6 @@ public interface GeneratorPackage extends EPackage {
 	int PARAMETER_GEN_FEATURE_COUNT = CODE_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
-	 * The meta object id for the '{@link org.yakindu.base.generator.generator.impl.VisibilityImpl <em>Visibility</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.yakindu.base.generator.generator.impl.VisibilityImpl
-	 * @see org.yakindu.base.generator.generator.impl.GeneratorPackageImpl#getVisibility()
-	 * @generated
-	 */
-	int VISIBILITY = 7;
-
-	/**
-	 * The feature id for the '<em><b>Visibility</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VISIBILITY__VISIBILITY = 0;
-
-	/**
-	 * The number of structural features of the '<em>Visibility</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VISIBILITY_FEATURE_COUNT = 1;
-
-	/**
 	 * The meta object id for the '{@link org.yakindu.base.generator.generator.VisibilityValues <em>Visibility Values</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -569,7 +541,7 @@ public interface GeneratorPackage extends EPackage {
 	 * @see org.yakindu.base.generator.generator.impl.GeneratorPackageImpl#getVisibilityValues()
 	 * @generated
 	 */
-	int VISIBILITY_VALUES = 8;
+	int VISIBILITY_VALUES = 7;
 
 	/**
 	 * Returns the meta object for class '{@link org.yakindu.base.generator.generator.CodeElement <em>Code Element</em>}'.
@@ -710,15 +682,15 @@ public interface GeneratorPackage extends EPackage {
 	EClass getAccessRestricted();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link org.yakindu.base.generator.generator.AccessRestricted#getVisibility <em>Visibility</em>}'.
+	 * Returns the meta object for the attribute '{@link org.yakindu.base.generator.generator.AccessRestricted#getVisibility <em>Visibility</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Visibility</em>'.
+	 * @return the meta object for the attribute '<em>Visibility</em>'.
 	 * @see org.yakindu.base.generator.generator.AccessRestricted#getVisibility()
 	 * @see #getAccessRestricted()
 	 * @generated
 	 */
-	EReference getAccessRestricted_Visibility();
+	EAttribute getAccessRestricted_Visibility();
 
 	/**
 	 * Returns the meta object for class '{@link org.yakindu.base.generator.generator.VariableGen <em>Variable Gen</em>}'.
@@ -739,27 +711,6 @@ public interface GeneratorPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getParameterGen();
-
-	/**
-	 * Returns the meta object for class '{@link org.yakindu.base.generator.generator.Visibility <em>Visibility</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Visibility</em>'.
-	 * @see org.yakindu.base.generator.generator.Visibility
-	 * @generated
-	 */
-	EClass getVisibility();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.yakindu.base.generator.generator.Visibility#getVisibility <em>Visibility</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Visibility</em>'.
-	 * @see org.yakindu.base.generator.generator.Visibility#getVisibility()
-	 * @see #getVisibility()
-	 * @generated
-	 */
-	EAttribute getVisibility_Visibility();
 
 	/**
 	 * Returns the meta object for enum '{@link org.yakindu.base.generator.generator.VisibilityValues <em>Visibility Values</em>}'.
@@ -909,12 +860,12 @@ public interface GeneratorPackage extends EPackage {
 		EClass ACCESS_RESTRICTED = eINSTANCE.getAccessRestricted();
 
 		/**
-		 * The meta object literal for the '<em><b>Visibility</b></em>' containment reference feature.
+		 * The meta object literal for the '<em><b>Visibility</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference ACCESS_RESTRICTED__VISIBILITY = eINSTANCE.getAccessRestricted_Visibility();
+		EAttribute ACCESS_RESTRICTED__VISIBILITY = eINSTANCE.getAccessRestricted_Visibility();
 
 		/**
 		 * The meta object literal for the '{@link org.yakindu.base.generator.generator.impl.VariableGenImpl <em>Variable Gen</em>}' class.
@@ -935,24 +886,6 @@ public interface GeneratorPackage extends EPackage {
 		 * @generated
 		 */
 		EClass PARAMETER_GEN = eINSTANCE.getParameterGen();
-
-		/**
-		 * The meta object literal for the '{@link org.yakindu.base.generator.generator.impl.VisibilityImpl <em>Visibility</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see org.yakindu.base.generator.generator.impl.VisibilityImpl
-		 * @see org.yakindu.base.generator.generator.impl.GeneratorPackageImpl#getVisibility()
-		 * @generated
-		 */
-		EClass VISIBILITY = eINSTANCE.getVisibility();
-
-		/**
-		 * The meta object literal for the '<em><b>Visibility</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute VISIBILITY__VISIBILITY = eINSTANCE.getVisibility_Visibility();
 
 		/**
 		 * The meta object literal for the '{@link org.yakindu.base.generator.generator.VisibilityValues <em>Visibility Values</em>}' enum.

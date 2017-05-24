@@ -3,16 +3,13 @@
 package org.yakindu.base.generator.generator.impl;
 
 import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.ecore.EClass;
-
-import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.yakindu.base.generator.generator.AccessRestricted;
 import org.yakindu.base.generator.generator.GeneratorPackage;
-import org.yakindu.base.generator.generator.Visibility;
+import org.yakindu.base.generator.generator.VisibilityValues;
 
 /**
  * <!-- begin-user-doc -->
@@ -29,14 +26,23 @@ import org.yakindu.base.generator.generator.Visibility;
  */
 public class AccessRestrictedImpl extends MinimalEObjectImpl.Container implements AccessRestricted {
 	/**
-	 * The cached value of the '{@link #getVisibility() <em>Visibility</em>}' containment reference.
+	 * The default value of the '{@link #getVisibility() <em>Visibility</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getVisibility()
 	 * @generated
 	 * @ordered
 	 */
-	protected Visibility visibility;
+	protected static final VisibilityValues VISIBILITY_EDEFAULT = VisibilityValues.NONE;
+	/**
+	 * The cached value of the '{@link #getVisibility() <em>Visibility</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getVisibility()
+	 * @generated
+	 * @ordered
+	 */
+	protected VisibilityValues visibility = VISIBILITY_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -62,7 +68,7 @@ public class AccessRestrictedImpl extends MinimalEObjectImpl.Container implement
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Visibility getVisibility() {
+	public VisibilityValues getVisibility() {
 		return visibility;
 	}
 
@@ -71,47 +77,11 @@ public class AccessRestrictedImpl extends MinimalEObjectImpl.Container implement
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetVisibility(Visibility newVisibility, NotificationChain msgs) {
-		Visibility oldVisibility = visibility;
-		visibility = newVisibility;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, GeneratorPackage.ACCESS_RESTRICTED__VISIBILITY, oldVisibility, newVisibility);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
-		return msgs;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setVisibility(Visibility newVisibility) {
-		if (newVisibility != visibility) {
-			NotificationChain msgs = null;
-			if (visibility != null)
-				msgs = ((InternalEObject)visibility).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - GeneratorPackage.ACCESS_RESTRICTED__VISIBILITY, null, msgs);
-			if (newVisibility != null)
-				msgs = ((InternalEObject)newVisibility).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - GeneratorPackage.ACCESS_RESTRICTED__VISIBILITY, null, msgs);
-			msgs = basicSetVisibility(newVisibility, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, GeneratorPackage.ACCESS_RESTRICTED__VISIBILITY, newVisibility, newVisibility));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID) {
-			case GeneratorPackage.ACCESS_RESTRICTED__VISIBILITY:
-				return basicSetVisibility(null, msgs);
-		}
-		return super.eInverseRemove(otherEnd, featureID, msgs);
+	public void setVisibility(VisibilityValues newVisibility) {
+		VisibilityValues oldVisibility = visibility;
+		visibility = newVisibility == null ? VISIBILITY_EDEFAULT : newVisibility;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, GeneratorPackage.ACCESS_RESTRICTED__VISIBILITY, oldVisibility, visibility));
 	}
 
 	/**
@@ -137,7 +107,7 @@ public class AccessRestrictedImpl extends MinimalEObjectImpl.Container implement
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case GeneratorPackage.ACCESS_RESTRICTED__VISIBILITY:
-				setVisibility((Visibility)newValue);
+				setVisibility((VisibilityValues)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -152,7 +122,7 @@ public class AccessRestrictedImpl extends MinimalEObjectImpl.Container implement
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case GeneratorPackage.ACCESS_RESTRICTED__VISIBILITY:
-				setVisibility((Visibility)null);
+				setVisibility(VISIBILITY_EDEFAULT);
 				return;
 		}
 		super.eUnset(featureID);
@@ -167,9 +137,25 @@ public class AccessRestrictedImpl extends MinimalEObjectImpl.Container implement
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case GeneratorPackage.ACCESS_RESTRICTED__VISIBILITY:
-				return visibility != null;
+				return visibility != VISIBILITY_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString() {
+		if (eIsProxy()) return super.toString();
+
+		StringBuffer result = new StringBuffer(super.toString());
+		result.append(" (visibility: ");
+		result.append(visibility);
+		result.append(')');
+		return result.toString();
 	}
 
 } //AccessRestrictedImpl
