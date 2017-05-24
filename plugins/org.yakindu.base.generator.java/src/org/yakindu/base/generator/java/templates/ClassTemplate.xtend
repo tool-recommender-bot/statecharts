@@ -1,53 +1,44 @@
 package org.yakindu.base.generator.java.templates
 
-import org.yakindu.base.generator.templates.IClassTemplate
 import org.yakindu.base.generator.generator.ClassGen
 
-class ClassTemplate implements IClassTemplate {
-	override generate(ClassGen it) {'''
-		«generateVisibility»class «className» «generateExtends»«generateImplements»{
+class ClassTemplate extends Template {
+	def dispatch generate(ClassGen it) {'''
+		«generateVisibility»class «name» «generateExtends»«generateImplements»{
 			«generateContent»
 		}
 	'''
 	}
 	
-	def generateContent(ClassGen it) {
+	def protected generateContent(ClassGen it) {
 		'''
-		«FOR cm:classMembers»
-		«cm.generate()»
+		«FOR c:children»
+		«c.getTemplate.generate(c)»
 		«ENDFOR»
 		'''
 	}
 	
-	def generateImplements(ClassGen it) {
+	def protected generateImplements(ClassGen it) {
 		var ret = ""
-		if(!interfaces.nullOrEmpty) {
-			ret = "implements "
-			var first = true
-			for(i : interfaces) {
-				if(first) {
-					first = false
-					ret += i.className
-				} else {
-					ret += ", " + i.className
-				}
-			}
-			ret += " "
+		if(!implements.nullOrEmpty) {
+			ret = "implements " + implements.join(", ")[name] + " "
 		}
 	}
 	
-	def generateVisibility(ClassGen it) {
-		if(!visibility.nullOrEmpty) {
+	def protected generateVisibility(ClassGen it) {
+		if(!visibility.toString.nullOrEmpty) {
 			return visibility + " "
 		}
 		""
 	}
 	
-	def generateExtends(ClassGen it) {
-		if(superClass == null) {
+	def protected generateExtends(ClassGen it) {
+		if(superClass === null) {
 			""
 		} else {
-			'''extends «superClass.className» '''
+			'''extends «superClass.name» '''
 		}
 	}
+	
+	
 }
