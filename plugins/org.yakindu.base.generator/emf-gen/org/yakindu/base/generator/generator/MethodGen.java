@@ -24,7 +24,7 @@ import org.yakindu.base.types.TypeSpecifier;
  * @model
  * @generated
  */
-public interface MethodGen extends CodeElement, AccessRestricted {
+public interface MethodGen extends CodeElement, AccessRestricted, AbstractableElement {
 	/**
 	 * Returns the value of the '<em><b>Parameters</b></em>' containment reference list.
 	 * The list contents are of type {@link org.yakindu.base.generator.generator.ParameterGen}.

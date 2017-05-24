@@ -93,6 +93,7 @@ public class GeneratorSwitch<T> extends Switch<T> {
 				T result = caseClassGen(classGen);
 				if (result == null) result = caseCodeElement(classGen);
 				if (result == null) result = caseAccessRestricted(classGen);
+				if (result == null) result = caseAbstractableElement(classGen);
 				if (result == null) result = caseNamedElement(classGen);
 				if (result == null) result = caseDocumentedElement(classGen);
 				if (result == null) result = defaultCase(theEObject);
@@ -119,6 +120,7 @@ public class GeneratorSwitch<T> extends Switch<T> {
 				T result = caseMethodGen(methodGen);
 				if (result == null) result = caseCodeElement(methodGen);
 				if (result == null) result = caseAccessRestricted(methodGen);
+				if (result == null) result = caseAbstractableElement(methodGen);
 				if (result == null) result = caseNamedElement(methodGen);
 				if (result == null) result = caseDocumentedElement(methodGen);
 				if (result == null) result = defaultCase(theEObject);

@@ -15,6 +15,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 
+import org.yakindu.base.generator.generator.AbstractableElement;
 import org.yakindu.base.generator.generator.AccessRestricted;
 import org.yakindu.base.generator.generator.ClassDeclarationGen;
 import org.yakindu.base.generator.generator.ClassGen;
@@ -32,6 +33,7 @@ import org.yakindu.base.generator.generator.VisibilityValues;
  * </p>
  * <ul>
  *   <li>{@link org.yakindu.base.generator.generator.impl.ClassGenImpl#getVisibility <em>Visibility</em>}</li>
+ *   <li>{@link org.yakindu.base.generator.generator.impl.ClassGenImpl#isAbstract <em>Abstract</em>}</li>
  *   <li>{@link org.yakindu.base.generator.generator.impl.ClassGenImpl#getSuperClass <em>Super Class</em>}</li>
  *   <li>{@link org.yakindu.base.generator.generator.impl.ClassGenImpl#getImplements <em>Implements</em>}</li>
  *   <li>{@link org.yakindu.base.generator.generator.impl.ClassGenImpl#getDeclaration <em>Declaration</em>}</li>
@@ -59,6 +61,26 @@ public class ClassGenImpl extends CodeElementImpl implements ClassGen {
 	 * @ordered
 	 */
 	protected VisibilityValues visibility = VISIBILITY_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #isAbstract() <em>Abstract</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isAbstract()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean ABSTRACT_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isAbstract() <em>Abstract</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isAbstract()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean abstract_ = ABSTRACT_EDEFAULT;
 
 	/**
 	 * The cached value of the '{@link #getSuperClass() <em>Super Class</em>}' reference.
@@ -128,6 +150,27 @@ public class ClassGenImpl extends CodeElementImpl implements ClassGen {
 		visibility = newVisibility == null ? VISIBILITY_EDEFAULT : newVisibility;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, GeneratorPackage.CLASS_GEN__VISIBILITY, oldVisibility, visibility));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean isAbstract() {
+		return abstract_;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setAbstract(boolean newAbstract) {
+		boolean oldAbstract = abstract_;
+		abstract_ = newAbstract;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, GeneratorPackage.CLASS_GEN__ABSTRACT, oldAbstract, abstract_));
 	}
 
 	/**
@@ -274,6 +317,8 @@ public class ClassGenImpl extends CodeElementImpl implements ClassGen {
 		switch (featureID) {
 			case GeneratorPackage.CLASS_GEN__VISIBILITY:
 				return getVisibility();
+			case GeneratorPackage.CLASS_GEN__ABSTRACT:
+				return isAbstract();
 			case GeneratorPackage.CLASS_GEN__SUPER_CLASS:
 				if (resolve) return getSuperClass();
 				return basicGetSuperClass();
@@ -296,6 +341,9 @@ public class ClassGenImpl extends CodeElementImpl implements ClassGen {
 		switch (featureID) {
 			case GeneratorPackage.CLASS_GEN__VISIBILITY:
 				setVisibility((VisibilityValues)newValue);
+				return;
+			case GeneratorPackage.CLASS_GEN__ABSTRACT:
+				setAbstract((Boolean)newValue);
 				return;
 			case GeneratorPackage.CLASS_GEN__SUPER_CLASS:
 				setSuperClass((ClassGen)newValue);
@@ -322,6 +370,9 @@ public class ClassGenImpl extends CodeElementImpl implements ClassGen {
 			case GeneratorPackage.CLASS_GEN__VISIBILITY:
 				setVisibility(VISIBILITY_EDEFAULT);
 				return;
+			case GeneratorPackage.CLASS_GEN__ABSTRACT:
+				setAbstract(ABSTRACT_EDEFAULT);
+				return;
 			case GeneratorPackage.CLASS_GEN__SUPER_CLASS:
 				setSuperClass((ClassGen)null);
 				return;
@@ -345,6 +396,8 @@ public class ClassGenImpl extends CodeElementImpl implements ClassGen {
 		switch (featureID) {
 			case GeneratorPackage.CLASS_GEN__VISIBILITY:
 				return visibility != VISIBILITY_EDEFAULT;
+			case GeneratorPackage.CLASS_GEN__ABSTRACT:
+				return abstract_ != ABSTRACT_EDEFAULT;
 			case GeneratorPackage.CLASS_GEN__SUPER_CLASS:
 				return superClass != null;
 			case GeneratorPackage.CLASS_GEN__IMPLEMENTS:
@@ -368,6 +421,12 @@ public class ClassGenImpl extends CodeElementImpl implements ClassGen {
 				default: return -1;
 			}
 		}
+		if (baseClass == AbstractableElement.class) {
+			switch (derivedFeatureID) {
+				case GeneratorPackage.CLASS_GEN__ABSTRACT: return GeneratorPackage.ABSTRACTABLE_ELEMENT__ABSTRACT;
+				default: return -1;
+			}
+		}
 		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
 	}
 
@@ -381,6 +440,12 @@ public class ClassGenImpl extends CodeElementImpl implements ClassGen {
 		if (baseClass == AccessRestricted.class) {
 			switch (baseFeatureID) {
 				case GeneratorPackage.ACCESS_RESTRICTED__VISIBILITY: return GeneratorPackage.CLASS_GEN__VISIBILITY;
+				default: return -1;
+			}
+		}
+		if (baseClass == AbstractableElement.class) {
+			switch (baseFeatureID) {
+				case GeneratorPackage.ABSTRACTABLE_ELEMENT__ABSTRACT: return GeneratorPackage.CLASS_GEN__ABSTRACT;
 				default: return -1;
 			}
 		}
@@ -399,6 +464,8 @@ public class ClassGenImpl extends CodeElementImpl implements ClassGen {
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (visibility: ");
 		result.append(visibility);
+		result.append(", abstract: ");
+		result.append(abstract_);
 		result.append(')');
 		return result.toString();
 	}

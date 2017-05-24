@@ -533,10 +533,12 @@ public class GeneratorPackageImpl extends EPackageImpl implements GeneratorPacka
 		sourceFileGenEClass.getESuperTypes().add(this.getCodeElement());
 		classGenEClass.getESuperTypes().add(this.getCodeElement());
 		classGenEClass.getESuperTypes().add(this.getAccessRestricted());
+		classGenEClass.getESuperTypes().add(this.getAbstractableElement());
 		interfaceGenEClass.getESuperTypes().add(this.getCodeElement());
 		interfaceGenEClass.getESuperTypes().add(this.getAccessRestricted());
 		methodGenEClass.getESuperTypes().add(this.getCodeElement());
 		methodGenEClass.getESuperTypes().add(this.getAccessRestricted());
+		methodGenEClass.getESuperTypes().add(this.getAbstractableElement());
 		variableGenEClass.getESuperTypes().add(this.getCodeElement());
 		variableGenEClass.getESuperTypes().add(this.getAccessRestricted());
 		variableGenEClass.getESuperTypes().add(theTypesPackage.getTypedElement());

@@ -13,7 +13,7 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="imports" upperBound="-1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ClassGen" eSuperTypes="#//CodeElement #//AccessRestricted">
+  <eClassifiers xsi:type="ecore:EClass" name="ClassGen" eSuperTypes="#//CodeElement #//AccessRestricted #//AbstractableElement">
     <eOperations name="addConstructor">
       <eParameters name="parameters" upperBound="-1" eType="#//ParameterGen"/>
     </eOperations>
@@ -30,7 +30,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="InterfaceGen" eSuperTypes="#//CodeElement #//AccessRestricted">
     <eStructuralFeatures xsi:type="ecore:EReference" name="superClass" eType="#//InterfaceGen"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="MethodGen" eSuperTypes="#//CodeElement #//AccessRestricted">
+  <eClassifiers xsi:type="ecore:EClass" name="MethodGen" eSuperTypes="#//CodeElement #//AccessRestricted #//AbstractableElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="parameters" upperBound="-1"
         eType="#//ParameterGen" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="returnType" eType="ecore:EClass ../../org.yakindu.base.types/model/types.ecore#//TypeSpecifier"/>

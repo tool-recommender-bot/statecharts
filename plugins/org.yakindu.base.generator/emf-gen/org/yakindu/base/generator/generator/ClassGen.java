@@ -22,7 +22,7 @@ import org.eclipse.emf.common.util.EList;
  * @model
  * @generated
  */
-public interface ClassGen extends CodeElement, AccessRestricted {
+public interface ClassGen extends CodeElement, AccessRestricted, AbstractableElement {
 	/**
 	 * Returns the value of the '<em><b>Super Class</b></em>' reference.
 	 * <!-- begin-user-doc -->

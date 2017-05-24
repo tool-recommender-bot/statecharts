@@ -242,13 +242,22 @@ public interface GeneratorPackage extends EPackage {
 	int CLASS_GEN__VISIBILITY = CODE_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Abstract</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CLASS_GEN__ABSTRACT = CODE_ELEMENT_FEATURE_COUNT + 1;
+
+	/**
 	 * The feature id for the '<em><b>Super Class</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CLASS_GEN__SUPER_CLASS = CODE_ELEMENT_FEATURE_COUNT + 1;
+	int CLASS_GEN__SUPER_CLASS = CODE_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Implements</b></em>' reference list.
@@ -257,7 +266,7 @@ public interface GeneratorPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CLASS_GEN__IMPLEMENTS = CODE_ELEMENT_FEATURE_COUNT + 2;
+	int CLASS_GEN__IMPLEMENTS = CODE_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Declaration</b></em>' containment reference.
@@ -266,7 +275,7 @@ public interface GeneratorPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CLASS_GEN__DECLARATION = CODE_ELEMENT_FEATURE_COUNT + 3;
+	int CLASS_GEN__DECLARATION = CODE_ELEMENT_FEATURE_COUNT + 4;
 
 	/**
 	 * The number of structural features of the '<em>Class Gen</em>' class.
@@ -275,7 +284,7 @@ public interface GeneratorPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CLASS_GEN_FEATURE_COUNT = CODE_ELEMENT_FEATURE_COUNT + 4;
+	int CLASS_GEN_FEATURE_COUNT = CODE_ELEMENT_FEATURE_COUNT + 5;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.base.generator.generator.impl.ClassDeclarationGenImpl <em>Class Declaration Gen</em>}' class.
@@ -434,13 +443,22 @@ public interface GeneratorPackage extends EPackage {
 	int METHOD_GEN__VISIBILITY = CODE_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Abstract</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int METHOD_GEN__ABSTRACT = CODE_ELEMENT_FEATURE_COUNT + 1;
+
+	/**
 	 * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int METHOD_GEN__PARAMETERS = CODE_ELEMENT_FEATURE_COUNT + 1;
+	int METHOD_GEN__PARAMETERS = CODE_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Return Type</b></em>' reference.
@@ -449,7 +467,7 @@ public interface GeneratorPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int METHOD_GEN__RETURN_TYPE = CODE_ELEMENT_FEATURE_COUNT + 2;
+	int METHOD_GEN__RETURN_TYPE = CODE_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Declaration</b></em>' containment reference.
@@ -458,7 +476,7 @@ public interface GeneratorPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int METHOD_GEN__DECLARATION = CODE_ELEMENT_FEATURE_COUNT + 3;
+	int METHOD_GEN__DECLARATION = CODE_ELEMENT_FEATURE_COUNT + 4;
 
 	/**
 	 * The number of structural features of the '<em>Method Gen</em>' class.
@@ -467,7 +485,7 @@ public interface GeneratorPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int METHOD_GEN_FEATURE_COUNT = CODE_ELEMENT_FEATURE_COUNT + 4;
+	int METHOD_GEN_FEATURE_COUNT = CODE_ELEMENT_FEATURE_COUNT + 5;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.base.generator.generator.impl.MethodDeclarationGenImpl <em>Method Declaration Gen</em>}' class.

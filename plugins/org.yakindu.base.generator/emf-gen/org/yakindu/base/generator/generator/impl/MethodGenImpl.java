@@ -16,6 +16,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
+import org.yakindu.base.generator.generator.AbstractableElement;
 import org.yakindu.base.generator.generator.AccessRestricted;
 import org.yakindu.base.generator.generator.GeneratorPackage;
 import org.yakindu.base.generator.generator.MethodDeclarationGen;
@@ -33,6 +34,7 @@ import org.yakindu.base.types.TypeSpecifier;
  * </p>
  * <ul>
  *   <li>{@link org.yakindu.base.generator.generator.impl.MethodGenImpl#getVisibility <em>Visibility</em>}</li>
+ *   <li>{@link org.yakindu.base.generator.generator.impl.MethodGenImpl#isAbstract <em>Abstract</em>}</li>
  *   <li>{@link org.yakindu.base.generator.generator.impl.MethodGenImpl#getParameters <em>Parameters</em>}</li>
  *   <li>{@link org.yakindu.base.generator.generator.impl.MethodGenImpl#getReturnType <em>Return Type</em>}</li>
  *   <li>{@link org.yakindu.base.generator.generator.impl.MethodGenImpl#getDeclaration <em>Declaration</em>}</li>
@@ -60,6 +62,26 @@ public class MethodGenImpl extends CodeElementImpl implements MethodGen {
 	 * @ordered
 	 */
 	protected VisibilityValues visibility = VISIBILITY_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #isAbstract() <em>Abstract</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isAbstract()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean ABSTRACT_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isAbstract() <em>Abstract</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isAbstract()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean abstract_ = ABSTRACT_EDEFAULT;
 
 	/**
 	 * The cached value of the '{@link #getParameters() <em>Parameters</em>}' containment reference list.
@@ -129,6 +151,27 @@ public class MethodGenImpl extends CodeElementImpl implements MethodGen {
 		visibility = newVisibility == null ? VISIBILITY_EDEFAULT : newVisibility;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, GeneratorPackage.METHOD_GEN__VISIBILITY, oldVisibility, visibility));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean isAbstract() {
+		return abstract_;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setAbstract(boolean newAbstract) {
+		boolean oldAbstract = abstract_;
+		abstract_ = newAbstract;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, GeneratorPackage.METHOD_GEN__ABSTRACT, oldAbstract, abstract_));
 	}
 
 	/**
@@ -266,6 +309,8 @@ public class MethodGenImpl extends CodeElementImpl implements MethodGen {
 		switch (featureID) {
 			case GeneratorPackage.METHOD_GEN__VISIBILITY:
 				return getVisibility();
+			case GeneratorPackage.METHOD_GEN__ABSTRACT:
+				return isAbstract();
 			case GeneratorPackage.METHOD_GEN__PARAMETERS:
 				return getParameters();
 			case GeneratorPackage.METHOD_GEN__RETURN_TYPE:
@@ -288,6 +333,9 @@ public class MethodGenImpl extends CodeElementImpl implements MethodGen {
 		switch (featureID) {
 			case GeneratorPackage.METHOD_GEN__VISIBILITY:
 				setVisibility((VisibilityValues)newValue);
+				return;
+			case GeneratorPackage.METHOD_GEN__ABSTRACT:
+				setAbstract((Boolean)newValue);
 				return;
 			case GeneratorPackage.METHOD_GEN__PARAMETERS:
 				getParameters().clear();
@@ -314,6 +362,9 @@ public class MethodGenImpl extends CodeElementImpl implements MethodGen {
 			case GeneratorPackage.METHOD_GEN__VISIBILITY:
 				setVisibility(VISIBILITY_EDEFAULT);
 				return;
+			case GeneratorPackage.METHOD_GEN__ABSTRACT:
+				setAbstract(ABSTRACT_EDEFAULT);
+				return;
 			case GeneratorPackage.METHOD_GEN__PARAMETERS:
 				getParameters().clear();
 				return;
@@ -337,6 +388,8 @@ public class MethodGenImpl extends CodeElementImpl implements MethodGen {
 		switch (featureID) {
 			case GeneratorPackage.METHOD_GEN__VISIBILITY:
 				return visibility != VISIBILITY_EDEFAULT;
+			case GeneratorPackage.METHOD_GEN__ABSTRACT:
+				return abstract_ != ABSTRACT_EDEFAULT;
 			case GeneratorPackage.METHOD_GEN__PARAMETERS:
 				return parameters != null && !parameters.isEmpty();
 			case GeneratorPackage.METHOD_GEN__RETURN_TYPE:
@@ -360,6 +413,12 @@ public class MethodGenImpl extends CodeElementImpl implements MethodGen {
 				default: return -1;
 			}
 		}
+		if (baseClass == AbstractableElement.class) {
+			switch (derivedFeatureID) {
+				case GeneratorPackage.METHOD_GEN__ABSTRACT: return GeneratorPackage.ABSTRACTABLE_ELEMENT__ABSTRACT;
+				default: return -1;
+			}
+		}
 		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
 	}
 
@@ -373,6 +432,12 @@ public class MethodGenImpl extends CodeElementImpl implements MethodGen {
 		if (baseClass == AccessRestricted.class) {
 			switch (baseFeatureID) {
 				case GeneratorPackage.ACCESS_RESTRICTED__VISIBILITY: return GeneratorPackage.METHOD_GEN__VISIBILITY;
+				default: return -1;
+			}
+		}
+		if (baseClass == AbstractableElement.class) {
+			switch (baseFeatureID) {
+				case GeneratorPackage.ABSTRACTABLE_ELEMENT__ABSTRACT: return GeneratorPackage.METHOD_GEN__ABSTRACT;
 				default: return -1;
 			}
 		}
@@ -391,6 +456,8 @@ public class MethodGenImpl extends CodeElementImpl implements MethodGen {
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (visibility: ");
 		result.append(visibility);
+		result.append(", abstract: ");
+		result.append(abstract_);
 		result.append(')');
 		return result.toString();
 	}
