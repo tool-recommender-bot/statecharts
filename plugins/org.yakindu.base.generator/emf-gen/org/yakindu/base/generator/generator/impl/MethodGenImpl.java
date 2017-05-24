@@ -6,6 +6,7 @@ import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
 
+import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
@@ -13,8 +14,8 @@ import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
-import org.eclipse.emf.ecore.util.EObjectResolvingEList;
-
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.InternalEList;
 import org.yakindu.base.generator.generator.AccessRestricted;
 import org.yakindu.base.generator.generator.GeneratorPackage;
 import org.yakindu.base.generator.generator.MethodGen;
@@ -40,7 +41,7 @@ import org.yakindu.base.types.TypeSpecifier;
  */
 public class MethodGenImpl extends CodeElementImpl implements MethodGen {
 	/**
-	 * The cached value of the '{@link #getVisibility() <em>Visibility</em>}' reference.
+	 * The cached value of the '{@link #getVisibility() <em>Visibility</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getVisibility()
@@ -50,7 +51,7 @@ public class MethodGenImpl extends CodeElementImpl implements MethodGen {
 	protected Visibility visibility;
 
 	/**
-	 * The cached value of the '{@link #getParameters() <em>Parameters</em>}' reference list.
+	 * The cached value of the '{@link #getParameters() <em>Parameters</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getParameters()
@@ -94,14 +95,6 @@ public class MethodGenImpl extends CodeElementImpl implements MethodGen {
 	 * @generated
 	 */
 	public Visibility getVisibility() {
-		if (visibility != null && visibility.eIsProxy()) {
-			InternalEObject oldVisibility = (InternalEObject)visibility;
-			visibility = (Visibility)eResolveProxy(oldVisibility);
-			if (visibility != oldVisibility) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, GeneratorPackage.METHOD_GEN__VISIBILITY, oldVisibility, visibility));
-			}
-		}
 		return visibility;
 	}
 
@@ -110,8 +103,14 @@ public class MethodGenImpl extends CodeElementImpl implements MethodGen {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Visibility basicGetVisibility() {
-		return visibility;
+	public NotificationChain basicSetVisibility(Visibility newVisibility, NotificationChain msgs) {
+		Visibility oldVisibility = visibility;
+		visibility = newVisibility;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, GeneratorPackage.METHOD_GEN__VISIBILITY, oldVisibility, newVisibility);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
 	}
 
 	/**
@@ -120,10 +119,17 @@ public class MethodGenImpl extends CodeElementImpl implements MethodGen {
 	 * @generated
 	 */
 	public void setVisibility(Visibility newVisibility) {
-		Visibility oldVisibility = visibility;
-		visibility = newVisibility;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, GeneratorPackage.METHOD_GEN__VISIBILITY, oldVisibility, visibility));
+		if (newVisibility != visibility) {
+			NotificationChain msgs = null;
+			if (visibility != null)
+				msgs = ((InternalEObject)visibility).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - GeneratorPackage.METHOD_GEN__VISIBILITY, null, msgs);
+			if (newVisibility != null)
+				msgs = ((InternalEObject)newVisibility).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - GeneratorPackage.METHOD_GEN__VISIBILITY, null, msgs);
+			msgs = basicSetVisibility(newVisibility, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, GeneratorPackage.METHOD_GEN__VISIBILITY, newVisibility, newVisibility));
 	}
 
 	/**
@@ -133,7 +139,7 @@ public class MethodGenImpl extends CodeElementImpl implements MethodGen {
 	 */
 	public EList<ParameterGen> getParameters() {
 		if (parameters == null) {
-			parameters = new EObjectResolvingEList<ParameterGen>(ParameterGen.class, this, GeneratorPackage.METHOD_GEN__PARAMETERS);
+			parameters = new EObjectContainmentEList<ParameterGen>(ParameterGen.class, this, GeneratorPackage.METHOD_GEN__PARAMETERS);
 		}
 		return parameters;
 	}
@@ -182,11 +188,26 @@ public class MethodGenImpl extends CodeElementImpl implements MethodGen {
 	 * @generated
 	 */
 	@Override
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case GeneratorPackage.METHOD_GEN__VISIBILITY:
+				return basicSetVisibility(null, msgs);
+			case GeneratorPackage.METHOD_GEN__PARAMETERS:
+				return ((InternalEList<?>)getParameters()).basicRemove(otherEnd, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case GeneratorPackage.METHOD_GEN__VISIBILITY:
-				if (resolve) return getVisibility();
-				return basicGetVisibility();
+				return getVisibility();
 			case GeneratorPackage.METHOD_GEN__PARAMETERS:
 				return getParameters();
 			case GeneratorPackage.METHOD_GEN__RETURN_TYPE:

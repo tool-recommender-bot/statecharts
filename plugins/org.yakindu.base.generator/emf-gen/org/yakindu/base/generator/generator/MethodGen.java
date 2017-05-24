@@ -25,7 +25,7 @@ import org.yakindu.base.types.TypeSpecifier;
  */
 public interface MethodGen extends CodeElement, AccessRestricted {
 	/**
-	 * Returns the value of the '<em><b>Parameters</b></em>' reference list.
+	 * Returns the value of the '<em><b>Parameters</b></em>' containment reference list.
 	 * The list contents are of type {@link org.yakindu.base.generator.generator.ParameterGen}.
 	 * <!-- begin-user-doc -->
 	 * <p>
@@ -33,9 +33,9 @@ public interface MethodGen extends CodeElement, AccessRestricted {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Parameters</em>' reference list.
+	 * @return the value of the '<em>Parameters</em>' containment reference list.
 	 * @see org.yakindu.base.generator.generator.GeneratorPackage#getMethodGen_Parameters()
-	 * @model
+	 * @model containment="true"
 	 * @generated
 	 */
 	EList<ParameterGen> getParameters();

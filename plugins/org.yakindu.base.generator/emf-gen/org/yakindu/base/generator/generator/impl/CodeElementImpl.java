@@ -14,7 +14,8 @@ import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
-import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
+import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
 
 import org.yakindu.base.base.BasePackage;
@@ -62,7 +63,7 @@ public class CodeElementImpl extends NamedElementImpl implements CodeElement {
 	protected String documentation = DOCUMENTATION_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getChildren() <em>Children</em>}' reference list.
+	 * The cached value of the '{@link #getChildren() <em>Children</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getChildren()
@@ -70,16 +71,6 @@ public class CodeElementImpl extends NamedElementImpl implements CodeElement {
 	 * @ordered
 	 */
 	protected EList<CodeElement> children;
-
-	/**
-	 * The cached value of the '{@link #getParent() <em>Parent</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getParent()
-	 * @generated
-	 * @ordered
-	 */
-	protected CodeElement parent;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -128,7 +119,7 @@ public class CodeElementImpl extends NamedElementImpl implements CodeElement {
 	 */
 	public EList<CodeElement> getChildren() {
 		if (children == null) {
-			children = new EObjectWithInverseResolvingEList<CodeElement>(CodeElement.class, this, GeneratorPackage.CODE_ELEMENT__CHILDREN, GeneratorPackage.CODE_ELEMENT__PARENT);
+			children = new EObjectContainmentWithInverseEList<CodeElement>(CodeElement.class, this, GeneratorPackage.CODE_ELEMENT__CHILDREN, GeneratorPackage.CODE_ELEMENT__PARENT);
 		}
 		return children;
 	}
@@ -139,24 +130,8 @@ public class CodeElementImpl extends NamedElementImpl implements CodeElement {
 	 * @generated
 	 */
 	public CodeElement getParent() {
-		if (parent != null && parent.eIsProxy()) {
-			InternalEObject oldParent = (InternalEObject)parent;
-			parent = (CodeElement)eResolveProxy(oldParent);
-			if (parent != oldParent) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, GeneratorPackage.CODE_ELEMENT__PARENT, oldParent, parent));
-			}
-		}
-		return parent;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public CodeElement basicGetParent() {
-		return parent;
+		if (eContainerFeatureID() != GeneratorPackage.CODE_ELEMENT__PARENT) return null;
+		return (CodeElement)eInternalContainer();
 	}
 
 	/**
@@ -165,12 +140,7 @@ public class CodeElementImpl extends NamedElementImpl implements CodeElement {
 	 * @generated
 	 */
 	public NotificationChain basicSetParent(CodeElement newParent, NotificationChain msgs) {
-		CodeElement oldParent = parent;
-		parent = newParent;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, GeneratorPackage.CODE_ELEMENT__PARENT, oldParent, newParent);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
+		msgs = eBasicSetContainer((InternalEObject)newParent, GeneratorPackage.CODE_ELEMENT__PARENT, msgs);
 		return msgs;
 	}
 
@@ -180,10 +150,12 @@ public class CodeElementImpl extends NamedElementImpl implements CodeElement {
 	 * @generated
 	 */
 	public void setParent(CodeElement newParent) {
-		if (newParent != parent) {
+		if (newParent != eInternalContainer() || (eContainerFeatureID() != GeneratorPackage.CODE_ELEMENT__PARENT && newParent != null)) {
+			if (EcoreUtil.isAncestor(this, newParent))
+				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
-			if (parent != null)
-				msgs = ((InternalEObject)parent).eInverseRemove(this, GeneratorPackage.CODE_ELEMENT__CHILDREN, CodeElement.class, msgs);
+			if (eInternalContainer() != null)
+				msgs = eBasicRemoveFromContainer(msgs);
 			if (newParent != null)
 				msgs = ((InternalEObject)newParent).eInverseAdd(this, GeneratorPackage.CODE_ELEMENT__CHILDREN, CodeElement.class, msgs);
 			msgs = basicSetParent(newParent, msgs);
@@ -205,8 +177,8 @@ public class CodeElementImpl extends NamedElementImpl implements CodeElement {
 			case GeneratorPackage.CODE_ELEMENT__CHILDREN:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getChildren()).basicAdd(otherEnd, msgs);
 			case GeneratorPackage.CODE_ELEMENT__PARENT:
-				if (parent != null)
-					msgs = ((InternalEObject)parent).eInverseRemove(this, GeneratorPackage.CODE_ELEMENT__CHILDREN, CodeElement.class, msgs);
+				if (eInternalContainer() != null)
+					msgs = eBasicRemoveFromContainer(msgs);
 				return basicSetParent((CodeElement)otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
@@ -234,6 +206,20 @@ public class CodeElementImpl extends NamedElementImpl implements CodeElement {
 	 * @generated
 	 */
 	@Override
+	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
+		switch (eContainerFeatureID()) {
+			case GeneratorPackage.CODE_ELEMENT__PARENT:
+				return eInternalContainer().eInverseRemove(this, GeneratorPackage.CODE_ELEMENT__CHILDREN, CodeElement.class, msgs);
+		}
+		return super.eBasicRemoveFromContainerFeature(msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case GeneratorPackage.CODE_ELEMENT__DOCUMENTATION:
@@ -241,8 +227,7 @@ public class CodeElementImpl extends NamedElementImpl implements CodeElement {
 			case GeneratorPackage.CODE_ELEMENT__CHILDREN:
 				return getChildren();
 			case GeneratorPackage.CODE_ELEMENT__PARENT:
-				if (resolve) return getParent();
-				return basicGetParent();
+				return getParent();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -304,7 +289,7 @@ public class CodeElementImpl extends NamedElementImpl implements CodeElement {
 			case GeneratorPackage.CODE_ELEMENT__CHILDREN:
 				return children != null && !children.isEmpty();
 			case GeneratorPackage.CODE_ELEMENT__PARENT:
-				return parent != null;
+				return getParent() != null;
 		}
 		return super.eIsSet(featureID);
 	}

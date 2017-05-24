@@ -23,26 +23,26 @@ import org.eclipse.emf.ecore.EObject;
 public interface AccessRestricted extends EObject {
 
 	/**
-	 * Returns the value of the '<em><b>Visibility</b></em>' reference.
+	 * Returns the value of the '<em><b>Visibility</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Visibility</em>' reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Visibility</em>' reference.
+	 * @return the value of the '<em>Visibility</em>' containment reference.
 	 * @see #setVisibility(Visibility)
 	 * @see org.yakindu.base.generator.generator.GeneratorPackage#getAccessRestricted_Visibility()
-	 * @model
+	 * @model containment="true"
 	 * @generated
 	 */
 	Visibility getVisibility();
 
 	/**
-	 * Sets the value of the '{@link org.yakindu.base.generator.generator.AccessRestricted#getVisibility <em>Visibility</em>}' reference.
+	 * Sets the value of the '{@link org.yakindu.base.generator.generator.AccessRestricted#getVisibility <em>Visibility</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Visibility</em>' reference.
+	 * @param value the new value of the '<em>Visibility</em>' containment reference.
 	 * @see #getVisibility()
 	 * @generated
 	 */

@@ -26,7 +26,7 @@ import org.yakindu.base.base.NamedElement;
  */
 public interface CodeElement extends NamedElement, DocumentedElement {
 	/**
-	 * Returns the value of the '<em><b>Children</b></em>' reference list.
+	 * Returns the value of the '<em><b>Children</b></em>' containment reference list.
 	 * The list contents are of type {@link org.yakindu.base.generator.generator.CodeElement}.
 	 * It is bidirectional and its opposite is '{@link org.yakindu.base.generator.generator.CodeElement#getParent <em>Parent</em>}'.
 	 * <!-- begin-user-doc -->
@@ -35,16 +35,16 @@ public interface CodeElement extends NamedElement, DocumentedElement {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Children</em>' reference list.
+	 * @return the value of the '<em>Children</em>' containment reference list.
 	 * @see org.yakindu.base.generator.generator.GeneratorPackage#getCodeElement_Children()
 	 * @see org.yakindu.base.generator.generator.CodeElement#getParent
-	 * @model opposite="parent"
+	 * @model opposite="parent" containment="true"
 	 * @generated
 	 */
 	EList<CodeElement> getChildren();
 
 	/**
-	 * Returns the value of the '<em><b>Parent</b></em>' reference.
+	 * Returns the value of the '<em><b>Parent</b></em>' container reference.
 	 * It is bidirectional and its opposite is '{@link org.yakindu.base.generator.generator.CodeElement#getChildren <em>Children</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
@@ -52,20 +52,20 @@ public interface CodeElement extends NamedElement, DocumentedElement {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Parent</em>' reference.
+	 * @return the value of the '<em>Parent</em>' container reference.
 	 * @see #setParent(CodeElement)
 	 * @see org.yakindu.base.generator.generator.GeneratorPackage#getCodeElement_Parent()
 	 * @see org.yakindu.base.generator.generator.CodeElement#getChildren
-	 * @model opposite="children"
+	 * @model opposite="children" transient="false"
 	 * @generated
 	 */
 	CodeElement getParent();
 
 	/**
-	 * Sets the value of the '{@link org.yakindu.base.generator.generator.CodeElement#getParent <em>Parent</em>}' reference.
+	 * Sets the value of the '{@link org.yakindu.base.generator.generator.CodeElement#getParent <em>Parent</em>}' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Parent</em>' reference.
+	 * @param value the new value of the '<em>Parent</em>' container reference.
 	 * @see #getParent()
 	 * @generated
 	 */

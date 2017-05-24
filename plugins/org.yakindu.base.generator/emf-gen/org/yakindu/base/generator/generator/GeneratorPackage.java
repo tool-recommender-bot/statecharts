@@ -4,6 +4,7 @@ package org.yakindu.base.generator.generator;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.yakindu.base.base.BasePackage;
@@ -86,7 +87,7 @@ public interface GeneratorPackage extends EPackage {
 	int CODE_ELEMENT__DOCUMENTATION = BasePackage.NAMED_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Children</b></em>' reference list.
+	 * The feature id for the '<em><b>Children</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -95,7 +96,7 @@ public interface GeneratorPackage extends EPackage {
 	int CODE_ELEMENT__CHILDREN = BasePackage.NAMED_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
-	 * The feature id for the '<em><b>Parent</b></em>' reference.
+	 * The feature id for the '<em><b>Parent</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -141,7 +142,7 @@ public interface GeneratorPackage extends EPackage {
 	int SOURCE_FILE_GEN__DOCUMENTATION = CODE_ELEMENT__DOCUMENTATION;
 
 	/**
-	 * The feature id for the '<em><b>Children</b></em>' reference list.
+	 * The feature id for the '<em><b>Children</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -150,7 +151,7 @@ public interface GeneratorPackage extends EPackage {
 	int SOURCE_FILE_GEN__CHILDREN = CODE_ELEMENT__CHILDREN;
 
 	/**
-	 * The feature id for the '<em><b>Parent</b></em>' reference.
+	 * The feature id for the '<em><b>Parent</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -214,7 +215,7 @@ public interface GeneratorPackage extends EPackage {
 	int CLASS_GEN__DOCUMENTATION = CODE_ELEMENT__DOCUMENTATION;
 
 	/**
-	 * The feature id for the '<em><b>Children</b></em>' reference list.
+	 * The feature id for the '<em><b>Children</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -223,7 +224,7 @@ public interface GeneratorPackage extends EPackage {
 	int CLASS_GEN__CHILDREN = CODE_ELEMENT__CHILDREN;
 
 	/**
-	 * The feature id for the '<em><b>Parent</b></em>' reference.
+	 * The feature id for the '<em><b>Parent</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -232,7 +233,7 @@ public interface GeneratorPackage extends EPackage {
 	int CLASS_GEN__PARENT = CODE_ELEMENT__PARENT;
 
 	/**
-	 * The feature id for the '<em><b>Visibility</b></em>' reference.
+	 * The feature id for the '<em><b>Visibility</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -296,7 +297,7 @@ public interface GeneratorPackage extends EPackage {
 	int METHOD_GEN__DOCUMENTATION = CODE_ELEMENT__DOCUMENTATION;
 
 	/**
-	 * The feature id for the '<em><b>Children</b></em>' reference list.
+	 * The feature id for the '<em><b>Children</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -305,7 +306,7 @@ public interface GeneratorPackage extends EPackage {
 	int METHOD_GEN__CHILDREN = CODE_ELEMENT__CHILDREN;
 
 	/**
-	 * The feature id for the '<em><b>Parent</b></em>' reference.
+	 * The feature id for the '<em><b>Parent</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -314,7 +315,7 @@ public interface GeneratorPackage extends EPackage {
 	int METHOD_GEN__PARENT = CODE_ELEMENT__PARENT;
 
 	/**
-	 * The feature id for the '<em><b>Visibility</b></em>' reference.
+	 * The feature id for the '<em><b>Visibility</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -323,7 +324,7 @@ public interface GeneratorPackage extends EPackage {
 	int METHOD_GEN__VISIBILITY = CODE_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Parameters</b></em>' reference list.
+	 * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -360,7 +361,7 @@ public interface GeneratorPackage extends EPackage {
 	int ACCESS_RESTRICTED = 4;
 
 	/**
-	 * The feature id for the '<em><b>Visibility</b></em>' reference.
+	 * The feature id for the '<em><b>Visibility</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -406,7 +407,7 @@ public interface GeneratorPackage extends EPackage {
 	int VARIABLE_GEN__DOCUMENTATION = CODE_ELEMENT__DOCUMENTATION;
 
 	/**
-	 * The feature id for the '<em><b>Children</b></em>' reference list.
+	 * The feature id for the '<em><b>Children</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -415,7 +416,7 @@ public interface GeneratorPackage extends EPackage {
 	int VARIABLE_GEN__CHILDREN = CODE_ELEMENT__CHILDREN;
 
 	/**
-	 * The feature id for the '<em><b>Parent</b></em>' reference.
+	 * The feature id for the '<em><b>Parent</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -424,7 +425,7 @@ public interface GeneratorPackage extends EPackage {
 	int VARIABLE_GEN__PARENT = CODE_ELEMENT__PARENT;
 
 	/**
-	 * The feature id for the '<em><b>Visibility</b></em>' reference.
+	 * The feature id for the '<em><b>Visibility</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -488,7 +489,7 @@ public interface GeneratorPackage extends EPackage {
 	int PARAMETER_GEN__DOCUMENTATION = CODE_ELEMENT__DOCUMENTATION;
 
 	/**
-	 * The feature id for the '<em><b>Children</b></em>' reference list.
+	 * The feature id for the '<em><b>Children</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -497,7 +498,7 @@ public interface GeneratorPackage extends EPackage {
 	int PARAMETER_GEN__CHILDREN = CODE_ELEMENT__CHILDREN;
 
 	/**
-	 * The feature id for the '<em><b>Parent</b></em>' reference.
+	 * The feature id for the '<em><b>Parent</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -543,13 +544,32 @@ public interface GeneratorPackage extends EPackage {
 	int VISIBILITY = 7;
 
 	/**
+	 * The feature id for the '<em><b>Visibility</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VISIBILITY__VISIBILITY = 0;
+
+	/**
 	 * The number of structural features of the '<em>Visibility</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int VISIBILITY_FEATURE_COUNT = 0;
+	int VISIBILITY_FEATURE_COUNT = 1;
+
+	/**
+	 * The meta object id for the '{@link org.yakindu.base.generator.generator.VisbilityValues <em>Visbility Values</em>}' enum.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.yakindu.base.generator.generator.VisbilityValues
+	 * @see org.yakindu.base.generator.generator.impl.GeneratorPackageImpl#getVisbilityValues()
+	 * @generated
+	 */
+	int VISBILITY_VALUES = 8;
 
 	/**
 	 * Returns the meta object for class '{@link org.yakindu.base.generator.generator.CodeElement <em>Code Element</em>}'.
@@ -562,10 +582,10 @@ public interface GeneratorPackage extends EPackage {
 	EClass getCodeElement();
 
 	/**
-	 * Returns the meta object for the reference list '{@link org.yakindu.base.generator.generator.CodeElement#getChildren <em>Children</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.yakindu.base.generator.generator.CodeElement#getChildren <em>Children</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Children</em>'.
+	 * @return the meta object for the containment reference list '<em>Children</em>'.
 	 * @see org.yakindu.base.generator.generator.CodeElement#getChildren()
 	 * @see #getCodeElement()
 	 * @generated
@@ -573,10 +593,10 @@ public interface GeneratorPackage extends EPackage {
 	EReference getCodeElement_Children();
 
 	/**
-	 * Returns the meta object for the reference '{@link org.yakindu.base.generator.generator.CodeElement#getParent <em>Parent</em>}'.
+	 * Returns the meta object for the container reference '{@link org.yakindu.base.generator.generator.CodeElement#getParent <em>Parent</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Parent</em>'.
+	 * @return the meta object for the container reference '<em>Parent</em>'.
 	 * @see org.yakindu.base.generator.generator.CodeElement#getParent()
 	 * @see #getCodeElement()
 	 * @generated
@@ -658,10 +678,10 @@ public interface GeneratorPackage extends EPackage {
 	EClass getMethodGen();
 
 	/**
-	 * Returns the meta object for the reference list '{@link org.yakindu.base.generator.generator.MethodGen#getParameters <em>Parameters</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.yakindu.base.generator.generator.MethodGen#getParameters <em>Parameters</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Parameters</em>'.
+	 * @return the meta object for the containment reference list '<em>Parameters</em>'.
 	 * @see org.yakindu.base.generator.generator.MethodGen#getParameters()
 	 * @see #getMethodGen()
 	 * @generated
@@ -690,10 +710,10 @@ public interface GeneratorPackage extends EPackage {
 	EClass getAccessRestricted();
 
 	/**
-	 * Returns the meta object for the reference '{@link org.yakindu.base.generator.generator.AccessRestricted#getVisibility <em>Visibility</em>}'.
+	 * Returns the meta object for the containment reference '{@link org.yakindu.base.generator.generator.AccessRestricted#getVisibility <em>Visibility</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Visibility</em>'.
+	 * @return the meta object for the containment reference '<em>Visibility</em>'.
 	 * @see org.yakindu.base.generator.generator.AccessRestricted#getVisibility()
 	 * @see #getAccessRestricted()
 	 * @generated
@@ -731,6 +751,27 @@ public interface GeneratorPackage extends EPackage {
 	EClass getVisibility();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.yakindu.base.generator.generator.Visibility#getVisibility <em>Visibility</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Visibility</em>'.
+	 * @see org.yakindu.base.generator.generator.Visibility#getVisibility()
+	 * @see #getVisibility()
+	 * @generated
+	 */
+	EAttribute getVisibility_Visibility();
+
+	/**
+	 * Returns the meta object for enum '{@link org.yakindu.base.generator.generator.VisbilityValues <em>Visbility Values</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for enum '<em>Visbility Values</em>'.
+	 * @see org.yakindu.base.generator.generator.VisbilityValues
+	 * @generated
+	 */
+	EEnum getVisbilityValues();
+
+	/**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -764,7 +805,7 @@ public interface GeneratorPackage extends EPackage {
 		EClass CODE_ELEMENT = eINSTANCE.getCodeElement();
 
 		/**
-		 * The meta object literal for the '<em><b>Children</b></em>' reference list feature.
+		 * The meta object literal for the '<em><b>Children</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
@@ -772,7 +813,7 @@ public interface GeneratorPackage extends EPackage {
 		EReference CODE_ELEMENT__CHILDREN = eINSTANCE.getCodeElement_Children();
 
 		/**
-		 * The meta object literal for the '<em><b>Parent</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>Parent</b></em>' container reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
@@ -842,7 +883,7 @@ public interface GeneratorPackage extends EPackage {
 		EClass METHOD_GEN = eINSTANCE.getMethodGen();
 
 		/**
-		 * The meta object literal for the '<em><b>Parameters</b></em>' reference list feature.
+		 * The meta object literal for the '<em><b>Parameters</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
@@ -868,7 +909,7 @@ public interface GeneratorPackage extends EPackage {
 		EClass ACCESS_RESTRICTED = eINSTANCE.getAccessRestricted();
 
 		/**
-		 * The meta object literal for the '<em><b>Visibility</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>Visibility</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
@@ -904,6 +945,24 @@ public interface GeneratorPackage extends EPackage {
 		 * @generated
 		 */
 		EClass VISIBILITY = eINSTANCE.getVisibility();
+
+		/**
+		 * The meta object literal for the '<em><b>Visibility</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute VISIBILITY__VISIBILITY = eINSTANCE.getVisibility_Visibility();
+
+		/**
+		 * The meta object literal for the '{@link org.yakindu.base.generator.generator.VisbilityValues <em>Visbility Values</em>}' enum.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.yakindu.base.generator.generator.VisbilityValues
+		 * @see org.yakindu.base.generator.generator.impl.GeneratorPackageImpl#getVisbilityValues()
+		 * @generated
+		 */
+		EEnum VISBILITY_VALUES = eINSTANCE.getVisbilityValues();
 
 	}
 

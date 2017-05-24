@@ -4,6 +4,7 @@ package org.yakindu.base.generator.generator.impl;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
@@ -22,6 +23,7 @@ import org.yakindu.base.generator.generator.ParameterGen;
 import org.yakindu.base.generator.generator.SourceFileGen;
 import org.yakindu.base.generator.generator.VariableGen;
 
+import org.yakindu.base.generator.generator.VisbilityValues;
 import org.yakindu.base.generator.generator.Visibility;
 import org.yakindu.base.types.TypesPackage;
 
@@ -87,6 +89,13 @@ public class GeneratorPackageImpl extends EPackageImpl implements GeneratorPacka
 	 * @generated
 	 */
 	private EClass visibilityEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EEnum visbilityValuesEEnum = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -310,6 +319,24 @@ public class GeneratorPackageImpl extends EPackageImpl implements GeneratorPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getVisibility_Visibility() {
+		return (EAttribute)visibilityEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EEnum getVisbilityValues() {
+		return visbilityValuesEEnum;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public GeneratorFactory getGeneratorFactory() {
 		return (GeneratorFactory)getEFactoryInstance();
 	}
@@ -357,6 +384,10 @@ public class GeneratorPackageImpl extends EPackageImpl implements GeneratorPacka
 		parameterGenEClass = createEClass(PARAMETER_GEN);
 
 		visibilityEClass = createEClass(VISIBILITY);
+		createEAttribute(visibilityEClass, VISIBILITY__VISIBILITY);
+
+		// Create enums
+		visbilityValuesEEnum = createEEnum(VISBILITY_VALUES);
 	}
 
 	/**
@@ -406,8 +437,8 @@ public class GeneratorPackageImpl extends EPackageImpl implements GeneratorPacka
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(codeElementEClass, CodeElement.class, "CodeElement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getCodeElement_Children(), this.getCodeElement(), this.getCodeElement_Parent(), "children", null, 0, -1, CodeElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getCodeElement_Parent(), this.getCodeElement(), this.getCodeElement_Children(), "parent", null, 0, 1, CodeElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getCodeElement_Children(), this.getCodeElement(), this.getCodeElement_Parent(), "children", null, 0, -1, CodeElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getCodeElement_Parent(), this.getCodeElement(), this.getCodeElement_Children(), "parent", null, 0, 1, CodeElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(sourceFileGenEClass, SourceFileGen.class, "SourceFileGen", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getSourceFileGen_Package(), ecorePackage.getEString(), "package", null, 0, 1, SourceFileGen.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -421,17 +452,25 @@ public class GeneratorPackageImpl extends EPackageImpl implements GeneratorPacka
 		addEParameter(op, this.getParameterGen(), "parameters", 0, -1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(methodGenEClass, MethodGen.class, "MethodGen", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getMethodGen_Parameters(), this.getParameterGen(), null, "parameters", null, 0, -1, MethodGen.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getMethodGen_Parameters(), this.getParameterGen(), null, "parameters", null, 0, -1, MethodGen.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getMethodGen_ReturnType(), theTypesPackage.getTypeSpecifier(), null, "returnType", null, 0, 1, MethodGen.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(accessRestrictedEClass, AccessRestricted.class, "AccessRestricted", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getAccessRestricted_Visibility(), this.getVisibility(), null, "visibility", null, 0, 1, AccessRestricted.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getAccessRestricted_Visibility(), this.getVisibility(), null, "visibility", null, 0, 1, AccessRestricted.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(variableGenEClass, VariableGen.class, "VariableGen", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(parameterGenEClass, ParameterGen.class, "ParameterGen", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(visibilityEClass, Visibility.class, "Visibility", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getVisibility_Visibility(), this.getVisbilityValues(), "visibility", null, 0, 1, Visibility.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		// Initialize enums and add enum literals
+		initEEnum(visbilityValuesEEnum, VisbilityValues.class, "VisbilityValues");
+		addEEnumLiteral(visbilityValuesEEnum, VisbilityValues.NONE);
+		addEEnumLiteral(visbilityValuesEEnum, VisbilityValues.PUBLIC);
+		addEEnumLiteral(visbilityValuesEEnum, VisbilityValues.PROTECTED);
+		addEEnumLiteral(visbilityValuesEEnum, VisbilityValues.PRIVATE);
 
 		// Create resource
 		createResource(eNS_URI);
