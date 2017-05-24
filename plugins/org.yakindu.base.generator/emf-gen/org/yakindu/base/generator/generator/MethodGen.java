@@ -17,6 +17,7 @@ import org.yakindu.base.types.TypeSpecifier;
  * <ul>
  *   <li>{@link org.yakindu.base.generator.generator.MethodGen#getParameters <em>Parameters</em>}</li>
  *   <li>{@link org.yakindu.base.generator.generator.MethodGen#getReturnType <em>Return Type</em>}</li>
+ *   <li>{@link org.yakindu.base.generator.generator.MethodGen#getDeclaration <em>Declaration</em>}</li>
  * </ul>
  *
  * @see org.yakindu.base.generator.generator.GeneratorPackage#getMethodGen()
@@ -65,5 +66,33 @@ public interface MethodGen extends CodeElement, AccessRestricted {
 	 * @generated
 	 */
 	void setReturnType(TypeSpecifier value);
+
+	/**
+	 * Returns the value of the '<em><b>Declaration</b></em>' containment reference.
+	 * It is bidirectional and its opposite is '{@link org.yakindu.base.generator.generator.MethodDeclarationGen#getMethodGen <em>Method Gen</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Declaration</em>' containment reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Declaration</em>' containment reference.
+	 * @see #setDeclaration(MethodDeclarationGen)
+	 * @see org.yakindu.base.generator.generator.GeneratorPackage#getMethodGen_Declaration()
+	 * @see org.yakindu.base.generator.generator.MethodDeclarationGen#getMethodGen
+	 * @model opposite="methodGen" containment="true"
+	 * @generated
+	 */
+	MethodDeclarationGen getDeclaration();
+
+	/**
+	 * Sets the value of the '{@link org.yakindu.base.generator.generator.MethodGen#getDeclaration <em>Declaration</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Declaration</em>' containment reference.
+	 * @see #getDeclaration()
+	 * @generated
+	 */
+	void setDeclaration(MethodDeclarationGen value);
 
 } // MethodGen

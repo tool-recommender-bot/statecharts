@@ -18,6 +18,7 @@ import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.yakindu.base.generator.generator.AccessRestricted;
 import org.yakindu.base.generator.generator.GeneratorPackage;
+import org.yakindu.base.generator.generator.MethodDeclarationGen;
 import org.yakindu.base.generator.generator.MethodGen;
 import org.yakindu.base.generator.generator.ParameterGen;
 import org.yakindu.base.generator.generator.VisibilityValues;
@@ -34,6 +35,7 @@ import org.yakindu.base.types.TypeSpecifier;
  *   <li>{@link org.yakindu.base.generator.generator.impl.MethodGenImpl#getVisibility <em>Visibility</em>}</li>
  *   <li>{@link org.yakindu.base.generator.generator.impl.MethodGenImpl#getParameters <em>Parameters</em>}</li>
  *   <li>{@link org.yakindu.base.generator.generator.impl.MethodGenImpl#getReturnType <em>Return Type</em>}</li>
+ *   <li>{@link org.yakindu.base.generator.generator.impl.MethodGenImpl#getDeclaration <em>Declaration</em>}</li>
  * </ul>
  *
  * @generated
@@ -78,6 +80,16 @@ public class MethodGenImpl extends CodeElementImpl implements MethodGen {
 	 * @ordered
 	 */
 	protected TypeSpecifier returnType;
+
+	/**
+	 * The cached value of the '{@link #getDeclaration() <em>Declaration</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getDeclaration()
+	 * @generated
+	 * @ordered
+	 */
+	protected MethodDeclarationGen declaration;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -174,11 +186,72 @@ public class MethodGenImpl extends CodeElementImpl implements MethodGen {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public MethodDeclarationGen getDeclaration() {
+		return declaration;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetDeclaration(MethodDeclarationGen newDeclaration, NotificationChain msgs) {
+		MethodDeclarationGen oldDeclaration = declaration;
+		declaration = newDeclaration;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, GeneratorPackage.METHOD_GEN__DECLARATION, oldDeclaration, newDeclaration);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setDeclaration(MethodDeclarationGen newDeclaration) {
+		if (newDeclaration != declaration) {
+			NotificationChain msgs = null;
+			if (declaration != null)
+				msgs = ((InternalEObject)declaration).eInverseRemove(this, GeneratorPackage.METHOD_DECLARATION_GEN__METHOD_GEN, MethodDeclarationGen.class, msgs);
+			if (newDeclaration != null)
+				msgs = ((InternalEObject)newDeclaration).eInverseAdd(this, GeneratorPackage.METHOD_DECLARATION_GEN__METHOD_GEN, MethodDeclarationGen.class, msgs);
+			msgs = basicSetDeclaration(newDeclaration, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, GeneratorPackage.METHOD_GEN__DECLARATION, newDeclaration, newDeclaration));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case GeneratorPackage.METHOD_GEN__DECLARATION:
+				if (declaration != null)
+					msgs = ((InternalEObject)declaration).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - GeneratorPackage.METHOD_GEN__DECLARATION, null, msgs);
+				return basicSetDeclaration((MethodDeclarationGen)otherEnd, msgs);
+		}
+		return super.eInverseAdd(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case GeneratorPackage.METHOD_GEN__PARAMETERS:
 				return ((InternalEList<?>)getParameters()).basicRemove(otherEnd, msgs);
+			case GeneratorPackage.METHOD_GEN__DECLARATION:
+				return basicSetDeclaration(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -198,6 +271,8 @@ public class MethodGenImpl extends CodeElementImpl implements MethodGen {
 			case GeneratorPackage.METHOD_GEN__RETURN_TYPE:
 				if (resolve) return getReturnType();
 				return basicGetReturnType();
+			case GeneratorPackage.METHOD_GEN__DECLARATION:
+				return getDeclaration();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -221,6 +296,9 @@ public class MethodGenImpl extends CodeElementImpl implements MethodGen {
 			case GeneratorPackage.METHOD_GEN__RETURN_TYPE:
 				setReturnType((TypeSpecifier)newValue);
 				return;
+			case GeneratorPackage.METHOD_GEN__DECLARATION:
+				setDeclaration((MethodDeclarationGen)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -242,6 +320,9 @@ public class MethodGenImpl extends CodeElementImpl implements MethodGen {
 			case GeneratorPackage.METHOD_GEN__RETURN_TYPE:
 				setReturnType((TypeSpecifier)null);
 				return;
+			case GeneratorPackage.METHOD_GEN__DECLARATION:
+				setDeclaration((MethodDeclarationGen)null);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -260,6 +341,8 @@ public class MethodGenImpl extends CodeElementImpl implements MethodGen {
 				return parameters != null && !parameters.isEmpty();
 			case GeneratorPackage.METHOD_GEN__RETURN_TYPE:
 				return returnType != null;
+			case GeneratorPackage.METHOD_GEN__DECLARATION:
+				return declaration != null;
 		}
 		return super.eIsSet(featureID);
 	}

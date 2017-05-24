@@ -98,10 +98,15 @@ public class GeneratorSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case GeneratorPackage.CLASS_DECLARATION_GEN: {
+				ClassDeclarationGen classDeclarationGen = (ClassDeclarationGen)theEObject;
+				T result = caseClassDeclarationGen(classDeclarationGen);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case GeneratorPackage.INTERFACE_GEN: {
 				InterfaceGen interfaceGen = (InterfaceGen)theEObject;
 				T result = caseInterfaceGen(interfaceGen);
-				if (result == null) result = caseClassGen(interfaceGen);
 				if (result == null) result = caseCodeElement(interfaceGen);
 				if (result == null) result = caseAccessRestricted(interfaceGen);
 				if (result == null) result = caseNamedElement(interfaceGen);
@@ -116,6 +121,12 @@ public class GeneratorSwitch<T> extends Switch<T> {
 				if (result == null) result = caseAccessRestricted(methodGen);
 				if (result == null) result = caseNamedElement(methodGen);
 				if (result == null) result = caseDocumentedElement(methodGen);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case GeneratorPackage.METHOD_DECLARATION_GEN: {
+				MethodDeclarationGen methodDeclarationGen = (MethodDeclarationGen)theEObject;
+				T result = caseMethodDeclarationGen(methodDeclarationGen);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -143,6 +154,12 @@ public class GeneratorSwitch<T> extends Switch<T> {
 				if (result == null) result = caseTypedElement(parameterGen);
 				if (result == null) result = caseNamedElement(parameterGen);
 				if (result == null) result = caseDocumentedElement(parameterGen);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case GeneratorPackage.ABSTRACTABLE_ELEMENT: {
+				AbstractableElement abstractableElement = (AbstractableElement)theEObject;
+				T result = caseAbstractableElement(abstractableElement);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -196,6 +213,21 @@ public class GeneratorSwitch<T> extends Switch<T> {
 	}
 
 	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Class Declaration Gen</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Class Declaration Gen</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseClassDeclarationGen(ClassDeclarationGen object) {
+		return null;
+	}
+
+	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Interface Gen</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -222,6 +254,21 @@ public class GeneratorSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseMethodGen(MethodGen object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Method Declaration Gen</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Method Declaration Gen</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseMethodDeclarationGen(MethodDeclarationGen object) {
 		return null;
 	}
 
@@ -267,6 +314,21 @@ public class GeneratorSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseParameterGen(ParameterGen object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Abstractable Element</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Abstractable Element</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseAbstractableElement(AbstractableElement object) {
 		return null;
 	}
 

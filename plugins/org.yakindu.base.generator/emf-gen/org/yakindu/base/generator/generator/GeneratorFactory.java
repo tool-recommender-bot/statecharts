@@ -49,6 +49,15 @@ public interface GeneratorFactory extends EFactory {
 	ClassGen createClassGen();
 
 	/**
+	 * Returns a new object of class '<em>Class Declaration Gen</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Class Declaration Gen</em>'.
+	 * @generated
+	 */
+	ClassDeclarationGen createClassDeclarationGen();
+
+	/**
 	 * Returns a new object of class '<em>Interface Gen</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -65,6 +74,15 @@ public interface GeneratorFactory extends EFactory {
 	 * @generated
 	 */
 	MethodGen createMethodGen();
+
+	/**
+	 * Returns a new object of class '<em>Method Declaration Gen</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Method Declaration Gen</em>'.
+	 * @generated
+	 */
+	MethodDeclarationGen createMethodDeclarationGen();
 
 	/**
 	 * Returns a new object of class '<em>Access Restricted</em>'.

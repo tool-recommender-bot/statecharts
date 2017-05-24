@@ -60,8 +60,10 @@ public class GeneratorFactoryImpl extends EFactoryImpl implements GeneratorFacto
 			case GeneratorPackage.CODE_ELEMENT: return createCodeElement();
 			case GeneratorPackage.SOURCE_FILE_GEN: return createSourceFileGen();
 			case GeneratorPackage.CLASS_GEN: return createClassGen();
+			case GeneratorPackage.CLASS_DECLARATION_GEN: return createClassDeclarationGen();
 			case GeneratorPackage.INTERFACE_GEN: return createInterfaceGen();
 			case GeneratorPackage.METHOD_GEN: return createMethodGen();
+			case GeneratorPackage.METHOD_DECLARATION_GEN: return createMethodDeclarationGen();
 			case GeneratorPackage.ACCESS_RESTRICTED: return createAccessRestricted();
 			case GeneratorPackage.VARIABLE_GEN: return createVariableGen();
 			case GeneratorPackage.PARAMETER_GEN: return createParameterGen();
@@ -135,6 +137,16 @@ public class GeneratorFactoryImpl extends EFactoryImpl implements GeneratorFacto
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public ClassDeclarationGen createClassDeclarationGen() {
+		ClassDeclarationGenImpl classDeclarationGen = new ClassDeclarationGenImpl();
+		return classDeclarationGen;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public InterfaceGen createInterfaceGen() {
 		InterfaceGenImpl interfaceGen = new InterfaceGenImpl();
 		return interfaceGen;
@@ -148,6 +160,16 @@ public class GeneratorFactoryImpl extends EFactoryImpl implements GeneratorFacto
 	public MethodGen createMethodGen() {
 		MethodGenImpl methodGen = new MethodGenImpl();
 		return methodGen;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public MethodDeclarationGen createMethodDeclarationGen() {
+		MethodDeclarationGenImpl methodDeclarationGen = new MethodDeclarationGenImpl();
+		return methodDeclarationGen;
 	}
 
 	/**

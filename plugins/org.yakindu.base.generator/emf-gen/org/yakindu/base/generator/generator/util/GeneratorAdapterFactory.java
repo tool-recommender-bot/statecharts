@@ -85,12 +85,20 @@ public class GeneratorAdapterFactory extends AdapterFactoryImpl {
 				return createClassGenAdapter();
 			}
 			@Override
+			public Adapter caseClassDeclarationGen(ClassDeclarationGen object) {
+				return createClassDeclarationGenAdapter();
+			}
+			@Override
 			public Adapter caseInterfaceGen(InterfaceGen object) {
 				return createInterfaceGenAdapter();
 			}
 			@Override
 			public Adapter caseMethodGen(MethodGen object) {
 				return createMethodGenAdapter();
+			}
+			@Override
+			public Adapter caseMethodDeclarationGen(MethodDeclarationGen object) {
+				return createMethodDeclarationGenAdapter();
 			}
 			@Override
 			public Adapter caseAccessRestricted(AccessRestricted object) {
@@ -103,6 +111,10 @@ public class GeneratorAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseParameterGen(ParameterGen object) {
 				return createParameterGenAdapter();
+			}
+			@Override
+			public Adapter caseAbstractableElement(AbstractableElement object) {
+				return createAbstractableElementAdapter();
 			}
 			@Override
 			public Adapter caseNamedElement(NamedElement object) {
@@ -179,6 +191,20 @@ public class GeneratorAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
+	 * Creates a new adapter for an object of class '{@link org.yakindu.base.generator.generator.ClassDeclarationGen <em>Class Declaration Gen</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.yakindu.base.generator.generator.ClassDeclarationGen
+	 * @generated
+	 */
+	public Adapter createClassDeclarationGenAdapter() {
+		return null;
+	}
+
+	/**
 	 * Creates a new adapter for an object of class '{@link org.yakindu.base.generator.generator.InterfaceGen <em>Interface Gen</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -203,6 +229,20 @@ public class GeneratorAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createMethodGenAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.yakindu.base.generator.generator.MethodDeclarationGen <em>Method Declaration Gen</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.yakindu.base.generator.generator.MethodDeclarationGen
+	 * @generated
+	 */
+	public Adapter createMethodDeclarationGenAdapter() {
 		return null;
 	}
 
@@ -245,6 +285,20 @@ public class GeneratorAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createParameterGenAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.yakindu.base.generator.generator.AbstractableElement <em>Abstractable Element</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.yakindu.base.generator.generator.AbstractableElement
+	 * @generated
+	 */
+	public Adapter createAbstractableElementAdapter() {
 		return null;
 	}
 

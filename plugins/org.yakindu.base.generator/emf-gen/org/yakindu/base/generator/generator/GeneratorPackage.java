@@ -260,13 +260,50 @@ public interface GeneratorPackage extends EPackage {
 	int CLASS_GEN__IMPLEMENTS = CODE_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
+	 * The feature id for the '<em><b>Declaration</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CLASS_GEN__DECLARATION = CODE_ELEMENT_FEATURE_COUNT + 3;
+
+	/**
 	 * The number of structural features of the '<em>Class Gen</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CLASS_GEN_FEATURE_COUNT = CODE_ELEMENT_FEATURE_COUNT + 3;
+	int CLASS_GEN_FEATURE_COUNT = CODE_ELEMENT_FEATURE_COUNT + 4;
+
+	/**
+	 * The meta object id for the '{@link org.yakindu.base.generator.generator.impl.ClassDeclarationGenImpl <em>Class Declaration Gen</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.yakindu.base.generator.generator.impl.ClassDeclarationGenImpl
+	 * @see org.yakindu.base.generator.generator.impl.GeneratorPackageImpl#getClassDeclarationGen()
+	 * @generated
+	 */
+	int CLASS_DECLARATION_GEN = 3;
+
+	/**
+	 * The feature id for the '<em><b>Class Gen</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CLASS_DECLARATION_GEN__CLASS_GEN = 0;
+
+	/**
+	 * The number of structural features of the '<em>Class Declaration Gen</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CLASS_DECLARATION_GEN_FEATURE_COUNT = 1;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.base.generator.generator.impl.InterfaceGenImpl <em>Interface Gen</em>}' class.
@@ -276,7 +313,7 @@ public interface GeneratorPackage extends EPackage {
 	 * @see org.yakindu.base.generator.generator.impl.GeneratorPackageImpl#getInterfaceGen()
 	 * @generated
 	 */
-	int INTERFACE_GEN = 3;
+	int INTERFACE_GEN = 4;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -285,7 +322,7 @@ public interface GeneratorPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int INTERFACE_GEN__NAME = CLASS_GEN__NAME;
+	int INTERFACE_GEN__NAME = CODE_ELEMENT__NAME;
 
 	/**
 	 * The feature id for the '<em><b>Documentation</b></em>' attribute.
@@ -294,7 +331,7 @@ public interface GeneratorPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int INTERFACE_GEN__DOCUMENTATION = CLASS_GEN__DOCUMENTATION;
+	int INTERFACE_GEN__DOCUMENTATION = CODE_ELEMENT__DOCUMENTATION;
 
 	/**
 	 * The feature id for the '<em><b>Children</b></em>' containment reference list.
@@ -303,7 +340,7 @@ public interface GeneratorPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int INTERFACE_GEN__CHILDREN = CLASS_GEN__CHILDREN;
+	int INTERFACE_GEN__CHILDREN = CODE_ELEMENT__CHILDREN;
 
 	/**
 	 * The feature id for the '<em><b>Parent</b></em>' container reference.
@@ -312,7 +349,7 @@ public interface GeneratorPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int INTERFACE_GEN__PARENT = CLASS_GEN__PARENT;
+	int INTERFACE_GEN__PARENT = CODE_ELEMENT__PARENT;
 
 	/**
 	 * The feature id for the '<em><b>Visibility</b></em>' attribute.
@@ -321,7 +358,7 @@ public interface GeneratorPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int INTERFACE_GEN__VISIBILITY = CLASS_GEN__VISIBILITY;
+	int INTERFACE_GEN__VISIBILITY = CODE_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Super Class</b></em>' reference.
@@ -330,16 +367,7 @@ public interface GeneratorPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int INTERFACE_GEN__SUPER_CLASS = CLASS_GEN__SUPER_CLASS;
-
-	/**
-	 * The feature id for the '<em><b>Implements</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int INTERFACE_GEN__IMPLEMENTS = CLASS_GEN__IMPLEMENTS;
+	int INTERFACE_GEN__SUPER_CLASS = CODE_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>Interface Gen</em>' class.
@@ -348,7 +376,7 @@ public interface GeneratorPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int INTERFACE_GEN_FEATURE_COUNT = CLASS_GEN_FEATURE_COUNT + 0;
+	int INTERFACE_GEN_FEATURE_COUNT = CODE_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.base.generator.generator.impl.MethodGenImpl <em>Method Gen</em>}' class.
@@ -358,7 +386,7 @@ public interface GeneratorPackage extends EPackage {
 	 * @see org.yakindu.base.generator.generator.impl.GeneratorPackageImpl#getMethodGen()
 	 * @generated
 	 */
-	int METHOD_GEN = 4;
+	int METHOD_GEN = 5;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -424,13 +452,50 @@ public interface GeneratorPackage extends EPackage {
 	int METHOD_GEN__RETURN_TYPE = CODE_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
+	 * The feature id for the '<em><b>Declaration</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int METHOD_GEN__DECLARATION = CODE_ELEMENT_FEATURE_COUNT + 3;
+
+	/**
 	 * The number of structural features of the '<em>Method Gen</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int METHOD_GEN_FEATURE_COUNT = CODE_ELEMENT_FEATURE_COUNT + 3;
+	int METHOD_GEN_FEATURE_COUNT = CODE_ELEMENT_FEATURE_COUNT + 4;
+
+	/**
+	 * The meta object id for the '{@link org.yakindu.base.generator.generator.impl.MethodDeclarationGenImpl <em>Method Declaration Gen</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.yakindu.base.generator.generator.impl.MethodDeclarationGenImpl
+	 * @see org.yakindu.base.generator.generator.impl.GeneratorPackageImpl#getMethodDeclarationGen()
+	 * @generated
+	 */
+	int METHOD_DECLARATION_GEN = 6;
+
+	/**
+	 * The feature id for the '<em><b>Method Gen</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int METHOD_DECLARATION_GEN__METHOD_GEN = 0;
+
+	/**
+	 * The number of structural features of the '<em>Method Declaration Gen</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int METHOD_DECLARATION_GEN_FEATURE_COUNT = 1;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.base.generator.generator.impl.AccessRestrictedImpl <em>Access Restricted</em>}' class.
@@ -440,7 +505,7 @@ public interface GeneratorPackage extends EPackage {
 	 * @see org.yakindu.base.generator.generator.impl.GeneratorPackageImpl#getAccessRestricted()
 	 * @generated
 	 */
-	int ACCESS_RESTRICTED = 5;
+	int ACCESS_RESTRICTED = 7;
 
 	/**
 	 * The feature id for the '<em><b>Visibility</b></em>' attribute.
@@ -468,7 +533,7 @@ public interface GeneratorPackage extends EPackage {
 	 * @see org.yakindu.base.generator.generator.impl.GeneratorPackageImpl#getVariableGen()
 	 * @generated
 	 */
-	int VARIABLE_GEN = 6;
+	int VARIABLE_GEN = 8;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -550,7 +615,7 @@ public interface GeneratorPackage extends EPackage {
 	 * @see org.yakindu.base.generator.generator.impl.GeneratorPackageImpl#getParameterGen()
 	 * @generated
 	 */
-	int PARAMETER_GEN = 7;
+	int PARAMETER_GEN = 9;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -616,6 +681,34 @@ public interface GeneratorPackage extends EPackage {
 	int PARAMETER_GEN_FEATURE_COUNT = CODE_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
+	 * The meta object id for the '{@link org.yakindu.base.generator.generator.impl.AbstractableElementImpl <em>Abstractable Element</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.yakindu.base.generator.generator.impl.AbstractableElementImpl
+	 * @see org.yakindu.base.generator.generator.impl.GeneratorPackageImpl#getAbstractableElement()
+	 * @generated
+	 */
+	int ABSTRACTABLE_ELEMENT = 10;
+
+	/**
+	 * The feature id for the '<em><b>Abstract</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ABSTRACTABLE_ELEMENT__ABSTRACT = 0;
+
+	/**
+	 * The number of structural features of the '<em>Abstractable Element</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ABSTRACTABLE_ELEMENT_FEATURE_COUNT = 1;
+
+	/**
 	 * The meta object id for the '{@link org.yakindu.base.generator.generator.VisibilityValues <em>Visibility Values</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -623,7 +716,7 @@ public interface GeneratorPackage extends EPackage {
 	 * @see org.yakindu.base.generator.generator.impl.GeneratorPackageImpl#getVisibilityValues()
 	 * @generated
 	 */
-	int VISIBILITY_VALUES = 8;
+	int VISIBILITY_VALUES = 11;
 
 	/**
 	 * Returns the meta object for class '{@link org.yakindu.base.generator.generator.CodeElement <em>Code Element</em>}'.
@@ -722,6 +815,38 @@ public interface GeneratorPackage extends EPackage {
 	EReference getClassGen_Implements();
 
 	/**
+	 * Returns the meta object for the containment reference '{@link org.yakindu.base.generator.generator.ClassGen#getDeclaration <em>Declaration</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Declaration</em>'.
+	 * @see org.yakindu.base.generator.generator.ClassGen#getDeclaration()
+	 * @see #getClassGen()
+	 * @generated
+	 */
+	EReference getClassGen_Declaration();
+
+	/**
+	 * Returns the meta object for class '{@link org.yakindu.base.generator.generator.ClassDeclarationGen <em>Class Declaration Gen</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Class Declaration Gen</em>'.
+	 * @see org.yakindu.base.generator.generator.ClassDeclarationGen
+	 * @generated
+	 */
+	EClass getClassDeclarationGen();
+
+	/**
+	 * Returns the meta object for the container reference '{@link org.yakindu.base.generator.generator.ClassDeclarationGen#getClassGen <em>Class Gen</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the container reference '<em>Class Gen</em>'.
+	 * @see org.yakindu.base.generator.generator.ClassDeclarationGen#getClassGen()
+	 * @see #getClassDeclarationGen()
+	 * @generated
+	 */
+	EReference getClassDeclarationGen_ClassGen();
+
+	/**
 	 * Returns the meta object for class '{@link org.yakindu.base.generator.generator.InterfaceGen <em>Interface Gen</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -730,6 +855,17 @@ public interface GeneratorPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getInterfaceGen();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.yakindu.base.generator.generator.InterfaceGen#getSuperClass <em>Super Class</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Super Class</em>'.
+	 * @see org.yakindu.base.generator.generator.InterfaceGen#getSuperClass()
+	 * @see #getInterfaceGen()
+	 * @generated
+	 */
+	EReference getInterfaceGen_SuperClass();
 
 	/**
 	 * Returns the meta object for class '{@link org.yakindu.base.generator.generator.MethodGen <em>Method Gen</em>}'.
@@ -762,6 +898,38 @@ public interface GeneratorPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getMethodGen_ReturnType();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.yakindu.base.generator.generator.MethodGen#getDeclaration <em>Declaration</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Declaration</em>'.
+	 * @see org.yakindu.base.generator.generator.MethodGen#getDeclaration()
+	 * @see #getMethodGen()
+	 * @generated
+	 */
+	EReference getMethodGen_Declaration();
+
+	/**
+	 * Returns the meta object for class '{@link org.yakindu.base.generator.generator.MethodDeclarationGen <em>Method Declaration Gen</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Method Declaration Gen</em>'.
+	 * @see org.yakindu.base.generator.generator.MethodDeclarationGen
+	 * @generated
+	 */
+	EClass getMethodDeclarationGen();
+
+	/**
+	 * Returns the meta object for the container reference '{@link org.yakindu.base.generator.generator.MethodDeclarationGen#getMethodGen <em>Method Gen</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the container reference '<em>Method Gen</em>'.
+	 * @see org.yakindu.base.generator.generator.MethodDeclarationGen#getMethodGen()
+	 * @see #getMethodDeclarationGen()
+	 * @generated
+	 */
+	EReference getMethodDeclarationGen_MethodGen();
 
 	/**
 	 * Returns the meta object for class '{@link org.yakindu.base.generator.generator.AccessRestricted <em>Access Restricted</em>}'.
@@ -803,6 +971,27 @@ public interface GeneratorPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getParameterGen();
+
+	/**
+	 * Returns the meta object for class '{@link org.yakindu.base.generator.generator.AbstractableElement <em>Abstractable Element</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Abstractable Element</em>'.
+	 * @see org.yakindu.base.generator.generator.AbstractableElement
+	 * @generated
+	 */
+	EClass getAbstractableElement();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.yakindu.base.generator.generator.AbstractableElement#isAbstract <em>Abstract</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Abstract</em>'.
+	 * @see org.yakindu.base.generator.generator.AbstractableElement#isAbstract()
+	 * @see #getAbstractableElement()
+	 * @generated
+	 */
+	EAttribute getAbstractableElement_Abstract();
 
 	/**
 	 * Returns the meta object for enum '{@link org.yakindu.base.generator.generator.VisibilityValues <em>Visibility Values</em>}'.
@@ -916,6 +1105,32 @@ public interface GeneratorPackage extends EPackage {
 		EReference CLASS_GEN__IMPLEMENTS = eINSTANCE.getClassGen_Implements();
 
 		/**
+		 * The meta object literal for the '<em><b>Declaration</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CLASS_GEN__DECLARATION = eINSTANCE.getClassGen_Declaration();
+
+		/**
+		 * The meta object literal for the '{@link org.yakindu.base.generator.generator.impl.ClassDeclarationGenImpl <em>Class Declaration Gen</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.yakindu.base.generator.generator.impl.ClassDeclarationGenImpl
+		 * @see org.yakindu.base.generator.generator.impl.GeneratorPackageImpl#getClassDeclarationGen()
+		 * @generated
+		 */
+		EClass CLASS_DECLARATION_GEN = eINSTANCE.getClassDeclarationGen();
+
+		/**
+		 * The meta object literal for the '<em><b>Class Gen</b></em>' container reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CLASS_DECLARATION_GEN__CLASS_GEN = eINSTANCE.getClassDeclarationGen_ClassGen();
+
+		/**
 		 * The meta object literal for the '{@link org.yakindu.base.generator.generator.impl.InterfaceGenImpl <em>Interface Gen</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -924,6 +1139,14 @@ public interface GeneratorPackage extends EPackage {
 		 * @generated
 		 */
 		EClass INTERFACE_GEN = eINSTANCE.getInterfaceGen();
+
+		/**
+		 * The meta object literal for the '<em><b>Super Class</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference INTERFACE_GEN__SUPER_CLASS = eINSTANCE.getInterfaceGen_SuperClass();
 
 		/**
 		 * The meta object literal for the '{@link org.yakindu.base.generator.generator.impl.MethodGenImpl <em>Method Gen</em>}' class.
@@ -950,6 +1173,32 @@ public interface GeneratorPackage extends EPackage {
 		 * @generated
 		 */
 		EReference METHOD_GEN__RETURN_TYPE = eINSTANCE.getMethodGen_ReturnType();
+
+		/**
+		 * The meta object literal for the '<em><b>Declaration</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference METHOD_GEN__DECLARATION = eINSTANCE.getMethodGen_Declaration();
+
+		/**
+		 * The meta object literal for the '{@link org.yakindu.base.generator.generator.impl.MethodDeclarationGenImpl <em>Method Declaration Gen</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.yakindu.base.generator.generator.impl.MethodDeclarationGenImpl
+		 * @see org.yakindu.base.generator.generator.impl.GeneratorPackageImpl#getMethodDeclarationGen()
+		 * @generated
+		 */
+		EClass METHOD_DECLARATION_GEN = eINSTANCE.getMethodDeclarationGen();
+
+		/**
+		 * The meta object literal for the '<em><b>Method Gen</b></em>' container reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference METHOD_DECLARATION_GEN__METHOD_GEN = eINSTANCE.getMethodDeclarationGen_MethodGen();
 
 		/**
 		 * The meta object literal for the '{@link org.yakindu.base.generator.generator.impl.AccessRestrictedImpl <em>Access Restricted</em>}' class.
@@ -988,6 +1237,24 @@ public interface GeneratorPackage extends EPackage {
 		 * @generated
 		 */
 		EClass PARAMETER_GEN = eINSTANCE.getParameterGen();
+
+		/**
+		 * The meta object literal for the '{@link org.yakindu.base.generator.generator.impl.AbstractableElementImpl <em>Abstractable Element</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.yakindu.base.generator.generator.impl.AbstractableElementImpl
+		 * @see org.yakindu.base.generator.generator.impl.GeneratorPackageImpl#getAbstractableElement()
+		 * @generated
+		 */
+		EClass ABSTRACTABLE_ELEMENT = eINSTANCE.getAbstractableElement();
+
+		/**
+		 * The meta object literal for the '<em><b>Abstract</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ABSTRACTABLE_ELEMENT__ABSTRACT = eINSTANCE.getAbstractableElement_Abstract();
 
 		/**
 		 * The meta object literal for the '{@link org.yakindu.base.generator.generator.VisibilityValues <em>Visibility Values</em>}' enum.

@@ -5,6 +5,7 @@ package org.yakindu.base.generator.generator.impl;
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
@@ -15,6 +16,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 
 import org.yakindu.base.generator.generator.AccessRestricted;
+import org.yakindu.base.generator.generator.ClassDeclarationGen;
 import org.yakindu.base.generator.generator.ClassGen;
 import org.yakindu.base.generator.generator.GeneratorPackage;
 import org.yakindu.base.generator.generator.InterfaceGen;
@@ -32,6 +34,7 @@ import org.yakindu.base.generator.generator.VisibilityValues;
  *   <li>{@link org.yakindu.base.generator.generator.impl.ClassGenImpl#getVisibility <em>Visibility</em>}</li>
  *   <li>{@link org.yakindu.base.generator.generator.impl.ClassGenImpl#getSuperClass <em>Super Class</em>}</li>
  *   <li>{@link org.yakindu.base.generator.generator.impl.ClassGenImpl#getImplements <em>Implements</em>}</li>
+ *   <li>{@link org.yakindu.base.generator.generator.impl.ClassGenImpl#getDeclaration <em>Declaration</em>}</li>
  * </ul>
  *
  * @generated
@@ -76,6 +79,16 @@ public class ClassGenImpl extends CodeElementImpl implements ClassGen {
 	 * @ordered
 	 */
 	protected EList<InterfaceGen> implements_;
+
+	/**
+	 * The cached value of the '{@link #getDeclaration() <em>Declaration</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getDeclaration()
+	 * @generated
+	 * @ordered
+	 */
+	protected ClassDeclarationGen declaration;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -172,10 +185,83 @@ public class ClassGenImpl extends CodeElementImpl implements ClassGen {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public ClassDeclarationGen getDeclaration() {
+		return declaration;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetDeclaration(ClassDeclarationGen newDeclaration, NotificationChain msgs) {
+		ClassDeclarationGen oldDeclaration = declaration;
+		declaration = newDeclaration;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, GeneratorPackage.CLASS_GEN__DECLARATION, oldDeclaration, newDeclaration);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setDeclaration(ClassDeclarationGen newDeclaration) {
+		if (newDeclaration != declaration) {
+			NotificationChain msgs = null;
+			if (declaration != null)
+				msgs = ((InternalEObject)declaration).eInverseRemove(this, GeneratorPackage.CLASS_DECLARATION_GEN__CLASS_GEN, ClassDeclarationGen.class, msgs);
+			if (newDeclaration != null)
+				msgs = ((InternalEObject)newDeclaration).eInverseAdd(this, GeneratorPackage.CLASS_DECLARATION_GEN__CLASS_GEN, ClassDeclarationGen.class, msgs);
+			msgs = basicSetDeclaration(newDeclaration, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, GeneratorPackage.CLASS_GEN__DECLARATION, newDeclaration, newDeclaration));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public void addConstructor(EList<ParameterGen> parameters) {
 		// TODO: implement this method
 		// Ensure that you remove @generated or mark it @generated NOT
 		throw new UnsupportedOperationException();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case GeneratorPackage.CLASS_GEN__DECLARATION:
+				if (declaration != null)
+					msgs = ((InternalEObject)declaration).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - GeneratorPackage.CLASS_GEN__DECLARATION, null, msgs);
+				return basicSetDeclaration((ClassDeclarationGen)otherEnd, msgs);
+		}
+		return super.eInverseAdd(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case GeneratorPackage.CLASS_GEN__DECLARATION:
+				return basicSetDeclaration(null, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
 
 	/**
@@ -193,6 +279,8 @@ public class ClassGenImpl extends CodeElementImpl implements ClassGen {
 				return basicGetSuperClass();
 			case GeneratorPackage.CLASS_GEN__IMPLEMENTS:
 				return getImplements();
+			case GeneratorPackage.CLASS_GEN__DECLARATION:
+				return getDeclaration();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -216,6 +304,9 @@ public class ClassGenImpl extends CodeElementImpl implements ClassGen {
 				getImplements().clear();
 				getImplements().addAll((Collection<? extends InterfaceGen>)newValue);
 				return;
+			case GeneratorPackage.CLASS_GEN__DECLARATION:
+				setDeclaration((ClassDeclarationGen)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -237,6 +328,9 @@ public class ClassGenImpl extends CodeElementImpl implements ClassGen {
 			case GeneratorPackage.CLASS_GEN__IMPLEMENTS:
 				getImplements().clear();
 				return;
+			case GeneratorPackage.CLASS_GEN__DECLARATION:
+				setDeclaration((ClassDeclarationGen)null);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -255,6 +349,8 @@ public class ClassGenImpl extends CodeElementImpl implements ClassGen {
 				return superClass != null;
 			case GeneratorPackage.CLASS_GEN__IMPLEMENTS:
 				return implements_ != null && !implements_.isEmpty();
+			case GeneratorPackage.CLASS_GEN__DECLARATION:
+				return declaration != null;
 		}
 		return super.eIsSet(featureID);
 	}

@@ -13,12 +13,15 @@ import org.eclipse.emf.ecore.impl.EPackageImpl;
 
 import org.yakindu.base.base.BasePackage;
 
+import org.yakindu.base.generator.generator.AbstractableElement;
 import org.yakindu.base.generator.generator.AccessRestricted;
+import org.yakindu.base.generator.generator.ClassDeclarationGen;
 import org.yakindu.base.generator.generator.ClassGen;
 import org.yakindu.base.generator.generator.CodeElement;
 import org.yakindu.base.generator.generator.GeneratorFactory;
 import org.yakindu.base.generator.generator.GeneratorPackage;
 import org.yakindu.base.generator.generator.InterfaceGen;
+import org.yakindu.base.generator.generator.MethodDeclarationGen;
 import org.yakindu.base.generator.generator.MethodGen;
 import org.yakindu.base.generator.generator.ParameterGen;
 import org.yakindu.base.generator.generator.SourceFileGen;
@@ -59,6 +62,13 @@ public class GeneratorPackageImpl extends EPackageImpl implements GeneratorPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	private EClass classDeclarationGenEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	private EClass interfaceGenEClass = null;
 
 	/**
@@ -67,6 +77,13 @@ public class GeneratorPackageImpl extends EPackageImpl implements GeneratorPacka
 	 * @generated
 	 */
 	private EClass methodGenEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass methodDeclarationGenEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -88,6 +105,13 @@ public class GeneratorPackageImpl extends EPackageImpl implements GeneratorPacka
 	 * @generated
 	 */
 	private EClass parameterGenEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass abstractableElementEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -246,8 +270,44 @@ public class GeneratorPackageImpl extends EPackageImpl implements GeneratorPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getClassGen_Declaration() {
+		return (EReference)classGenEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getClassDeclarationGen() {
+		return classDeclarationGenEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getClassDeclarationGen_ClassGen() {
+		return (EReference)classDeclarationGenEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getInterfaceGen() {
 		return interfaceGenEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getInterfaceGen_SuperClass() {
+		return (EReference)interfaceGenEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -275,6 +335,33 @@ public class GeneratorPackageImpl extends EPackageImpl implements GeneratorPacka
 	 */
 	public EReference getMethodGen_ReturnType() {
 		return (EReference)methodGenEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getMethodGen_Declaration() {
+		return (EReference)methodGenEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getMethodDeclarationGen() {
+		return methodDeclarationGenEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getMethodDeclarationGen_MethodGen() {
+		return (EReference)methodDeclarationGenEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -311,6 +398,24 @@ public class GeneratorPackageImpl extends EPackageImpl implements GeneratorPacka
 	 */
 	public EClass getParameterGen() {
 		return parameterGenEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getAbstractableElement() {
+		return abstractableElementEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getAbstractableElement_Abstract() {
+		return (EAttribute)abstractableElementEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -361,12 +466,21 @@ public class GeneratorPackageImpl extends EPackageImpl implements GeneratorPacka
 		classGenEClass = createEClass(CLASS_GEN);
 		createEReference(classGenEClass, CLASS_GEN__SUPER_CLASS);
 		createEReference(classGenEClass, CLASS_GEN__IMPLEMENTS);
+		createEReference(classGenEClass, CLASS_GEN__DECLARATION);
+
+		classDeclarationGenEClass = createEClass(CLASS_DECLARATION_GEN);
+		createEReference(classDeclarationGenEClass, CLASS_DECLARATION_GEN__CLASS_GEN);
 
 		interfaceGenEClass = createEClass(INTERFACE_GEN);
+		createEReference(interfaceGenEClass, INTERFACE_GEN__SUPER_CLASS);
 
 		methodGenEClass = createEClass(METHOD_GEN);
 		createEReference(methodGenEClass, METHOD_GEN__PARAMETERS);
 		createEReference(methodGenEClass, METHOD_GEN__RETURN_TYPE);
+		createEReference(methodGenEClass, METHOD_GEN__DECLARATION);
+
+		methodDeclarationGenEClass = createEClass(METHOD_DECLARATION_GEN);
+		createEReference(methodDeclarationGenEClass, METHOD_DECLARATION_GEN__METHOD_GEN);
 
 		accessRestrictedEClass = createEClass(ACCESS_RESTRICTED);
 		createEAttribute(accessRestrictedEClass, ACCESS_RESTRICTED__VISIBILITY);
@@ -374,6 +488,9 @@ public class GeneratorPackageImpl extends EPackageImpl implements GeneratorPacka
 		variableGenEClass = createEClass(VARIABLE_GEN);
 
 		parameterGenEClass = createEClass(PARAMETER_GEN);
+
+		abstractableElementEClass = createEClass(ABSTRACTABLE_ELEMENT);
+		createEAttribute(abstractableElementEClass, ABSTRACTABLE_ELEMENT__ABSTRACT);
 
 		// Create enums
 		visibilityValuesEEnum = createEEnum(VISIBILITY_VALUES);
@@ -416,7 +533,8 @@ public class GeneratorPackageImpl extends EPackageImpl implements GeneratorPacka
 		sourceFileGenEClass.getESuperTypes().add(this.getCodeElement());
 		classGenEClass.getESuperTypes().add(this.getCodeElement());
 		classGenEClass.getESuperTypes().add(this.getAccessRestricted());
-		interfaceGenEClass.getESuperTypes().add(this.getClassGen());
+		interfaceGenEClass.getESuperTypes().add(this.getCodeElement());
+		interfaceGenEClass.getESuperTypes().add(this.getAccessRestricted());
 		methodGenEClass.getESuperTypes().add(this.getCodeElement());
 		methodGenEClass.getESuperTypes().add(this.getAccessRestricted());
 		variableGenEClass.getESuperTypes().add(this.getCodeElement());
@@ -437,15 +555,24 @@ public class GeneratorPackageImpl extends EPackageImpl implements GeneratorPacka
 		initEClass(classGenEClass, ClassGen.class, "ClassGen", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getClassGen_SuperClass(), this.getClassGen(), null, "superClass", null, 0, 1, ClassGen.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getClassGen_Implements(), this.getInterfaceGen(), null, "implements", null, 0, -1, ClassGen.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getClassGen_Declaration(), this.getClassDeclarationGen(), this.getClassDeclarationGen_ClassGen(), "declaration", null, 0, 1, ClassGen.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		EOperation op = addEOperation(classGenEClass, null, "addConstructor", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, this.getParameterGen(), "parameters", 0, -1, IS_UNIQUE, IS_ORDERED);
 
+		initEClass(classDeclarationGenEClass, ClassDeclarationGen.class, "ClassDeclarationGen", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getClassDeclarationGen_ClassGen(), this.getClassGen(), this.getClassGen_Declaration(), "classGen", null, 0, 1, ClassDeclarationGen.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
 		initEClass(interfaceGenEClass, InterfaceGen.class, "InterfaceGen", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getInterfaceGen_SuperClass(), this.getInterfaceGen(), null, "superClass", null, 0, 1, InterfaceGen.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(methodGenEClass, MethodGen.class, "MethodGen", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getMethodGen_Parameters(), this.getParameterGen(), null, "parameters", null, 0, -1, MethodGen.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getMethodGen_ReturnType(), theTypesPackage.getTypeSpecifier(), null, "returnType", null, 0, 1, MethodGen.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getMethodGen_Declaration(), this.getMethodDeclarationGen(), this.getMethodDeclarationGen_MethodGen(), "declaration", null, 0, 1, MethodGen.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(methodDeclarationGenEClass, MethodDeclarationGen.class, "MethodDeclarationGen", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getMethodDeclarationGen_MethodGen(), this.getMethodGen(), this.getMethodGen_Declaration(), "methodGen", null, 0, 1, MethodDeclarationGen.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(accessRestrictedEClass, AccessRestricted.class, "AccessRestricted", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getAccessRestricted_Visibility(), this.getVisibilityValues(), "visibility", "NONE", 0, 1, AccessRestricted.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -453,6 +580,9 @@ public class GeneratorPackageImpl extends EPackageImpl implements GeneratorPacka
 		initEClass(variableGenEClass, VariableGen.class, "VariableGen", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(parameterGenEClass, ParameterGen.class, "ParameterGen", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(abstractableElementEClass, AbstractableElement.class, "AbstractableElement", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getAbstractableElement_Abstract(), ecorePackage.getEBoolean(), "abstract", "false", 0, 1, AbstractableElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(visibilityValuesEEnum, VisibilityValues.class, "VisibilityValues");
