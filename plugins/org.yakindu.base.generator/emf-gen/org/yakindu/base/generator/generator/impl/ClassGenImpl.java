@@ -15,9 +15,11 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 
+import org.yakindu.base.generator.generator.AccessRestricted;
 import org.yakindu.base.generator.generator.ClassGen;
 import org.yakindu.base.generator.generator.GeneratorPackage;
 import org.yakindu.base.generator.generator.ParameterGen;
+import org.yakindu.base.generator.generator.Visibility;
 
 /**
  * <!-- begin-user-doc -->
@@ -27,6 +29,7 @@ import org.yakindu.base.generator.generator.ParameterGen;
  * The following features are implemented:
  * </p>
  * <ul>
+ *   <li>{@link org.yakindu.base.generator.generator.impl.ClassGenImpl#getVisibility <em>Visibility</em>}</li>
  *   <li>{@link org.yakindu.base.generator.generator.impl.ClassGenImpl#getSuperClass <em>Super Class</em>}</li>
  *   <li>{@link org.yakindu.base.generator.generator.impl.ClassGenImpl#getImplements <em>Implements</em>}</li>
  * </ul>
@@ -34,6 +37,16 @@ import org.yakindu.base.generator.generator.ParameterGen;
  * @generated
  */
 public class ClassGenImpl extends CodeElementImpl implements ClassGen {
+	/**
+	 * The cached value of the '{@link #getVisibility() <em>Visibility</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getVisibility()
+	 * @generated
+	 * @ordered
+	 */
+	protected Visibility visibility;
+
 	/**
 	 * The cached value of the '{@link #getSuperClass() <em>Super Class</em>}' reference.
 	 * <!-- begin-user-doc -->
@@ -71,6 +84,44 @@ public class ClassGenImpl extends CodeElementImpl implements ClassGen {
 	@Override
 	protected EClass eStaticClass() {
 		return GeneratorPackage.Literals.CLASS_GEN;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Visibility getVisibility() {
+		if (visibility != null && visibility.eIsProxy()) {
+			InternalEObject oldVisibility = (InternalEObject)visibility;
+			visibility = (Visibility)eResolveProxy(oldVisibility);
+			if (visibility != oldVisibility) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, GeneratorPackage.CLASS_GEN__VISIBILITY, oldVisibility, visibility));
+			}
+		}
+		return visibility;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Visibility basicGetVisibility() {
+		return visibility;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setVisibility(Visibility newVisibility) {
+		Visibility oldVisibility = visibility;
+		visibility = newVisibility;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, GeneratorPackage.CLASS_GEN__VISIBILITY, oldVisibility, visibility));
 	}
 
 	/**
@@ -128,7 +179,7 @@ public class ClassGenImpl extends CodeElementImpl implements ClassGen {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<ParameterGen> addConstructor() {
+	public void addConstructor(EList<ParameterGen> parameters) {
 		// TODO: implement this method
 		// Ensure that you remove @generated or mark it @generated NOT
 		throw new UnsupportedOperationException();
@@ -142,6 +193,9 @@ public class ClassGenImpl extends CodeElementImpl implements ClassGen {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
+			case GeneratorPackage.CLASS_GEN__VISIBILITY:
+				if (resolve) return getVisibility();
+				return basicGetVisibility();
 			case GeneratorPackage.CLASS_GEN__SUPER_CLASS:
 				if (resolve) return getSuperClass();
 				return basicGetSuperClass();
@@ -160,6 +214,9 @@ public class ClassGenImpl extends CodeElementImpl implements ClassGen {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
+			case GeneratorPackage.CLASS_GEN__VISIBILITY:
+				setVisibility((Visibility)newValue);
+				return;
 			case GeneratorPackage.CLASS_GEN__SUPER_CLASS:
 				setSuperClass((ClassGen)newValue);
 				return;
@@ -179,6 +236,9 @@ public class ClassGenImpl extends CodeElementImpl implements ClassGen {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
+			case GeneratorPackage.CLASS_GEN__VISIBILITY:
+				setVisibility((Visibility)null);
+				return;
 			case GeneratorPackage.CLASS_GEN__SUPER_CLASS:
 				setSuperClass((ClassGen)null);
 				return;
@@ -197,12 +257,46 @@ public class ClassGenImpl extends CodeElementImpl implements ClassGen {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
+			case GeneratorPackage.CLASS_GEN__VISIBILITY:
+				return visibility != null;
 			case GeneratorPackage.CLASS_GEN__SUPER_CLASS:
 				return superClass != null;
 			case GeneratorPackage.CLASS_GEN__IMPLEMENTS:
 				return implements_ != null && !implements_.isEmpty();
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
+		if (baseClass == AccessRestricted.class) {
+			switch (derivedFeatureID) {
+				case GeneratorPackage.CLASS_GEN__VISIBILITY: return GeneratorPackage.ACCESS_RESTRICTED__VISIBILITY;
+				default: return -1;
+			}
+		}
+		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
+		if (baseClass == AccessRestricted.class) {
+			switch (baseFeatureID) {
+				case GeneratorPackage.ACCESS_RESTRICTED__VISIBILITY: return GeneratorPackage.CLASS_GEN__VISIBILITY;
+				default: return -1;
+			}
+		}
+		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
 	}
 
 } //ClassGenImpl

@@ -232,13 +232,22 @@ public interface GeneratorPackage extends EPackage {
 	int CLASS_GEN__PARENT = CODE_ELEMENT__PARENT;
 
 	/**
+	 * The feature id for the '<em><b>Visibility</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CLASS_GEN__VISIBILITY = CODE_ELEMENT_FEATURE_COUNT + 0;
+
+	/**
 	 * The feature id for the '<em><b>Super Class</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CLASS_GEN__SUPER_CLASS = CODE_ELEMENT_FEATURE_COUNT + 0;
+	int CLASS_GEN__SUPER_CLASS = CODE_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Implements</b></em>' reference list.
@@ -247,7 +256,7 @@ public interface GeneratorPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CLASS_GEN__IMPLEMENTS = CODE_ELEMENT_FEATURE_COUNT + 1;
+	int CLASS_GEN__IMPLEMENTS = CODE_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of structural features of the '<em>Class Gen</em>' class.
@@ -256,7 +265,7 @@ public interface GeneratorPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CLASS_GEN_FEATURE_COUNT = CODE_ELEMENT_FEATURE_COUNT + 2;
+	int CLASS_GEN_FEATURE_COUNT = CODE_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.base.generator.generator.impl.MethodGenImpl <em>Method Gen</em>}' class.
@@ -305,13 +314,22 @@ public interface GeneratorPackage extends EPackage {
 	int METHOD_GEN__PARENT = CODE_ELEMENT__PARENT;
 
 	/**
+	 * The feature id for the '<em><b>Visibility</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int METHOD_GEN__VISIBILITY = CODE_ELEMENT_FEATURE_COUNT + 0;
+
+	/**
 	 * The feature id for the '<em><b>Parameters</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int METHOD_GEN__PARAMETERS = CODE_ELEMENT_FEATURE_COUNT + 0;
+	int METHOD_GEN__PARAMETERS = CODE_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Return Type</b></em>' reference.
@@ -320,7 +338,7 @@ public interface GeneratorPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int METHOD_GEN__RETURN_TYPE = CODE_ELEMENT_FEATURE_COUNT + 1;
+	int METHOD_GEN__RETURN_TYPE = CODE_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of structural features of the '<em>Method Gen</em>' class.
@@ -329,7 +347,7 @@ public interface GeneratorPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int METHOD_GEN_FEATURE_COUNT = CODE_ELEMENT_FEATURE_COUNT + 2;
+	int METHOD_GEN_FEATURE_COUNT = CODE_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.base.generator.generator.impl.AccessRestrictedImpl <em>Access Restricted</em>}' class.
@@ -342,13 +360,22 @@ public interface GeneratorPackage extends EPackage {
 	int ACCESS_RESTRICTED = 4;
 
 	/**
+	 * The feature id for the '<em><b>Visibility</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ACCESS_RESTRICTED__VISIBILITY = 0;
+
+	/**
 	 * The number of structural features of the '<em>Access Restricted</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ACCESS_RESTRICTED_FEATURE_COUNT = 0;
+	int ACCESS_RESTRICTED_FEATURE_COUNT = 1;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.base.generator.generator.impl.VariableGenImpl <em>Variable Gen</em>}' class.
@@ -397,13 +424,22 @@ public interface GeneratorPackage extends EPackage {
 	int VARIABLE_GEN__PARENT = CODE_ELEMENT__PARENT;
 
 	/**
+	 * The feature id for the '<em><b>Visibility</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VARIABLE_GEN__VISIBILITY = CODE_ELEMENT_FEATURE_COUNT + 0;
+
+	/**
 	 * The feature id for the '<em><b>Type</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int VARIABLE_GEN__TYPE = CODE_ELEMENT_FEATURE_COUNT + 0;
+	int VARIABLE_GEN__TYPE = CODE_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Type Specifier</b></em>' containment reference.
@@ -412,7 +448,7 @@ public interface GeneratorPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int VARIABLE_GEN__TYPE_SPECIFIER = CODE_ELEMENT_FEATURE_COUNT + 1;
+	int VARIABLE_GEN__TYPE_SPECIFIER = CODE_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of structural features of the '<em>Variable Gen</em>' class.
@@ -421,7 +457,7 @@ public interface GeneratorPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int VARIABLE_GEN_FEATURE_COUNT = CODE_ELEMENT_FEATURE_COUNT + 2;
+	int VARIABLE_GEN_FEATURE_COUNT = CODE_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.base.generator.generator.impl.ParameterGenImpl <em>Parameter Gen</em>}' class.
@@ -495,6 +531,25 @@ public interface GeneratorPackage extends EPackage {
 	 * @ordered
 	 */
 	int PARAMETER_GEN_FEATURE_COUNT = CODE_ELEMENT_FEATURE_COUNT + 2;
+
+	/**
+	 * The meta object id for the '{@link org.yakindu.base.generator.generator.impl.VisibilityImpl <em>Visibility</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.yakindu.base.generator.generator.impl.VisibilityImpl
+	 * @see org.yakindu.base.generator.generator.impl.GeneratorPackageImpl#getVisibility()
+	 * @generated
+	 */
+	int VISIBILITY = 7;
+
+	/**
+	 * The number of structural features of the '<em>Visibility</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VISIBILITY_FEATURE_COUNT = 0;
 
 	/**
 	 * Returns the meta object for class '{@link org.yakindu.base.generator.generator.CodeElement <em>Code Element</em>}'.
@@ -635,6 +690,17 @@ public interface GeneratorPackage extends EPackage {
 	EClass getAccessRestricted();
 
 	/**
+	 * Returns the meta object for the reference '{@link org.yakindu.base.generator.generator.AccessRestricted#getVisibility <em>Visibility</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Visibility</em>'.
+	 * @see org.yakindu.base.generator.generator.AccessRestricted#getVisibility()
+	 * @see #getAccessRestricted()
+	 * @generated
+	 */
+	EReference getAccessRestricted_Visibility();
+
+	/**
 	 * Returns the meta object for class '{@link org.yakindu.base.generator.generator.VariableGen <em>Variable Gen</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -653,6 +719,16 @@ public interface GeneratorPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getParameterGen();
+
+	/**
+	 * Returns the meta object for class '{@link org.yakindu.base.generator.generator.Visibility <em>Visibility</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Visibility</em>'.
+	 * @see org.yakindu.base.generator.generator.Visibility
+	 * @generated
+	 */
+	EClass getVisibility();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -792,6 +868,14 @@ public interface GeneratorPackage extends EPackage {
 		EClass ACCESS_RESTRICTED = eINSTANCE.getAccessRestricted();
 
 		/**
+		 * The meta object literal for the '<em><b>Visibility</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference ACCESS_RESTRICTED__VISIBILITY = eINSTANCE.getAccessRestricted_Visibility();
+
+		/**
 		 * The meta object literal for the '{@link org.yakindu.base.generator.generator.impl.VariableGenImpl <em>Variable Gen</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -810,6 +894,16 @@ public interface GeneratorPackage extends EPackage {
 		 * @generated
 		 */
 		EClass PARAMETER_GEN = eINSTANCE.getParameterGen();
+
+		/**
+		 * The meta object literal for the '{@link org.yakindu.base.generator.generator.impl.VisibilityImpl <em>Visibility</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.yakindu.base.generator.generator.impl.VisibilityImpl
+		 * @see org.yakindu.base.generator.generator.impl.GeneratorPackageImpl#getVisibility()
+		 * @generated
+		 */
+		EClass VISIBILITY = eINSTANCE.getVisibility();
 
 	}
 

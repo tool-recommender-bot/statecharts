@@ -4,6 +4,7 @@ package org.yakindu.base.generator.generator.impl;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 
@@ -21,6 +22,7 @@ import org.yakindu.base.generator.generator.ParameterGen;
 import org.yakindu.base.generator.generator.SourceFileGen;
 import org.yakindu.base.generator.generator.VariableGen;
 
+import org.yakindu.base.generator.generator.Visibility;
 import org.yakindu.base.types.TypesPackage;
 
 /**
@@ -78,6 +80,13 @@ public class GeneratorPackageImpl extends EPackageImpl implements GeneratorPacka
 	 * @generated
 	 */
 	private EClass parameterGenEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass visibilityEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -265,6 +274,15 @@ public class GeneratorPackageImpl extends EPackageImpl implements GeneratorPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getAccessRestricted_Visibility() {
+		return (EReference)accessRestrictedEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getVariableGen() {
 		return variableGenEClass;
 	}
@@ -276,6 +294,15 @@ public class GeneratorPackageImpl extends EPackageImpl implements GeneratorPacka
 	 */
 	public EClass getParameterGen() {
 		return parameterGenEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getVisibility() {
+		return visibilityEClass;
 	}
 
 	/**
@@ -323,10 +350,13 @@ public class GeneratorPackageImpl extends EPackageImpl implements GeneratorPacka
 		createEReference(methodGenEClass, METHOD_GEN__RETURN_TYPE);
 
 		accessRestrictedEClass = createEClass(ACCESS_RESTRICTED);
+		createEReference(accessRestrictedEClass, ACCESS_RESTRICTED__VISIBILITY);
 
 		variableGenEClass = createEClass(VARIABLE_GEN);
 
 		parameterGenEClass = createEClass(PARAMETER_GEN);
+
+		visibilityEClass = createEClass(VISIBILITY);
 	}
 
 	/**
@@ -387,17 +417,21 @@ public class GeneratorPackageImpl extends EPackageImpl implements GeneratorPacka
 		initEReference(getClassGen_SuperClass(), this.getClassGen(), null, "superClass", null, 0, 1, ClassGen.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getClassGen_Implements(), this.getClassGen(), null, "implements", null, 0, -1, ClassGen.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		addEOperation(classGenEClass, this.getParameterGen(), "addConstructor", 0, -1, IS_UNIQUE, IS_ORDERED);
+		EOperation op = addEOperation(classGenEClass, null, "addConstructor", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, this.getParameterGen(), "parameters", 0, -1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(methodGenEClass, MethodGen.class, "MethodGen", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getMethodGen_Parameters(), this.getParameterGen(), null, "parameters", null, 0, -1, MethodGen.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getMethodGen_ReturnType(), theTypesPackage.getTypeSpecifier(), null, "returnType", null, 0, 1, MethodGen.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(accessRestrictedEClass, AccessRestricted.class, "AccessRestricted", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getAccessRestricted_Visibility(), this.getVisibility(), null, "visibility", null, 0, 1, AccessRestricted.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(variableGenEClass, VariableGen.class, "VariableGen", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(parameterGenEClass, ParameterGen.class, "ParameterGen", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(visibilityEClass, Visibility.class, "Visibility", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		// Create resource
 		createResource(eNS_URI);

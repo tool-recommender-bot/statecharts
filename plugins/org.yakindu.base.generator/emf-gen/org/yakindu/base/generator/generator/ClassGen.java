@@ -67,9 +67,9 @@ public interface ClassGen extends CodeElement, AccessRestricted {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model
+	 * @model parametersMany="true"
 	 * @generated
 	 */
-	EList<ParameterGen> addConstructor();
+	void addConstructor(EList<ParameterGen> parameters);
 
 } // ClassGen

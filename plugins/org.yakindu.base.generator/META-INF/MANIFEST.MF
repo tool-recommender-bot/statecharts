@@ -9,7 +9,8 @@ Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Export-Package: org.yakindu.base.generator.generator,
  org.yakindu.base.generator.generator.impl,
- org.yakindu.base.generator.generator.util
+ org.yakindu.base.generator.generator.util,
+ org.yakindu.base.generator.templates
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf.ecore;visibility:=reexport,
  org.yakindu.base.types;visibility:=reexport,

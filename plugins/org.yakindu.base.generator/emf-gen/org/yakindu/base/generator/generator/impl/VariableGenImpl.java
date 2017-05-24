@@ -14,6 +14,7 @@ import org.yakindu.base.generator.generator.AccessRestricted;
 import org.yakindu.base.generator.generator.GeneratorPackage;
 import org.yakindu.base.generator.generator.VariableGen;
 
+import org.yakindu.base.generator.generator.Visibility;
 import org.yakindu.base.types.Type;
 import org.yakindu.base.types.TypeSpecifier;
 import org.yakindu.base.types.TypedElement;
@@ -27,6 +28,7 @@ import org.yakindu.base.types.TypesPackage;
  * The following features are implemented:
  * </p>
  * <ul>
+ *   <li>{@link org.yakindu.base.generator.generator.impl.VariableGenImpl#getVisibility <em>Visibility</em>}</li>
  *   <li>{@link org.yakindu.base.generator.generator.impl.VariableGenImpl#getType <em>Type</em>}</li>
  *   <li>{@link org.yakindu.base.generator.generator.impl.VariableGenImpl#getTypeSpecifier <em>Type Specifier</em>}</li>
  * </ul>
@@ -34,6 +36,15 @@ import org.yakindu.base.types.TypesPackage;
  * @generated
  */
 public class VariableGenImpl extends CodeElementImpl implements VariableGen {
+	/**
+	 * The cached value of the '{@link #getVisibility() <em>Visibility</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getVisibility()
+	 * @generated
+	 * @ordered
+	 */
+	protected Visibility visibility;
 	/**
 	 * The cached value of the '{@link #getTypeSpecifier() <em>Type Specifier</em>}' containment reference.
 	 * <!-- begin-user-doc -->
@@ -61,6 +72,44 @@ public class VariableGenImpl extends CodeElementImpl implements VariableGen {
 	@Override
 	protected EClass eStaticClass() {
 		return GeneratorPackage.Literals.VARIABLE_GEN;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Visibility getVisibility() {
+		if (visibility != null && visibility.eIsProxy()) {
+			InternalEObject oldVisibility = (InternalEObject)visibility;
+			visibility = (Visibility)eResolveProxy(oldVisibility);
+			if (visibility != oldVisibility) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, GeneratorPackage.VARIABLE_GEN__VISIBILITY, oldVisibility, visibility));
+			}
+		}
+		return visibility;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Visibility basicGetVisibility() {
+		return visibility;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setVisibility(Visibility newVisibility) {
+		Visibility oldVisibility = visibility;
+		visibility = newVisibility;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, GeneratorPackage.VARIABLE_GEN__VISIBILITY, oldVisibility, visibility));
 	}
 
 	/**
@@ -150,6 +199,9 @@ public class VariableGenImpl extends CodeElementImpl implements VariableGen {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
+			case GeneratorPackage.VARIABLE_GEN__VISIBILITY:
+				if (resolve) return getVisibility();
+				return basicGetVisibility();
 			case GeneratorPackage.VARIABLE_GEN__TYPE:
 				if (resolve) return getType();
 				return basicGetType();
@@ -167,6 +219,9 @@ public class VariableGenImpl extends CodeElementImpl implements VariableGen {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
+			case GeneratorPackage.VARIABLE_GEN__VISIBILITY:
+				setVisibility((Visibility)newValue);
+				return;
 			case GeneratorPackage.VARIABLE_GEN__TYPE_SPECIFIER:
 				setTypeSpecifier((TypeSpecifier)newValue);
 				return;
@@ -182,6 +237,9 @@ public class VariableGenImpl extends CodeElementImpl implements VariableGen {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
+			case GeneratorPackage.VARIABLE_GEN__VISIBILITY:
+				setVisibility((Visibility)null);
+				return;
 			case GeneratorPackage.VARIABLE_GEN__TYPE_SPECIFIER:
 				setTypeSpecifier((TypeSpecifier)null);
 				return;
@@ -197,6 +255,8 @@ public class VariableGenImpl extends CodeElementImpl implements VariableGen {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
+			case GeneratorPackage.VARIABLE_GEN__VISIBILITY:
+				return visibility != null;
 			case GeneratorPackage.VARIABLE_GEN__TYPE:
 				return basicGetType() != null;
 			case GeneratorPackage.VARIABLE_GEN__TYPE_SPECIFIER:
@@ -214,6 +274,7 @@ public class VariableGenImpl extends CodeElementImpl implements VariableGen {
 	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
 		if (baseClass == AccessRestricted.class) {
 			switch (derivedFeatureID) {
+				case GeneratorPackage.VARIABLE_GEN__VISIBILITY: return GeneratorPackage.ACCESS_RESTRICTED__VISIBILITY;
 				default: return -1;
 			}
 		}
@@ -236,6 +297,7 @@ public class VariableGenImpl extends CodeElementImpl implements VariableGen {
 	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
 		if (baseClass == AccessRestricted.class) {
 			switch (baseFeatureID) {
+				case GeneratorPackage.ACCESS_RESTRICTED__VISIBILITY: return GeneratorPackage.VARIABLE_GEN__VISIBILITY;
 				default: return -1;
 			}
 		}

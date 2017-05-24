@@ -101,6 +101,10 @@ public class GeneratorAdapterFactory extends AdapterFactoryImpl {
 				return createParameterGenAdapter();
 			}
 			@Override
+			public Adapter caseVisibility(Visibility object) {
+				return createVisibilityAdapter();
+			}
+			@Override
 			public Adapter caseNamedElement(NamedElement object) {
 				return createNamedElementAdapter();
 			}
@@ -227,6 +231,20 @@ public class GeneratorAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createParameterGenAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.yakindu.base.generator.generator.Visibility <em>Visibility</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.yakindu.base.generator.generator.Visibility
+	 * @generated
+	 */
+	public Adapter createVisibilityAdapter() {
 		return null;
 	}
 
