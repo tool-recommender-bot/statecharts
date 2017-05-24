@@ -1,0 +1,13 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Base Java Generator
+Bundle-SymbolicName: org.yakindu.base.generator.java
+Bundle-Version: 2.9.3.qualifier
+Bundle-Vendor: statecharts.org
+Bundle-RequiredExecutionEnvironment: JavaSE-1.7
+Require-Bundle: org.yakindu.base.generator;bundle-version="2.9.3",
+ com.google.guava,
+ org.eclipse.xtext.xbase.lib,
+ org.eclipse.xtend.lib,
+ org.eclipse.xtend.lib.macro
+
