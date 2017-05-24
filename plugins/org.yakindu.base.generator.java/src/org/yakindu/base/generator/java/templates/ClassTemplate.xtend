@@ -4,10 +4,18 @@ import org.yakindu.base.generator.generator.ClassGen
 
 class ClassTemplate extends Template {
 	def dispatch String generate(ClassGen it) {'''
-		«generateVisibility»class «name» «generateExtends»«generateImplements»{
+		«generateVisibility»«generateAbstract»class «name» «generateExtends»«generateImplements»{
 			«generateContent»
 		}
 	'''
+	}
+	
+	def generateAbstract(ClassGen it) {
+		if(abstract) {
+			"abstract "
+		} else {
+			""
+		}
 	}
 	
 	def protected generateContent(ClassGen it) {

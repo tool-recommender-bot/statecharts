@@ -19,4 +19,17 @@ class InterfaceTest extends AbstractJavaGeneratorTest {
 		'''
 		generatesTo(exp, interface)
 	}
+	
+	@Test
+	def methodAbstractTest() {
+		val interface = helper.createInterfaceGen("ITestInterface")
+		val method = helper.createMethodGen("interfaceMethod", "public")
+		interface.children.add(method)
+		val exp = '''
+		interface ITestInterface {
+			public interfaceMethod();
+		}
+		'''
+		generatesTo(exp, interface)
+	}
 }

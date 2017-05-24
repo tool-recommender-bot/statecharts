@@ -29,4 +29,37 @@ class MethodTest extends AbstractJavaGeneratorTest {
 		'''
 		generatesTo(exp, testMethod)
 	}
+	
+	@Test
+	def abstractMethodTest() {
+		val testMethod = helper.createMethodGen("myFunc", "public")
+		testMethod.abstract = true
+		val exp = '''
+		public myFunc();
+		'''
+		generatesTo(exp, testMethod)
+	}
+	
+	@Test
+	def method1ParameterTest() {
+		val testMethod = helper.createMethodGen("myFunc")
+		testMethod.parameters.add(helper.createParameterGen("p1", "string"))
+		val exp = '''
+		myFunc(string p1) {
+		}
+		'''
+		generatesTo(exp, testMethod)
+	}
+	
+	@Test
+	def method2ParameterTest() {
+		val testMethod = helper.createMethodGen("myFunc")
+		testMethod.parameters.add(helper.createParameterGen("p1", "string"))
+		testMethod.parameters.add(helper.createParameterGen("p2", "integer"))
+		val exp = '''
+		myFunc(string p1, integer p2) {
+		}
+		'''
+		generatesTo(exp, testMethod)
+	}
 }

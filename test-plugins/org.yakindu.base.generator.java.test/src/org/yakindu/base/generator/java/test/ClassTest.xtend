@@ -31,6 +31,17 @@ class ClassTest extends AbstractJavaGeneratorTest {
 	}
 	
 	@Test
+	def testAbstract() {
+		val testClass = helper.createClassGen("PrivateClass")
+		testClass.abstract = true
+		val exp = '''
+		abstract class PrivateClass {
+		}
+		'''
+		generatesTo(exp, testClass)
+	}
+	
+	@Test
 	def testSuperclass() {
 		val testClass = helper.createClassGen("ChildClass")
 		val superClass = helper.createClassGen("SuperClass")

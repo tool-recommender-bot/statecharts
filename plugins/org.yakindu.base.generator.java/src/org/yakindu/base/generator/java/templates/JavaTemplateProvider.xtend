@@ -5,6 +5,7 @@ import com.google.inject.Injector
 import org.yakindu.base.generator.generator.ClassGen
 import org.yakindu.base.generator.generator.InterfaceGen
 import org.yakindu.base.generator.generator.MethodGen
+import org.yakindu.base.generator.generator.ParameterGen
 import org.yakindu.base.generator.generator.SourceFileGen
 import org.yakindu.base.generator.templates.ITemplate
 import org.yakindu.base.generator.templates.TemplateProvider
@@ -26,6 +27,12 @@ class JavaTemplateProvider extends TemplateProvider {
 
 	def dispatch doGet(MethodGen it) {
 		val ret = new MethodTemplate()
+		ret.inject
+		return ret
+	}
+	
+	def dispatch doGet(ParameterGen it) {
+		val ret = new ParameterTemplate()
 		ret.inject
 		return ret
 	}
