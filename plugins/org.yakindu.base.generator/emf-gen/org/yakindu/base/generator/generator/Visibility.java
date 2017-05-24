@@ -24,6 +24,7 @@ public interface Visibility extends EObject {
 
 	/**
 	 * Returns the value of the '<em><b>Visibility</b></em>' attribute.
+	 * The default value is <code>"NONE"</code>.
 	 * The literals are from the enumeration {@link org.yakindu.base.generator.generator.VisibilityValues}.
 	 * <!-- begin-user-doc -->
 	 * <p>
@@ -35,7 +36,7 @@ public interface Visibility extends EObject {
 	 * @see org.yakindu.base.generator.generator.VisibilityValues
 	 * @see #setVisibility(VisibilityValues)
 	 * @see org.yakindu.base.generator.generator.GeneratorPackage#getVisibility_Visibility()
-	 * @model
+	 * @model default="NONE"
 	 * @generated
 	 */
 	VisibilityValues getVisibility();
