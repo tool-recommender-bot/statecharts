@@ -5,3 +5,13 @@ Bundle-SymbolicName: org.yakindu.base.generator.java.test
 Bundle-Version: 2.9.3.qualifier
 Bundle-Vendor: statecharts.org
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
+Require-Bundle: com.google.guava,
+ org.eclipse.xtext.xbase.lib,
+ org.eclipse.xtend.lib,
+ org.eclipse.xtend.lib.macro,
+ org.junit,
+ com.google.inject,
+ org.eclipse.xtext.junit4,
+ org.yakindu.base.generator,
+ org.yakindu.base.generator.java
+

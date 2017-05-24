@@ -146,9 +146,21 @@ public enum VisibilityValues implements Enumerator {
 	 * <!-- end-user-doc -->
 	 * @param literal the literal.
 	 * @return the matching enumerator or <code>null</code>.
-	 * @generated
+	 * @generated NOT
 	 */
 	public static VisibilityValues get(String literal) {
+		return getGen(literal.toUpperCase());
+	}
+	
+	/**
+	 * Returns the '<em><b>Visibility Values</b></em>' literal with the specified literal value.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param literal the literal.
+	 * @return the matching enumerator or <code>null</code>.
+	 * @generated
+	 */
+	public static VisibilityValues getGen(String literal) {
 		for (int i = 0; i < VALUES_ARRAY.length; ++i) {
 			VisibilityValues result = VALUES_ARRAY[i];
 			if (result.toString().equals(literal)) {

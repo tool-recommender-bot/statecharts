@@ -5,9 +5,11 @@ Bundle-SymbolicName: org.yakindu.base.generator.java
 Bundle-Version: 2.9.3.qualifier
 Bundle-Vendor: statecharts.org
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
-Require-Bundle: org.yakindu.base.generator;bundle-version="2.9.3",
+Require-Bundle: org.yakindu.base.generator;bundle-version="2.9.3";visibility:=reexport,
  com.google.guava,
  org.eclipse.xtext.xbase.lib,
  org.eclipse.xtend.lib,
- org.eclipse.xtend.lib.macro
+ org.eclipse.xtend.lib.macro,
+ com.google.inject;bundle-version="3.0.0"
+Export-Package: org.yakindu.base.generator.java.templates
 

@@ -13,7 +13,7 @@ class ClassTemplate extends Template {
 	def protected generateContent(ClassGen it) {
 		'''
 		«FOR c:children»
-		«c.getTemplate.generate(c)»
+		«templateProvider.get(c).generate(c)»
 		«ENDFOR»
 		'''
 	}
@@ -23,13 +23,6 @@ class ClassTemplate extends Template {
 		if(!implements.nullOrEmpty) {
 			ret = "implements " + implements.join(", ")[name] + " "
 		}
-	}
-	
-	def protected generateVisibility(ClassGen it) {
-		if(!visibility.toString.nullOrEmpty) {
-			return visibility + " "
-		}
-		""
 	}
 	
 	def protected generateExtends(ClassGen it) {
