@@ -17,6 +17,7 @@ import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.yakindu.base.generator.generator.AccessRestricted;
 import org.yakindu.base.generator.generator.ClassGen;
 import org.yakindu.base.generator.generator.GeneratorPackage;
+import org.yakindu.base.generator.generator.InterfaceGen;
 import org.yakindu.base.generator.generator.ParameterGen;
 import org.yakindu.base.generator.generator.VisibilityValues;
 
@@ -74,7 +75,7 @@ public class ClassGenImpl extends CodeElementImpl implements ClassGen {
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<ClassGen> implements_;
+	protected EList<InterfaceGen> implements_;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -159,9 +160,9 @@ public class ClassGenImpl extends CodeElementImpl implements ClassGen {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<ClassGen> getImplements() {
+	public EList<InterfaceGen> getImplements() {
 		if (implements_ == null) {
-			implements_ = new EObjectResolvingEList<ClassGen>(ClassGen.class, this, GeneratorPackage.CLASS_GEN__IMPLEMENTS);
+			implements_ = new EObjectResolvingEList<InterfaceGen>(InterfaceGen.class, this, GeneratorPackage.CLASS_GEN__IMPLEMENTS);
 		}
 		return implements_;
 	}
@@ -213,7 +214,7 @@ public class ClassGenImpl extends CodeElementImpl implements ClassGen {
 				return;
 			case GeneratorPackage.CLASS_GEN__IMPLEMENTS:
 				getImplements().clear();
-				getImplements().addAll((Collection<? extends ClassGen>)newValue);
+				getImplements().addAll((Collection<? extends InterfaceGen>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);

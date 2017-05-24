@@ -12,7 +12,7 @@ abstract class Template implements ITemplate {
 	/**
 	 * Dispatch function that gets extended by the child classes.
 	 */
-	def dispatch generate(CodeElement it) {
+	def dispatch String generate(CodeElement it) {
 		throw new UnsupportedOperationException(
 			"Trying to generate a  " + it.class.simpleName + "with a " + this.class.simpleName
 		)

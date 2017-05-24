@@ -19,8 +19,9 @@
     </eOperations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="superClass" eType="#//ClassGen"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="implements" upperBound="-1"
-        eType="#//ClassGen"/>
+        eType="#//InterfaceGen"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="InterfaceGen" eSuperTypes="#//ClassGen"/>
   <eClassifiers xsi:type="ecore:EClass" name="MethodGen" eSuperTypes="#//CodeElement #//AccessRestricted">
     <eStructuralFeatures xsi:type="ecore:EReference" name="parameters" upperBound="-1"
         eType="#//ParameterGen" containment="true"/>

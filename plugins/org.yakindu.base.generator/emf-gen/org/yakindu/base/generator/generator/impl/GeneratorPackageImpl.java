@@ -18,6 +18,7 @@ import org.yakindu.base.generator.generator.ClassGen;
 import org.yakindu.base.generator.generator.CodeElement;
 import org.yakindu.base.generator.generator.GeneratorFactory;
 import org.yakindu.base.generator.generator.GeneratorPackage;
+import org.yakindu.base.generator.generator.InterfaceGen;
 import org.yakindu.base.generator.generator.MethodGen;
 import org.yakindu.base.generator.generator.ParameterGen;
 import org.yakindu.base.generator.generator.SourceFileGen;
@@ -52,6 +53,13 @@ public class GeneratorPackageImpl extends EPackageImpl implements GeneratorPacka
 	 * @generated
 	 */
 	private EClass classGenEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass interfaceGenEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -238,6 +246,15 @@ public class GeneratorPackageImpl extends EPackageImpl implements GeneratorPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getInterfaceGen() {
+		return interfaceGenEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getMethodGen() {
 		return methodGenEClass;
 	}
@@ -345,6 +362,8 @@ public class GeneratorPackageImpl extends EPackageImpl implements GeneratorPacka
 		createEReference(classGenEClass, CLASS_GEN__SUPER_CLASS);
 		createEReference(classGenEClass, CLASS_GEN__IMPLEMENTS);
 
+		interfaceGenEClass = createEClass(INTERFACE_GEN);
+
 		methodGenEClass = createEClass(METHOD_GEN);
 		createEReference(methodGenEClass, METHOD_GEN__PARAMETERS);
 		createEReference(methodGenEClass, METHOD_GEN__RETURN_TYPE);
@@ -397,6 +416,7 @@ public class GeneratorPackageImpl extends EPackageImpl implements GeneratorPacka
 		sourceFileGenEClass.getESuperTypes().add(this.getCodeElement());
 		classGenEClass.getESuperTypes().add(this.getCodeElement());
 		classGenEClass.getESuperTypes().add(this.getAccessRestricted());
+		interfaceGenEClass.getESuperTypes().add(this.getClassGen());
 		methodGenEClass.getESuperTypes().add(this.getCodeElement());
 		methodGenEClass.getESuperTypes().add(this.getAccessRestricted());
 		variableGenEClass.getESuperTypes().add(this.getCodeElement());
@@ -416,10 +436,12 @@ public class GeneratorPackageImpl extends EPackageImpl implements GeneratorPacka
 
 		initEClass(classGenEClass, ClassGen.class, "ClassGen", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getClassGen_SuperClass(), this.getClassGen(), null, "superClass", null, 0, 1, ClassGen.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getClassGen_Implements(), this.getClassGen(), null, "implements", null, 0, -1, ClassGen.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getClassGen_Implements(), this.getInterfaceGen(), null, "implements", null, 0, -1, ClassGen.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		EOperation op = addEOperation(classGenEClass, null, "addConstructor", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, this.getParameterGen(), "parameters", 0, -1, IS_UNIQUE, IS_ORDERED);
+
+		initEClass(interfaceGenEClass, InterfaceGen.class, "InterfaceGen", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(methodGenEClass, MethodGen.class, "MethodGen", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getMethodGen_Parameters(), this.getParameterGen(), null, "parameters", null, 0, -1, MethodGen.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

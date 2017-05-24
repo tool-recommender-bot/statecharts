@@ -49,6 +49,15 @@ public interface GeneratorFactory extends EFactory {
 	ClassGen createClassGen();
 
 	/**
+	 * Returns a new object of class '<em>Interface Gen</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Interface Gen</em>'.
+	 * @generated
+	 */
+	InterfaceGen createInterfaceGen();
+
+	/**
 	 * Returns a new object of class '<em>Method Gen</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

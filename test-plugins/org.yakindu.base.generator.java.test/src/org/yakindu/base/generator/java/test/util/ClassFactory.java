@@ -1,4 +1,4 @@
-package org.yakindu.base.generator.java.test;
+package org.yakindu.base.generator.java.test.util;
 
 import org.yakindu.base.generator.generator.ClassGen;
 import org.yakindu.base.generator.generator.GeneratorFactory;

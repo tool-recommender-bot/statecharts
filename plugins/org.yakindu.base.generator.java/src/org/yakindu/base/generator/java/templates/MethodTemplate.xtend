@@ -3,7 +3,7 @@ package org.yakindu.base.generator.java.templates
 import org.yakindu.base.generator.generator.MethodGen
 
 class MethodTemplate extends Template {
-	def generate(MethodGen it) {'''
+	def dispatch String generate(MethodGen it) {'''
 		«generateVisibility»«generateReturnType»«name»(«generateParameters») {
 			«generateContent»
 		}

@@ -3,7 +3,7 @@ package org.yakindu.base.generator.java.templates
 import org.yakindu.base.generator.generator.ClassGen
 
 class ClassTemplate extends Template {
-	def dispatch generate(ClassGen it) {'''
+	def dispatch String generate(ClassGen it) {'''
 		«generateVisibility»class «name» «generateExtends»«generateImplements»{
 			«generateContent»
 		}

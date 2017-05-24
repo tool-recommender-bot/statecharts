@@ -50,7 +50,7 @@ public interface ClassGen extends CodeElement, AccessRestricted {
 
 	/**
 	 * Returns the value of the '<em><b>Implements</b></em>' reference list.
-	 * The list contents are of type {@link org.yakindu.base.generator.generator.ClassGen}.
+	 * The list contents are of type {@link org.yakindu.base.generator.generator.InterfaceGen}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Implements</em>' reference list isn't clear,
@@ -62,7 +62,7 @@ public interface ClassGen extends CodeElement, AccessRestricted {
 	 * @model
 	 * @generated
 	 */
-	EList<ClassGen> getImplements();
+	EList<InterfaceGen> getImplements();
 
 	/**
 	 * <!-- begin-user-doc -->

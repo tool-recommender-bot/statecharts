@@ -1,4 +1,4 @@
-package org.yakindu.base.generator.java.test;
+package org.yakindu.base.generator.java.test.util;
 
 import org.eclipse.xtext.junit4.IInjectorProvider;
 

@@ -1,4 +1,4 @@
-package org.yakindu.base.generator.java.test;
+package org.yakindu.base.generator.java.test.util;
 
 import static org.junit.Assert.assertEquals;
 
@@ -9,7 +9,7 @@ import org.yakindu.base.generator.templates.TemplateProvider;
 import com.google.inject.Inject;
 
 abstract public class AbstractJavaGeneratorTest {
-	@Inject GeneratorHelper helper;
+	@Inject protected GeneratorHelper helper;
 	
 	@Inject TemplateProvider templateProvider;
 	

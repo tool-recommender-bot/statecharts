@@ -60,6 +60,7 @@ public class GeneratorFactoryImpl extends EFactoryImpl implements GeneratorFacto
 			case GeneratorPackage.CODE_ELEMENT: return createCodeElement();
 			case GeneratorPackage.SOURCE_FILE_GEN: return createSourceFileGen();
 			case GeneratorPackage.CLASS_GEN: return createClassGen();
+			case GeneratorPackage.INTERFACE_GEN: return createInterfaceGen();
 			case GeneratorPackage.METHOD_GEN: return createMethodGen();
 			case GeneratorPackage.ACCESS_RESTRICTED: return createAccessRestricted();
 			case GeneratorPackage.VARIABLE_GEN: return createVariableGen();
@@ -127,6 +128,16 @@ public class GeneratorFactoryImpl extends EFactoryImpl implements GeneratorFacto
 	public ClassGen createClassGen() {
 		ClassGenImpl classGen = new ClassGenImpl();
 		return classGen;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public InterfaceGen createInterfaceGen() {
+		InterfaceGenImpl interfaceGen = new InterfaceGenImpl();
+		return interfaceGen;
 	}
 
 	/**

@@ -269,6 +269,88 @@ public interface GeneratorPackage extends EPackage {
 	int CLASS_GEN_FEATURE_COUNT = CODE_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
+	 * The meta object id for the '{@link org.yakindu.base.generator.generator.impl.InterfaceGenImpl <em>Interface Gen</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.yakindu.base.generator.generator.impl.InterfaceGenImpl
+	 * @see org.yakindu.base.generator.generator.impl.GeneratorPackageImpl#getInterfaceGen()
+	 * @generated
+	 */
+	int INTERFACE_GEN = 3;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INTERFACE_GEN__NAME = CLASS_GEN__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Documentation</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INTERFACE_GEN__DOCUMENTATION = CLASS_GEN__DOCUMENTATION;
+
+	/**
+	 * The feature id for the '<em><b>Children</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INTERFACE_GEN__CHILDREN = CLASS_GEN__CHILDREN;
+
+	/**
+	 * The feature id for the '<em><b>Parent</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INTERFACE_GEN__PARENT = CLASS_GEN__PARENT;
+
+	/**
+	 * The feature id for the '<em><b>Visibility</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INTERFACE_GEN__VISIBILITY = CLASS_GEN__VISIBILITY;
+
+	/**
+	 * The feature id for the '<em><b>Super Class</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INTERFACE_GEN__SUPER_CLASS = CLASS_GEN__SUPER_CLASS;
+
+	/**
+	 * The feature id for the '<em><b>Implements</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INTERFACE_GEN__IMPLEMENTS = CLASS_GEN__IMPLEMENTS;
+
+	/**
+	 * The number of structural features of the '<em>Interface Gen</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INTERFACE_GEN_FEATURE_COUNT = CLASS_GEN_FEATURE_COUNT + 0;
+
+	/**
 	 * The meta object id for the '{@link org.yakindu.base.generator.generator.impl.MethodGenImpl <em>Method Gen</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -276,7 +358,7 @@ public interface GeneratorPackage extends EPackage {
 	 * @see org.yakindu.base.generator.generator.impl.GeneratorPackageImpl#getMethodGen()
 	 * @generated
 	 */
-	int METHOD_GEN = 3;
+	int METHOD_GEN = 4;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -358,7 +440,7 @@ public interface GeneratorPackage extends EPackage {
 	 * @see org.yakindu.base.generator.generator.impl.GeneratorPackageImpl#getAccessRestricted()
 	 * @generated
 	 */
-	int ACCESS_RESTRICTED = 4;
+	int ACCESS_RESTRICTED = 5;
 
 	/**
 	 * The feature id for the '<em><b>Visibility</b></em>' attribute.
@@ -386,7 +468,7 @@ public interface GeneratorPackage extends EPackage {
 	 * @see org.yakindu.base.generator.generator.impl.GeneratorPackageImpl#getVariableGen()
 	 * @generated
 	 */
-	int VARIABLE_GEN = 5;
+	int VARIABLE_GEN = 6;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -468,7 +550,7 @@ public interface GeneratorPackage extends EPackage {
 	 * @see org.yakindu.base.generator.generator.impl.GeneratorPackageImpl#getParameterGen()
 	 * @generated
 	 */
-	int PARAMETER_GEN = 6;
+	int PARAMETER_GEN = 7;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -541,7 +623,7 @@ public interface GeneratorPackage extends EPackage {
 	 * @see org.yakindu.base.generator.generator.impl.GeneratorPackageImpl#getVisibilityValues()
 	 * @generated
 	 */
-	int VISIBILITY_VALUES = 7;
+	int VISIBILITY_VALUES = 8;
 
 	/**
 	 * Returns the meta object for class '{@link org.yakindu.base.generator.generator.CodeElement <em>Code Element</em>}'.
@@ -638,6 +720,16 @@ public interface GeneratorPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getClassGen_Implements();
+
+	/**
+	 * Returns the meta object for class '{@link org.yakindu.base.generator.generator.InterfaceGen <em>Interface Gen</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Interface Gen</em>'.
+	 * @see org.yakindu.base.generator.generator.InterfaceGen
+	 * @generated
+	 */
+	EClass getInterfaceGen();
 
 	/**
 	 * Returns the meta object for class '{@link org.yakindu.base.generator.generator.MethodGen <em>Method Gen</em>}'.
@@ -822,6 +914,16 @@ public interface GeneratorPackage extends EPackage {
 		 * @generated
 		 */
 		EReference CLASS_GEN__IMPLEMENTS = eINSTANCE.getClassGen_Implements();
+
+		/**
+		 * The meta object literal for the '{@link org.yakindu.base.generator.generator.impl.InterfaceGenImpl <em>Interface Gen</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.yakindu.base.generator.generator.impl.InterfaceGenImpl
+		 * @see org.yakindu.base.generator.generator.impl.GeneratorPackageImpl#getInterfaceGen()
+		 * @generated
+		 */
+		EClass INTERFACE_GEN = eINSTANCE.getInterfaceGen();
 
 		/**
 		 * The meta object literal for the '{@link org.yakindu.base.generator.generator.impl.MethodGenImpl <em>Method Gen</em>}' class.

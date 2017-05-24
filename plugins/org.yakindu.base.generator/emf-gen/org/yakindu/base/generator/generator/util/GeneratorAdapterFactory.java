@@ -85,6 +85,10 @@ public class GeneratorAdapterFactory extends AdapterFactoryImpl {
 				return createClassGenAdapter();
 			}
 			@Override
+			public Adapter caseInterfaceGen(InterfaceGen object) {
+				return createInterfaceGenAdapter();
+			}
+			@Override
 			public Adapter caseMethodGen(MethodGen object) {
 				return createMethodGenAdapter();
 			}
@@ -171,6 +175,20 @@ public class GeneratorAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createClassGenAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.yakindu.base.generator.generator.InterfaceGen <em>Interface Gen</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.yakindu.base.generator.generator.InterfaceGen
+	 * @generated
+	 */
+	public Adapter createInterfaceGenAdapter() {
 		return null;
 	}
 

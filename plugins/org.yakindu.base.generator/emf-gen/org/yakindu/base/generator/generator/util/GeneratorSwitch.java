@@ -98,6 +98,17 @@ public class GeneratorSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case GeneratorPackage.INTERFACE_GEN: {
+				InterfaceGen interfaceGen = (InterfaceGen)theEObject;
+				T result = caseInterfaceGen(interfaceGen);
+				if (result == null) result = caseClassGen(interfaceGen);
+				if (result == null) result = caseCodeElement(interfaceGen);
+				if (result == null) result = caseAccessRestricted(interfaceGen);
+				if (result == null) result = caseNamedElement(interfaceGen);
+				if (result == null) result = caseDocumentedElement(interfaceGen);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case GeneratorPackage.METHOD_GEN: {
 				MethodGen methodGen = (MethodGen)theEObject;
 				T result = caseMethodGen(methodGen);
@@ -181,6 +192,21 @@ public class GeneratorSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseClassGen(ClassGen object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Interface Gen</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Interface Gen</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseInterfaceGen(InterfaceGen object) {
 		return null;
 	}
 
