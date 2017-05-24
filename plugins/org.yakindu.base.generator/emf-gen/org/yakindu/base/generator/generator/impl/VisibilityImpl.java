@@ -9,8 +9,8 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.yakindu.base.generator.generator.GeneratorPackage;
-import org.yakindu.base.generator.generator.VisbilityValues;
 import org.yakindu.base.generator.generator.Visibility;
+import org.yakindu.base.generator.generator.VisibilityValues;
 
 /**
  * <!-- begin-user-doc -->
@@ -34,7 +34,7 @@ public abstract class VisibilityImpl extends MinimalEObjectImpl.Container implem
 	 * @generated
 	 * @ordered
 	 */
-	protected static final VisbilityValues VISIBILITY_EDEFAULT = VisbilityValues.NONE;
+	protected static final VisibilityValues VISIBILITY_EDEFAULT = VisibilityValues.NONE;
 	/**
 	 * The cached value of the '{@link #getVisibility() <em>Visibility</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -43,7 +43,7 @@ public abstract class VisibilityImpl extends MinimalEObjectImpl.Container implem
 	 * @generated
 	 * @ordered
 	 */
-	protected VisbilityValues visibility = VISIBILITY_EDEFAULT;
+	protected VisibilityValues visibility = VISIBILITY_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -69,7 +69,7 @@ public abstract class VisibilityImpl extends MinimalEObjectImpl.Container implem
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public VisbilityValues getVisibility() {
+	public VisibilityValues getVisibility() {
 		return visibility;
 	}
 
@@ -78,8 +78,8 @@ public abstract class VisibilityImpl extends MinimalEObjectImpl.Container implem
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setVisibility(VisbilityValues newVisibility) {
-		VisbilityValues oldVisibility = visibility;
+	public void setVisibility(VisibilityValues newVisibility) {
+		VisibilityValues oldVisibility = visibility;
 		visibility = newVisibility == null ? VISIBILITY_EDEFAULT : newVisibility;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, GeneratorPackage.VISIBILITY__VISIBILITY, oldVisibility, visibility));
@@ -108,7 +108,7 @@ public abstract class VisibilityImpl extends MinimalEObjectImpl.Container implem
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case GeneratorPackage.VISIBILITY__VISIBILITY:
-				setVisibility((VisbilityValues)newValue);
+				setVisibility((VisibilityValues)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);

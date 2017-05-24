@@ -77,8 +77,8 @@ public class GeneratorFactoryImpl extends EFactoryImpl implements GeneratorFacto
 	@Override
 	public Object createFromString(EDataType eDataType, String initialValue) {
 		switch (eDataType.getClassifierID()) {
-			case GeneratorPackage.VISBILITY_VALUES:
-				return createVisbilityValuesFromString(eDataType, initialValue);
+			case GeneratorPackage.VISIBILITY_VALUES:
+				return createVisibilityValuesFromString(eDataType, initialValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -92,8 +92,8 @@ public class GeneratorFactoryImpl extends EFactoryImpl implements GeneratorFacto
 	@Override
 	public String convertToString(EDataType eDataType, Object instanceValue) {
 		switch (eDataType.getClassifierID()) {
-			case GeneratorPackage.VISBILITY_VALUES:
-				return convertVisbilityValuesToString(eDataType, instanceValue);
+			case GeneratorPackage.VISIBILITY_VALUES:
+				return convertVisibilityValuesToString(eDataType, instanceValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -174,8 +174,8 @@ public class GeneratorFactoryImpl extends EFactoryImpl implements GeneratorFacto
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public VisbilityValues createVisbilityValuesFromString(EDataType eDataType, String initialValue) {
-		VisbilityValues result = VisbilityValues.get(initialValue);
+	public VisibilityValues createVisibilityValuesFromString(EDataType eDataType, String initialValue) {
+		VisibilityValues result = VisibilityValues.get(initialValue);
 		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
 		return result;
 	}
@@ -185,7 +185,7 @@ public class GeneratorFactoryImpl extends EFactoryImpl implements GeneratorFacto
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String convertVisbilityValuesToString(EDataType eDataType, Object instanceValue) {
+	public String convertVisibilityValuesToString(EDataType eDataType, Object instanceValue) {
 		return instanceValue == null ? null : instanceValue.toString();
 	}
 

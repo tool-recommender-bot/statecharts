@@ -562,14 +562,14 @@ public interface GeneratorPackage extends EPackage {
 	int VISIBILITY_FEATURE_COUNT = 1;
 
 	/**
-	 * The meta object id for the '{@link org.yakindu.base.generator.generator.VisbilityValues <em>Visbility Values</em>}' enum.
+	 * The meta object id for the '{@link org.yakindu.base.generator.generator.VisibilityValues <em>Visibility Values</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.yakindu.base.generator.generator.VisbilityValues
-	 * @see org.yakindu.base.generator.generator.impl.GeneratorPackageImpl#getVisbilityValues()
+	 * @see org.yakindu.base.generator.generator.VisibilityValues
+	 * @see org.yakindu.base.generator.generator.impl.GeneratorPackageImpl#getVisibilityValues()
 	 * @generated
 	 */
-	int VISBILITY_VALUES = 8;
+	int VISIBILITY_VALUES = 8;
 
 	/**
 	 * Returns the meta object for class '{@link org.yakindu.base.generator.generator.CodeElement <em>Code Element</em>}'.
@@ -762,14 +762,14 @@ public interface GeneratorPackage extends EPackage {
 	EAttribute getVisibility_Visibility();
 
 	/**
-	 * Returns the meta object for enum '{@link org.yakindu.base.generator.generator.VisbilityValues <em>Visbility Values</em>}'.
+	 * Returns the meta object for enum '{@link org.yakindu.base.generator.generator.VisibilityValues <em>Visibility Values</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for enum '<em>Visbility Values</em>'.
-	 * @see org.yakindu.base.generator.generator.VisbilityValues
+	 * @return the meta object for enum '<em>Visibility Values</em>'.
+	 * @see org.yakindu.base.generator.generator.VisibilityValues
 	 * @generated
 	 */
-	EEnum getVisbilityValues();
+	EEnum getVisibilityValues();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -955,14 +955,14 @@ public interface GeneratorPackage extends EPackage {
 		EAttribute VISIBILITY__VISIBILITY = eINSTANCE.getVisibility_Visibility();
 
 		/**
-		 * The meta object literal for the '{@link org.yakindu.base.generator.generator.VisbilityValues <em>Visbility Values</em>}' enum.
+		 * The meta object literal for the '{@link org.yakindu.base.generator.generator.VisibilityValues <em>Visibility Values</em>}' enum.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see org.yakindu.base.generator.generator.VisbilityValues
-		 * @see org.yakindu.base.generator.generator.impl.GeneratorPackageImpl#getVisbilityValues()
+		 * @see org.yakindu.base.generator.generator.VisibilityValues
+		 * @see org.yakindu.base.generator.generator.impl.GeneratorPackageImpl#getVisibilityValues()
 		 * @generated
 		 */
-		EEnum VISBILITY_VALUES = eINSTANCE.getVisbilityValues();
+		EEnum VISIBILITY_VALUES = eINSTANCE.getVisibilityValues();
 
 	}
 

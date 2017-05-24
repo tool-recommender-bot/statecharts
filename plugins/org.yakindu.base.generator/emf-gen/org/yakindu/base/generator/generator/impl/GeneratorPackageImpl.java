@@ -22,9 +22,8 @@ import org.yakindu.base.generator.generator.MethodGen;
 import org.yakindu.base.generator.generator.ParameterGen;
 import org.yakindu.base.generator.generator.SourceFileGen;
 import org.yakindu.base.generator.generator.VariableGen;
-
-import org.yakindu.base.generator.generator.VisbilityValues;
 import org.yakindu.base.generator.generator.Visibility;
+import org.yakindu.base.generator.generator.VisibilityValues;
 import org.yakindu.base.types.TypesPackage;
 
 /**
@@ -95,7 +94,7 @@ public class GeneratorPackageImpl extends EPackageImpl implements GeneratorPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EEnum visbilityValuesEEnum = null;
+	private EEnum visibilityValuesEEnum = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -328,8 +327,8 @@ public class GeneratorPackageImpl extends EPackageImpl implements GeneratorPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EEnum getVisbilityValues() {
-		return visbilityValuesEEnum;
+	public EEnum getVisibilityValues() {
+		return visibilityValuesEEnum;
 	}
 
 	/**
@@ -387,7 +386,7 @@ public class GeneratorPackageImpl extends EPackageImpl implements GeneratorPacka
 		createEAttribute(visibilityEClass, VISIBILITY__VISIBILITY);
 
 		// Create enums
-		visbilityValuesEEnum = createEEnum(VISBILITY_VALUES);
+		visibilityValuesEEnum = createEEnum(VISIBILITY_VALUES);
 	}
 
 	/**
@@ -463,14 +462,14 @@ public class GeneratorPackageImpl extends EPackageImpl implements GeneratorPacka
 		initEClass(parameterGenEClass, ParameterGen.class, "ParameterGen", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(visibilityEClass, Visibility.class, "Visibility", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getVisibility_Visibility(), this.getVisbilityValues(), "visibility", null, 0, 1, Visibility.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getVisibility_Visibility(), this.getVisibilityValues(), "visibility", null, 0, 1, Visibility.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize enums and add enum literals
-		initEEnum(visbilityValuesEEnum, VisbilityValues.class, "VisbilityValues");
-		addEEnumLiteral(visbilityValuesEEnum, VisbilityValues.NONE);
-		addEEnumLiteral(visbilityValuesEEnum, VisbilityValues.PUBLIC);
-		addEEnumLiteral(visbilityValuesEEnum, VisbilityValues.PROTECTED);
-		addEEnumLiteral(visbilityValuesEEnum, VisbilityValues.PRIVATE);
+		initEEnum(visibilityValuesEEnum, VisibilityValues.class, "VisibilityValues");
+		addEEnumLiteral(visibilityValuesEEnum, VisibilityValues.NONE);
+		addEEnumLiteral(visibilityValuesEEnum, VisibilityValues.PUBLIC);
+		addEEnumLiteral(visibilityValuesEEnum, VisibilityValues.PROTECTED);
+		addEEnumLiteral(visibilityValuesEEnum, VisibilityValues.PRIVATE);
 
 		// Create resource
 		createResource(eNS_URI);

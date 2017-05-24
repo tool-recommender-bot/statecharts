@@ -24,7 +24,7 @@ public interface Visibility extends EObject {
 
 	/**
 	 * Returns the value of the '<em><b>Visibility</b></em>' attribute.
-	 * The literals are from the enumeration {@link org.yakindu.base.generator.generator.VisbilityValues}.
+	 * The literals are from the enumeration {@link org.yakindu.base.generator.generator.VisibilityValues}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Visibility</em>' attribute isn't clear,
@@ -32,22 +32,22 @@ public interface Visibility extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Visibility</em>' attribute.
-	 * @see org.yakindu.base.generator.generator.VisbilityValues
-	 * @see #setVisibility(VisbilityValues)
+	 * @see org.yakindu.base.generator.generator.VisibilityValues
+	 * @see #setVisibility(VisibilityValues)
 	 * @see org.yakindu.base.generator.generator.GeneratorPackage#getVisibility_Visibility()
 	 * @model
 	 * @generated
 	 */
-	VisbilityValues getVisibility();
+	VisibilityValues getVisibility();
 
 	/**
 	 * Sets the value of the '{@link org.yakindu.base.generator.generator.Visibility#getVisibility <em>Visibility</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Visibility</em>' attribute.
-	 * @see org.yakindu.base.generator.generator.VisbilityValues
+	 * @see org.yakindu.base.generator.generator.VisibilityValues
 	 * @see #getVisibility()
 	 * @generated
 	 */
-	void setVisibility(VisbilityValues value);
+	void setVisibility(VisibilityValues value);
 } // Visibility
