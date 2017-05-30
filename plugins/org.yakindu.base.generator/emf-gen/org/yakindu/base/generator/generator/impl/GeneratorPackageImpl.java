@@ -18,6 +18,7 @@ import org.yakindu.base.generator.generator.AccessRestricted;
 import org.yakindu.base.generator.generator.ClassDeclarationGen;
 import org.yakindu.base.generator.generator.ClassGen;
 import org.yakindu.base.generator.generator.CodeElement;
+import org.yakindu.base.generator.generator.ExpressionGen;
 import org.yakindu.base.generator.generator.GeneratorFactory;
 import org.yakindu.base.generator.generator.GeneratorPackage;
 import org.yakindu.base.generator.generator.InterfaceGen;
@@ -112,6 +113,13 @@ public class GeneratorPackageImpl extends EPackageImpl implements GeneratorPacka
 	 * @generated
 	 */
 	private EClass abstractableElementEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass expressionGenEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -423,6 +431,15 @@ public class GeneratorPackageImpl extends EPackageImpl implements GeneratorPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getExpressionGen() {
+		return expressionGenEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EEnum getVisibilityValues() {
 		return visibilityValuesEEnum;
 	}
@@ -492,6 +509,8 @@ public class GeneratorPackageImpl extends EPackageImpl implements GeneratorPacka
 		abstractableElementEClass = createEClass(ABSTRACTABLE_ELEMENT);
 		createEAttribute(abstractableElementEClass, ABSTRACTABLE_ELEMENT__ABSTRACT);
 
+		expressionGenEClass = createEClass(EXPRESSION_GEN);
+
 		// Create enums
 		visibilityValuesEEnum = createEEnum(VISIBILITY_VALUES);
 	}
@@ -544,6 +563,7 @@ public class GeneratorPackageImpl extends EPackageImpl implements GeneratorPacka
 		variableGenEClass.getESuperTypes().add(theTypesPackage.getTypedElement());
 		parameterGenEClass.getESuperTypes().add(this.getCodeElement());
 		parameterGenEClass.getESuperTypes().add(theTypesPackage.getTypedElement());
+		expressionGenEClass.getESuperTypes().add(this.getCodeElement());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(codeElementEClass, CodeElement.class, "CodeElement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -585,6 +605,8 @@ public class GeneratorPackageImpl extends EPackageImpl implements GeneratorPacka
 
 		initEClass(abstractableElementEClass, AbstractableElement.class, "AbstractableElement", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getAbstractableElement_Abstract(), ecorePackage.getEBoolean(), "abstract", "false", 0, 1, AbstractableElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(expressionGenEClass, ExpressionGen.class, "ExpressionGen", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		// Initialize enums and add enum literals
 		initEEnum(visibilityValuesEEnum, VisibilityValues.class, "VisibilityValues");

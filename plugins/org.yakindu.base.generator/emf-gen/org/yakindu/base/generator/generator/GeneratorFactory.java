@@ -112,6 +112,15 @@ public interface GeneratorFactory extends EFactory {
 	ParameterGen createParameterGen();
 
 	/**
+	 * Returns a new object of class '<em>Expression Gen</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Expression Gen</em>'.
+	 * @generated
+	 */
+	ExpressionGen createExpressionGen();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

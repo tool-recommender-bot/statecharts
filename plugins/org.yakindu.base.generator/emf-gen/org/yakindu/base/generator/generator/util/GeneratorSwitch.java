@@ -165,6 +165,15 @@ public class GeneratorSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case GeneratorPackage.EXPRESSION_GEN: {
+				ExpressionGen expressionGen = (ExpressionGen)theEObject;
+				T result = caseExpressionGen(expressionGen);
+				if (result == null) result = caseCodeElement(expressionGen);
+				if (result == null) result = caseNamedElement(expressionGen);
+				if (result == null) result = caseDocumentedElement(expressionGen);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			default: return defaultCase(theEObject);
 		}
 	}
@@ -331,6 +340,21 @@ public class GeneratorSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseAbstractableElement(AbstractableElement object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Expression Gen</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Expression Gen</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseExpressionGen(ExpressionGen object) {
 		return null;
 	}
 

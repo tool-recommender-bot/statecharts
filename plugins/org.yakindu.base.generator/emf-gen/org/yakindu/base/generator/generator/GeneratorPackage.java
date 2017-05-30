@@ -727,6 +727,61 @@ public interface GeneratorPackage extends EPackage {
 	int ABSTRACTABLE_ELEMENT_FEATURE_COUNT = 1;
 
 	/**
+	 * The meta object id for the '{@link org.yakindu.base.generator.generator.impl.ExpressionGenImpl <em>Expression Gen</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.yakindu.base.generator.generator.impl.ExpressionGenImpl
+	 * @see org.yakindu.base.generator.generator.impl.GeneratorPackageImpl#getExpressionGen()
+	 * @generated
+	 */
+	int EXPRESSION_GEN = 11;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXPRESSION_GEN__NAME = CODE_ELEMENT__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Documentation</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXPRESSION_GEN__DOCUMENTATION = CODE_ELEMENT__DOCUMENTATION;
+
+	/**
+	 * The feature id for the '<em><b>Children</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXPRESSION_GEN__CHILDREN = CODE_ELEMENT__CHILDREN;
+
+	/**
+	 * The feature id for the '<em><b>Parent</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXPRESSION_GEN__PARENT = CODE_ELEMENT__PARENT;
+
+	/**
+	 * The number of structural features of the '<em>Expression Gen</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXPRESSION_GEN_FEATURE_COUNT = CODE_ELEMENT_FEATURE_COUNT + 0;
+
+	/**
 	 * The meta object id for the '{@link org.yakindu.base.generator.generator.VisibilityValues <em>Visibility Values</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -734,7 +789,7 @@ public interface GeneratorPackage extends EPackage {
 	 * @see org.yakindu.base.generator.generator.impl.GeneratorPackageImpl#getVisibilityValues()
 	 * @generated
 	 */
-	int VISIBILITY_VALUES = 11;
+	int VISIBILITY_VALUES = 12;
 
 	/**
 	 * Returns the meta object for class '{@link org.yakindu.base.generator.generator.CodeElement <em>Code Element</em>}'.
@@ -1012,6 +1067,16 @@ public interface GeneratorPackage extends EPackage {
 	EAttribute getAbstractableElement_Abstract();
 
 	/**
+	 * Returns the meta object for class '{@link org.yakindu.base.generator.generator.ExpressionGen <em>Expression Gen</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Expression Gen</em>'.
+	 * @see org.yakindu.base.generator.generator.ExpressionGen
+	 * @generated
+	 */
+	EClass getExpressionGen();
+
+	/**
 	 * Returns the meta object for enum '{@link org.yakindu.base.generator.generator.VisibilityValues <em>Visibility Values</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1273,6 +1338,16 @@ public interface GeneratorPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute ABSTRACTABLE_ELEMENT__ABSTRACT = eINSTANCE.getAbstractableElement_Abstract();
+
+		/**
+		 * The meta object literal for the '{@link org.yakindu.base.generator.generator.impl.ExpressionGenImpl <em>Expression Gen</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.yakindu.base.generator.generator.impl.ExpressionGenImpl
+		 * @see org.yakindu.base.generator.generator.impl.GeneratorPackageImpl#getExpressionGen()
+		 * @generated
+		 */
+		EClass EXPRESSION_GEN = eINSTANCE.getExpressionGen();
 
 		/**
 		 * The meta object literal for the '{@link org.yakindu.base.generator.generator.VisibilityValues <em>Visibility Values</em>}' enum.

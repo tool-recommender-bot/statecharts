@@ -67,6 +67,7 @@ public class GeneratorFactoryImpl extends EFactoryImpl implements GeneratorFacto
 			case GeneratorPackage.ACCESS_RESTRICTED: return createAccessRestricted();
 			case GeneratorPackage.VARIABLE_GEN: return createVariableGen();
 			case GeneratorPackage.PARAMETER_GEN: return createParameterGen();
+			case GeneratorPackage.EXPRESSION_GEN: return createExpressionGen();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -200,6 +201,16 @@ public class GeneratorFactoryImpl extends EFactoryImpl implements GeneratorFacto
 	public ParameterGen createParameterGen() {
 		ParameterGenImpl parameterGen = new ParameterGenImpl();
 		return parameterGen;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ExpressionGen createExpressionGen() {
+		ExpressionGenImpl expressionGen = new ExpressionGenImpl();
+		return expressionGen;
 	}
 
 	/**
