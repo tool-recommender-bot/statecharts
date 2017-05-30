@@ -5,7 +5,6 @@ package org.yakindu.base.generator.generator.impl;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EEnum;
-import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 
@@ -13,6 +12,7 @@ import org.eclipse.emf.ecore.impl.EPackageImpl;
 
 import org.yakindu.base.base.BasePackage;
 
+import org.yakindu.base.expressions.expressions.ExpressionsPackage;
 import org.yakindu.base.generator.generator.AbstractableElement;
 import org.yakindu.base.generator.generator.AccessRestricted;
 import org.yakindu.base.generator.generator.ClassDeclarationGen;
@@ -175,7 +175,7 @@ public class GeneratorPackageImpl extends EPackageImpl implements GeneratorPacka
 		isInited = true;
 
 		// Initialize simple dependencies
-		org.yakindu.base.expressions.expressions.ExpressionsPackage.eINSTANCE.eClass();
+		ExpressionsPackage.eINSTANCE.eClass();
 
 		// Create package meta-data objects
 		theGeneratorPackage.createPackageContents();
@@ -551,7 +551,7 @@ public class GeneratorPackageImpl extends EPackageImpl implements GeneratorPacka
 		// Obtain other dependent packages
 		BasePackage theBasePackage = (BasePackage)EPackage.Registry.INSTANCE.getEPackage(BasePackage.eNS_URI);
 		TypesPackage theTypesPackage = (TypesPackage)EPackage.Registry.INSTANCE.getEPackage(TypesPackage.eNS_URI);
-		org.yakindu.base.expressions.expressions.ExpressionsPackage theExpressionsPackage = (org.yakindu.base.expressions.expressions.ExpressionsPackage)EPackage.Registry.INSTANCE.getEPackage(org.yakindu.base.expressions.expressions.ExpressionsPackage.eNS_URI);
+		ExpressionsPackage theExpressionsPackage = (ExpressionsPackage)EPackage.Registry.INSTANCE.getEPackage(ExpressionsPackage.eNS_URI);
 
 		// Create type parameters
 
@@ -589,9 +589,6 @@ public class GeneratorPackageImpl extends EPackageImpl implements GeneratorPacka
 		initEReference(getClassGen_SuperClass(), this.getClassGen(), null, "superClass", null, 0, 1, ClassGen.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getClassGen_Implements(), this.getInterfaceGen(), null, "implements", null, 0, -1, ClassGen.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getClassGen_Declaration(), this.getClassDeclarationGen(), this.getClassDeclarationGen_ClassGen(), "declaration", null, 0, 1, ClassGen.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		EOperation op = addEOperation(classGenEClass, null, "addConstructor", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, this.getParameterGen(), "parameters", 0, -1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(classDeclarationGenEClass, ClassDeclarationGen.class, "ClassDeclarationGen", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getClassDeclarationGen_ClassGen(), this.getClassGen(), this.getClassGen_Declaration(), "classGen", null, 0, 1, ClassDeclarationGen.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

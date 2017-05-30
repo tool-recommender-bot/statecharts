@@ -14,9 +14,6 @@
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ClassGen" eSuperTypes="#//CodeElement #//AccessRestricted #//AbstractableElement">
-    <eOperations name="addConstructor">
-      <eParameters name="parameters" upperBound="-1" eType="#//ParameterGen"/>
-    </eOperations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="superClass" eType="#//ClassGen"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="implements" upperBound="-1"
         eType="#//InterfaceGen"/>

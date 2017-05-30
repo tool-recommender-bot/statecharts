@@ -8,6 +8,7 @@ import org.eclipse.emf.ecore.EClass;
 
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.yakindu.base.expressions.expressions.Expression;
 import org.yakindu.base.generator.generator.ExpressionGen;
 import org.yakindu.base.generator.generator.GeneratorPackage;
 
@@ -33,7 +34,7 @@ public class ExpressionGenImpl extends CodeElementImpl implements ExpressionGen 
 	 * @generated
 	 * @ordered
 	 */
-	protected org.yakindu.base.expressions.expressions.Expression expression;
+	protected Expression expression;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -59,7 +60,7 @@ public class ExpressionGenImpl extends CodeElementImpl implements ExpressionGen 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public org.yakindu.base.expressions.expressions.Expression getExpression() {
+	public Expression getExpression() {
 		return expression;
 	}
 
@@ -68,8 +69,8 @@ public class ExpressionGenImpl extends CodeElementImpl implements ExpressionGen 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetExpression(org.yakindu.base.expressions.expressions.Expression newExpression, NotificationChain msgs) {
-		org.yakindu.base.expressions.expressions.Expression oldExpression = expression;
+	public NotificationChain basicSetExpression(Expression newExpression, NotificationChain msgs) {
+		Expression oldExpression = expression;
 		expression = newExpression;
 		if (eNotificationRequired()) {
 			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, GeneratorPackage.EXPRESSION_GEN__EXPRESSION, oldExpression, newExpression);
@@ -83,7 +84,7 @@ public class ExpressionGenImpl extends CodeElementImpl implements ExpressionGen 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setExpression(org.yakindu.base.expressions.expressions.Expression newExpression) {
+	public void setExpression(Expression newExpression) {
 		if (newExpression != expression) {
 			NotificationChain msgs = null;
 			if (expression != null)
@@ -134,7 +135,7 @@ public class ExpressionGenImpl extends CodeElementImpl implements ExpressionGen 
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case GeneratorPackage.EXPRESSION_GEN__EXPRESSION:
-				setExpression((org.yakindu.base.expressions.expressions.Expression)newValue);
+				setExpression((Expression)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -149,7 +150,7 @@ public class ExpressionGenImpl extends CodeElementImpl implements ExpressionGen 
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case GeneratorPackage.EXPRESSION_GEN__EXPRESSION:
-				setExpression((org.yakindu.base.expressions.expressions.Expression)null);
+				setExpression((Expression)null);
 				return;
 		}
 		super.eUnset(featureID);

@@ -93,12 +93,4 @@ public interface ClassGen extends CodeElement, AccessRestricted, AbstractableEle
 	 */
 	void setDeclaration(ClassDeclarationGen value);
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model parametersMany="true"
-	 * @generated
-	 */
-	void addConstructor(EList<ParameterGen> parameters);
-
 } // ClassGen

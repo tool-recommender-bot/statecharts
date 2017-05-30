@@ -2,6 +2,8 @@
  */
 package org.yakindu.base.generator.generator;
 
+import org.yakindu.base.expressions.expressions.Expression;
+
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Expression Gen</b></em>'.
@@ -29,12 +31,12 @@ public interface ExpressionGen extends CodeElement {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Expression</em>' containment reference.
-	 * @see #setExpression(org.yakindu.base.expressions.expressions.Expression)
+	 * @see #setExpression(Expression)
 	 * @see org.yakindu.base.generator.generator.GeneratorPackage#getExpressionGen_Expression()
 	 * @model containment="true"
 	 * @generated
 	 */
-	org.yakindu.base.expressions.expressions.Expression getExpression();
+	Expression getExpression();
 
 	/**
 	 * Sets the value of the '{@link org.yakindu.base.generator.generator.ExpressionGen#getExpression <em>Expression</em>}' containment reference.
@@ -44,5 +46,5 @@ public interface ExpressionGen extends CodeElement {
 	 * @see #getExpression()
 	 * @generated
 	 */
-	void setExpression(org.yakindu.base.expressions.expressions.Expression value);
+	void setExpression(Expression value);
 } // ExpressionGen

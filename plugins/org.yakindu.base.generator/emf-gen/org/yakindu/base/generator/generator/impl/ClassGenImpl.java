@@ -21,7 +21,6 @@ import org.yakindu.base.generator.generator.ClassDeclarationGen;
 import org.yakindu.base.generator.generator.ClassGen;
 import org.yakindu.base.generator.generator.GeneratorPackage;
 import org.yakindu.base.generator.generator.InterfaceGen;
-import org.yakindu.base.generator.generator.ParameterGen;
 import org.yakindu.base.generator.generator.VisibilityValues;
 
 /**
@@ -264,17 +263,6 @@ public class ClassGenImpl extends CodeElementImpl implements ClassGen {
 		}
 		else if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, GeneratorPackage.CLASS_GEN__DECLARATION, newDeclaration, newDeclaration));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void addConstructor(EList<ParameterGen> parameters) {
-		// TODO: implement this method
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
 	}
 
 	/**
