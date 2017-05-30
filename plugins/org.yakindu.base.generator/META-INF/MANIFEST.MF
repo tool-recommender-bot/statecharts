@@ -18,7 +18,8 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.xtext.xbase.lib,
  org.eclipse.xtend.lib,
  org.eclipse.xtend.lib.macro,
- org.yakindu.sct.model.stext.test
+ org.yakindu.sct.model.stext.test,
+ org.yakindu.base.expressions;visibility:=reexport
 Bundle-ActivationPolicy: lazy
 Import-Package: com.google.inject
 

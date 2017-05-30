@@ -773,13 +773,22 @@ public interface GeneratorPackage extends EPackage {
 	int EXPRESSION_GEN__PARENT = CODE_ELEMENT__PARENT;
 
 	/**
+	 * The feature id for the '<em><b>Expression</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXPRESSION_GEN__EXPRESSION = CODE_ELEMENT_FEATURE_COUNT + 0;
+
+	/**
 	 * The number of structural features of the '<em>Expression Gen</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int EXPRESSION_GEN_FEATURE_COUNT = CODE_ELEMENT_FEATURE_COUNT + 0;
+	int EXPRESSION_GEN_FEATURE_COUNT = CODE_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.base.generator.generator.VisibilityValues <em>Visibility Values</em>}' enum.
@@ -1077,6 +1086,17 @@ public interface GeneratorPackage extends EPackage {
 	EClass getExpressionGen();
 
 	/**
+	 * Returns the meta object for the containment reference '{@link org.yakindu.base.generator.generator.ExpressionGen#getExpression <em>Expression</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Expression</em>'.
+	 * @see org.yakindu.base.generator.generator.ExpressionGen#getExpression()
+	 * @see #getExpressionGen()
+	 * @generated
+	 */
+	EReference getExpressionGen_Expression();
+
+	/**
 	 * Returns the meta object for enum '{@link org.yakindu.base.generator.generator.VisibilityValues <em>Visibility Values</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1348,6 +1368,14 @@ public interface GeneratorPackage extends EPackage {
 		 * @generated
 		 */
 		EClass EXPRESSION_GEN = eINSTANCE.getExpressionGen();
+
+		/**
+		 * The meta object literal for the '<em><b>Expression</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference EXPRESSION_GEN__EXPRESSION = eINSTANCE.getExpressionGen_Expression();
 
 		/**
 		 * The meta object literal for the '{@link org.yakindu.base.generator.generator.VisibilityValues <em>Visibility Values</em>}' enum.

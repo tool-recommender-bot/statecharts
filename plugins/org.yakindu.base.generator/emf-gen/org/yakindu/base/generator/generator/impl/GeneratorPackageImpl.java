@@ -175,7 +175,7 @@ public class GeneratorPackageImpl extends EPackageImpl implements GeneratorPacka
 		isInited = true;
 
 		// Initialize simple dependencies
-		TypesPackage.eINSTANCE.eClass();
+		org.yakindu.base.expressions.expressions.ExpressionsPackage.eINSTANCE.eClass();
 
 		// Create package meta-data objects
 		theGeneratorPackage.createPackageContents();
@@ -440,6 +440,15 @@ public class GeneratorPackageImpl extends EPackageImpl implements GeneratorPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getExpressionGen_Expression() {
+		return (EReference)expressionGenEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EEnum getVisibilityValues() {
 		return visibilityValuesEEnum;
 	}
@@ -510,6 +519,7 @@ public class GeneratorPackageImpl extends EPackageImpl implements GeneratorPacka
 		createEAttribute(abstractableElementEClass, ABSTRACTABLE_ELEMENT__ABSTRACT);
 
 		expressionGenEClass = createEClass(EXPRESSION_GEN);
+		createEReference(expressionGenEClass, EXPRESSION_GEN__EXPRESSION);
 
 		// Create enums
 		visibilityValuesEEnum = createEEnum(VISIBILITY_VALUES);
@@ -541,6 +551,7 @@ public class GeneratorPackageImpl extends EPackageImpl implements GeneratorPacka
 		// Obtain other dependent packages
 		BasePackage theBasePackage = (BasePackage)EPackage.Registry.INSTANCE.getEPackage(BasePackage.eNS_URI);
 		TypesPackage theTypesPackage = (TypesPackage)EPackage.Registry.INSTANCE.getEPackage(TypesPackage.eNS_URI);
+		org.yakindu.base.expressions.expressions.ExpressionsPackage theExpressionsPackage = (org.yakindu.base.expressions.expressions.ExpressionsPackage)EPackage.Registry.INSTANCE.getEPackage(org.yakindu.base.expressions.expressions.ExpressionsPackage.eNS_URI);
 
 		// Create type parameters
 
@@ -607,6 +618,7 @@ public class GeneratorPackageImpl extends EPackageImpl implements GeneratorPacka
 		initEAttribute(getAbstractableElement_Abstract(), ecorePackage.getEBoolean(), "abstract", "false", 0, 1, AbstractableElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(expressionGenEClass, ExpressionGen.class, "ExpressionGen", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getExpressionGen_Expression(), theExpressionsPackage.getExpression(), null, "expression", null, 0, 1, ExpressionGen.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(visibilityValuesEEnum, VisibilityValues.class, "VisibilityValues");
