@@ -617,13 +617,50 @@ public interface GeneratorPackage extends EPackage {
 	int VARIABLE_GEN__TYPE_SPECIFIER = CODE_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
+	 * The feature id for the '<em><b>Declaration</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VARIABLE_GEN__DECLARATION = CODE_ELEMENT_FEATURE_COUNT + 3;
+
+	/**
 	 * The number of structural features of the '<em>Variable Gen</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int VARIABLE_GEN_FEATURE_COUNT = CODE_ELEMENT_FEATURE_COUNT + 3;
+	int VARIABLE_GEN_FEATURE_COUNT = CODE_ELEMENT_FEATURE_COUNT + 4;
+
+	/**
+	 * The meta object id for the '{@link org.yakindu.base.generator.generator.impl.VariableDeclarationGenImpl <em>Variable Declaration Gen</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.yakindu.base.generator.generator.impl.VariableDeclarationGenImpl
+	 * @see org.yakindu.base.generator.generator.impl.GeneratorPackageImpl#getVariableDeclarationGen()
+	 * @generated
+	 */
+	int VARIABLE_DECLARATION_GEN = 9;
+
+	/**
+	 * The feature id for the '<em><b>Variable Gen</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VARIABLE_DECLARATION_GEN__VARIABLE_GEN = 0;
+
+	/**
+	 * The number of structural features of the '<em>Variable Declaration Gen</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VARIABLE_DECLARATION_GEN_FEATURE_COUNT = 1;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.base.generator.generator.impl.ParameterGenImpl <em>Parameter Gen</em>}' class.
@@ -633,7 +670,7 @@ public interface GeneratorPackage extends EPackage {
 	 * @see org.yakindu.base.generator.generator.impl.GeneratorPackageImpl#getParameterGen()
 	 * @generated
 	 */
-	int PARAMETER_GEN = 9;
+	int PARAMETER_GEN = 10;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -706,7 +743,7 @@ public interface GeneratorPackage extends EPackage {
 	 * @see org.yakindu.base.generator.generator.impl.GeneratorPackageImpl#getAbstractableElement()
 	 * @generated
 	 */
-	int ABSTRACTABLE_ELEMENT = 10;
+	int ABSTRACTABLE_ELEMENT = 11;
 
 	/**
 	 * The feature id for the '<em><b>Abstract</b></em>' attribute.
@@ -734,7 +771,7 @@ public interface GeneratorPackage extends EPackage {
 	 * @see org.yakindu.base.generator.generator.impl.GeneratorPackageImpl#getExpressionGen()
 	 * @generated
 	 */
-	int EXPRESSION_GEN = 11;
+	int EXPRESSION_GEN = 12;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -798,7 +835,7 @@ public interface GeneratorPackage extends EPackage {
 	 * @see org.yakindu.base.generator.generator.impl.GeneratorPackageImpl#getVisibilityValues()
 	 * @generated
 	 */
-	int VISIBILITY_VALUES = 12;
+	int VISIBILITY_VALUES = 13;
 
 	/**
 	 * Returns the meta object for class '{@link org.yakindu.base.generator.generator.CodeElement <em>Code Element</em>}'.
@@ -1043,6 +1080,38 @@ public interface GeneratorPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getVariableGen();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.yakindu.base.generator.generator.VariableGen#getDeclaration <em>Declaration</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Declaration</em>'.
+	 * @see org.yakindu.base.generator.generator.VariableGen#getDeclaration()
+	 * @see #getVariableGen()
+	 * @generated
+	 */
+	EReference getVariableGen_Declaration();
+
+	/**
+	 * Returns the meta object for class '{@link org.yakindu.base.generator.generator.VariableDeclarationGen <em>Variable Declaration Gen</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Variable Declaration Gen</em>'.
+	 * @see org.yakindu.base.generator.generator.VariableDeclarationGen
+	 * @generated
+	 */
+	EClass getVariableDeclarationGen();
+
+	/**
+	 * Returns the meta object for the container reference '{@link org.yakindu.base.generator.generator.VariableDeclarationGen#getVariableGen <em>Variable Gen</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the container reference '<em>Variable Gen</em>'.
+	 * @see org.yakindu.base.generator.generator.VariableDeclarationGen#getVariableGen()
+	 * @see #getVariableDeclarationGen()
+	 * @generated
+	 */
+	EReference getVariableDeclarationGen_VariableGen();
 
 	/**
 	 * Returns the meta object for class '{@link org.yakindu.base.generator.generator.ParameterGen <em>Parameter Gen</em>}'.
@@ -1330,6 +1399,32 @@ public interface GeneratorPackage extends EPackage {
 		 * @generated
 		 */
 		EClass VARIABLE_GEN = eINSTANCE.getVariableGen();
+
+		/**
+		 * The meta object literal for the '<em><b>Declaration</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference VARIABLE_GEN__DECLARATION = eINSTANCE.getVariableGen_Declaration();
+
+		/**
+		 * The meta object literal for the '{@link org.yakindu.base.generator.generator.impl.VariableDeclarationGenImpl <em>Variable Declaration Gen</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.yakindu.base.generator.generator.impl.VariableDeclarationGenImpl
+		 * @see org.yakindu.base.generator.generator.impl.GeneratorPackageImpl#getVariableDeclarationGen()
+		 * @generated
+		 */
+		EClass VARIABLE_DECLARATION_GEN = eINSTANCE.getVariableDeclarationGen();
+
+		/**
+		 * The meta object literal for the '<em><b>Variable Gen</b></em>' container reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference VARIABLE_DECLARATION_GEN__VARIABLE_GEN = eINSTANCE.getVariableDeclarationGen_VariableGen();
 
 		/**
 		 * The meta object literal for the '{@link org.yakindu.base.generator.generator.impl.ParameterGenImpl <em>Parameter Gen</em>}' class.

@@ -103,6 +103,15 @@ public interface GeneratorFactory extends EFactory {
 	VariableGen createVariableGen();
 
 	/**
+	 * Returns a new object of class '<em>Variable Declaration Gen</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Variable Declaration Gen</em>'.
+	 * @generated
+	 */
+	VariableDeclarationGen createVariableDeclarationGen();
+
+	/**
 	 * Returns a new object of class '<em>Parameter Gen</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

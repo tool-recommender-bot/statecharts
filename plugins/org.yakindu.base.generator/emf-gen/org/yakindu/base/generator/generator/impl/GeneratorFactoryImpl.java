@@ -66,6 +66,7 @@ public class GeneratorFactoryImpl extends EFactoryImpl implements GeneratorFacto
 			case GeneratorPackage.METHOD_DECLARATION_GEN: return createMethodDeclarationGen();
 			case GeneratorPackage.ACCESS_RESTRICTED: return createAccessRestricted();
 			case GeneratorPackage.VARIABLE_GEN: return createVariableGen();
+			case GeneratorPackage.VARIABLE_DECLARATION_GEN: return createVariableDeclarationGen();
 			case GeneratorPackage.PARAMETER_GEN: return createParameterGen();
 			case GeneratorPackage.EXPRESSION_GEN: return createExpressionGen();
 			default:
@@ -191,6 +192,16 @@ public class GeneratorFactoryImpl extends EFactoryImpl implements GeneratorFacto
 	public VariableGen createVariableGen() {
 		VariableGenImpl variableGen = new VariableGenImpl();
 		return variableGen;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public VariableDeclarationGen createVariableDeclarationGen() {
+		VariableDeclarationGenImpl variableDeclarationGen = new VariableDeclarationGenImpl();
+		return variableDeclarationGen;
 	}
 
 	/**

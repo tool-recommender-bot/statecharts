@@ -42,7 +42,14 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="visibility" eType="#//VisibilityValues"
         defaultValueLiteral="NONE"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="VariableGen" eSuperTypes="#//CodeElement #//AccessRestricted ../../org.yakindu.base.types/model/types.ecore#//TypedElement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="VariableGen" eSuperTypes="#//CodeElement #//AccessRestricted ../../org.yakindu.base.types/model/types.ecore#//TypedElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="declaration" eType="#//VariableDeclarationGen"
+        containment="true" eOpposite="#//VariableDeclarationGen/variableGen"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="VariableDeclarationGen">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="variableGen" eType="#//VariableGen"
+        eOpposite="#//VariableGen/declaration"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ParameterGen" eSuperTypes="#//CodeElement ../../org.yakindu.base.types/model/types.ecore#//TypedElement"/>
   <eClassifiers xsi:type="ecore:EEnum" name="VisibilityValues">
     <eLiterals name="NONE"/>

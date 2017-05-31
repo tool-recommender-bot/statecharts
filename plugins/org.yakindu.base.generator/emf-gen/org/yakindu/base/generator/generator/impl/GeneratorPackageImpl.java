@@ -26,6 +26,7 @@ import org.yakindu.base.generator.generator.MethodDeclarationGen;
 import org.yakindu.base.generator.generator.MethodGen;
 import org.yakindu.base.generator.generator.ParameterGen;
 import org.yakindu.base.generator.generator.SourceFileGen;
+import org.yakindu.base.generator.generator.VariableDeclarationGen;
 import org.yakindu.base.generator.generator.VariableGen;
 import org.yakindu.base.generator.generator.VisibilityValues;
 import org.yakindu.base.types.TypesPackage;
@@ -99,6 +100,13 @@ public class GeneratorPackageImpl extends EPackageImpl implements GeneratorPacka
 	 * @generated
 	 */
 	private EClass variableGenEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass variableDeclarationGenEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -404,6 +412,33 @@ public class GeneratorPackageImpl extends EPackageImpl implements GeneratorPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getVariableGen_Declaration() {
+		return (EReference)variableGenEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getVariableDeclarationGen() {
+		return variableDeclarationGenEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getVariableDeclarationGen_VariableGen() {
+		return (EReference)variableDeclarationGenEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getParameterGen() {
 		return parameterGenEClass;
 	}
@@ -512,6 +547,10 @@ public class GeneratorPackageImpl extends EPackageImpl implements GeneratorPacka
 		createEAttribute(accessRestrictedEClass, ACCESS_RESTRICTED__VISIBILITY);
 
 		variableGenEClass = createEClass(VARIABLE_GEN);
+		createEReference(variableGenEClass, VARIABLE_GEN__DECLARATION);
+
+		variableDeclarationGenEClass = createEClass(VARIABLE_DECLARATION_GEN);
+		createEReference(variableDeclarationGenEClass, VARIABLE_DECLARATION_GEN__VARIABLE_GEN);
 
 		parameterGenEClass = createEClass(PARAMETER_GEN);
 
@@ -608,6 +647,10 @@ public class GeneratorPackageImpl extends EPackageImpl implements GeneratorPacka
 		initEAttribute(getAccessRestricted_Visibility(), this.getVisibilityValues(), "visibility", "NONE", 0, 1, AccessRestricted.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(variableGenEClass, VariableGen.class, "VariableGen", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getVariableGen_Declaration(), this.getVariableDeclarationGen(), this.getVariableDeclarationGen_VariableGen(), "declaration", null, 0, 1, VariableGen.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(variableDeclarationGenEClass, VariableDeclarationGen.class, "VariableDeclarationGen", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getVariableDeclarationGen_VariableGen(), this.getVariableGen(), this.getVariableGen_Declaration(), "variableGen", null, 0, 1, VariableDeclarationGen.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(parameterGenEClass, ParameterGen.class, "ParameterGen", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 

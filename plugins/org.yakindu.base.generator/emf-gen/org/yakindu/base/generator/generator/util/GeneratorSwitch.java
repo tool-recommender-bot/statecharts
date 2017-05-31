@@ -149,6 +149,12 @@ public class GeneratorSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case GeneratorPackage.VARIABLE_DECLARATION_GEN: {
+				VariableDeclarationGen variableDeclarationGen = (VariableDeclarationGen)theEObject;
+				T result = caseVariableDeclarationGen(variableDeclarationGen);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case GeneratorPackage.PARAMETER_GEN: {
 				ParameterGen parameterGen = (ParameterGen)theEObject;
 				T result = caseParameterGen(parameterGen);
@@ -310,6 +316,21 @@ public class GeneratorSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseVariableGen(VariableGen object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Variable Declaration Gen</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Variable Declaration Gen</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseVariableDeclarationGen(VariableDeclarationGen object) {
 		return null;
 	}
 

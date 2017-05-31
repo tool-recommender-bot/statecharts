@@ -109,6 +109,10 @@ public class GeneratorAdapterFactory extends AdapterFactoryImpl {
 				return createVariableGenAdapter();
 			}
 			@Override
+			public Adapter caseVariableDeclarationGen(VariableDeclarationGen object) {
+				return createVariableDeclarationGenAdapter();
+			}
+			@Override
 			public Adapter caseParameterGen(ParameterGen object) {
 				return createParameterGenAdapter();
 			}
@@ -275,6 +279,20 @@ public class GeneratorAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createVariableGenAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.yakindu.base.generator.generator.VariableDeclarationGen <em>Variable Declaration Gen</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.yakindu.base.generator.generator.VariableDeclarationGen
+	 * @generated
+	 */
+	public Adapter createVariableDeclarationGenAdapter() {
 		return null;
 	}
 
