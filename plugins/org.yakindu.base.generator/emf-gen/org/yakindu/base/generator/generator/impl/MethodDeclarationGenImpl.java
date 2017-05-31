@@ -9,8 +9,6 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.util.EcoreUtil;
-
 import org.yakindu.base.generator.generator.GeneratorPackage;
 import org.yakindu.base.generator.generator.MethodDeclarationGen;
 import org.yakindu.base.generator.generator.MethodGen;
@@ -29,6 +27,16 @@ import org.yakindu.base.generator.generator.MethodGen;
  * @generated
  */
 public class MethodDeclarationGenImpl extends DeclarationImpl implements MethodDeclarationGen {
+	/**
+	 * The cached value of the '{@link #getMethodGen() <em>Method Gen</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getMethodGen()
+	 * @generated
+	 * @ordered
+	 */
+	protected MethodGen methodGen;
+
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -54,8 +62,24 @@ public class MethodDeclarationGenImpl extends DeclarationImpl implements MethodD
 	 * @generated
 	 */
 	public MethodGen getMethodGen() {
-		if (eContainerFeatureID() != GeneratorPackage.METHOD_DECLARATION_GEN__METHOD_GEN) return null;
-		return (MethodGen)eInternalContainer();
+		if (methodGen != null && methodGen.eIsProxy()) {
+			InternalEObject oldMethodGen = (InternalEObject)methodGen;
+			methodGen = (MethodGen)eResolveProxy(oldMethodGen);
+			if (methodGen != oldMethodGen) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, GeneratorPackage.METHOD_DECLARATION_GEN__METHOD_GEN, oldMethodGen, methodGen));
+			}
+		}
+		return methodGen;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public MethodGen basicGetMethodGen() {
+		return methodGen;
 	}
 
 	/**
@@ -64,7 +88,12 @@ public class MethodDeclarationGenImpl extends DeclarationImpl implements MethodD
 	 * @generated
 	 */
 	public NotificationChain basicSetMethodGen(MethodGen newMethodGen, NotificationChain msgs) {
-		msgs = eBasicSetContainer((InternalEObject)newMethodGen, GeneratorPackage.METHOD_DECLARATION_GEN__METHOD_GEN, msgs);
+		MethodGen oldMethodGen = methodGen;
+		methodGen = newMethodGen;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, GeneratorPackage.METHOD_DECLARATION_GEN__METHOD_GEN, oldMethodGen, newMethodGen);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
 		return msgs;
 	}
 
@@ -74,12 +103,10 @@ public class MethodDeclarationGenImpl extends DeclarationImpl implements MethodD
 	 * @generated
 	 */
 	public void setMethodGen(MethodGen newMethodGen) {
-		if (newMethodGen != eInternalContainer() || (eContainerFeatureID() != GeneratorPackage.METHOD_DECLARATION_GEN__METHOD_GEN && newMethodGen != null)) {
-			if (EcoreUtil.isAncestor(this, newMethodGen))
-				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
+		if (newMethodGen != methodGen) {
 			NotificationChain msgs = null;
-			if (eInternalContainer() != null)
-				msgs = eBasicRemoveFromContainer(msgs);
+			if (methodGen != null)
+				msgs = ((InternalEObject)methodGen).eInverseRemove(this, GeneratorPackage.METHOD_GEN__DECLARATION, MethodGen.class, msgs);
 			if (newMethodGen != null)
 				msgs = ((InternalEObject)newMethodGen).eInverseAdd(this, GeneratorPackage.METHOD_GEN__DECLARATION, MethodGen.class, msgs);
 			msgs = basicSetMethodGen(newMethodGen, msgs);
@@ -98,8 +125,8 @@ public class MethodDeclarationGenImpl extends DeclarationImpl implements MethodD
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case GeneratorPackage.METHOD_DECLARATION_GEN__METHOD_GEN:
-				if (eInternalContainer() != null)
-					msgs = eBasicRemoveFromContainer(msgs);
+				if (methodGen != null)
+					msgs = ((InternalEObject)methodGen).eInverseRemove(this, GeneratorPackage.METHOD_GEN__DECLARATION, MethodGen.class, msgs);
 				return basicSetMethodGen((MethodGen)otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
@@ -125,24 +152,11 @@ public class MethodDeclarationGenImpl extends DeclarationImpl implements MethodD
 	 * @generated
 	 */
 	@Override
-	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
-		switch (eContainerFeatureID()) {
-			case GeneratorPackage.METHOD_DECLARATION_GEN__METHOD_GEN:
-				return eInternalContainer().eInverseRemove(this, GeneratorPackage.METHOD_GEN__DECLARATION, MethodGen.class, msgs);
-		}
-		return super.eBasicRemoveFromContainerFeature(msgs);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case GeneratorPackage.METHOD_DECLARATION_GEN__METHOD_GEN:
-				return getMethodGen();
+				if (resolve) return getMethodGen();
+				return basicGetMethodGen();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -186,7 +200,7 @@ public class MethodDeclarationGenImpl extends DeclarationImpl implements MethodD
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case GeneratorPackage.METHOD_DECLARATION_GEN__METHOD_GEN:
-				return getMethodGen() != null;
+				return methodGen != null;
 		}
 		return super.eIsSet(featureID);
 	}

@@ -269,7 +269,7 @@ public interface GeneratorPackage extends EPackage {
 	int CLASS_GEN__IMPLEMENTS = CODE_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
-	 * The feature id for the '<em><b>Declaration</b></em>' containment reference.
+	 * The feature id for the '<em><b>Declaration</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -388,7 +388,7 @@ public interface GeneratorPackage extends EPackage {
 	int CLASS_DECLARATION_GEN__PARENT = DECLARATION__PARENT;
 
 	/**
-	 * The feature id for the '<em><b>Class Gen</b></em>' container reference.
+	 * The feature id for the '<em><b>Class Gen</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -561,7 +561,7 @@ public interface GeneratorPackage extends EPackage {
 	int METHOD_GEN__RETURN_TYPE = CODE_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
-	 * The feature id for the '<em><b>Declaration</b></em>' containment reference.
+	 * The feature id for the '<em><b>Declaration</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -625,7 +625,7 @@ public interface GeneratorPackage extends EPackage {
 	int METHOD_DECLARATION_GEN__PARENT = DECLARATION__PARENT;
 
 	/**
-	 * The feature id for the '<em><b>Method Gen</b></em>' container reference.
+	 * The feature id for the '<em><b>Method Gen</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -744,7 +744,7 @@ public interface GeneratorPackage extends EPackage {
 	int VARIABLE_GEN__TYPE_SPECIFIER = CODE_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
-	 * The feature id for the '<em><b>Declaration</b></em>' containment reference.
+	 * The feature id for the '<em><b>Declaration</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -808,7 +808,7 @@ public interface GeneratorPackage extends EPackage {
 	int VARIABLE_DECLARATION_GEN__PARENT = DECLARATION__PARENT;
 
 	/**
-	 * The feature id for the '<em><b>Variable Gen</b></em>' container reference.
+	 * The feature id for the '<em><b>Variable Gen</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -1116,10 +1116,10 @@ public interface GeneratorPackage extends EPackage {
 	EReference getClassGen_Implements();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link org.yakindu.base.generator.generator.ClassGen#getDeclaration <em>Declaration</em>}'.
+	 * Returns the meta object for the reference '{@link org.yakindu.base.generator.generator.ClassGen#getDeclaration <em>Declaration</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Declaration</em>'.
+	 * @return the meta object for the reference '<em>Declaration</em>'.
 	 * @see org.yakindu.base.generator.generator.ClassGen#getDeclaration()
 	 * @see #getClassGen()
 	 * @generated
@@ -1137,10 +1137,10 @@ public interface GeneratorPackage extends EPackage {
 	EClass getClassDeclarationGen();
 
 	/**
-	 * Returns the meta object for the container reference '{@link org.yakindu.base.generator.generator.ClassDeclarationGen#getClassGen <em>Class Gen</em>}'.
+	 * Returns the meta object for the reference '{@link org.yakindu.base.generator.generator.ClassDeclarationGen#getClassGen <em>Class Gen</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the container reference '<em>Class Gen</em>'.
+	 * @return the meta object for the reference '<em>Class Gen</em>'.
 	 * @see org.yakindu.base.generator.generator.ClassDeclarationGen#getClassGen()
 	 * @see #getClassDeclarationGen()
 	 * @generated
@@ -1201,10 +1201,10 @@ public interface GeneratorPackage extends EPackage {
 	EReference getMethodGen_ReturnType();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link org.yakindu.base.generator.generator.MethodGen#getDeclaration <em>Declaration</em>}'.
+	 * Returns the meta object for the reference '{@link org.yakindu.base.generator.generator.MethodGen#getDeclaration <em>Declaration</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Declaration</em>'.
+	 * @return the meta object for the reference '<em>Declaration</em>'.
 	 * @see org.yakindu.base.generator.generator.MethodGen#getDeclaration()
 	 * @see #getMethodGen()
 	 * @generated
@@ -1222,10 +1222,10 @@ public interface GeneratorPackage extends EPackage {
 	EClass getMethodDeclarationGen();
 
 	/**
-	 * Returns the meta object for the container reference '{@link org.yakindu.base.generator.generator.MethodDeclarationGen#getMethodGen <em>Method Gen</em>}'.
+	 * Returns the meta object for the reference '{@link org.yakindu.base.generator.generator.MethodDeclarationGen#getMethodGen <em>Method Gen</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the container reference '<em>Method Gen</em>'.
+	 * @return the meta object for the reference '<em>Method Gen</em>'.
 	 * @see org.yakindu.base.generator.generator.MethodDeclarationGen#getMethodGen()
 	 * @see #getMethodDeclarationGen()
 	 * @generated
@@ -1264,10 +1264,10 @@ public interface GeneratorPackage extends EPackage {
 	EClass getVariableGen();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link org.yakindu.base.generator.generator.VariableGen#getDeclaration <em>Declaration</em>}'.
+	 * Returns the meta object for the reference '{@link org.yakindu.base.generator.generator.VariableGen#getDeclaration <em>Declaration</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Declaration</em>'.
+	 * @return the meta object for the reference '<em>Declaration</em>'.
 	 * @see org.yakindu.base.generator.generator.VariableGen#getDeclaration()
 	 * @see #getVariableGen()
 	 * @generated
@@ -1285,10 +1285,10 @@ public interface GeneratorPackage extends EPackage {
 	EClass getVariableDeclarationGen();
 
 	/**
-	 * Returns the meta object for the container reference '{@link org.yakindu.base.generator.generator.VariableDeclarationGen#getVariableGen <em>Variable Gen</em>}'.
+	 * Returns the meta object for the reference '{@link org.yakindu.base.generator.generator.VariableDeclarationGen#getVariableGen <em>Variable Gen</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the container reference '<em>Variable Gen</em>'.
+	 * @return the meta object for the reference '<em>Variable Gen</em>'.
 	 * @see org.yakindu.base.generator.generator.VariableDeclarationGen#getVariableGen()
 	 * @see #getVariableDeclarationGen()
 	 * @generated
@@ -1479,7 +1479,7 @@ public interface GeneratorPackage extends EPackage {
 		EReference CLASS_GEN__IMPLEMENTS = eINSTANCE.getClassGen_Implements();
 
 		/**
-		 * The meta object literal for the '<em><b>Declaration</b></em>' containment reference feature.
+		 * The meta object literal for the '<em><b>Declaration</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
@@ -1497,7 +1497,7 @@ public interface GeneratorPackage extends EPackage {
 		EClass CLASS_DECLARATION_GEN = eINSTANCE.getClassDeclarationGen();
 
 		/**
-		 * The meta object literal for the '<em><b>Class Gen</b></em>' container reference feature.
+		 * The meta object literal for the '<em><b>Class Gen</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
@@ -1549,7 +1549,7 @@ public interface GeneratorPackage extends EPackage {
 		EReference METHOD_GEN__RETURN_TYPE = eINSTANCE.getMethodGen_ReturnType();
 
 		/**
-		 * The meta object literal for the '<em><b>Declaration</b></em>' containment reference feature.
+		 * The meta object literal for the '<em><b>Declaration</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
@@ -1567,7 +1567,7 @@ public interface GeneratorPackage extends EPackage {
 		EClass METHOD_DECLARATION_GEN = eINSTANCE.getMethodDeclarationGen();
 
 		/**
-		 * The meta object literal for the '<em><b>Method Gen</b></em>' container reference feature.
+		 * The meta object literal for the '<em><b>Method Gen</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
@@ -1603,7 +1603,7 @@ public interface GeneratorPackage extends EPackage {
 		EClass VARIABLE_GEN = eINSTANCE.getVariableGen();
 
 		/**
-		 * The meta object literal for the '<em><b>Declaration</b></em>' containment reference feature.
+		 * The meta object literal for the '<em><b>Declaration</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
@@ -1621,7 +1621,7 @@ public interface GeneratorPackage extends EPackage {
 		EClass VARIABLE_DECLARATION_GEN = eINSTANCE.getVariableDeclarationGen();
 
 		/**
-		 * The meta object literal for the '<em><b>Variable Gen</b></em>' container reference feature.
+		 * The meta object literal for the '<em><b>Variable Gen</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated

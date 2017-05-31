@@ -9,8 +9,6 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.util.EcoreUtil;
-
 import org.yakindu.base.generator.generator.ClassDeclarationGen;
 import org.yakindu.base.generator.generator.ClassGen;
 import org.yakindu.base.generator.generator.GeneratorPackage;
@@ -29,6 +27,16 @@ import org.yakindu.base.generator.generator.GeneratorPackage;
  * @generated
  */
 public class ClassDeclarationGenImpl extends DeclarationImpl implements ClassDeclarationGen {
+	/**
+	 * The cached value of the '{@link #getClassGen() <em>Class Gen</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getClassGen()
+	 * @generated
+	 * @ordered
+	 */
+	protected ClassGen classGen;
+
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -54,8 +62,24 @@ public class ClassDeclarationGenImpl extends DeclarationImpl implements ClassDec
 	 * @generated
 	 */
 	public ClassGen getClassGen() {
-		if (eContainerFeatureID() != GeneratorPackage.CLASS_DECLARATION_GEN__CLASS_GEN) return null;
-		return (ClassGen)eInternalContainer();
+		if (classGen != null && classGen.eIsProxy()) {
+			InternalEObject oldClassGen = (InternalEObject)classGen;
+			classGen = (ClassGen)eResolveProxy(oldClassGen);
+			if (classGen != oldClassGen) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, GeneratorPackage.CLASS_DECLARATION_GEN__CLASS_GEN, oldClassGen, classGen));
+			}
+		}
+		return classGen;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ClassGen basicGetClassGen() {
+		return classGen;
 	}
 
 	/**
@@ -64,7 +88,12 @@ public class ClassDeclarationGenImpl extends DeclarationImpl implements ClassDec
 	 * @generated
 	 */
 	public NotificationChain basicSetClassGen(ClassGen newClassGen, NotificationChain msgs) {
-		msgs = eBasicSetContainer((InternalEObject)newClassGen, GeneratorPackage.CLASS_DECLARATION_GEN__CLASS_GEN, msgs);
+		ClassGen oldClassGen = classGen;
+		classGen = newClassGen;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, GeneratorPackage.CLASS_DECLARATION_GEN__CLASS_GEN, oldClassGen, newClassGen);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
 		return msgs;
 	}
 
@@ -74,12 +103,10 @@ public class ClassDeclarationGenImpl extends DeclarationImpl implements ClassDec
 	 * @generated
 	 */
 	public void setClassGen(ClassGen newClassGen) {
-		if (newClassGen != eInternalContainer() || (eContainerFeatureID() != GeneratorPackage.CLASS_DECLARATION_GEN__CLASS_GEN && newClassGen != null)) {
-			if (EcoreUtil.isAncestor(this, newClassGen))
-				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
+		if (newClassGen != classGen) {
 			NotificationChain msgs = null;
-			if (eInternalContainer() != null)
-				msgs = eBasicRemoveFromContainer(msgs);
+			if (classGen != null)
+				msgs = ((InternalEObject)classGen).eInverseRemove(this, GeneratorPackage.CLASS_GEN__DECLARATION, ClassGen.class, msgs);
 			if (newClassGen != null)
 				msgs = ((InternalEObject)newClassGen).eInverseAdd(this, GeneratorPackage.CLASS_GEN__DECLARATION, ClassGen.class, msgs);
 			msgs = basicSetClassGen(newClassGen, msgs);
@@ -98,8 +125,8 @@ public class ClassDeclarationGenImpl extends DeclarationImpl implements ClassDec
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case GeneratorPackage.CLASS_DECLARATION_GEN__CLASS_GEN:
-				if (eInternalContainer() != null)
-					msgs = eBasicRemoveFromContainer(msgs);
+				if (classGen != null)
+					msgs = ((InternalEObject)classGen).eInverseRemove(this, GeneratorPackage.CLASS_GEN__DECLARATION, ClassGen.class, msgs);
 				return basicSetClassGen((ClassGen)otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
@@ -125,24 +152,11 @@ public class ClassDeclarationGenImpl extends DeclarationImpl implements ClassDec
 	 * @generated
 	 */
 	@Override
-	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
-		switch (eContainerFeatureID()) {
-			case GeneratorPackage.CLASS_DECLARATION_GEN__CLASS_GEN:
-				return eInternalContainer().eInverseRemove(this, GeneratorPackage.CLASS_GEN__DECLARATION, ClassGen.class, msgs);
-		}
-		return super.eBasicRemoveFromContainerFeature(msgs);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case GeneratorPackage.CLASS_DECLARATION_GEN__CLASS_GEN:
-				return getClassGen();
+				if (resolve) return getClassGen();
+				return basicGetClassGen();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -186,7 +200,7 @@ public class ClassDeclarationGenImpl extends DeclarationImpl implements ClassDec
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case GeneratorPackage.CLASS_DECLARATION_GEN__CLASS_GEN:
-				return getClassGen() != null;
+				return classGen != null;
 		}
 		return super.eIsSet(featureID);
 	}

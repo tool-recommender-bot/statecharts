@@ -103,7 +103,7 @@ public class ClassGenImpl extends CodeElementImpl implements ClassGen {
 	protected EList<InterfaceGen> implements_;
 
 	/**
-	 * The cached value of the '{@link #getDeclaration() <em>Declaration</em>}' containment reference.
+	 * The cached value of the '{@link #getDeclaration() <em>Declaration</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getDeclaration()
@@ -229,6 +229,23 @@ public class ClassGenImpl extends CodeElementImpl implements ClassGen {
 	 * @generated
 	 */
 	public ClassDeclarationGen getDeclaration() {
+		if (declaration != null && declaration.eIsProxy()) {
+			InternalEObject oldDeclaration = (InternalEObject)declaration;
+			declaration = (ClassDeclarationGen)eResolveProxy(oldDeclaration);
+			if (declaration != oldDeclaration) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, GeneratorPackage.CLASS_GEN__DECLARATION, oldDeclaration, declaration));
+			}
+		}
+		return declaration;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ClassDeclarationGen basicGetDeclaration() {
 		return declaration;
 	}
 
@@ -276,7 +293,7 @@ public class ClassGenImpl extends CodeElementImpl implements ClassGen {
 		switch (featureID) {
 			case GeneratorPackage.CLASS_GEN__DECLARATION:
 				if (declaration != null)
-					msgs = ((InternalEObject)declaration).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - GeneratorPackage.CLASS_GEN__DECLARATION, null, msgs);
+					msgs = ((InternalEObject)declaration).eInverseRemove(this, GeneratorPackage.CLASS_DECLARATION_GEN__CLASS_GEN, ClassDeclarationGen.class, msgs);
 				return basicSetDeclaration((ClassDeclarationGen)otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
@@ -314,7 +331,8 @@ public class ClassGenImpl extends CodeElementImpl implements ClassGen {
 			case GeneratorPackage.CLASS_GEN__IMPLEMENTS:
 				return getImplements();
 			case GeneratorPackage.CLASS_GEN__DECLARATION:
-				return getDeclaration();
+				if (resolve) return getDeclaration();
+				return basicGetDeclaration();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}

@@ -67,7 +67,7 @@ public class VariableGenImpl extends CodeElementImpl implements VariableGen {
 	protected TypeSpecifier typeSpecifier;
 
 	/**
-	 * The cached value of the '{@link #getDeclaration() <em>Declaration</em>}' containment reference.
+	 * The cached value of the '{@link #getDeclaration() <em>Declaration</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getDeclaration()
@@ -187,6 +187,23 @@ public class VariableGenImpl extends CodeElementImpl implements VariableGen {
 	 * @generated
 	 */
 	public VariableDeclarationGen getDeclaration() {
+		if (declaration != null && declaration.eIsProxy()) {
+			InternalEObject oldDeclaration = (InternalEObject)declaration;
+			declaration = (VariableDeclarationGen)eResolveProxy(oldDeclaration);
+			if (declaration != oldDeclaration) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, GeneratorPackage.VARIABLE_GEN__DECLARATION, oldDeclaration, declaration));
+			}
+		}
+		return declaration;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public VariableDeclarationGen basicGetDeclaration() {
 		return declaration;
 	}
 
@@ -234,7 +251,7 @@ public class VariableGenImpl extends CodeElementImpl implements VariableGen {
 		switch (featureID) {
 			case GeneratorPackage.VARIABLE_GEN__DECLARATION:
 				if (declaration != null)
-					msgs = ((InternalEObject)declaration).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - GeneratorPackage.VARIABLE_GEN__DECLARATION, null, msgs);
+					msgs = ((InternalEObject)declaration).eInverseRemove(this, GeneratorPackage.VARIABLE_DECLARATION_GEN__VARIABLE_GEN, VariableDeclarationGen.class, msgs);
 				return basicSetDeclaration((VariableDeclarationGen)otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
@@ -272,7 +289,8 @@ public class VariableGenImpl extends CodeElementImpl implements VariableGen {
 			case GeneratorPackage.VARIABLE_GEN__TYPE_SPECIFIER:
 				return getTypeSpecifier();
 			case GeneratorPackage.VARIABLE_GEN__DECLARATION:
-				return getDeclaration();
+				if (resolve) return getDeclaration();
+				return basicGetDeclaration();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}

@@ -20,7 +20,7 @@ package org.yakindu.base.generator.generator;
  */
 public interface ClassDeclarationGen extends Declaration {
 	/**
-	 * Returns the value of the '<em><b>Class Gen</b></em>' container reference.
+	 * Returns the value of the '<em><b>Class Gen</b></em>' reference.
 	 * It is bidirectional and its opposite is '{@link org.yakindu.base.generator.generator.ClassGen#getDeclaration <em>Declaration</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
@@ -28,20 +28,20 @@ public interface ClassDeclarationGen extends Declaration {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Class Gen</em>' container reference.
+	 * @return the value of the '<em>Class Gen</em>' reference.
 	 * @see #setClassGen(ClassGen)
 	 * @see org.yakindu.base.generator.generator.GeneratorPackage#getClassDeclarationGen_ClassGen()
 	 * @see org.yakindu.base.generator.generator.ClassGen#getDeclaration
-	 * @model opposite="declaration" transient="false"
+	 * @model opposite="declaration"
 	 * @generated
 	 */
 	ClassGen getClassGen();
 
 	/**
-	 * Sets the value of the '{@link org.yakindu.base.generator.generator.ClassDeclarationGen#getClassGen <em>Class Gen</em>}' container reference.
+	 * Sets the value of the '{@link org.yakindu.base.generator.generator.ClassDeclarationGen#getClassGen <em>Class Gen</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Class Gen</em>' container reference.
+	 * @param value the new value of the '<em>Class Gen</em>' reference.
 	 * @see #getClassGen()
 	 * @generated
 	 */

@@ -9,8 +9,6 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.util.EcoreUtil;
-
 import org.yakindu.base.generator.generator.GeneratorPackage;
 import org.yakindu.base.generator.generator.VariableDeclarationGen;
 import org.yakindu.base.generator.generator.VariableGen;
@@ -29,6 +27,16 @@ import org.yakindu.base.generator.generator.VariableGen;
  * @generated
  */
 public class VariableDeclarationGenImpl extends DeclarationImpl implements VariableDeclarationGen {
+	/**
+	 * The cached value of the '{@link #getVariableGen() <em>Variable Gen</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getVariableGen()
+	 * @generated
+	 * @ordered
+	 */
+	protected VariableGen variableGen;
+
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -54,8 +62,24 @@ public class VariableDeclarationGenImpl extends DeclarationImpl implements Varia
 	 * @generated
 	 */
 	public VariableGen getVariableGen() {
-		if (eContainerFeatureID() != GeneratorPackage.VARIABLE_DECLARATION_GEN__VARIABLE_GEN) return null;
-		return (VariableGen)eInternalContainer();
+		if (variableGen != null && variableGen.eIsProxy()) {
+			InternalEObject oldVariableGen = (InternalEObject)variableGen;
+			variableGen = (VariableGen)eResolveProxy(oldVariableGen);
+			if (variableGen != oldVariableGen) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, GeneratorPackage.VARIABLE_DECLARATION_GEN__VARIABLE_GEN, oldVariableGen, variableGen));
+			}
+		}
+		return variableGen;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public VariableGen basicGetVariableGen() {
+		return variableGen;
 	}
 
 	/**
@@ -64,7 +88,12 @@ public class VariableDeclarationGenImpl extends DeclarationImpl implements Varia
 	 * @generated
 	 */
 	public NotificationChain basicSetVariableGen(VariableGen newVariableGen, NotificationChain msgs) {
-		msgs = eBasicSetContainer((InternalEObject)newVariableGen, GeneratorPackage.VARIABLE_DECLARATION_GEN__VARIABLE_GEN, msgs);
+		VariableGen oldVariableGen = variableGen;
+		variableGen = newVariableGen;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, GeneratorPackage.VARIABLE_DECLARATION_GEN__VARIABLE_GEN, oldVariableGen, newVariableGen);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
 		return msgs;
 	}
 
@@ -74,12 +103,10 @@ public class VariableDeclarationGenImpl extends DeclarationImpl implements Varia
 	 * @generated
 	 */
 	public void setVariableGen(VariableGen newVariableGen) {
-		if (newVariableGen != eInternalContainer() || (eContainerFeatureID() != GeneratorPackage.VARIABLE_DECLARATION_GEN__VARIABLE_GEN && newVariableGen != null)) {
-			if (EcoreUtil.isAncestor(this, newVariableGen))
-				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
+		if (newVariableGen != variableGen) {
 			NotificationChain msgs = null;
-			if (eInternalContainer() != null)
-				msgs = eBasicRemoveFromContainer(msgs);
+			if (variableGen != null)
+				msgs = ((InternalEObject)variableGen).eInverseRemove(this, GeneratorPackage.VARIABLE_GEN__DECLARATION, VariableGen.class, msgs);
 			if (newVariableGen != null)
 				msgs = ((InternalEObject)newVariableGen).eInverseAdd(this, GeneratorPackage.VARIABLE_GEN__DECLARATION, VariableGen.class, msgs);
 			msgs = basicSetVariableGen(newVariableGen, msgs);
@@ -98,8 +125,8 @@ public class VariableDeclarationGenImpl extends DeclarationImpl implements Varia
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case GeneratorPackage.VARIABLE_DECLARATION_GEN__VARIABLE_GEN:
-				if (eInternalContainer() != null)
-					msgs = eBasicRemoveFromContainer(msgs);
+				if (variableGen != null)
+					msgs = ((InternalEObject)variableGen).eInverseRemove(this, GeneratorPackage.VARIABLE_GEN__DECLARATION, VariableGen.class, msgs);
 				return basicSetVariableGen((VariableGen)otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
@@ -125,24 +152,11 @@ public class VariableDeclarationGenImpl extends DeclarationImpl implements Varia
 	 * @generated
 	 */
 	@Override
-	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
-		switch (eContainerFeatureID()) {
-			case GeneratorPackage.VARIABLE_DECLARATION_GEN__VARIABLE_GEN:
-				return eInternalContainer().eInverseRemove(this, GeneratorPackage.VARIABLE_GEN__DECLARATION, VariableGen.class, msgs);
-		}
-		return super.eBasicRemoveFromContainerFeature(msgs);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case GeneratorPackage.VARIABLE_DECLARATION_GEN__VARIABLE_GEN:
-				return getVariableGen();
+				if (resolve) return getVariableGen();
+				return basicGetVariableGen();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -186,7 +200,7 @@ public class VariableDeclarationGenImpl extends DeclarationImpl implements Varia
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case GeneratorPackage.VARIABLE_DECLARATION_GEN__VARIABLE_GEN:
-				return getVariableGen() != null;
+				return variableGen != null;
 		}
 		return super.eIsSet(featureID);
 	}

@@ -20,7 +20,7 @@ package org.yakindu.base.generator.generator;
  */
 public interface VariableDeclarationGen extends Declaration {
 	/**
-	 * Returns the value of the '<em><b>Variable Gen</b></em>' container reference.
+	 * Returns the value of the '<em><b>Variable Gen</b></em>' reference.
 	 * It is bidirectional and its opposite is '{@link org.yakindu.base.generator.generator.VariableGen#getDeclaration <em>Declaration</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
@@ -28,20 +28,20 @@ public interface VariableDeclarationGen extends Declaration {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Variable Gen</em>' container reference.
+	 * @return the value of the '<em>Variable Gen</em>' reference.
 	 * @see #setVariableGen(VariableGen)
 	 * @see org.yakindu.base.generator.generator.GeneratorPackage#getVariableDeclarationGen_VariableGen()
 	 * @see org.yakindu.base.generator.generator.VariableGen#getDeclaration
-	 * @model opposite="declaration" transient="false"
+	 * @model opposite="declaration"
 	 * @generated
 	 */
 	VariableGen getVariableGen();
 
 	/**
-	 * Sets the value of the '{@link org.yakindu.base.generator.generator.VariableDeclarationGen#getVariableGen <em>Variable Gen</em>}' container reference.
+	 * Sets the value of the '{@link org.yakindu.base.generator.generator.VariableDeclarationGen#getVariableGen <em>Variable Gen</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Variable Gen</em>' container reference.
+	 * @param value the new value of the '<em>Variable Gen</em>' reference.
 	 * @see #getVariableGen()
 	 * @generated
 	 */

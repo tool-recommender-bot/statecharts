@@ -68,7 +68,7 @@ public interface MethodGen extends CodeElement, AccessRestricted, AbstractableEl
 	void setReturnType(TypeSpecifier value);
 
 	/**
-	 * Returns the value of the '<em><b>Declaration</b></em>' containment reference.
+	 * Returns the value of the '<em><b>Declaration</b></em>' reference.
 	 * It is bidirectional and its opposite is '{@link org.yakindu.base.generator.generator.MethodDeclarationGen#getMethodGen <em>Method Gen</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
@@ -76,20 +76,20 @@ public interface MethodGen extends CodeElement, AccessRestricted, AbstractableEl
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Declaration</em>' containment reference.
+	 * @return the value of the '<em>Declaration</em>' reference.
 	 * @see #setDeclaration(MethodDeclarationGen)
 	 * @see org.yakindu.base.generator.generator.GeneratorPackage#getMethodGen_Declaration()
 	 * @see org.yakindu.base.generator.generator.MethodDeclarationGen#getMethodGen
-	 * @model opposite="methodGen" containment="true"
+	 * @model opposite="methodGen"
 	 * @generated
 	 */
 	MethodDeclarationGen getDeclaration();
 
 	/**
-	 * Sets the value of the '{@link org.yakindu.base.generator.generator.MethodGen#getDeclaration <em>Declaration</em>}' containment reference.
+	 * Sets the value of the '{@link org.yakindu.base.generator.generator.MethodGen#getDeclaration <em>Declaration</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Declaration</em>' containment reference.
+	 * @param value the new value of the '<em>Declaration</em>' reference.
 	 * @see #getDeclaration()
 	 * @generated
 	 */

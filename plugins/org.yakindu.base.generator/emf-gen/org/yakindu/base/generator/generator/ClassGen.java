@@ -66,7 +66,7 @@ public interface ClassGen extends CodeElement, AccessRestricted, AbstractableEle
 	EList<InterfaceGen> getImplements();
 
 	/**
-	 * Returns the value of the '<em><b>Declaration</b></em>' containment reference.
+	 * Returns the value of the '<em><b>Declaration</b></em>' reference.
 	 * It is bidirectional and its opposite is '{@link org.yakindu.base.generator.generator.ClassDeclarationGen#getClassGen <em>Class Gen</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
@@ -74,20 +74,20 @@ public interface ClassGen extends CodeElement, AccessRestricted, AbstractableEle
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Declaration</em>' containment reference.
+	 * @return the value of the '<em>Declaration</em>' reference.
 	 * @see #setDeclaration(ClassDeclarationGen)
 	 * @see org.yakindu.base.generator.generator.GeneratorPackage#getClassGen_Declaration()
 	 * @see org.yakindu.base.generator.generator.ClassDeclarationGen#getClassGen
-	 * @model opposite="classGen" containment="true"
+	 * @model opposite="classGen"
 	 * @generated
 	 */
 	ClassDeclarationGen getDeclaration();
 
 	/**
-	 * Sets the value of the '{@link org.yakindu.base.generator.generator.ClassGen#getDeclaration <em>Declaration</em>}' containment reference.
+	 * Sets the value of the '{@link org.yakindu.base.generator.generator.ClassGen#getDeclaration <em>Declaration</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Declaration</em>' containment reference.
+	 * @param value the new value of the '<em>Declaration</em>' reference.
 	 * @see #getDeclaration()
 	 * @generated
 	 */

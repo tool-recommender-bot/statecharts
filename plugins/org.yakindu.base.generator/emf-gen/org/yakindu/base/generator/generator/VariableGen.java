@@ -23,7 +23,7 @@ import org.yakindu.base.types.TypedElement;
 public interface VariableGen extends CodeElement, AccessRestricted, TypedElement, Declarable {
 
 	/**
-	 * Returns the value of the '<em><b>Declaration</b></em>' containment reference.
+	 * Returns the value of the '<em><b>Declaration</b></em>' reference.
 	 * It is bidirectional and its opposite is '{@link org.yakindu.base.generator.generator.VariableDeclarationGen#getVariableGen <em>Variable Gen</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
@@ -31,20 +31,20 @@ public interface VariableGen extends CodeElement, AccessRestricted, TypedElement
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Declaration</em>' containment reference.
+	 * @return the value of the '<em>Declaration</em>' reference.
 	 * @see #setDeclaration(VariableDeclarationGen)
 	 * @see org.yakindu.base.generator.generator.GeneratorPackage#getVariableGen_Declaration()
 	 * @see org.yakindu.base.generator.generator.VariableDeclarationGen#getVariableGen
-	 * @model opposite="variableGen" containment="true"
+	 * @model opposite="variableGen"
 	 * @generated
 	 */
 	VariableDeclarationGen getDeclaration();
 
 	/**
-	 * Sets the value of the '{@link org.yakindu.base.generator.generator.VariableGen#getDeclaration <em>Declaration</em>}' containment reference.
+	 * Sets the value of the '{@link org.yakindu.base.generator.generator.VariableGen#getDeclaration <em>Declaration</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Declaration</em>' containment reference.
+	 * @param value the new value of the '<em>Declaration</em>' reference.
 	 * @see #getDeclaration()
 	 * @generated
 	 */

@@ -20,7 +20,7 @@ package org.yakindu.base.generator.generator;
  */
 public interface MethodDeclarationGen extends Declaration {
 	/**
-	 * Returns the value of the '<em><b>Method Gen</b></em>' container reference.
+	 * Returns the value of the '<em><b>Method Gen</b></em>' reference.
 	 * It is bidirectional and its opposite is '{@link org.yakindu.base.generator.generator.MethodGen#getDeclaration <em>Declaration</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
@@ -28,20 +28,20 @@ public interface MethodDeclarationGen extends Declaration {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Method Gen</em>' container reference.
+	 * @return the value of the '<em>Method Gen</em>' reference.
 	 * @see #setMethodGen(MethodGen)
 	 * @see org.yakindu.base.generator.generator.GeneratorPackage#getMethodDeclarationGen_MethodGen()
 	 * @see org.yakindu.base.generator.generator.MethodGen#getDeclaration
-	 * @model opposite="declaration" transient="false"
+	 * @model opposite="declaration"
 	 * @generated
 	 */
 	MethodGen getMethodGen();
 
 	/**
-	 * Sets the value of the '{@link org.yakindu.base.generator.generator.MethodDeclarationGen#getMethodGen <em>Method Gen</em>}' container reference.
+	 * Sets the value of the '{@link org.yakindu.base.generator.generator.MethodDeclarationGen#getMethodGen <em>Method Gen</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Method Gen</em>' container reference.
+	 * @param value the new value of the '<em>Method Gen</em>' reference.
 	 * @see #getMethodGen()
 	 * @generated
 	 */
