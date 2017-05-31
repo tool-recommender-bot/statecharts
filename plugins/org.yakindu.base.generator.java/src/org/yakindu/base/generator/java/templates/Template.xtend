@@ -5,6 +5,7 @@ import org.yakindu.base.generator.generator.AccessRestricted
 import org.yakindu.base.generator.generator.CodeElement
 import org.yakindu.base.generator.templates.ITemplate
 import org.yakindu.base.generator.templates.TemplateProvider
+import org.yakindu.base.types.TypeSpecifier
 
 abstract class Template implements ITemplate {
 	@Inject protected TemplateProvider templateProvider
@@ -17,7 +18,7 @@ abstract class Template implements ITemplate {
 			"Trying to generate a  " + it.class.simpleName + "with a " + this.class.simpleName
 		)
 	}
-
+	
 	def generateVisibility(AccessRestricted it) {
 		switch (visibility) {
 			case null:
@@ -33,6 +34,19 @@ abstract class Template implements ITemplate {
 			case PUBLIC: {
 				"public "
 			}
+		}
+	}
+	
+	def CharSequence generateTypeSpecifier(TypeSpecifier it) {
+		'''«type»«generateTypeParameters»'''
+	}
+	
+	def generateTypeParameters(TypeSpecifier it) {
+		if(typeArguments.nullOrEmpty) {
+			return ""
+		}
+		else {
+			return '''<«typeArguments.map([generateTypeSpecifier]).join(", ")»>'''
 		}
 	}
 	
@@ -61,8 +75,12 @@ abstract class Template implements ITemplate {
 	}
 	
 	def generateContent(CodeElement it) {
+		children.generateElements
+	}
+	
+	def generateElements(Iterable<CodeElement> it) {
 		'''
-		«FOR c:children»
+		«FOR c:it»
 		«templateProvider.get(c).generate(c)»
 		«ENDFOR»
 		'''

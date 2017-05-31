@@ -100,6 +100,24 @@ class ClassTest extends AbstractJavaGeneratorTest {
 	}
 	
 	@Test
+	def testMemberVariables() {
+		val testClass = helper.createClassGen("ClassWithMembers")
+		testClass.children.add(helper.getDeclaration(
+			helper.createVariableGen("myString", "string", "public")
+		))
+		testClass.children.add(helper.getDeclaration(
+			helper.createVariableGen("myInteger", "integer", "public")
+		))
+		val exp = '''
+		class ClassWithMembers {
+			public string myString;
+			public integer myInteger;
+		}
+		'''
+		generatesTo(exp, testClass)
+	}
+	
+	@Test
 	def testConstructor() {
 		val testClass = helper.createClassGen("HasConstructor")
 		testClass.addConstructor(newArrayList())
@@ -120,6 +138,8 @@ class ClassTest extends AbstractJavaGeneratorTest {
 		testClass.addConstructor(parameters)
 		val exp = '''
 		class HasConstructor {
+			protected string p1;
+			
 			public HasConstructor(string p1) {
 				this.p1 = p1;
 			}
@@ -137,9 +157,45 @@ class ClassTest extends AbstractJavaGeneratorTest {
 		testClass.addConstructor(parameters)
 		val exp = '''
 		class HasConstructor {
+			protected string p1;
+			protected integer p2;
+			
 			public HasConstructor(string p1, integer p2) {
 				this.p1 = p1;
 				this.p2 = p2;
+			}
+		}
+		'''
+		generatesTo(exp, testClass)
+	}
+	
+	@Test
+	def testGettersAndSetters() {
+		val testClass = helper.createClassGen("ClassWithMembers")
+		testClass.children.add(helper.getDeclaration(
+			helper.createVariableGen("myString", "string", "protected")
+		))
+		testClass.children.add(helper.getDeclaration(
+			helper.createVariableGen("myInteger", "integer", "protected")
+		))
+		testClass.addAllGettersAndSetters
+		val exp = '''
+		class ClassWithMembers {
+			protected string myString;
+			protected integer myInteger;
+			
+			public string getMyString() {
+			}
+			
+			public void setMyString(string value) {
+				this.myString = value;
+			}
+			
+			public integer getMyInteger() {
+			}
+			
+			public void setMyInteger(integer value) {
+				this.myInteger = value;
 			}
 		}
 		'''

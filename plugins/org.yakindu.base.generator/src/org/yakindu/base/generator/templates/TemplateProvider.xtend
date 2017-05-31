@@ -8,6 +8,6 @@ abstract class TemplateProvider implements ITemplateProvider {
 	}
 	
 	def dispatch ITemplate doGet(CodeElement it) {
-		return null
+		throw new UnsupportedOperationException("Could not find a template for CodeElement " + class.simpleName)
 	}
 }

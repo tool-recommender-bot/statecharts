@@ -11,17 +11,4 @@ class ParameterTemplate extends Template {
 	def generateParameterType(ParameterGen it) {
 		generateTypeSpecifier(typeSpecifier)
 	}
-	
-	def CharSequence generateTypeSpecifier(TypeSpecifier it) {
-		'''«type»«generateTypeParameters»'''
-	}
-	
-	def generateTypeParameters(TypeSpecifier it) {
-		if(typeArguments.nullOrEmpty) {
-			return ""
-		}
-		else {
-			return '''<«typeArguments.map([generateTypeSpecifier]).join(", ")»>'''
-		}
-	}
 }

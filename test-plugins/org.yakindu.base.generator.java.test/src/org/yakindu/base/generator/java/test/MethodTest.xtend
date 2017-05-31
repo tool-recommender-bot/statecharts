@@ -62,4 +62,15 @@ class MethodTest extends AbstractJavaGeneratorTest {
 		'''
 		generatesTo(exp, testMethod)
 	}
+	
+	@Test
+	def methodReturnTypeTest() {
+		val testMethod = helper.createMethodGen("myFunc")
+		testMethod.returnType = helper.createTypeSpecifier("string")
+		val exp = '''
+		string myFunc() {
+		}
+		'''
+		generatesTo(exp, testMethod)
+	}
 }
