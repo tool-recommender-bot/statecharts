@@ -2,8 +2,6 @@
  */
 package org.yakindu.base.generator.generator;
 
-import org.eclipse.emf.ecore.EObject;
-
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Method Declaration Gen</b></em>'.
@@ -20,7 +18,7 @@ import org.eclipse.emf.ecore.EObject;
  * @model
  * @generated
  */
-public interface MethodDeclarationGen extends EObject {
+public interface MethodDeclarationGen extends Declaration {
 	/**
 	 * Returns the value of the '<em><b>Method Gen</b></em>' container reference.
 	 * It is bidirectional and its opposite is '{@link org.yakindu.base.generator.generator.MethodGen#getDeclaration <em>Declaration</em>}'.

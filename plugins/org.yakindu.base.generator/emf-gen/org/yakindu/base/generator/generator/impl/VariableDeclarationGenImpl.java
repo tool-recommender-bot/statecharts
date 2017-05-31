@@ -9,8 +9,6 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
-
 import org.eclipse.emf.ecore.util.EcoreUtil;
 
 import org.yakindu.base.generator.generator.GeneratorPackage;
@@ -30,7 +28,7 @@ import org.yakindu.base.generator.generator.VariableGen;
  *
  * @generated
  */
-public class VariableDeclarationGenImpl extends MinimalEObjectImpl.Container implements VariableDeclarationGen {
+public class VariableDeclarationGenImpl extends DeclarationImpl implements VariableDeclarationGen {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

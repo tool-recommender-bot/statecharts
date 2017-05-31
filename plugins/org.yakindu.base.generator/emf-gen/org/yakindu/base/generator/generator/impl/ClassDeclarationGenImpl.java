@@ -9,8 +9,6 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
-
 import org.eclipse.emf.ecore.util.EcoreUtil;
 
 import org.yakindu.base.generator.generator.ClassDeclarationGen;
@@ -30,7 +28,7 @@ import org.yakindu.base.generator.generator.GeneratorPackage;
  *
  * @generated
  */
-public class ClassDeclarationGenImpl extends MinimalEObjectImpl.Container implements ClassDeclarationGen {
+public class ClassDeclarationGenImpl extends DeclarationImpl implements ClassDeclarationGen {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

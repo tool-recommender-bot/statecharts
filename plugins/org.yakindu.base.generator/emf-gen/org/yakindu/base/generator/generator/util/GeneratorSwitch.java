@@ -94,6 +94,7 @@ public class GeneratorSwitch<T> extends Switch<T> {
 				if (result == null) result = caseCodeElement(classGen);
 				if (result == null) result = caseAccessRestricted(classGen);
 				if (result == null) result = caseAbstractableElement(classGen);
+				if (result == null) result = caseDeclarable(classGen);
 				if (result == null) result = caseNamedElement(classGen);
 				if (result == null) result = caseDocumentedElement(classGen);
 				if (result == null) result = defaultCase(theEObject);
@@ -102,6 +103,7 @@ public class GeneratorSwitch<T> extends Switch<T> {
 			case GeneratorPackage.CLASS_DECLARATION_GEN: {
 				ClassDeclarationGen classDeclarationGen = (ClassDeclarationGen)theEObject;
 				T result = caseClassDeclarationGen(classDeclarationGen);
+				if (result == null) result = caseDeclaration(classDeclarationGen);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -121,6 +123,7 @@ public class GeneratorSwitch<T> extends Switch<T> {
 				if (result == null) result = caseCodeElement(methodGen);
 				if (result == null) result = caseAccessRestricted(methodGen);
 				if (result == null) result = caseAbstractableElement(methodGen);
+				if (result == null) result = caseDeclarable(methodGen);
 				if (result == null) result = caseNamedElement(methodGen);
 				if (result == null) result = caseDocumentedElement(methodGen);
 				if (result == null) result = defaultCase(theEObject);
@@ -129,6 +132,7 @@ public class GeneratorSwitch<T> extends Switch<T> {
 			case GeneratorPackage.METHOD_DECLARATION_GEN: {
 				MethodDeclarationGen methodDeclarationGen = (MethodDeclarationGen)theEObject;
 				T result = caseMethodDeclarationGen(methodDeclarationGen);
+				if (result == null) result = caseDeclaration(methodDeclarationGen);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -144,6 +148,7 @@ public class GeneratorSwitch<T> extends Switch<T> {
 				if (result == null) result = caseCodeElement(variableGen);
 				if (result == null) result = caseAccessRestricted(variableGen);
 				if (result == null) result = caseTypedElement(variableGen);
+				if (result == null) result = caseDeclarable(variableGen);
 				if (result == null) result = caseNamedElement(variableGen);
 				if (result == null) result = caseDocumentedElement(variableGen);
 				if (result == null) result = defaultCase(theEObject);
@@ -152,6 +157,7 @@ public class GeneratorSwitch<T> extends Switch<T> {
 			case GeneratorPackage.VARIABLE_DECLARATION_GEN: {
 				VariableDeclarationGen variableDeclarationGen = (VariableDeclarationGen)theEObject;
 				T result = caseVariableDeclarationGen(variableDeclarationGen);
+				if (result == null) result = caseDeclaration(variableDeclarationGen);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -177,6 +183,18 @@ public class GeneratorSwitch<T> extends Switch<T> {
 				if (result == null) result = caseCodeElement(expressionGen);
 				if (result == null) result = caseNamedElement(expressionGen);
 				if (result == null) result = caseDocumentedElement(expressionGen);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case GeneratorPackage.DECLARATION: {
+				Declaration declaration = (Declaration)theEObject;
+				T result = caseDeclaration(declaration);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case GeneratorPackage.DECLARABLE: {
+				Declarable declarable = (Declarable)theEObject;
+				T result = caseDeclarable(declarable);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -376,6 +394,36 @@ public class GeneratorSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseExpressionGen(ExpressionGen object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Declaration</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Declaration</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseDeclaration(Declaration object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Declarable</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Declarable</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseDeclarable(Declarable object) {
 		return null;
 	}
 

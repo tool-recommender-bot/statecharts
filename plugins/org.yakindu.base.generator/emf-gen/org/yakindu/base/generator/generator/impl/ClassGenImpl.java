@@ -19,6 +19,7 @@ import org.yakindu.base.generator.generator.AbstractableElement;
 import org.yakindu.base.generator.generator.AccessRestricted;
 import org.yakindu.base.generator.generator.ClassDeclarationGen;
 import org.yakindu.base.generator.generator.ClassGen;
+import org.yakindu.base.generator.generator.Declarable;
 import org.yakindu.base.generator.generator.GeneratorPackage;
 import org.yakindu.base.generator.generator.InterfaceGen;
 import org.yakindu.base.generator.generator.VisibilityValues;
@@ -415,6 +416,11 @@ public class ClassGenImpl extends CodeElementImpl implements ClassGen {
 				default: return -1;
 			}
 		}
+		if (baseClass == Declarable.class) {
+			switch (derivedFeatureID) {
+				default: return -1;
+			}
+		}
 		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
 	}
 
@@ -434,6 +440,11 @@ public class ClassGenImpl extends CodeElementImpl implements ClassGen {
 		if (baseClass == AbstractableElement.class) {
 			switch (baseFeatureID) {
 				case GeneratorPackage.ABSTRACTABLE_ELEMENT__ABSTRACT: return GeneratorPackage.CLASS_GEN__ABSTRACT;
+				default: return -1;
+			}
+		}
+		if (baseClass == Declarable.class) {
+			switch (baseFeatureID) {
 				default: return -1;
 			}
 		}

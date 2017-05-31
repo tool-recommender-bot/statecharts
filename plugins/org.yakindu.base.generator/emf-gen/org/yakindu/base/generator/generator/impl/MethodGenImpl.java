@@ -18,6 +18,7 @@ import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.yakindu.base.generator.generator.AbstractableElement;
 import org.yakindu.base.generator.generator.AccessRestricted;
+import org.yakindu.base.generator.generator.Declarable;
 import org.yakindu.base.generator.generator.GeneratorPackage;
 import org.yakindu.base.generator.generator.MethodDeclarationGen;
 import org.yakindu.base.generator.generator.MethodGen;
@@ -419,6 +420,11 @@ public class MethodGenImpl extends CodeElementImpl implements MethodGen {
 				default: return -1;
 			}
 		}
+		if (baseClass == Declarable.class) {
+			switch (derivedFeatureID) {
+				default: return -1;
+			}
+		}
 		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
 	}
 
@@ -438,6 +444,11 @@ public class MethodGenImpl extends CodeElementImpl implements MethodGen {
 		if (baseClass == AbstractableElement.class) {
 			switch (baseFeatureID) {
 				case GeneratorPackage.ABSTRACTABLE_ELEMENT__ABSTRACT: return GeneratorPackage.METHOD_GEN__ABSTRACT;
+				default: return -1;
+			}
+		}
+		if (baseClass == Declarable.class) {
+			switch (baseFeatureID) {
 				default: return -1;
 			}
 		}

@@ -11,6 +11,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import org.yakindu.base.generator.generator.AccessRestricted;
+import org.yakindu.base.generator.generator.Declarable;
 import org.yakindu.base.generator.generator.GeneratorPackage;
 import org.yakindu.base.generator.generator.VariableDeclarationGen;
 import org.yakindu.base.generator.generator.VariableGen;
@@ -358,6 +359,11 @@ public class VariableGenImpl extends CodeElementImpl implements VariableGen {
 				default: return -1;
 			}
 		}
+		if (baseClass == Declarable.class) {
+			switch (derivedFeatureID) {
+				default: return -1;
+			}
+		}
 		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
 	}
 
@@ -378,6 +384,11 @@ public class VariableGenImpl extends CodeElementImpl implements VariableGen {
 			switch (baseFeatureID) {
 				case TypesPackage.TYPED_ELEMENT__TYPE: return GeneratorPackage.VARIABLE_GEN__TYPE;
 				case TypesPackage.TYPED_ELEMENT__TYPE_SPECIFIER: return GeneratorPackage.VARIABLE_GEN__TYPE_SPECIFIER;
+				default: return -1;
+			}
+		}
+		if (baseClass == Declarable.class) {
+			switch (baseFeatureID) {
 				default: return -1;
 			}
 		}

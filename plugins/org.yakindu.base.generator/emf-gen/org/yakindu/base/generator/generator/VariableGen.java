@@ -20,7 +20,7 @@ import org.yakindu.base.types.TypedElement;
  * @model
  * @generated
  */
-public interface VariableGen extends CodeElement, AccessRestricted, TypedElement {
+public interface VariableGen extends CodeElement, AccessRestricted, TypedElement, Declarable {
 
 	/**
 	 * Returns the value of the '<em><b>Declaration</b></em>' containment reference.

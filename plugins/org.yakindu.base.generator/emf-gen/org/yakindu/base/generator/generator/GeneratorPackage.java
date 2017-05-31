@@ -287,6 +287,25 @@ public interface GeneratorPackage extends EPackage {
 	int CLASS_GEN_FEATURE_COUNT = CODE_ELEMENT_FEATURE_COUNT + 5;
 
 	/**
+	 * The meta object id for the '{@link org.yakindu.base.generator.generator.impl.DeclarationImpl <em>Declaration</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.yakindu.base.generator.generator.impl.DeclarationImpl
+	 * @see org.yakindu.base.generator.generator.impl.GeneratorPackageImpl#getDeclaration()
+	 * @generated
+	 */
+	int DECLARATION = 13;
+
+	/**
+	 * The number of structural features of the '<em>Declaration</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DECLARATION_FEATURE_COUNT = 0;
+
+	/**
 	 * The meta object id for the '{@link org.yakindu.base.generator.generator.impl.ClassDeclarationGenImpl <em>Class Declaration Gen</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -303,7 +322,7 @@ public interface GeneratorPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CLASS_DECLARATION_GEN__CLASS_GEN = 0;
+	int CLASS_DECLARATION_GEN__CLASS_GEN = DECLARATION_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>Class Declaration Gen</em>' class.
@@ -312,7 +331,7 @@ public interface GeneratorPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CLASS_DECLARATION_GEN_FEATURE_COUNT = 1;
+	int CLASS_DECLARATION_GEN_FEATURE_COUNT = DECLARATION_FEATURE_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.base.generator.generator.impl.InterfaceGenImpl <em>Interface Gen</em>}' class.
@@ -504,7 +523,7 @@ public interface GeneratorPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int METHOD_DECLARATION_GEN__METHOD_GEN = 0;
+	int METHOD_DECLARATION_GEN__METHOD_GEN = DECLARATION_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>Method Declaration Gen</em>' class.
@@ -513,7 +532,7 @@ public interface GeneratorPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int METHOD_DECLARATION_GEN_FEATURE_COUNT = 1;
+	int METHOD_DECLARATION_GEN_FEATURE_COUNT = DECLARATION_FEATURE_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.base.generator.generator.impl.AccessRestrictedImpl <em>Access Restricted</em>}' class.
@@ -651,7 +670,7 @@ public interface GeneratorPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int VARIABLE_DECLARATION_GEN__VARIABLE_GEN = 0;
+	int VARIABLE_DECLARATION_GEN__VARIABLE_GEN = DECLARATION_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>Variable Declaration Gen</em>' class.
@@ -660,7 +679,7 @@ public interface GeneratorPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int VARIABLE_DECLARATION_GEN_FEATURE_COUNT = 1;
+	int VARIABLE_DECLARATION_GEN_FEATURE_COUNT = DECLARATION_FEATURE_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.base.generator.generator.impl.ParameterGenImpl <em>Parameter Gen</em>}' class.
@@ -828,6 +847,25 @@ public interface GeneratorPackage extends EPackage {
 	int EXPRESSION_GEN_FEATURE_COUNT = CODE_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
+	 * The meta object id for the '{@link org.yakindu.base.generator.generator.impl.DeclarableImpl <em>Declarable</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.yakindu.base.generator.generator.impl.DeclarableImpl
+	 * @see org.yakindu.base.generator.generator.impl.GeneratorPackageImpl#getDeclarable()
+	 * @generated
+	 */
+	int DECLARABLE = 14;
+
+	/**
+	 * The number of structural features of the '<em>Declarable</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DECLARABLE_FEATURE_COUNT = 0;
+
+	/**
 	 * The meta object id for the '{@link org.yakindu.base.generator.generator.VisibilityValues <em>Visibility Values</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -835,7 +873,7 @@ public interface GeneratorPackage extends EPackage {
 	 * @see org.yakindu.base.generator.generator.impl.GeneratorPackageImpl#getVisibilityValues()
 	 * @generated
 	 */
-	int VISIBILITY_VALUES = 13;
+	int VISIBILITY_VALUES = 15;
 
 	/**
 	 * Returns the meta object for class '{@link org.yakindu.base.generator.generator.CodeElement <em>Code Element</em>}'.
@@ -1166,6 +1204,26 @@ public interface GeneratorPackage extends EPackage {
 	EReference getExpressionGen_Expression();
 
 	/**
+	 * Returns the meta object for class '{@link org.yakindu.base.generator.generator.Declaration <em>Declaration</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Declaration</em>'.
+	 * @see org.yakindu.base.generator.generator.Declaration
+	 * @generated
+	 */
+	EClass getDeclaration();
+
+	/**
+	 * Returns the meta object for class '{@link org.yakindu.base.generator.generator.Declarable <em>Declarable</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Declarable</em>'.
+	 * @see org.yakindu.base.generator.generator.Declarable
+	 * @generated
+	 */
+	EClass getDeclarable();
+
+	/**
 	 * Returns the meta object for enum '{@link org.yakindu.base.generator.generator.VisibilityValues <em>Visibility Values</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1471,6 +1529,26 @@ public interface GeneratorPackage extends EPackage {
 		 * @generated
 		 */
 		EReference EXPRESSION_GEN__EXPRESSION = eINSTANCE.getExpressionGen_Expression();
+
+		/**
+		 * The meta object literal for the '{@link org.yakindu.base.generator.generator.impl.DeclarationImpl <em>Declaration</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.yakindu.base.generator.generator.impl.DeclarationImpl
+		 * @see org.yakindu.base.generator.generator.impl.GeneratorPackageImpl#getDeclaration()
+		 * @generated
+		 */
+		EClass DECLARATION = eINSTANCE.getDeclaration();
+
+		/**
+		 * The meta object literal for the '{@link org.yakindu.base.generator.generator.impl.DeclarableImpl <em>Declarable</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.yakindu.base.generator.generator.impl.DeclarableImpl
+		 * @see org.yakindu.base.generator.generator.impl.GeneratorPackageImpl#getDeclarable()
+		 * @generated
+		 */
+		EClass DECLARABLE = eINSTANCE.getDeclarable();
 
 		/**
 		 * The meta object literal for the '{@link org.yakindu.base.generator.generator.VisibilityValues <em>Visibility Values</em>}' enum.

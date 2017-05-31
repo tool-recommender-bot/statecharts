@@ -125,6 +125,14 @@ public class GeneratorAdapterFactory extends AdapterFactoryImpl {
 				return createExpressionGenAdapter();
 			}
 			@Override
+			public Adapter caseDeclaration(Declaration object) {
+				return createDeclarationAdapter();
+			}
+			@Override
+			public Adapter caseDeclarable(Declarable object) {
+				return createDeclarableAdapter();
+			}
+			@Override
 			public Adapter caseNamedElement(NamedElement object) {
 				return createNamedElementAdapter();
 			}
@@ -335,6 +343,34 @@ public class GeneratorAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createExpressionGenAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.yakindu.base.generator.generator.Declaration <em>Declaration</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.yakindu.base.generator.generator.Declaration
+	 * @generated
+	 */
+	public Adapter createDeclarationAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.yakindu.base.generator.generator.Declarable <em>Declarable</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.yakindu.base.generator.generator.Declarable
+	 * @generated
+	 */
+	public Adapter createDeclarableAdapter() {
 		return null;
 	}
 

@@ -18,6 +18,8 @@ import org.yakindu.base.generator.generator.AccessRestricted;
 import org.yakindu.base.generator.generator.ClassDeclarationGen;
 import org.yakindu.base.generator.generator.ClassGen;
 import org.yakindu.base.generator.generator.CodeElement;
+import org.yakindu.base.generator.generator.Declarable;
+import org.yakindu.base.generator.generator.Declaration;
 import org.yakindu.base.generator.generator.ExpressionGen;
 import org.yakindu.base.generator.generator.GeneratorFactory;
 import org.yakindu.base.generator.generator.GeneratorPackage;
@@ -128,6 +130,20 @@ public class GeneratorPackageImpl extends EPackageImpl implements GeneratorPacka
 	 * @generated
 	 */
 	private EClass expressionGenEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass declarationEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass declarableEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -484,6 +500,24 @@ public class GeneratorPackageImpl extends EPackageImpl implements GeneratorPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getDeclaration() {
+		return declarationEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getDeclarable() {
+		return declarableEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EEnum getVisibilityValues() {
 		return visibilityValuesEEnum;
 	}
@@ -560,6 +594,10 @@ public class GeneratorPackageImpl extends EPackageImpl implements GeneratorPacka
 		expressionGenEClass = createEClass(EXPRESSION_GEN);
 		createEReference(expressionGenEClass, EXPRESSION_GEN__EXPRESSION);
 
+		declarationEClass = createEClass(DECLARATION);
+
+		declarableEClass = createEClass(DECLARABLE);
+
 		// Create enums
 		visibilityValuesEEnum = createEEnum(VISIBILITY_VALUES);
 	}
@@ -603,14 +641,20 @@ public class GeneratorPackageImpl extends EPackageImpl implements GeneratorPacka
 		classGenEClass.getESuperTypes().add(this.getCodeElement());
 		classGenEClass.getESuperTypes().add(this.getAccessRestricted());
 		classGenEClass.getESuperTypes().add(this.getAbstractableElement());
+		classGenEClass.getESuperTypes().add(this.getDeclarable());
+		classDeclarationGenEClass.getESuperTypes().add(this.getDeclaration());
 		interfaceGenEClass.getESuperTypes().add(this.getCodeElement());
 		interfaceGenEClass.getESuperTypes().add(this.getAccessRestricted());
 		methodGenEClass.getESuperTypes().add(this.getCodeElement());
 		methodGenEClass.getESuperTypes().add(this.getAccessRestricted());
 		methodGenEClass.getESuperTypes().add(this.getAbstractableElement());
+		methodGenEClass.getESuperTypes().add(this.getDeclarable());
+		methodDeclarationGenEClass.getESuperTypes().add(this.getDeclaration());
 		variableGenEClass.getESuperTypes().add(this.getCodeElement());
 		variableGenEClass.getESuperTypes().add(this.getAccessRestricted());
 		variableGenEClass.getESuperTypes().add(theTypesPackage.getTypedElement());
+		variableGenEClass.getESuperTypes().add(this.getDeclarable());
+		variableDeclarationGenEClass.getESuperTypes().add(this.getDeclaration());
 		parameterGenEClass.getESuperTypes().add(this.getCodeElement());
 		parameterGenEClass.getESuperTypes().add(theTypesPackage.getTypedElement());
 		expressionGenEClass.getESuperTypes().add(this.getCodeElement());
@@ -659,6 +703,10 @@ public class GeneratorPackageImpl extends EPackageImpl implements GeneratorPacka
 
 		initEClass(expressionGenEClass, ExpressionGen.class, "ExpressionGen", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getExpressionGen_Expression(), theExpressionsPackage.getExpression(), null, "expression", null, 0, 1, ExpressionGen.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(declarationEClass, Declaration.class, "Declaration", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(declarableEClass, Declarable.class, "Declarable", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		// Initialize enums and add enum literals
 		initEEnum(visibilityValuesEEnum, VisibilityValues.class, "VisibilityValues");

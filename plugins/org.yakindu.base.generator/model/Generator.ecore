@@ -13,28 +13,28 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="imports" upperBound="-1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ClassGen" eSuperTypes="#//CodeElement #//AccessRestricted #//AbstractableElement">
+  <eClassifiers xsi:type="ecore:EClass" name="ClassGen" eSuperTypes="#//CodeElement #//AccessRestricted #//AbstractableElement #//Declarable">
     <eStructuralFeatures xsi:type="ecore:EReference" name="superClass" eType="#//ClassGen"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="implements" upperBound="-1"
         eType="#//InterfaceGen"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="declaration" eType="#//ClassDeclarationGen"
         containment="true" eOpposite="#//ClassDeclarationGen/classGen"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ClassDeclarationGen">
+  <eClassifiers xsi:type="ecore:EClass" name="ClassDeclarationGen" eSuperTypes="#//Declaration">
     <eStructuralFeatures xsi:type="ecore:EReference" name="classGen" eType="#//ClassGen"
         eOpposite="#//ClassGen/declaration"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="InterfaceGen" eSuperTypes="#//CodeElement #//AccessRestricted">
     <eStructuralFeatures xsi:type="ecore:EReference" name="superClass" eType="#//InterfaceGen"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="MethodGen" eSuperTypes="#//CodeElement #//AccessRestricted #//AbstractableElement">
+  <eClassifiers xsi:type="ecore:EClass" name="MethodGen" eSuperTypes="#//CodeElement #//AccessRestricted #//AbstractableElement #//Declarable">
     <eStructuralFeatures xsi:type="ecore:EReference" name="parameters" upperBound="-1"
         eType="#//ParameterGen" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="returnType" eType="ecore:EClass ../../org.yakindu.base.types/model/types.ecore#//TypeSpecifier"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="declaration" eType="#//MethodDeclarationGen"
         containment="true" eOpposite="#//MethodDeclarationGen/methodGen"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="MethodDeclarationGen">
+  <eClassifiers xsi:type="ecore:EClass" name="MethodDeclarationGen" eSuperTypes="#//Declaration">
     <eStructuralFeatures xsi:type="ecore:EReference" name="methodGen" eType="#//MethodGen"
         eOpposite="#//MethodGen/declaration"/>
   </eClassifiers>
@@ -42,11 +42,11 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="visibility" eType="#//VisibilityValues"
         defaultValueLiteral="NONE"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="VariableGen" eSuperTypes="#//CodeElement #//AccessRestricted ../../org.yakindu.base.types/model/types.ecore#//TypedElement">
+  <eClassifiers xsi:type="ecore:EClass" name="VariableGen" eSuperTypes="#//CodeElement #//AccessRestricted ../../org.yakindu.base.types/model/types.ecore#//TypedElement #//Declarable">
     <eStructuralFeatures xsi:type="ecore:EReference" name="declaration" eType="#//VariableDeclarationGen"
         containment="true" eOpposite="#//VariableDeclarationGen/variableGen"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="VariableDeclarationGen">
+  <eClassifiers xsi:type="ecore:EClass" name="VariableDeclarationGen" eSuperTypes="#//Declaration">
     <eStructuralFeatures xsi:type="ecore:EReference" name="variableGen" eType="#//VariableGen"
         eOpposite="#//VariableGen/declaration"/>
   </eClassifiers>
@@ -65,4 +65,6 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="expression" eType="ecore:EClass ../../org.yakindu.base.expressions/model/Expressions.ecore#//Expression"
         containment="true"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Declaration" abstract="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Declarable" abstract="true"/>
 </ecore:EPackage>
