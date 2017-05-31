@@ -35,4 +35,28 @@ abstract class Template implements ITemplate {
 			}
 		}
 	}
+	
+	def CharSequence generateDocumentation(CodeElement it) {
+		if(documentation.nullOrEmpty) {
+			return ''''''
+		}
+		if(documentation.multiline) {
+			return 
+			''' 
+			/**
+			 «FOR line : documentation.split("\n")»
+			 * «line»
+			 «ENDFOR»
+			 */
+			'''
+		}
+		'''/** «documentation» */'''
+	}
+	
+	def isMultiline(String doc) {
+		if(doc.contains("\n")) {
+			return true
+		}
+		return false
+	}
 }

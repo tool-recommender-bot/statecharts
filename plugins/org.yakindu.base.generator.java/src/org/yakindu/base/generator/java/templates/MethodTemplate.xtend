@@ -4,8 +4,8 @@ import org.yakindu.base.generator.generator.MethodGen
 
 class MethodTemplate extends Template {
 	def dispatch String generate(MethodGen it) {
-		
 		'''
+		«generateDocumentation»
 		«generateVisibility»«generateReturnType»«name»(«generateParameters»)«generateBody»
 		'''
 	}
