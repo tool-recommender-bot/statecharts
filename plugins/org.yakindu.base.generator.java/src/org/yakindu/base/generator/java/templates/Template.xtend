@@ -45,7 +45,7 @@ abstract class Template implements ITemplate {
 			''' 
 			/**
 			 «FOR line : documentation.split("\n")»
-			 * «line»
+			 * «line.trim»
 			 «ENDFOR»
 			 */
 			'''

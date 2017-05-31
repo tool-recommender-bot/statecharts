@@ -3,6 +3,7 @@ package org.yakindu.base.generator.java.templates
 import com.google.inject.Inject
 import com.google.inject.Injector
 import org.yakindu.base.generator.generator.ClassGen
+import org.yakindu.base.generator.generator.ExpressionGen
 import org.yakindu.base.generator.generator.InterfaceGen
 import org.yakindu.base.generator.generator.MethodGen
 import org.yakindu.base.generator.generator.ParameterGen
@@ -39,6 +40,12 @@ class JavaTemplateProvider extends TemplateProvider {
 
 	def dispatch doGet(SourceFileGen it) {
 		val ret = new SourceFileTemplate()
+		ret.inject
+		return ret
+	}
+	
+	def dispatch doGet(ExpressionGen it) {
+		val ret = new ExpressionTemplate()
 		ret.inject
 		return ret
 	}
