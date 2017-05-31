@@ -3,6 +3,7 @@ package org.yakindu.base.generator
 import com.google.inject.Inject
 import org.yakindu.base.generator.generator.AccessRestricted
 import org.yakindu.base.generator.generator.ClassGen
+import org.yakindu.base.generator.generator.ExpressionGen
 import org.yakindu.base.generator.generator.GeneratorFactory
 import org.yakindu.base.generator.generator.InterfaceGen
 import org.yakindu.base.generator.generator.MethodGen
@@ -65,6 +66,9 @@ class GeneratorHelper {
 	def ParameterGen create factory.createParameterGen createParameterGen(String name, String typeName) {
 		it.name = name
 		it.typeSpecifier = typeName.toTypeSpecifier
+	}
+	
+	def ExpressionGen create factory.createExpressionGen createExpressionGen() {
 	}
 	
 }
