@@ -104,6 +104,9 @@ public class GeneratorSwitch<T> extends Switch<T> {
 				ClassDeclarationGen classDeclarationGen = (ClassDeclarationGen)theEObject;
 				T result = caseClassDeclarationGen(classDeclarationGen);
 				if (result == null) result = caseDeclaration(classDeclarationGen);
+				if (result == null) result = caseCodeElement(classDeclarationGen);
+				if (result == null) result = caseNamedElement(classDeclarationGen);
+				if (result == null) result = caseDocumentedElement(classDeclarationGen);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -133,6 +136,9 @@ public class GeneratorSwitch<T> extends Switch<T> {
 				MethodDeclarationGen methodDeclarationGen = (MethodDeclarationGen)theEObject;
 				T result = caseMethodDeclarationGen(methodDeclarationGen);
 				if (result == null) result = caseDeclaration(methodDeclarationGen);
+				if (result == null) result = caseCodeElement(methodDeclarationGen);
+				if (result == null) result = caseNamedElement(methodDeclarationGen);
+				if (result == null) result = caseDocumentedElement(methodDeclarationGen);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -158,6 +164,9 @@ public class GeneratorSwitch<T> extends Switch<T> {
 				VariableDeclarationGen variableDeclarationGen = (VariableDeclarationGen)theEObject;
 				T result = caseVariableDeclarationGen(variableDeclarationGen);
 				if (result == null) result = caseDeclaration(variableDeclarationGen);
+				if (result == null) result = caseCodeElement(variableDeclarationGen);
+				if (result == null) result = caseNamedElement(variableDeclarationGen);
+				if (result == null) result = caseDocumentedElement(variableDeclarationGen);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -189,6 +198,9 @@ public class GeneratorSwitch<T> extends Switch<T> {
 			case GeneratorPackage.DECLARATION: {
 				Declaration declaration = (Declaration)theEObject;
 				T result = caseDeclaration(declaration);
+				if (result == null) result = caseCodeElement(declaration);
+				if (result == null) result = caseNamedElement(declaration);
+				if (result == null) result = caseDocumentedElement(declaration);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}

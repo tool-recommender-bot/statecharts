@@ -3,9 +3,6 @@
 package org.yakindu.base.generator.generator.impl;
 
 import org.eclipse.emf.ecore.EClass;
-
-import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
-
 import org.yakindu.base.generator.generator.Declaration;
 import org.yakindu.base.generator.generator.GeneratorPackage;
 
@@ -16,7 +13,7 @@ import org.yakindu.base.generator.generator.GeneratorPackage;
  *
  * @generated
  */
-public abstract class DeclarationImpl extends MinimalEObjectImpl.Container implements Declaration {
+public abstract class DeclarationImpl extends CodeElementImpl implements Declaration {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

@@ -297,13 +297,49 @@ public interface GeneratorPackage extends EPackage {
 	int DECLARATION = 13;
 
 	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DECLARATION__NAME = CODE_ELEMENT__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Documentation</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DECLARATION__DOCUMENTATION = CODE_ELEMENT__DOCUMENTATION;
+
+	/**
+	 * The feature id for the '<em><b>Children</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DECLARATION__CHILDREN = CODE_ELEMENT__CHILDREN;
+
+	/**
+	 * The feature id for the '<em><b>Parent</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DECLARATION__PARENT = CODE_ELEMENT__PARENT;
+
+	/**
 	 * The number of structural features of the '<em>Declaration</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DECLARATION_FEATURE_COUNT = 0;
+	int DECLARATION_FEATURE_COUNT = CODE_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.base.generator.generator.impl.ClassDeclarationGenImpl <em>Class Declaration Gen</em>}' class.
@@ -314,6 +350,42 @@ public interface GeneratorPackage extends EPackage {
 	 * @generated
 	 */
 	int CLASS_DECLARATION_GEN = 3;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CLASS_DECLARATION_GEN__NAME = DECLARATION__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Documentation</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CLASS_DECLARATION_GEN__DOCUMENTATION = DECLARATION__DOCUMENTATION;
+
+	/**
+	 * The feature id for the '<em><b>Children</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CLASS_DECLARATION_GEN__CHILDREN = DECLARATION__CHILDREN;
+
+	/**
+	 * The feature id for the '<em><b>Parent</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CLASS_DECLARATION_GEN__PARENT = DECLARATION__PARENT;
 
 	/**
 	 * The feature id for the '<em><b>Class Gen</b></em>' container reference.
@@ -517,6 +589,42 @@ public interface GeneratorPackage extends EPackage {
 	int METHOD_DECLARATION_GEN = 6;
 
 	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int METHOD_DECLARATION_GEN__NAME = DECLARATION__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Documentation</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int METHOD_DECLARATION_GEN__DOCUMENTATION = DECLARATION__DOCUMENTATION;
+
+	/**
+	 * The feature id for the '<em><b>Children</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int METHOD_DECLARATION_GEN__CHILDREN = DECLARATION__CHILDREN;
+
+	/**
+	 * The feature id for the '<em><b>Parent</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int METHOD_DECLARATION_GEN__PARENT = DECLARATION__PARENT;
+
+	/**
 	 * The feature id for the '<em><b>Method Gen</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -662,6 +770,42 @@ public interface GeneratorPackage extends EPackage {
 	 * @generated
 	 */
 	int VARIABLE_DECLARATION_GEN = 9;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VARIABLE_DECLARATION_GEN__NAME = DECLARATION__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Documentation</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VARIABLE_DECLARATION_GEN__DOCUMENTATION = DECLARATION__DOCUMENTATION;
+
+	/**
+	 * The feature id for the '<em><b>Children</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VARIABLE_DECLARATION_GEN__CHILDREN = DECLARATION__CHILDREN;
+
+	/**
+	 * The feature id for the '<em><b>Parent</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VARIABLE_DECLARATION_GEN__PARENT = DECLARATION__PARENT;
 
 	/**
 	 * The feature id for the '<em><b>Variable Gen</b></em>' container reference.

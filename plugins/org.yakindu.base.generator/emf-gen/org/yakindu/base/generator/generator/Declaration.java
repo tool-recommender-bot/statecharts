@@ -2,8 +2,6 @@
  */
 package org.yakindu.base.generator.generator;
 
-import org.eclipse.emf.ecore.EObject;
-
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Declaration</b></em>'.
@@ -14,5 +12,5 @@ import org.eclipse.emf.ecore.EObject;
  * @model abstract="true"
  * @generated
  */
-public interface Declaration extends EObject {
+public interface Declaration extends CodeElement {
 } // Declaration

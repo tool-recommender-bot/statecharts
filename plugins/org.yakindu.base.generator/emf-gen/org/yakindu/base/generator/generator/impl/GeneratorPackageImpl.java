@@ -658,6 +658,7 @@ public class GeneratorPackageImpl extends EPackageImpl implements GeneratorPacka
 		parameterGenEClass.getESuperTypes().add(this.getCodeElement());
 		parameterGenEClass.getESuperTypes().add(theTypesPackage.getTypedElement());
 		expressionGenEClass.getESuperTypes().add(this.getCodeElement());
+		declarationEClass.getESuperTypes().add(this.getCodeElement());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(codeElementEClass, CodeElement.class, "CodeElement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
