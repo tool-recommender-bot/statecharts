@@ -8,6 +8,7 @@ Bundle-Vendor: statecharts.org
 Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Export-Package: org.yakindu.base.generator,
+ org.yakindu.base.generator.extensions,
  org.yakindu.base.generator.generator,
  org.yakindu.base.generator.generator.impl,
  org.yakindu.base.generator.generator.util,

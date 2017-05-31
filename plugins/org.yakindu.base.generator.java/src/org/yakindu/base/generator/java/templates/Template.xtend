@@ -59,4 +59,12 @@ abstract class Template implements ITemplate {
 		}
 		return false
 	}
+	
+	def generateContent(CodeElement it) {
+		'''
+		«FOR c:children»
+		«templateProvider.get(c).generate(c)»
+		«ENDFOR»
+		'''
+	}
 }

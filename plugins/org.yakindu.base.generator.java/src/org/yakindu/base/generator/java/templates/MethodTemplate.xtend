@@ -22,14 +22,6 @@ class MethodTemplate extends Template {
 		}
 	}
 	
-	def protected generateContent(MethodGen it) {
-		'''
-		«FOR c:children»
-		«templateProvider.get(c).generate(c)»
-		«ENDFOR»
-		'''
-	}
-	
 	def generateParameters(MethodGen it) {
 		if(!parameters.nullOrEmpty) {
 			return parameters?.map([templateProvider.get(it).generate(it)]).join(', ')

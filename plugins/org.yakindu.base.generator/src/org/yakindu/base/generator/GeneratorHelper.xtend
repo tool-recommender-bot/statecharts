@@ -1,6 +1,7 @@
 package org.yakindu.base.generator
 
 import com.google.inject.Inject
+import org.eclipse.xtext.EcoreUtil2
 import org.yakindu.base.generator.generator.AccessRestricted
 import org.yakindu.base.generator.generator.ClassGen
 import org.yakindu.base.generator.generator.ExpressionGen
@@ -8,16 +9,27 @@ import org.yakindu.base.generator.generator.GeneratorFactory
 import org.yakindu.base.generator.generator.InterfaceGen
 import org.yakindu.base.generator.generator.MethodGen
 import org.yakindu.base.generator.generator.ParameterGen
+import org.yakindu.base.generator.generator.SourceFileGen
 import org.yakindu.base.generator.generator.VariableGen
 import org.yakindu.base.generator.generator.VisibilityValues
 import org.yakindu.base.types.Type
-import org.yakindu.sct.model.stext.test.util.TypesTestFactory
 import org.yakindu.base.types.TypeSpecifier
-import org.eclipse.xtext.EcoreUtil2
+import org.yakindu.sct.model.stext.test.util.TypesTestFactory
 
 class GeneratorHelper {
 	protected GeneratorFactory factory = GeneratorFactory.eINSTANCE
 	@Inject extension TypesTestFactory typesFactory
+	
+	def SourceFileGen createSourceFileGen() {
+		val it = factory.createSourceFileGen
+		it
+	}
+	
+	def SourceFileGen createSourceFileGen(String name) {
+		val it = factory.createSourceFileGen
+		it.name = name
+		it
+	}
 	
 	def ClassGen createClassGen() {
 		val it = factory.createClassGen()

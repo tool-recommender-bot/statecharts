@@ -8,6 +8,7 @@ import org.yakindu.base.generator.generator.InterfaceGen
 import org.yakindu.base.generator.generator.MethodGen
 import org.yakindu.base.generator.generator.ParameterGen
 import org.yakindu.base.generator.generator.SourceFileGen
+import org.yakindu.base.generator.generator.VariableGen
 import org.yakindu.base.generator.templates.ITemplate
 import org.yakindu.base.generator.templates.TemplateProvider
 
@@ -50,6 +51,12 @@ class JavaTemplateProvider extends TemplateProvider {
 		return ret
 	}
 
+	def dispatch doGet(VariableGen it) {
+		val ret = new VariableTemplate()
+		ret.inject
+		return ret
+	}
+	
 	def inject(ITemplate it) {
 		if (injector !== null) {
 			injector.injectMembers(it)
