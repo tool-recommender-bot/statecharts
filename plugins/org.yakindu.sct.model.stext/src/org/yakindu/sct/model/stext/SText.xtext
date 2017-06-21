@@ -64,13 +64,15 @@ QID:
 	ID ('.' ID)*;
 
 EventDefinition:
+	(annotations+=ArgumentedAnnotation)*
 	(direction=Direction)? 'event' name=XID (':' typeSpecifier=TypeSpecifier)?;
 
 enum Direction returns types::Direction:
 	LOCAL='local' | IN='in' | OUT='out';
 
 VariableDefinition:
-	{VariableDefinition} (const?='const'|'var') ((readonly?='readonly')? & (external?='external')?) name=XID ':' typeSpecifier=TypeSpecifier
+	{VariableDefinition}
+	 (const?='const'|'var') ((readonly?='readonly')? & (external?='external')?) name=XID ':' typeSpecifier=TypeSpecifier
 	('=' initialValue=Expression)?; /* ---- operation definition ---- */ 
 	
 TypeAliasDefinition:

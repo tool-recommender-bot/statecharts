@@ -8,6 +8,7 @@ import org.yakindu.base.expressions.scoping.AbstractLibraryGlobalScopeProvider;
 
 import com.google.common.collect.Sets;
 import com.google.inject.Singleton;
+
 /**
  * @author andreas muelder - Initial contribution and API
  * 
@@ -18,9 +19,12 @@ public class STextLibraryGlobalScopeProvider extends AbstractLibraryGlobalScopeP
 	public static final URI STEXT_LIB = URI
 			.createURI("platform:/plugin/org.yakindu.sct.model.stext.lib/lib/STextLib.xmi");
 
+	public static final URI MSP430_LIB = URI
+			.createURI("platform:/plugin/org.yakindu.sct.model.stext.lib/lib/MSP430.xmi");
+
 	@Override
 	public Set<URI> getLibraries(Resource context) {
-		return Sets.newHashSet(STEXT_LIB);
+		return Sets.newHashSet(STEXT_LIB, MSP430_LIB);
 	}
 
 }

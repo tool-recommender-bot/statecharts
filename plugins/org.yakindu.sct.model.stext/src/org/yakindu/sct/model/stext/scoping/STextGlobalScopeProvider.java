@@ -50,10 +50,7 @@ import com.google.inject.Provider;
  * 
  */
 public class STextGlobalScopeProvider extends ImportUriGlobalScopeProvider {
-
-	public static final URI STEXT_LIB = URI
-			.createURI("platform:/plugin/org.yakindu.sct.model.stext.lib/lib/STextLib.xmi");
-
+	
 	@Inject
 	private ITypeSystem typeSystem;
 	@Inject

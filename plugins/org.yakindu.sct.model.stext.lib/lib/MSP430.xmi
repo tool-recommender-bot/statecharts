@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<types:Package
+    xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:types="http://www.yakindu.org/base/types/2.0.0"
+    xsi:schemaLocation="http://www.yakindu.org/base/types/2.0.0 ../../org.yakindu.base.types/model/types.ecore"
+    name="msp430">
+  <member xsi:type="types:AnnotationType"
+      name="PORT1">
+    <properties
+        name="flag">
+      <typeSpecifier
+          type="//@member.2"/>
+    </properties>
+  </member>
+  <member xsi:type="types:AnnotationType"
+      name="PORT0">
+    <properties
+        name="flag">
+      <typeSpecifier
+          type="//@member.2"/>
+    </properties>
+  </member>
+  <member xsi:type="types:EnumerationType"
+      name="SubFlags">
+    <enumerator
+        name="BIT0"/>
+    <enumerator
+        name="BIT1"/>
+    <enumerator
+        name="BIT2"/>
+  </member>
+  <member xsi:type="types:AnnotationType"
+      name="WDT"/>
+</types:Package>
