@@ -32,7 +32,5 @@
         name="BIT2"/>
   </member>
   <member xsi:type="types:AnnotationType"
-      name="WDT"/>
-  <member xsi:type="types:AnnotationType"
-      name="MSP430"/>
+      name="STM32F"/>
 </types:Package>

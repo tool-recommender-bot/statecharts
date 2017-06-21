@@ -22,9 +22,12 @@ public class STextLibraryGlobalScopeProvider extends AbstractLibraryGlobalScopeP
 	public static final URI MSP430_LIB = URI
 			.createURI("platform:/plugin/org.yakindu.sct.model.stext.lib/lib/MSP430.xmi");
 
+	public static final URI STM32F_LIB = URI
+			.createURI("platform:/plugin/org.yakindu.sct.model.stext.lib/lib/STM32F.xmi");
+
 	@Override
 	public Set<URI> getLibraries(Resource context) {
-		return Sets.newHashSet(STEXT_LIB, MSP430_LIB);
+		return Sets.newHashSet(STEXT_LIB, MSP430_LIB, STM32F_LIB);
 	}
 
 }
