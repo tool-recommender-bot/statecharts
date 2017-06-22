@@ -10,7 +10,10 @@
  */
 package org.yakindu.sct.ui.editor.editparts;
 
+
+
 import org.eclipse.draw2d.IFigure;
+import org.eclipse.draw2d.ImageFigure;
 import org.eclipse.draw2d.StackLayout;
 import org.eclipse.draw2d.geometry.Dimension;
 import org.eclipse.emf.ecore.EStructuralFeature;
@@ -25,8 +28,10 @@ import org.eclipse.gmf.runtime.diagram.ui.editpolicies.EditPolicyRoles;
 import org.eclipse.gmf.runtime.diagram.ui.requests.RequestConstants;
 import org.eclipse.gmf.runtime.draw2d.ui.figures.FigureUtilities;
 import org.eclipse.gmf.runtime.gef.ui.figures.NodeFigure;
+
 import org.eclipse.gmf.runtime.notation.NotationPackage;
 import org.eclipse.gmf.runtime.notation.View;
+import org.eclipse.swt.graphics.Image;
 import org.yakindu.sct.ui.editor.editor.figures.RegionFigure;
 import org.yakindu.sct.ui.editor.policies.PreferredSizeHandlerEditPolicy;
 import org.yakindu.sct.ui.editor.preferences.StatechartColorConstants;
@@ -48,6 +53,20 @@ public class RegionEditPart extends ShapeNodeEditPart {
 		figure.setLayoutManager(new StackLayout());
 		figure.setMinimumSize(new Dimension(0, 0));
 		figure.add(new RegionFigure(getMapMode()));
+		
+		Image i = new Image(null ,
+				getClass().getResourceAsStream("sct-pro-logo.png"));
+		ImageFigure logo = new ImageFigure(i);
+		logo.setEnabled(false);
+		logo.setOpaque(false);
+		logo.setFocusTraversable(false);
+		logo.setRequestFocusEnabled(false);
+		logo.setValid(false);
+		//for private and academic edition true, otherwise false
+		logo.setVisible(false);
+		
+		figure.add(logo);
+		
 		return figure;
 	}
 
