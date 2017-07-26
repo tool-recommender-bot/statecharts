@@ -19,7 +19,9 @@ import static org.yakindu.sct.simulation.core.sruntime.SRuntimePackage.Literals.
 import static org.yakindu.sct.simulation.core.sruntime.SRuntimePackage.Literals.EXECUTION_CONTEXT__SUSPENDED_ELEMENTS;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EObject;
@@ -27,6 +29,8 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.yakindu.base.gmf.runtime.highlighting.HighlightingParameters;
 import org.yakindu.base.gmf.runtime.highlighting.IHighlightingSupport;
 import org.yakindu.sct.model.sgraph.RegularState;
+import org.yakindu.sct.model.sgraph.State;
+import org.yakindu.sct.model.sgraph.Transition;
 import org.yakindu.sct.simulation.core.sruntime.ExecutionContext;
 import org.yakindu.sct.simulation.core.sruntime.util.CrossDocumentContentAdapter;
 
@@ -42,6 +46,8 @@ import com.google.common.collect.Lists;
 public class ExecutionContextVisualizer extends CrossDocumentContentAdapter {
 
 	private IHighlightingSupport highlightingSupport;
+	
+	protected List<EObject> delayedHighlightChanges;
 
 	public ExecutionContextVisualizer(IHighlightingSupport support) {
 		highlightingSupport = support;
@@ -85,7 +91,9 @@ public class ExecutionContextVisualizer extends CrossDocumentContentAdapter {
 						if (eventType == ADD || eventType == ADD_MANY) {
 							actions.add(new IHighlightingSupport.Highlight(container, params));
 						} else if (eventType == REMOVE || eventType == REMOVE_MANY) {
-							actions.add(new IHighlightingSupport.Highlight(container, null));
+							List<EObject> changes = toList(container);
+							scheduleTransitionHighlightChanges(changes, eventType);
+							actions.add(new IHighlightingSupport.Highlight(changes, null));
 						}
 					}
 					container = container.eContainer();
@@ -103,9 +111,41 @@ public class ExecutionContextVisualizer extends CrossDocumentContentAdapter {
 			actions.add(new IHighlightingSupport.Highlight(objects, params));
 		} else if (eventType == REMOVE || eventType == REMOVE_MANY) {
 			List<EObject> objects = toList(notification.getOldValue());
+			scheduleTransitionHighlightChanges(objects, eventType);
 			actions.add(new IHighlightingSupport.Highlight(objects, null));
 		}
 		getHighlightingSupport().executeAsync(actions);
+	}
+	
+	protected void scheduleTransitionHighlightChanges(List<EObject> objects, int eventType) {
+		if(delayedHighlightChanges == null) {
+			delayedHighlightChanges = new ArrayList<>();
+		}
+		
+		if(eventType != REMOVE && eventType != REMOVE_MANY) {
+			return;
+		}
+		for(ListIterator<EObject> removedObjectsIterator = objects.listIterator(); removedObjectsIterator.hasNext();) {
+			EObject removedObject = removedObjectsIterator.next();
+			if(removedObject instanceof State) {
+				/* When a State is removed, all transitions that point to this state need to be unhighlighted. */
+				for(Iterator<EObject> delayedObjectsIterator = delayedHighlightChanges.iterator(); delayedObjectsIterator.hasNext();) {
+					EObject delayedObject = delayedObjectsIterator.next();
+					if(delayedObject instanceof Transition) {
+						Transition t = (Transition) delayedObject;
+						if(t.getTarget() == removedObject) {
+							delayedObjectsIterator.remove();
+							removedObjectsIterator.add(t);
+						}
+					}
+				}
+			}
+			if(removedObject instanceof Transition) {
+				/* The removal of transition highlights is delayed until the state they point to is unhighlighted. */
+				delayedHighlightChanges.add(removedObject);
+				removedObjectsIterator.remove();
+			}
+		}
 	}
 
 	@SuppressWarnings("unchecked")
