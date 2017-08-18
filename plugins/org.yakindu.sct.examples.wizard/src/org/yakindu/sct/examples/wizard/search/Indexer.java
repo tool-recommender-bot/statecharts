@@ -7,15 +7,21 @@ import java.io.InputStream;
 import java.nio.file.Files;
 
 import org.apache.lucene.analysis.standard.StandardAnalyzer;
+import org.apache.lucene.document.Document;
+import org.apache.lucene.document.Field;
+import org.apache.lucene.document.FieldType;
 import org.apache.lucene.index.FieldInfo.IndexOptions;
 import org.apache.lucene.index.IndexWriter;
 import org.apache.lucene.index.IndexWriterConfig;
 import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.FSDirectory;
 import org.apache.lucene.util.Version;
+import org.apache.tika.exception.TikaException;
 import org.apache.tika.metadata.Metadata;
+import org.apache.tika.parser.ParseContext;
 import org.apache.tika.parser.html.HtmlParser;
 import org.apache.tika.sax.BodyContentHandler;
+import org.xml.sax.SAXException;
 
 public class Indexer {
 
@@ -33,7 +39,6 @@ public class Indexer {
 		TYPE_CONTENTS.setIndexOptions(IndexOptions.DOCS_ONLY);
 		TYPE_CONTENTS.setTokenized(true);
 		TYPE_CONTENTS.setStoreTermVectors(true);
-		// TYPE_CONTENTS.setStoreTermVectorPositions(true);
 		TYPE_CONTENTS.freeze();
 
 		TYPE_NAME.setIndexed(false);
@@ -41,7 +46,7 @@ public class Indexer {
 		TYPE_NAME.setStored(true);
 		TYPE_NAME.freeze();
 	}
-	
+
 	public Directory index(String dataPath, String indexPath) throws IOException {
 		File dataFolder = new File(dataPath);
 		if (!dataFolder.exists() || !dataFolder.isDirectory()) {
@@ -56,19 +61,19 @@ public class Indexer {
 		}
 
 		// create Lucene index
-		StandardAnalyzer analyzer = new StandardAnalyzer(Version.LUCENE_35);
+		StandardAnalyzer analyzer = new StandardAnalyzer(Version.LUCENE_46);
 
 		// Directory index = new RAMDirectory();
-		Directory index = FSDirectory.open(new File(indexPath));
-		IndexWriter indexWriter = new IndexWriter(index, new IndexWriterConfig(Version.LUCENE_35, analyzer));
+		Directory index = FSDirectory.open(indexFolder);
+		IndexWriter indexWriter = new IndexWriter(index, new IndexWriterConfig(Version.LUCENE_46, analyzer));
 
 		indexDirectory(indexWriter, dataFolder);
 
 		indexWriter.close();
 		return index;
 	}
-	
-	private void indexDirectory(IndexWriter writer, File dir) throws IOException {
+
+	protected void indexDirectory(IndexWriter writer, File dir) throws IOException {
 		File[] files = dir.listFiles();
 
 		for (File f : files) {
@@ -80,38 +85,53 @@ public class Indexer {
 		}
 	}
 
-	private void indexFile(IndexWriter writer, File file) throws IOException {
+	protected void indexFile(IndexWriter writer, File file) throws IOException {
 		if (file.isHidden() || !file.exists() || !file.canRead()) {
 			return;
 		}
+		if (!file.getName().equalsIgnoreCase("index.html")) {
+			return;
+		}
 
+		String contents = parseBodyContents(file);
+		String name = file.getCanonicalPath();
+		writer.addDocument(createDocument(name, contents));
+		System.out.println("Indexing -> " + file.getCanonicalPath());
+		// System.out.println("Contents of the document:" + contents);
+		// System.out.println("Metadata of the document:");
+		// String[] metadataNames = metadata.names();
+		//
+		// for(String name : metadataNames) {
+		// System.out.println(name + ": " + metadata.get(name));
+		// }
+
+	}
+
+	protected String parseBodyContents(File file) {
 		try {
 			BodyContentHandler handler = new BodyContentHandler();
 			Metadata metadata = new Metadata();
 			InputStream inputstream = new FileInputStream(file);
 			HtmlParser htmlparser = new HtmlParser();
-		    htmlparser.parse(inputstream, handler);
-		    String contents = handler.toString();
-//			Tika tika = new Tika();
-//			String contents = tika.parseToString(stream);
-//			Document doc = new Document();
-//			doc.add(new Field(FIELD_CONTENTS, contents, TYPE_CONTENTS));
-//			doc.add(new Field(FIELD_NAME, file.getCanonicalPath(), TYPE_NAME));
-//			writer.addDocument(doc);
+			ParseContext context = new ParseContext();
 
-		      System.out.println("Contents of the document:" + handler.toString());
-		      System.out.println("Metadata of the document:");
-		      String[] metadataNames = metadata.names();
-		      
-		      for(String name : metadataNames) {
-		         System.out.println(name + ":   " + metadata.get(name));  
-		      }
+			htmlparser.parse(inputstream, handler, metadata, context);
 
+			return handler.toString();
 		} catch (IOException e) {
 			e.printStackTrace();
-//		} catch (TikaException e) {
-//			e.printStackTrace();
+		} catch (TikaException e) {
+			e.printStackTrace();
+		} catch (SAXException e) {
+			e.printStackTrace();
 		}
+		return "";
+	}
 
+	protected Document createDocument(String name, String contents) {
+		Document doc = new Document();
+		doc.add(new Field(FIELD_CONTENTS, contents, TYPE_CONTENTS));
+		doc.add(new Field(FIELD_NAME, name, TYPE_NAME));
+		return doc;
 	}
 }

@@ -16,11 +16,8 @@ Require-Bundle: org.eclipse.core.runtime,
  com.google.inject,
  com.google.guava,
  org.yakindu.sct.ui.editor,
- org.apache.lucene.core,
- org.apache.lucene.analysis,
  org.junit,
- org.apache.tika.core,
- org.apache.tika.parsers
+ org.slf4j.api
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-ActivationPolicy: lazy
 Import-Package: org.eclipse.xtext.resource
