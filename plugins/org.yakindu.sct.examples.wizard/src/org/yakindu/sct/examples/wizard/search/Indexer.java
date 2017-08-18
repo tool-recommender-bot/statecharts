@@ -46,6 +46,8 @@ public class Indexer {
 		TYPE_NAME.setStored(true);
 		TYPE_NAME.freeze();
 	}
+	
+	protected Directory index;
 
 	public Directory index(String dataPath, String indexPath) throws IOException {
 		File dataFolder = new File(dataPath);
@@ -70,6 +72,11 @@ public class Indexer {
 		indexDirectory(indexWriter, dataFolder);
 
 		indexWriter.close();
+		this.index = index;
+		return index;
+	}
+	
+	public Directory getIndex() {
 		return index;
 	}
 

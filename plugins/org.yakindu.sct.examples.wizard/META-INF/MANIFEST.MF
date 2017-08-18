@@ -21,3 +21,12 @@ Require-Bundle: org.eclipse.core.runtime,
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-ActivationPolicy: lazy
 Import-Package: org.eclipse.xtext.resource
+Bundle-ClassPath: .,
+ lib/commons-io-2.5.jar,
+ lib/tagsoup-1.2.1.jar,
+ lib/tika-core-1.16.jar,
+ lib/tika-parsers-1.16.jar,
+ lib/lucene-analyzers-common-4.6.1.jar,
+ lib/lucene-core-4.6.1.jar,
+ lib/lucene-queries-4.6.1.jar,
+ lib/lucene-queryparser-4.6.1.jar

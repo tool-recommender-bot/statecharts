@@ -17,8 +17,8 @@ import org.apache.lucene.util.Version;
 
 public class Searcher {
 
-	public void search(Directory index, String input) throws IOException {
-		int hitsPerPage = 10;
+	public ScoreDoc[] search(Directory index, String input) throws IOException {
+		int hitsPerPage = 100;
 		IndexReader reader = DirectoryReader.open(index);
 		IndexSearcher is = new IndexSearcher(reader);
 		TopScoreDocCollector collector = TopScoreDocCollector.create(hitsPerPage, true);
@@ -35,7 +35,9 @@ public class Searcher {
 				Document d = is.doc(docId);
 				System.out.println((i + 1) + ". " + d.get("name") + " Score: " + score);
 			}
+			return hits;
 		}
+		return new ScoreDoc[0];
 	}
 
 	protected Query createQuery(String input) {

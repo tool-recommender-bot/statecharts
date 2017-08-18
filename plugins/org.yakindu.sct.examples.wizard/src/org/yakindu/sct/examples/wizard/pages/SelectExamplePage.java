@@ -11,9 +11,11 @@
 package org.yakindu.sct.examples.wizard.pages;
 
 import java.io.File;
+import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
+import org.apache.lucene.search.ScoreDoc;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.NullProgressMonitor;
@@ -34,16 +36,21 @@ import org.eclipse.jface.wizard.WizardPage;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.browser.Browser;
 import org.eclipse.swt.custom.SashForm;
+import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.program.Program;
+import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.Text;
 import org.yakindu.sct.examples.wizard.ExampleActivator;
 import org.yakindu.sct.examples.wizard.preferences.ExamplesPreferenceConstants;
+import org.yakindu.sct.examples.wizard.search.Indexer;
+import org.yakindu.sct.examples.wizard.search.Searcher;
 import org.yakindu.sct.examples.wizard.service.ExampleData;
 import org.yakindu.sct.examples.wizard.service.ExampleWizardConstants;
 import org.yakindu.sct.examples.wizard.service.IExampleService;
@@ -70,9 +77,16 @@ public class SelectExamplePage extends WizardPage
 	private ExampleData selection;
 	private Browser browser;
 	private MessageArea messageArea;
-
+	
+	@Inject
+	protected Indexer indexer;
+	
+	@Inject
+	protected Searcher searcher;
+	
 	/** ID of example to be installed */
 	private String exampleIdToInstall;
+	private Text searchField;
 
 	public SelectExamplePage() {
 		super(SELECT_PAGE_TITLE);
@@ -92,6 +106,7 @@ public class SelectExamplePage extends WizardPage
 		Composite root = new Composite(parent, SWT.NONE);
 		root.setLayout(new GridLayout(1, true));
 		createUpdateGroup(root);
+		createSearchGroup(root);
 		SashForm container = new SashForm(root, SWT.NONE);
 		GridDataFactory.fillDefaults().grab(true, true).applyTo(container);
 		GridLayout layout = new GridLayout(2, false);
@@ -99,7 +114,7 @@ public class SelectExamplePage extends WizardPage
 		createTreeViewer(container);
 		createDetailsPane(container);
 		container.setWeights(new int[] { 1, 2 });
-		setControl(container);
+		setControl(root);
 	}
 
 	private void createUpdateGroup(Composite root) {
@@ -107,6 +122,65 @@ public class SelectExamplePage extends WizardPage
 		GridDataFactory.fillDefaults().grab(true, false).applyTo(messageArea);
 		messageArea.addSelectionListener(this);
 		messageArea.hide();
+	}
+	
+	private void createSearchGroup(Composite root) {
+		Composite searchContainer = new Composite(root, SWT.NONE);
+		GridDataFactory.fillDefaults().grab(true, true).applyTo(searchContainer);
+		GridLayout layout = new GridLayout(2, false);
+		searchContainer.setLayout(layout);
+		
+		searchField = new Text(searchContainer, SWT.NONE);
+		searchField.setText("search for keywords");
+		GridDataFactory.fillDefaults().grab(false, false).align(SWT.BEGINNING, SWT.CENTER).applyTo(searchField);
+		
+		Button searchButton = new Button(searchContainer, SWT.PUSH);
+		searchButton.setText("Search");
+		GridDataFactory.fillDefaults().grab(false, false).align(SWT.BEGINNING, SWT.CENTER).applyTo(searchButton);
+		
+		searchButton.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				performSearch();
+			}
+		});
+	}
+	
+	protected void performSearch() {
+		String query = searchField.getText();
+		if (query.isEmpty()) {
+			return;
+		}
+		// ensure we have an index to search on
+		if (indexer.getIndex() == null) {
+			performIndexing();
+		}
+		try {
+			ScoreDoc[] results = searcher.search(indexer.getIndex(), query);
+			showSearchResults(results);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	private void showSearchResults(ScoreDoc[] results) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	protected void performIndexing() {
+		// TODO: we should work on ExampleData abstraction here
+		String exampleRepoPath = getExamplesLocation();
+		try {
+			indexer.index(exampleRepoPath, exampleRepoPath+"/.index");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	protected String getExamplesLocation() {
+		return java.nio.file.Paths.get(ExampleActivator.getDefault().getPreferenceStore()
+				.getString(ExamplesPreferenceConstants.STORAGE_LOCATION)).toString();
 	}
 
 	@Override
@@ -118,7 +192,6 @@ public class SelectExamplePage extends WizardPage
 			viewer.setInput(null);
 			browser.setUrl("about:blank");
 		}
-
 	}
 
 	private boolean revealExamplesAutomatically() {
@@ -277,6 +350,7 @@ public class SelectExamplePage extends WizardPage
 		case DOWNLOAD:
 		case UPDATE:
 			revealExamples();
+			performIndexing();
 			break;
 		case INSTALL:
 			Program.launch(PRO_UPDATE_SITE);
