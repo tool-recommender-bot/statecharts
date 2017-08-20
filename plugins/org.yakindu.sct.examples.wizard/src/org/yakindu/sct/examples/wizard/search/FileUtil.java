@@ -2,6 +2,7 @@ package org.yakindu.sct.examples.wizard.search;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.charset.Charset;
 import java.nio.file.FileVisitResult;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -36,6 +37,24 @@ public class FileUtil {
 					return foundRecursive;
 				}
 			}
+		}
+		return null;
+	}
+	
+	public static String readFile(Path file) {
+		try {
+			return new String(Files.readAllBytes(file), Charset.forName("UTF-8"));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return "";
+	}
+	
+	public static Path writeFile(Path path, String contents) {
+		try {
+			return Files.write(path, contents.getBytes());
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 		return null;
 	}

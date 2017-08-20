@@ -28,6 +28,9 @@ public class ExampleData implements Comparable<ExampleData> {
 	private String description;
 	private String[] images;
 	private File projectDir;
+	
+	private String detailsText;
+	private String detailsUrl;
 
 	public ExampleData(String category[], String id, String title, String description, String[] images) {
 		this.category = category;
@@ -88,6 +91,25 @@ public class ExampleData implements Comparable<ExampleData> {
 
 	public File getProjectDir() {
 		return projectDir;
+	}
+	
+	public String getDetailsUrl() {
+		if (detailsUrl == null) {
+			detailsUrl = getProjectDir().getAbsolutePath() + File.separator + "index.html";
+		}
+		return detailsUrl;
+	}
+	
+	public void setDetailsUrl(String url) {
+		this.detailsUrl = url;
+	}
+	
+	public void setDetailsText(String text) {
+		this.detailsText = text;
+	}
+	
+	public String getDetailsText() {
+		return detailsText;
 	}
 
 	public void setProjectDir(File projectDir) {

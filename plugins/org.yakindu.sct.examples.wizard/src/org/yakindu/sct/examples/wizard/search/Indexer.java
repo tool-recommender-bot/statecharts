@@ -27,6 +27,7 @@ import org.yakindu.sct.examples.wizard.service.ExampleData;
 public class Indexer {
 
 	public static final String FIELD_CONTENTS = "contents";
+	public static final String FIELD_SOURCE = "source";
 	public static final String FIELD_ID = "id";
 	public static final String FIELD_TITLE = "title";
 	public static final String FIELD_PATH = "path";
@@ -35,13 +36,22 @@ public class Indexer {
 	public static final FieldType TYPE_ID = new FieldType();
 	public static final FieldType TYPE_TITLE = new FieldType();
 	public static final FieldType TYPE_PATH = new FieldType();
+	public static final FieldType TYPE_SOURCE = new FieldType();
 
 	static {
 		TYPE_CONTENTS.setIndexed(true);
-		TYPE_CONTENTS.setIndexOptions(IndexOptions.DOCS_ONLY);
+		TYPE_CONTENTS.setIndexOptions(IndexOptions.DOCS_AND_FREQS_AND_POSITIONS_AND_OFFSETS);
 		TYPE_CONTENTS.setTokenized(true);
 		TYPE_CONTENTS.setStoreTermVectors(true);
+		TYPE_CONTENTS.setStoreTermVectorOffsets(true);
+		TYPE_CONTENTS.setStoreTermVectorPositions(true);
+		TYPE_CONTENTS.setStored(true);
 		TYPE_CONTENTS.freeze();
+		
+		TYPE_SOURCE.setIndexed(false);
+		TYPE_SOURCE.setTokenized(false);
+		TYPE_SOURCE.setStored(true);
+		TYPE_SOURCE.freeze();
 
 		TYPE_ID.setIndexed(false);
 		TYPE_ID.setTokenized(false);
@@ -99,7 +109,8 @@ public class Indexer {
 			String id = example.getId();
 			String title = example.getTitle();
 			String path = example.getProjectDir().getAbsolutePath();
-			writer.addDocument(createDocument(id, title, path, contents));
+			String source = FileUtil.readFile(indexHtml.toPath());
+			writer.addDocument(createDocument(id, title, path, contents, source));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -134,12 +145,13 @@ public class Indexer {
 		return "";
 	}
 
-	protected Document createDocument(String id, String title, String path, String contents) {
+	protected Document createDocument(String id, String title, String path, String contents, String source) {
 		Document doc = new Document();
 		doc.add(new Field(FIELD_ID, id, TYPE_ID));
 		doc.add(new Field(FIELD_TITLE, id, TYPE_TITLE));
 		doc.add(new Field(FIELD_PATH, id, TYPE_PATH));
 		doc.add(new Field(FIELD_CONTENTS, contents, TYPE_CONTENTS));
+		doc.add(new Field(FIELD_SOURCE, source, TYPE_SOURCE));
 		return doc;
 	}
 }

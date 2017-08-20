@@ -13,6 +13,8 @@ package org.yakindu.sct.examples.wizard.pages;
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 
 import org.apache.lucene.document.Document;
@@ -49,8 +51,10 @@ import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Text;
 import org.yakindu.sct.examples.wizard.ExampleActivator;
 import org.yakindu.sct.examples.wizard.preferences.ExamplesPreferenceConstants;
+import org.yakindu.sct.examples.wizard.search.FileUtil;
 import org.yakindu.sct.examples.wizard.search.Indexer;
 import org.yakindu.sct.examples.wizard.search.Searcher;
+import org.yakindu.sct.examples.wizard.search.Searcher.SearchResult;
 import org.yakindu.sct.examples.wizard.service.ExampleData;
 import org.yakindu.sct.examples.wizard.service.ExampleWizardConstants;
 import org.yakindu.sct.examples.wizard.service.IExampleService;
@@ -131,7 +135,7 @@ public class SelectExamplePage extends WizardPage
 		searchContainer.setLayout(layout);
 		
 		searchField = new Text(searchContainer, SWT.NONE);
-		searchField.setText("search for keywords");
+		searchField.setText("java");
 		GridDataFactory.fillDefaults().grab(false, false).align(SWT.BEGINNING, SWT.CENTER).applyTo(searchField);
 		
 		Button searchButton = new Button(searchContainer, SWT.PUSH);
@@ -156,14 +160,14 @@ public class SelectExamplePage extends WizardPage
 			performIndexing();
 		}
 		try {
-			Iterable<Document> results = searcher.search(indexer.getIndex(), query);
+			Iterable<SearchResult> results = searcher.search(indexer.getIndex(), query);
 			showSearchResults(results);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
 	
-	private void showSearchResults(final Iterable<Document> results) {
+	private void showSearchResults(final Iterable<SearchResult> results) {
 		viewer.resetFilters();
 		viewer.addFilter(new ViewerFilter() {
 
@@ -171,18 +175,30 @@ public class SelectExamplePage extends WizardPage
 			public boolean select(Viewer viewer, Object parentElement, Object element) {
 				if (element instanceof ExampleData) {
 					ExampleData example = (ExampleData) element;
-					for (Document searchResult : results) {
-						String docId = searchResult.get(Indexer.FIELD_ID);
-						if (example.getId().equals(docId)) {
+					for (SearchResult searchResult : results) {
+						if (example.getId().equals(searchResult.getExampleId())) {
+							
+							
+							highlight(example, searchResult);
+							
 							return true;
 						}
 					}
+					
 				}
 				return false;
 			}
 			
 		});
 		viewer.refresh();
+		
+	}
+
+	protected void highlight(ExampleData example, SearchResult searchResult) {
+		String highlightedContents = searchResult.getHighlightedText();
+		Path highlightedHtml = Paths.get(example.getProjectDir().getAbsolutePath()+File.separator+".index_highlighted.html");
+		FileUtil.writeFile(highlightedHtml, highlightedContents);
+		example.setDetailsUrl(highlightedHtml.toString());
 		
 	}
 
@@ -340,8 +356,11 @@ public class SelectExamplePage extends WizardPage
 	}
 
 	protected void setDetailPaneContent(ExampleData exampleData) {
-		String url = exampleData.getProjectDir().getAbsolutePath() + File.separator + "index.html";
-		browser.setUrl(url);
+		if (exampleData.getDetailsText() != null) {
+			browser.setText(exampleData.getDetailsText());
+		} else {
+			browser.setUrl(exampleData.getDetailsUrl());
+		}
 	}
 
 	protected void createDetailsPane(Composite parent) {
