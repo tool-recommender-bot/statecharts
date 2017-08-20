@@ -15,7 +15,7 @@ import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
-import org.apache.lucene.search.ScoreDoc;
+import org.apache.lucene.document.Document;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.NullProgressMonitor;
@@ -156,23 +156,41 @@ public class SelectExamplePage extends WizardPage
 			performIndexing();
 		}
 		try {
-			ScoreDoc[] results = searcher.search(indexer.getIndex(), query);
+			Iterable<Document> results = searcher.search(indexer.getIndex(), query);
 			showSearchResults(results);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
 	
-	private void showSearchResults(ScoreDoc[] results) {
-		// TODO Auto-generated method stub
+	private void showSearchResults(final Iterable<Document> results) {
+		viewer.resetFilters();
+		viewer.addFilter(new ViewerFilter() {
+
+			@Override
+			public boolean select(Viewer viewer, Object parentElement, Object element) {
+				if (element instanceof ExampleData) {
+					ExampleData example = (ExampleData) element;
+					for (Document searchResult : results) {
+						String docId = searchResult.get(Indexer.FIELD_ID);
+						if (example.getId().equals(docId)) {
+							return true;
+						}
+					}
+				}
+				return false;
+			}
+			
+		});
+		viewer.refresh();
 		
 	}
 
 	protected void performIndexing() {
-		// TODO: we should work on ExampleData abstraction here
 		String exampleRepoPath = getExamplesLocation();
 		try {
-			indexer.index(exampleRepoPath, exampleRepoPath+"/.index");
+			List<ExampleData> examples = exampleService.getExamples(null);
+			indexer.index(examples, exampleRepoPath + "/.index");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

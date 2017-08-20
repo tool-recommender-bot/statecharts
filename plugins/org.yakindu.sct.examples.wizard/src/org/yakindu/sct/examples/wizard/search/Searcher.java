@@ -1,6 +1,9 @@
 package org.yakindu.sct.examples.wizard.search;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.document.Document;
@@ -10,34 +13,29 @@ import org.apache.lucene.queryparser.classic.ParseException;
 import org.apache.lucene.queryparser.classic.QueryParser;
 import org.apache.lucene.search.IndexSearcher;
 import org.apache.lucene.search.Query;
-import org.apache.lucene.search.ScoreDoc;
-import org.apache.lucene.search.TopScoreDocCollector;
+import org.apache.lucene.search.TopDocs;
 import org.apache.lucene.store.Directory;
 import org.apache.lucene.util.Version;
 
 public class Searcher {
 
-	public ScoreDoc[] search(Directory index, String input) throws IOException {
+	public Iterable<Document> search(Directory index, String input) throws IOException {
 		int hitsPerPage = 100;
 		IndexReader reader = DirectoryReader.open(index);
 		IndexSearcher is = new IndexSearcher(reader);
-		TopScoreDocCollector collector = TopScoreDocCollector.create(hitsPerPage, true);
 		
 		Query query = createQuery(input);
 		if (query != null) {
-			is.search(query, collector);
-			ScoreDoc[] hits = collector.topDocs().scoreDocs;
-			// Code to display the results of search
-			System.out.println("Found " + hits.length + " hits.");
-			for (int i = 0; i < hits.length; ++i) {
-				int docId = hits[i].doc;
-				float score = hits[i].score;
+			TopDocs hits = is.search(query, hitsPerPage);
+			List<Document> docs = new ArrayList<Document>();
+			for (int i = 0; i < hits.totalHits; ++i) {
+				int docId = hits.scoreDocs[i].doc;
 				Document d = is.doc(docId);
-				System.out.println((i + 1) + ". " + d.get("name") + " Score: " + score);
+				docs.add(d);
 			}
-			return hits;
+			return docs;
 		}
-		return new ScoreDoc[0];
+		return Collections.emptyList();
 	}
 
 	protected Query createQuery(String input) {

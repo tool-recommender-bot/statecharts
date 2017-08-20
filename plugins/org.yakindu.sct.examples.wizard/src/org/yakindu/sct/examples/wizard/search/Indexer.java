@@ -22,17 +22,19 @@ import org.apache.tika.parser.ParseContext;
 import org.apache.tika.parser.html.HtmlParser;
 import org.apache.tika.sax.BodyContentHandler;
 import org.xml.sax.SAXException;
+import org.yakindu.sct.examples.wizard.service.ExampleData;
 
 public class Indexer {
 
 	public static final String FIELD_CONTENTS = "contents";
-	public static final String FIELD_NAME = "name";
+	public static final String FIELD_ID = "id";
+	public static final String FIELD_TITLE = "title";
+	public static final String FIELD_PATH = "path";
 
-	/* Indexed, tokenized, not stored. */
 	public static final FieldType TYPE_CONTENTS = new FieldType();
-
-	/* Indexed, tokenized, stored. */
-	public static final FieldType TYPE_NAME = new FieldType();
+	public static final FieldType TYPE_ID = new FieldType();
+	public static final FieldType TYPE_TITLE = new FieldType();
+	public static final FieldType TYPE_PATH = new FieldType();
 
 	static {
 		TYPE_CONTENTS.setIndexed(true);
@@ -41,19 +43,25 @@ public class Indexer {
 		TYPE_CONTENTS.setStoreTermVectors(true);
 		TYPE_CONTENTS.freeze();
 
-		TYPE_NAME.setIndexed(false);
-		TYPE_NAME.setTokenized(false);
-		TYPE_NAME.setStored(true);
-		TYPE_NAME.freeze();
+		TYPE_ID.setIndexed(false);
+		TYPE_ID.setTokenized(false);
+		TYPE_ID.setStored(true);
+		TYPE_ID.freeze();
+		
+		TYPE_PATH.setIndexed(false);
+		TYPE_PATH.setTokenized(false);
+		TYPE_PATH.setStored(true);
+		TYPE_PATH.freeze();
+		
+		TYPE_TITLE.setIndexed(true);
+		TYPE_TITLE.setTokenized(false);
+		TYPE_TITLE.setStored(false);
+		TYPE_TITLE.freeze();
 	}
 	
 	protected Directory index;
 
-	public Directory index(String dataPath, String indexPath) throws IOException {
-		File dataFolder = new File(dataPath);
-		if (!dataFolder.exists() || !dataFolder.isDirectory()) {
-			throw new IOException(dataPath + " does not exist or is not a directory");
-		}
+	public Directory index(Iterable<ExampleData> examples, String indexPath) throws IOException {
 		File indexFolder = new File(indexPath);
 		if (indexFolder.exists()) {
 			FileUtil.deleteDirectory(indexFolder);
@@ -62,14 +70,12 @@ public class Indexer {
 			Files.createDirectory(indexFolder.toPath());
 		}
 
-		// create Lucene index
 		StandardAnalyzer analyzer = new StandardAnalyzer(Version.LUCENE_46);
 
-		// Directory index = new RAMDirectory();
 		Directory index = FSDirectory.open(indexFolder);
 		IndexWriter indexWriter = new IndexWriter(index, new IndexWriterConfig(Version.LUCENE_46, analyzer));
 
-		indexDirectory(indexWriter, dataFolder);
+		indexExamples(indexWriter, examples);
 
 		indexWriter.close();
 		this.index = index;
@@ -79,42 +85,35 @@ public class Indexer {
 	public Directory getIndex() {
 		return index;
 	}
-
-	protected void indexDirectory(IndexWriter writer, File dir) throws IOException {
-		File[] files = dir.listFiles();
-
-		for (File f : files) {
-			if (f.isDirectory()) {
-				indexDirectory(writer, f);
-			} else {
-				indexFile(writer, f);
-			}
+	
+	protected void indexExamples(IndexWriter writer, Iterable<ExampleData> examples) {
+		for (ExampleData example : examples) {
+			indexExample(writer, example);
+		}
+	}
+	
+	protected void indexExample(IndexWriter writer, ExampleData example) {
+		try {
+			File indexHtml = getIndexHtml(example);
+			String contents = parseBodyContents(indexHtml);
+			String id = example.getId();
+			String title = example.getTitle();
+			String path = example.getProjectDir().getAbsolutePath();
+			writer.addDocument(createDocument(id, title, path, contents));
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 	}
 
-	protected void indexFile(IndexWriter writer, File file) throws IOException {
-		if (file.isHidden() || !file.exists() || !file.canRead()) {
-			return;
-		}
-		if (!file.getName().equalsIgnoreCase("index.html")) {
-			return;
-		}
-
-		String contents = parseBodyContents(file);
-		String name = file.getCanonicalPath();
-		writer.addDocument(createDocument(name, contents));
-		System.out.println("Indexing -> " + file.getCanonicalPath());
-		// System.out.println("Contents of the document:" + contents);
-		// System.out.println("Metadata of the document:");
-		// String[] metadataNames = metadata.names();
-		//
-		// for(String name : metadataNames) {
-		// System.out.println(name + ": " + metadata.get(name));
-		// }
-
+	protected File getIndexHtml(ExampleData example) {
+		File dir = example.getProjectDir();
+		return FileUtil.findFirst(dir, (File f)->{return f.getName().toLowerCase().equals("index.html");});
 	}
 
 	protected String parseBodyContents(File file) {
+		if (file == null) {
+			return "";
+		}
 		try {
 			BodyContentHandler handler = new BodyContentHandler();
 			Metadata metadata = new Metadata();
@@ -135,10 +134,12 @@ public class Indexer {
 		return "";
 	}
 
-	protected Document createDocument(String name, String contents) {
+	protected Document createDocument(String id, String title, String path, String contents) {
 		Document doc = new Document();
+		doc.add(new Field(FIELD_ID, id, TYPE_ID));
+		doc.add(new Field(FIELD_TITLE, id, TYPE_TITLE));
+		doc.add(new Field(FIELD_PATH, id, TYPE_PATH));
 		doc.add(new Field(FIELD_CONTENTS, contents, TYPE_CONTENTS));
-		doc.add(new Field(FIELD_NAME, name, TYPE_NAME));
 		return doc;
 	}
 }
