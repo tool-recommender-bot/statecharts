@@ -37,6 +37,8 @@ import org.eclipse.jface.wizard.WizardPage;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.browser.Browser;
 import org.eclipse.swt.custom.SashForm;
+import org.eclipse.swt.events.ModifyEvent;
+import org.eclipse.swt.events.ModifyListener;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
@@ -47,6 +49,7 @@ import org.eclipse.swt.program.Program;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Text;
 import org.yakindu.sct.examples.wizard.ExampleActivator;
 import org.yakindu.sct.examples.wizard.preferences.ExamplesPreferenceConstants;
@@ -128,27 +131,50 @@ public class SelectExamplePage extends WizardPage
 	}
 	
 	private void createSearchGroup(Composite root) {
-		Composite searchContainer = new Composite(root, SWT.NONE);
-		GridDataFactory.fillDefaults().grab(true, true).applyTo(searchContainer);
-		GridLayout layout = new GridLayout(2, false);
+		Group searchContainer = new Group(root, SWT.NONE);
+		searchContainer.setText("Search");
+		GridDataFactory.fillDefaults().grab(true, false).applyTo(searchContainer);
+		GridLayout layout = new GridLayout(1, true);
 		searchContainer.setLayout(layout);
 		
-		searchField = new Text(searchContainer, SWT.NONE);
-		searchField.setText("java");
-		GridDataFactory.fillDefaults().grab(false, false).align(SWT.BEGINNING, SWT.CENTER).applyTo(searchField);
-		
-		Button searchButton = new Button(searchContainer, SWT.PUSH);
-		searchButton.setText("Search");
-		GridDataFactory.fillDefaults().grab(false, false).align(SWT.BEGINNING, SWT.CENTER).applyTo(searchButton);
-		
-		searchButton.addSelectionListener(new SelectionAdapter() {
+		searchField = new Text(searchContainer, SWT.SINGLE | SWT.BORDER | SWT.SEARCH | SWT.ICON_CANCEL);
+		searchField.setText("Type search keywords");
+		GridDataFactory.fillDefaults().grab(true, false).align(SWT.BEGINNING, SWT.CENTER).applyTo(searchField);
+		searchField.addModifyListener(new ModifyListener() {
 			@Override
-			public void widgetSelected(SelectionEvent e) {
+			public void modifyText(ModifyEvent e) {
 				performSearch();
+			}
+		});
+		searchField.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetDefaultSelected(SelectionEvent e) {
+				if (e.detail == SWT.ICON_CANCEL)
+					cancelSearch();
 			}
 		});
 	}
 	
+	protected void cancelSearch() {
+		viewer.resetFilters();
+//		
+//		viewer.addFilter(new ViewerFilter() {
+//
+//			@Override
+//			public boolean select(Viewer viewer, Object parentElement, Object element) {
+//				if (element instanceof ExampleData) {
+//					ExampleData example = (ExampleData) element;
+//					// should be done via viewer.getInput instead of filter mechanism
+//					removeHighlighting(example);
+//					return true;
+//				}
+//				return false;
+//			}
+//			
+//		});
+//		viewer.refresh();
+	}
+
 	protected void performSearch() {
 		String query = searchField.getText();
 		if (query.isEmpty()) {
@@ -176,10 +202,7 @@ public class SelectExamplePage extends WizardPage
 					ExampleData example = (ExampleData) element;
 					for (SearchResult searchResult : results) {
 						if (example.getId().equals(searchResult.getExampleId())) {
-							
-							
-							highlight(example, searchResult);
-							
+							addHighlighting(example, searchResult);
 							return true;
 						}
 					}
@@ -193,7 +216,7 @@ public class SelectExamplePage extends WizardPage
 		
 	}
 
-	protected void highlight(ExampleData example, SearchResult searchResult) {
+	protected void addHighlighting(ExampleData example, SearchResult searchResult) {
 		String highlightedContents = searchResult.getHighlightedText();
 		Path highlightedHtml = Paths.get(example.getProjectDir().getAbsolutePath()+File.separator+".index_highlighted.html");
 		FileUtil.writeFile(highlightedHtml, highlightedContents);
