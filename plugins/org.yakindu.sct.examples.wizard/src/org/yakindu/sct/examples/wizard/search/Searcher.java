@@ -21,7 +21,6 @@ import org.apache.lucene.search.highlight.Highlighter;
 import org.apache.lucene.search.highlight.InvalidTokenOffsetsException;
 import org.apache.lucene.search.highlight.NullFragmenter;
 import org.apache.lucene.search.highlight.QueryScorer;
-import org.apache.lucene.search.highlight.SimpleHTMLFormatter;
 import org.apache.lucene.search.highlight.TokenSources;
 import org.apache.lucene.store.Directory;
 import org.apache.lucene.util.Version;
@@ -54,7 +53,7 @@ public class Searcher {
 			return Collections.emptyList();
 		}
 		TopDocs hits = is.search(query, hitsPerPage);
-		Formatter formatter = new SimpleHTMLFormatter();
+		Formatter formatter = new CssHtmlFormatter("highlight");
 		QueryScorer scorer = new QueryScorer(query);
 		Highlighter highlighter = new Highlighter(formatter, scorer);
 		Fragmenter fragmenter = new NullFragmenter();
