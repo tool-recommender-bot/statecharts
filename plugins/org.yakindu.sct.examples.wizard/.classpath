@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
+	<classpathentry exported="true" kind="lib" path="lib/lucene-suggest-4.6.1.jar" sourcepath="lib/lucene-suggest-4.6.1-sources.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/lucene-highlighter-4.6.1.jar" sourcepath="lib/lucene-highlighter-4.6.1-sources.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/lucene-analyzers-common-4.6.1.jar" sourcepath="lib/lucene-analyzers-common-4.6.1-sources.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/lucene-core-4.6.1.jar" sourcepath="lib/lucene-core-4.6.1-sources.jar"/>

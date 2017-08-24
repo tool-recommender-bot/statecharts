@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.apache.lucene.analysis.TokenStream;
 import org.apache.lucene.analysis.standard.StandardAnalyzer;
@@ -22,6 +23,10 @@ import org.apache.lucene.search.highlight.InvalidTokenOffsetsException;
 import org.apache.lucene.search.highlight.NullFragmenter;
 import org.apache.lucene.search.highlight.QueryScorer;
 import org.apache.lucene.search.highlight.TokenSources;
+import org.apache.lucene.search.spell.Dictionary;
+import org.apache.lucene.search.spell.LuceneDictionary;
+import org.apache.lucene.search.suggest.Lookup;
+import org.apache.lucene.search.suggest.analyzing.FuzzySuggester;
 import org.apache.lucene.store.Directory;
 import org.apache.lucene.util.Version;
 
@@ -41,6 +46,20 @@ public class Searcher {
 		public String getHighlightedText() {
 			return highlightedText;
 		}
+	}
+	
+	// TODO: consider moving into a suggester class
+	public Iterable<String> suggest(Directory index, String input) throws IOException {
+		IndexReader indexReader = DirectoryReader.open(index);
+        Dictionary dictionary = new LuceneDictionary(indexReader, Indexer.FIELD_CONTENTS);
+        FuzzySuggester fuzzySuggester = new FuzzySuggester(new StandardAnalyzer(Version.LUCENE_46));
+        
+        fuzzySuggester.build(dictionary);
+        List<Lookup.LookupResult> lookupResultList = fuzzySuggester.lookup(input, false, 10);
+        for (Lookup.LookupResult lookupResult : lookupResultList) {
+            System.out.println(lookupResult.key + ": " + lookupResult.value);
+        }
+        return lookupResultList.stream().map(r -> r.key.toString()).collect(Collectors.toList());
 	}
 	
 	public Iterable<SearchResult> search(Directory index, String input) throws IOException {

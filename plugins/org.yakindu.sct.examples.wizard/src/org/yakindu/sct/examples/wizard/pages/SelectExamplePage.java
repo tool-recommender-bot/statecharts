@@ -47,6 +47,7 @@ import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.program.Program;
 import org.eclipse.swt.widgets.Button;
+import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Group;
@@ -92,7 +93,7 @@ public class SelectExamplePage extends WizardPage
 	
 	/** ID of example to be installed */
 	private String exampleIdToInstall;
-	private Text searchField;
+	private Combo searchField;
 
 	public SelectExamplePage() {
 		super(SELECT_PAGE_TITLE);
@@ -134,10 +135,10 @@ public class SelectExamplePage extends WizardPage
 		Group searchContainer = new Group(root, SWT.NONE);
 		searchContainer.setText("Search");
 		GridDataFactory.fillDefaults().grab(true, false).applyTo(searchContainer);
-		GridLayout layout = new GridLayout(1, true);
+		GridLayout layout = new GridLayout(2, false);
 		searchContainer.setLayout(layout);
 		
-		searchField = new Text(searchContainer, SWT.SINGLE | SWT.BORDER | SWT.SEARCH | SWT.ICON_CANCEL);
+		searchField = new Combo(searchContainer, SWT.SIMPLE | SWT.BORDER | SWT.SEARCH | SWT.ICON_CANCEL);
 		searchField.setText("Type search keywords");
 		GridDataFactory.fillDefaults().grab(true, false).align(SWT.BEGINNING, SWT.CENTER).applyTo(searchField);
 		searchField.addModifyListener(new ModifyListener() {
@@ -153,6 +154,8 @@ public class SelectExamplePage extends WizardPage
 					cancelSearch();
 			}
 		});
+		
+		
 	}
 	
 	protected void cancelSearch() {
@@ -185,6 +188,8 @@ public class SelectExamplePage extends WizardPage
 			performIndexing();
 		}
 		try {
+			Iterable<String> suggestions = searcher.suggest(indexer.getIndex(), query);
+			updateComboBox(suggestions, query);
 			Iterable<SearchResult> results = searcher.search(indexer.getIndex(), query);
 			showSearchResults(results);
 		} catch (IOException e) {
@@ -192,6 +197,15 @@ public class SelectExamplePage extends WizardPage
 		}
 	}
 	
+	private void updateComboBox(Iterable<String> suggestions, String query) {
+		for (String item : searchField.getItems()) {
+			searchField.remove(item);
+		}
+		for (String suggest : suggestions) {
+			searchField.add(suggest);
+		}
+	}
+
 	private void showSearchResults(final Iterable<SearchResult> results) {
 		viewer.resetFilters();
 		viewer.addFilter(new ViewerFilter() {
