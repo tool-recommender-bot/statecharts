@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
+import java.nio.file.Path;
 
 import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.document.Document;
@@ -24,7 +25,7 @@ import org.apache.tika.sax.BodyContentHandler;
 import org.xml.sax.SAXException;
 import org.yakindu.sct.examples.wizard.service.ExampleData;
 
-public class Indexer {
+public class ExampleIndexer {
 
 	public static final String FIELD_CONTENTS = "contents";
 	public static final String FIELD_SOURCE = "source";
@@ -69,15 +70,13 @@ public class Indexer {
 		TYPE_TITLE.freeze();
 	}
 	
-	protected Directory index;
-
-	public Directory index(Iterable<ExampleData> examples, String indexPath) throws IOException {
-		File indexFolder = new File(indexPath);
+	public Directory index(Iterable<ExampleData> examples, Path indexPath) throws IOException {
+		File indexFolder = indexPath.toFile();
 		if (indexFolder.exists()) {
-			FileUtil.deleteDirectory(indexFolder);
+			FileUtil.deleteDirectory(indexPath);
 		}
 		if (!indexFolder.exists()) {
-			Files.createDirectory(indexFolder.toPath());
+			Files.createDirectory(indexPath);
 		}
 
 		StandardAnalyzer analyzer = new StandardAnalyzer(Version.LUCENE_46);
@@ -88,11 +87,6 @@ public class Indexer {
 		indexExamples(indexWriter, examples);
 
 		indexWriter.close();
-		this.index = index;
-		return index;
-	}
-	
-	public Directory getIndex() {
 		return index;
 	}
 	
@@ -118,7 +112,7 @@ public class Indexer {
 
 	protected File getIndexHtml(ExampleData example) {
 		File dir = example.getProjectDir();
-		return FileUtil.findFirst(dir, (File f)->{return f.getName().toLowerCase().equals("index.html");});
+		return FileUtil.findFirst(dir, f -> f.getName().toLowerCase().equals("index.html"));
 	}
 
 	protected String parseBodyContents(File file) {

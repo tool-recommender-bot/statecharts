@@ -10,6 +10,8 @@
  */
 package org.yakindu.sct.examples.wizard.service;
 
+import org.yakindu.sct.examples.wizard.search.LuceneSearchService;
+import org.yakindu.sct.examples.wizard.search.IExampleSearchService;
 import org.yakindu.sct.examples.wizard.service.git.GitRepositoryExampleService;
 import org.yakindu.sct.examples.wizard.service.git.IExampleDataReader;
 import org.yakindu.sct.examples.wizard.service.git.JsonMetaDataReader;
@@ -28,6 +30,7 @@ public class ExampleWizardModule implements Module {
 	public void configure(Binder binder) {
 		binder.bind(IExampleService.class).to(GitRepositoryExampleService.class);
 		binder.bind(IExampleDataReader.class).to(JsonMetaDataReader.class);
+		binder.bind(IExampleSearchService.class).to(LuceneSearchService.class);
 	}
 
 }

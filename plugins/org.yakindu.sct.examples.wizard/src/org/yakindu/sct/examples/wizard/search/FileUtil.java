@@ -13,8 +13,8 @@ import com.google.common.base.Predicate;
 
 public class FileUtil {
 
-	public static void deleteDirectory(File folder) throws IOException {
-		Files.walkFileTree(folder.toPath(), new SimpleFileVisitor<Path>() {
+	public static void deleteDirectory(Path folder) throws IOException {
+		Files.walkFileTree(folder, new SimpleFileVisitor<Path>() {
 			@Override
 			public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
 				Files.delete(file);

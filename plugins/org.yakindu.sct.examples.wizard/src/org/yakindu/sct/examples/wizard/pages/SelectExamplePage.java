@@ -10,12 +10,9 @@
  */
 package org.yakindu.sct.examples.wizard.pages;
 
-import java.io.File;
-import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.List;
+import java.util.Optional;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
@@ -53,16 +50,11 @@ import org.eclipse.swt.widgets.Text;
 import org.yakindu.sct.examples.wizard.ExampleActivator;
 import org.yakindu.sct.examples.wizard.ExampleWizardImages;
 import org.yakindu.sct.examples.wizard.preferences.ExamplesPreferenceConstants;
-import org.yakindu.sct.examples.wizard.search.FileUtil;
-import org.yakindu.sct.examples.wizard.search.Indexer;
-import org.yakindu.sct.examples.wizard.search.Searcher;
-import org.yakindu.sct.examples.wizard.search.Searcher.SearchResult;
+import org.yakindu.sct.examples.wizard.search.IExampleSearchService;
 import org.yakindu.sct.examples.wizard.service.ExampleData;
 import org.yakindu.sct.examples.wizard.service.ExampleWizardConstants;
 import org.yakindu.sct.examples.wizard.service.IExampleService;
 
-import com.google.common.base.Predicate;
-import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 
 /**
@@ -71,24 +63,22 @@ import com.google.inject.Inject;
  * @author andreas muelder - Replace Image Gallery with Browser widget
  * 
  */
-
 public class SelectExamplePage extends WizardPage
 		implements ExampleWizardConstants, ISelectionChangedListener, SelectionListener, IPropertyChangeListener {
 
 	private static final String PRO_BUNDLE = "com.yakindu.sct.domain.c";
 	private static final String PRO_UPDATE_SITE = "https://info.itemis.com/yakindu/statecharts/pro/";
+	
 	@Inject
 	private IExampleService exampleService;
+	
+	@Inject
+	private IExampleSearchService searchService;
+	
 	private TableViewer viewer;
 	private ExampleData selection;
 	private Browser browser;
 	private MessageArea messageArea;
-	
-	@Inject
-	protected Indexer indexer;
-	
-	@Inject
-	protected Searcher searcher;
 	
 	/** ID of example to be installed */
 	private String exampleIdToInstall;
@@ -147,7 +137,12 @@ public class SelectExamplePage extends WizardPage
 		searchField.addModifyListener(new ModifyListener() {
 			@Override
 			public void modifyText(ModifyEvent e) {
-				performSearch();
+				if (searchField.getText().isEmpty()) {
+					cancelSearch();
+				} else {
+					List<ExampleData> results = searchService.search(searchField.getText());
+					showSearchResults(results);
+				}
 			}
 		});
 		searchField.addSelectionListener(new SelectionAdapter() {
@@ -160,86 +155,11 @@ public class SelectExamplePage extends WizardPage
 	}
 	
 	protected void cancelSearch() {
-		viewer.resetFilters();
-//		
-//		viewer.addFilter(new ViewerFilter() {
-//
-//			@Override
-//			public boolean select(Viewer viewer, Object parentElement, Object element) {
-//				if (element instanceof ExampleData) {
-//					ExampleData example = (ExampleData) element;
-//					// should be done via viewer.getInput instead of filter mechanism
-//					removeHighlighting(example);
-//					return true;
-//				}
-//				return false;
-//			}
-//			
-//		});
-//		viewer.refresh();
+		setInput(getExamples(new NullProgressMonitor()));
 	}
 
-	protected void performSearch() {
-		String query = searchField.getText();
-		if (query.isEmpty()) {
-			return;
-		}
-		// ensure we have an index to search on
-		if (indexer.getIndex() == null) {
-			performIndexing();
-		}
-		try {
-			Iterable<SearchResult> results = searcher.search(indexer.getIndex(), query);
-			showSearchResults(results);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-	
-	private void showSearchResults(final Iterable<SearchResult> results) {
-		viewer.resetFilters();
-		viewer.addFilter(new ViewerFilter() {
-
-			@Override
-			public boolean select(Viewer viewer, Object parentElement, Object element) {
-				if (element instanceof ExampleData) {
-					ExampleData example = (ExampleData) element;
-					for (SearchResult searchResult : results) {
-						if (example.getId().equals(searchResult.getExampleId())) {
-							addHighlighting(example, searchResult);
-							return true;
-						}
-					}
-					
-				}
-				return false;
-			}
-			
-		});
-		viewer.refresh();
-		
-	}
-
-	protected void addHighlighting(ExampleData example, SearchResult searchResult) {
-		String highlightedContents = searchResult.getHighlightedText();
-		Path highlightedHtml = Paths.get(example.getProjectDir().getAbsolutePath()+File.separator+".index_highlighted.html");
-		FileUtil.writeFile(highlightedHtml, highlightedContents);
-		example.setDetailsUrl(highlightedHtml.toString());
-	}
-
-	protected void performIndexing() {
-		String exampleRepoPath = getExamplesLocation();
-		try {
-			List<ExampleData> examples = exampleService.getExamples(null);
-			indexer.index(examples, exampleRepoPath + "/.index");
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-	
-	protected String getExamplesLocation() {
-		return java.nio.file.Paths.get(ExampleActivator.getDefault().getPreferenceStore()
-				.getString(ExamplesPreferenceConstants.STORAGE_LOCATION)).toString();
+	protected void showSearchResults(final List<ExampleData> examples) {
+		setInput(examples);
 	}
 
 	@Override
@@ -294,7 +214,9 @@ public class SelectExamplePage extends WizardPage
 
 				@Override
 				public void run() {
-					setInput(monitor);
+					List<ExampleData> examples = getExamples(monitor);
+					setInput(examples);
+					searchService.index(examples);
 					messageArea.showUpdate();
 					messageArea.getParent().layout(true);
 				}
@@ -303,36 +225,32 @@ public class SelectExamplePage extends WizardPage
 			Display.getDefault().syncExec(new Runnable() {
 				@Override
 				public void run() {
-					setInput(monitor);
+					List<ExampleData> examples = getExamples(monitor);
+					setInput(examples);
+					searchService.index(examples);
 				}
 			});
 		}
 
 	}
 
-	protected void setInput(final IProgressMonitor monitor) {
-		final List<ExampleData> input = exampleService.getExamples(new NullProgressMonitor());
-
+	protected void setInput(List<ExampleData> input) {
 		messageArea.hide();
 		viewer.setInput(input);
 		// explicit layouting required for Unix systems
 		viewer.getControl().getParent().getParent().layout(true);
-
 		filterAndSelectExampleToInstall(viewer, input);
 	}
 
-	protected void filterAndSelectExampleToInstall(TableViewer viewer, List<ExampleData> input) {
-		final ExampleData exampleToInstall = Iterables.find(input, new Predicate<ExampleData>() {
-			@Override
-			public boolean apply(ExampleData input) {
-				if (exampleIdToInstall != null) {
-					return exampleIdToInstall.equals(input.getId());
-				}
-				return true;
-			}
+	protected List<ExampleData> getExamples(final IProgressMonitor monitor) {
+		return exampleService.getExamples(monitor);
+	}
 
-		});
-		if (exampleToInstall != null) {
+	protected void filterAndSelectExampleToInstall(TableViewer viewer, List<ExampleData> input) {
+		final Optional<ExampleData> exampleToInstall = input.stream()
+				.filter(i -> exampleIdToInstall == null || exampleIdToInstall.equals(i.getId())).findFirst();
+
+		if (exampleToInstall.isPresent()) {
 			viewer.addFilter(new ViewerFilter() {
 
 				@Override
@@ -344,12 +262,12 @@ public class SelectExamplePage extends WizardPage
 						return exampleIdToInstall.equals(((ExampleData) element).getId());
 					}
 					if (element instanceof ExampleContentProvider.Category) {
-						return ((ExampleContentProvider.Category) element).getChildren().contains(exampleToInstall);
+						return ((ExampleContentProvider.Category) element).getChildren().contains(exampleToInstall.get());
 					}
 					return true;
 				}
 			});
-			viewer.setSelection(new StructuredSelection(exampleToInstall), true);
+			viewer.setSelection(new StructuredSelection(exampleToInstall.get()), true);
 		}
 	}
 
@@ -381,11 +299,7 @@ public class SelectExamplePage extends WizardPage
 	}
 
 	protected void setDetailPaneContent(ExampleData exampleData) {
-		if (exampleData.getDetailsText() != null) {
-			browser.setText(exampleData.getDetailsText());
-		} else {
-			browser.setUrl(exampleData.getDetailsUrl());
-		}
+		browser.setUrl(exampleData.getDetailsUrl());
 	}
 
 	protected void createDetailsPane(Composite parent) {
@@ -412,7 +326,6 @@ public class SelectExamplePage extends WizardPage
 		case DOWNLOAD:
 		case UPDATE:
 			revealExamples();
-			performIndexing();
 			break;
 		case INSTALL:
 			Program.launch(PRO_UPDATE_SITE);
@@ -432,7 +345,9 @@ public class SelectExamplePage extends WizardPage
 						@Override
 						public void run() {
 							if (status.isOK()) {
-								SelectExamplePage.this.setInput(monitor);
+								List<ExampleData> examples = getExamples(monitor);
+								SelectExamplePage.this.setInput(examples);
+								searchService.index(examples);
 							} else {
 								messageArea.showError();
 							}
