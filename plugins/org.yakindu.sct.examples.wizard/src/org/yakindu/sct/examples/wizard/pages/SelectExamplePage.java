@@ -132,7 +132,7 @@ public class SelectExamplePage extends WizardPage
         wizardLabel.setText("Examples:");
 		
 		searchField = new Text(searchContainer, SWT.SINGLE | SWT.BORDER | SWT.SEARCH | SWT.ICON_CANCEL);
-		searchField.setText("type search keywords");
+		searchField.setMessage("type search keywords, e.g. java, code generator, sctunit");
 		GridDataFactory.fillDefaults().grab(true, false).align(SWT.FILL, SWT.CENTER).applyTo(searchField);
 		searchField.addModifyListener(new ModifyListener() {
 			@Override
