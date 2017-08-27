@@ -5,7 +5,7 @@
 	<classpathentry exported="true" kind="lib" path="lib/lucene-analyzers-common-4.6.1.jar" sourcepath="lib/lucene-analyzers-common-4.6.1-sources.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/lucene-core-4.6.1.jar" sourcepath="lib/lucene-core-4.6.1-sources.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/lucene-queries-4.6.1.jar"/>
-	<classpathentry exported="true" kind="lib" path="lib/lucene-queryparser-4.6.1.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/lucene-queryparser-4.6.1.jar" sourcepath="lib/lucene-queryparser-4.6.1-sources.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/commons-io-2.5.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/tagsoup-1.2.1.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/tika-core-1.16.jar"/>
