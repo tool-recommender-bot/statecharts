@@ -46,13 +46,12 @@ import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.program.Program;
-import org.eclipse.swt.widgets.Button;
-import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
-import org.eclipse.swt.widgets.Group;
+import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 import org.yakindu.sct.examples.wizard.ExampleActivator;
+import org.yakindu.sct.examples.wizard.ExampleWizardImages;
 import org.yakindu.sct.examples.wizard.preferences.ExamplesPreferenceConstants;
 import org.yakindu.sct.examples.wizard.search.FileUtil;
 import org.yakindu.sct.examples.wizard.search.Indexer;
@@ -93,12 +92,13 @@ public class SelectExamplePage extends WizardPage
 	
 	/** ID of example to be installed */
 	private String exampleIdToInstall;
-	private Combo searchField;
+	private Text searchField;
 
 	public SelectExamplePage() {
 		super(SELECT_PAGE_TITLE);
 		setTitle(SELECT_PAGE_TITLE);
 		setDescription(SELECT_PAGE_DESCRIPTION);
+		setImageDescriptor(ExampleWizardImages.YAKINDU_LOGO.imageDescriptor());
 		setPageComplete(false);
 		ExampleActivator.getDefault().getPreferenceStore().addPropertyChangeListener(this);
 	}
@@ -132,15 +132,18 @@ public class SelectExamplePage extends WizardPage
 	}
 	
 	private void createSearchGroup(Composite root) {
-		Group searchContainer = new Group(root, SWT.NONE);
-		searchContainer.setText("Search");
-		GridDataFactory.fillDefaults().grab(true, false).applyTo(searchContainer);
-		GridLayout layout = new GridLayout(2, false);
+		Composite searchContainer = new Composite(root, SWT.NONE);
+		GridLayout layout = new GridLayout(1, false);
 		searchContainer.setLayout(layout);
+		searchContainer.setLayoutData(new GridData(SWT.FILL, SWT.BEGINNING, true, false));
 		
-		searchField = new Combo(searchContainer, SWT.SIMPLE | SWT.BORDER | SWT.SEARCH | SWT.ICON_CANCEL);
-		searchField.setText("Type search keywords");
-		GridDataFactory.fillDefaults().grab(true, false).align(SWT.BEGINNING, SWT.CENTER).applyTo(searchField);
+        Label wizardLabel = new Label(searchContainer, SWT.NONE);
+        wizardLabel.setFont(root.getFont());
+        wizardLabel.setText("Examples:");
+		
+		searchField = new Text(searchContainer, SWT.SINGLE | SWT.BORDER | SWT.SEARCH | SWT.ICON_CANCEL);
+		searchField.setText("type search keywords");
+		GridDataFactory.fillDefaults().grab(true, false).align(SWT.FILL, SWT.CENTER).applyTo(searchField);
 		searchField.addModifyListener(new ModifyListener() {
 			@Override
 			public void modifyText(ModifyEvent e) {
@@ -154,8 +157,6 @@ public class SelectExamplePage extends WizardPage
 					cancelSearch();
 			}
 		});
-		
-		
 	}
 	
 	protected void cancelSearch() {
@@ -188,8 +189,6 @@ public class SelectExamplePage extends WizardPage
 			performIndexing();
 		}
 		try {
-			Iterable<String> suggestions = searcher.suggest(indexer.getIndex(), query);
-			updateComboBox(suggestions, query);
 			Iterable<SearchResult> results = searcher.search(indexer.getIndex(), query);
 			showSearchResults(results);
 		} catch (IOException e) {
@@ -197,15 +196,6 @@ public class SelectExamplePage extends WizardPage
 		}
 	}
 	
-	private void updateComboBox(Iterable<String> suggestions, String query) {
-		for (String item : searchField.getItems()) {
-			searchField.remove(item);
-		}
-		for (String suggest : suggestions) {
-			searchField.add(suggest);
-		}
-	}
-
 	private void showSearchResults(final Iterable<SearchResult> results) {
 		viewer.resetFilters();
 		viewer.addFilter(new ViewerFilter() {
@@ -235,7 +225,6 @@ public class SelectExamplePage extends WizardPage
 		Path highlightedHtml = Paths.get(example.getProjectDir().getAbsolutePath()+File.separator+".index_highlighted.html");
 		FileUtil.writeFile(highlightedHtml, highlightedContents);
 		example.setDetailsUrl(highlightedHtml.toString());
-		
 	}
 
 	protected void performIndexing() {

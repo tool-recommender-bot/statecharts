@@ -22,7 +22,8 @@ import org.eclipse.swt.graphics.Image;
 public enum ExampleWizardImages {
 
 	COLLAPSE_ALL("icons/collapseall.gif"),
-	EXPAND_ALL("icons/expandall.gif");
+	EXPAND_ALL("icons/expandall.gif"),
+	YAKINDU_LOGO("icons/icon-64.png");
 	
 	private final String path;
 
