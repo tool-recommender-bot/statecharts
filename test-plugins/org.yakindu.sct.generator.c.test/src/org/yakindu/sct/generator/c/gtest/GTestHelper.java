@@ -172,6 +172,7 @@ public class GTestHelper {
 		command.add("-lgtest_main");
 		command.add("-lstdc++");
 		command.add("-pthread");
+		command.add("-Weffc++");
 		// command.add("-pg");
 		return command;
 	}
