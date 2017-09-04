@@ -719,9 +719,18 @@ public class SGraphJavaValidationTest {
 		assertTrue(validator.validate(sync, diagnostics, new HashMap<Object, Object>()));
 		assertNoIssues(diagnostics);
 	}
+	
+	@Test
+	public void syncNoTarget_Issue1366() {
+		statechart = loadStatechart("SyncNoTarget_Issue1366.sct");
 		
-
-
+		State state = firstNamed(EcoreUtil2.eAllOfType(statechart, State.class), "State1");
+		Synchronization sync = (Synchronization) state.getOutgoingTransitions().get(0).getTarget();
+		
+		assertTrue(validator.validate(sync, diagnostics, new HashMap<Object, Object>()));
+		assertNoIssues(diagnostics);
+	}
+		
 	@Test
 	public void regionCantBeEnteredUsingShallowHistory() {
 		statechart = AbstractTestModelsUtil
