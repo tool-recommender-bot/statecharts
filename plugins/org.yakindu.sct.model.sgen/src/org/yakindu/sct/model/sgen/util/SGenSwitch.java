@@ -20,7 +20,6 @@ import org.yakindu.base.types.Declaration;
 import org.yakindu.base.types.PackageMember;
 import org.yakindu.base.types.Property;
 import org.yakindu.base.types.TypedElement;
-import org.yakindu.sct.model.sgen.*;
 import org.yakindu.sct.model.sgen.DeprecatableElement;
 import org.yakindu.sct.model.sgen.FeatureConfiguration;
 import org.yakindu.sct.model.sgen.FeatureParameter;
@@ -31,6 +30,8 @@ import org.yakindu.sct.model.sgen.GeneratorConfiguration;
 import org.yakindu.sct.model.sgen.GeneratorEntry;
 import org.yakindu.sct.model.sgen.GeneratorModel;
 import org.yakindu.sct.model.sgen.SGenPackage;
+import org.yakindu.sct.model.sgen.VarRefExpression;
+import org.yakindu.sct.model.sgen.VariableDefinition;
 
 /**
  * <!-- begin-user-doc -->

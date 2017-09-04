@@ -18,6 +18,7 @@ import java.util.Map
 import java.util.Queue
 import org.eclipse.emf.ecore.util.EcoreUtil
 import org.eclipse.xtend.lib.annotations.Data
+import org.yakindu.base.expressions.interpreter.IStatementInterpreter
 import org.yakindu.sct.model.sexec.Call
 import org.yakindu.sct.model.sexec.Check
 import org.yakindu.sct.model.sexec.EnterState
@@ -38,12 +39,11 @@ import org.yakindu.sct.model.sexec.extensions.StateVectorExtensions
 import org.yakindu.sct.model.sexec.transformation.SexecExtensions
 import org.yakindu.sct.model.sgraph.FinalState
 import org.yakindu.sct.model.sgraph.RegularState
+import org.yakindu.sct.model.sruntime.sruntime.ExecutionContext
+import org.yakindu.sct.model.sruntime.sruntime.ExecutionEvent
 import org.yakindu.sct.model.stext.lib.StatechartAnnotations
 import org.yakindu.sct.simulation.core.sexec.scheduling.ITimeTaskScheduler
 import org.yakindu.sct.simulation.core.sexec.scheduling.ITimeTaskScheduler.TimeTask
-import org.yakindu.sct.simulation.core.sruntime.ExecutionContext
-import org.yakindu.sct.simulation.core.sruntime.ExecutionEvent
-import org.yakindu.base.expressions.interpreter.IStatementInterpreter
 
 /**
  * 

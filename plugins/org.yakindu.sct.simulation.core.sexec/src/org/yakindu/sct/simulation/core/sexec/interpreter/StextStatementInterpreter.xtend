@@ -18,10 +18,10 @@ import org.yakindu.base.expressions.expressions.Expression
 import org.yakindu.base.expressions.expressions.FeatureCall
 import org.yakindu.base.expressions.interpreter.ExpressionsInterpreter
 import org.yakindu.base.types.Event
+import org.yakindu.sct.model.sruntime.sruntime.ExecutionEvent
 import org.yakindu.sct.model.stext.stext.ActiveStateReferenceExpression
 import org.yakindu.sct.model.stext.stext.EventRaisingExpression
 import org.yakindu.sct.model.stext.stext.EventValueReferenceExpression
-import org.yakindu.sct.simulation.core.sruntime.ExecutionEvent
 
 /**
  * 

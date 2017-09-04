@@ -18,5 +18,5 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf.ecore.xmi;visibility:=reexport,
  org.yakindu.base.types;visibility:=reexport,
  com.google.inject;visibility:=reexport,
- org.yakindu.sct.simulation.core
+ org.yakindu.sct.model.sruntime
 Bundle-ActivationPolicy: lazy

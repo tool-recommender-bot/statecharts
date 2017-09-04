@@ -11,8 +11,8 @@
 package org.yakindu.base.expressions.interpreter;
 
 import org.yakindu.base.expressions.expressions.Expression;
-import org.yakindu.sct.simulation.core.sruntime.ExecutionContext;
-import org.yakindu.sct.simulation.core.sruntime.ExecutionSlot;
+import org.yakindu.sct.model.sruntime.sruntime.ExecutionContext;
+import org.yakindu.sct.model.sruntime.sruntime.ExecutionSlot;
 
 import com.google.inject.ImplementedBy;
 
@@ -24,9 +24,10 @@ import com.google.inject.ImplementedBy;
  */
 @ImplementedBy(DefaultExecutionSlotResolver.class)
 public interface IExecutionSlotResolver {
-	
+
 	/**
-	 * Resolves for a given {@link Expression} the corresponding {@link ExecutionSlot} within the given {@link ExecutionContext}.
+	 * Resolves for a given {@link Expression} the corresponding
+	 * {@link ExecutionSlot} within the given {@link ExecutionContext}.
 	 * 
 	 * @param context
 	 * @param expression

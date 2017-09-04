@@ -3,7 +3,6 @@
 package org.yakindu.sct.model.sgen;
 
 import org.yakindu.base.expressions.expressions.Expression;
-
 import org.yakindu.base.types.Property;
 
 /**

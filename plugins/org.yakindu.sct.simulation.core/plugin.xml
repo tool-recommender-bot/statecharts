@@ -7,7 +7,7 @@
       <package
             uri="http://www.yakindu.org/sct/sruntime/2.0.0"
             class="org.yakindu.sct.simulation.core.sruntime.SRuntimePackage"
-            genModel="model/sruntime.genmodel"/>
+            genModel="META-INF/sruntime.genmodel"/>
    </extension>
 
 </plugin>
