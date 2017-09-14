@@ -79,13 +79,13 @@ TypeCastExpression returns Expression:
 
 PrimaryExpression returns Expression:
 	PrimitiveValueExpression
+	| NewInstanceExpression
 	| FeatureCall
-	| ParenthesizedExpression;
+	| ParenthesizedExpression
+	;
 
 PrimitiveValueExpression returns Expression:
 	{PrimitiveValueExpression} value=Literal;
-
-
 
 FeatureCall returns Expression:
 	ElementReferenceExpression ({FeatureCall.owner=current} '.' feature=[ecore::EObject]
@@ -110,6 +110,11 @@ ParenthesizedExpression returns Expression:
 
 TypeSpecifier returns types::TypeSpecifier:
 	type=[types::Type|QID] ('<' (typeArguments+=TypeSpecifier (',' typeArguments+=TypeSpecifier)*'>'))?;
+	
+NewInstanceExpression returns Expression:
+	{NewInstanceExpression}
+	'new' type=TypeSpecifier operationCall?='(' (arguments+=Argument (',' arguments+=Argument)*)? ')' 
+;
 
 Literal:
 	BoolLiteral | IntLiteral | HexLiteral | BinaryLiteral | DoubleLiteral | FloatLiteral | StringLiteral | NullLiteral;

@@ -15,6 +15,7 @@ import org.yakindu.base.types.Annotation;
 import org.yakindu.base.types.AnnotationType;
 import org.yakindu.base.types.ArrayTypeSpecifier;
 import org.yakindu.base.types.ComplexType;
+import org.yakindu.base.types.Constructor;
 import org.yakindu.base.types.Declaration;
 import org.yakindu.base.types.Domain;
 import org.yakindu.base.types.EnumerationType;
@@ -293,6 +294,19 @@ public class TypesSwitch<T> extends Switch<T> {
 				if (result == null) result = casePackageMember(annotationType);
 				if (result == null) result = caseNamedElement(annotationType);
 				if (result == null) result = caseAnnotatableElement(annotationType);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case TypesPackage.CONSTRUCTOR: {
+				Constructor constructor = (Constructor)theEObject;
+				T result = caseConstructor(constructor);
+				if (result == null) result = caseOperation(constructor);
+				if (result == null) result = caseDeclaration(constructor);
+				if (result == null) result = caseGenericElement(constructor);
+				if (result == null) result = caseTypedElement(constructor);
+				if (result == null) result = casePackageMember(constructor);
+				if (result == null) result = caseNamedElement(constructor);
+				if (result == null) result = caseAnnotatableElement(constructor);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -663,6 +677,21 @@ public class TypesSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseAnnotationType(AnnotationType object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Constructor</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Constructor</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseConstructor(Constructor object) {
 		return null;
 	}
 

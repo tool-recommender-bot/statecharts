@@ -19,6 +19,7 @@ import org.yakindu.base.types.Annotation;
 import org.yakindu.base.types.AnnotationType;
 import org.yakindu.base.types.ArrayTypeSpecifier;
 import org.yakindu.base.types.ComplexType;
+import org.yakindu.base.types.Constructor;
 import org.yakindu.base.types.Declaration;
 import org.yakindu.base.types.Direction;
 import org.yakindu.base.types.Domain;
@@ -204,6 +205,13 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * @generated
 	 */
 	private EClass annotationTypeEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass constructorEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -820,6 +828,15 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getConstructor() {
+		return constructorEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EEnum getDirection() {
 		return directionEEnum;
 	}
@@ -936,6 +953,8 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 		createEReference(annotationTypeEClass, ANNOTATION_TYPE__PROPERTIES);
 		createEReference(annotationTypeEClass, ANNOTATION_TYPE__TARGETS);
 
+		constructorEClass = createEClass(CONSTRUCTOR);
+
 		// Create enums
 		directionEEnum = createEEnum(DIRECTION);
 	}
@@ -996,6 +1015,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 		typeAliasEClass.getESuperTypes().add(this.getType());
 		arrayTypeSpecifierEClass.getESuperTypes().add(this.getTypeSpecifier());
 		annotationTypeEClass.getESuperTypes().add(this.getType());
+		constructorEClass.getESuperTypes().add(this.getOperation());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(packageEClass, org.yakindu.base.types.Package.class, "Package", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -1096,6 +1116,8 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 		initEClass(annotationTypeEClass, AnnotationType.class, "AnnotationType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getAnnotationType_Properties(), this.getProperty(), null, "properties", null, 0, -1, AnnotationType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getAnnotationType_Targets(), ecorePackage.getEObject(), null, "targets", null, 0, -1, AnnotationType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(constructorEClass, Constructor.class, "Constructor", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		// Initialize enums and add enum literals
 		initEEnum(directionEEnum, Direction.class, "Direction");

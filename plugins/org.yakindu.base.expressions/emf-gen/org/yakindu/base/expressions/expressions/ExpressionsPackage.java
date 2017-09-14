@@ -1196,6 +1196,79 @@ public interface ExpressionsPackage extends EPackage {
 	int ARGUMENT_FEATURE_COUNT = 2;
 
 	/**
+	 * The meta object id for the '{@link org.yakindu.base.expressions.expressions.impl.NewInstanceExpressionImpl <em>New Instance Expression</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.yakindu.base.expressions.expressions.impl.NewInstanceExpressionImpl
+	 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getNewInstanceExpression()
+	 * @generated
+	 */
+	int NEW_INSTANCE_EXPRESSION = 32;
+
+	/**
+	 * The feature id for the '<em><b>Arguments</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NEW_INSTANCE_EXPRESSION__ARGUMENTS = ELEMENT_REFERENCE_EXPRESSION__ARGUMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Reference</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NEW_INSTANCE_EXPRESSION__REFERENCE = ELEMENT_REFERENCE_EXPRESSION__REFERENCE;
+
+	/**
+	 * The feature id for the '<em><b>Operation Call</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NEW_INSTANCE_EXPRESSION__OPERATION_CALL = ELEMENT_REFERENCE_EXPRESSION__OPERATION_CALL;
+
+	/**
+	 * The feature id for the '<em><b>Array Selector</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NEW_INSTANCE_EXPRESSION__ARRAY_SELECTOR = ELEMENT_REFERENCE_EXPRESSION__ARRAY_SELECTOR;
+
+	/**
+	 * The feature id for the '<em><b>Array Access</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NEW_INSTANCE_EXPRESSION__ARRAY_ACCESS = ELEMENT_REFERENCE_EXPRESSION__ARRAY_ACCESS;
+
+	/**
+	 * The feature id for the '<em><b>Type</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NEW_INSTANCE_EXPRESSION__TYPE = ELEMENT_REFERENCE_EXPRESSION_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>New Instance Expression</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NEW_INSTANCE_EXPRESSION_FEATURE_COUNT = ELEMENT_REFERENCE_EXPRESSION_FEATURE_COUNT + 1;
+
+	/**
 	 * The meta object id for the '{@link org.yakindu.base.expressions.expressions.AssignmentOperator <em>Assignment Operator</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1203,7 +1276,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getAssignmentOperator()
 	 * @generated
 	 */
-	int ASSIGNMENT_OPERATOR = 32;
+	int ASSIGNMENT_OPERATOR = 33;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.base.expressions.expressions.ShiftOperator <em>Shift Operator</em>}' enum.
@@ -1213,7 +1286,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getShiftOperator()
 	 * @generated
 	 */
-	int SHIFT_OPERATOR = 33;
+	int SHIFT_OPERATOR = 34;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.base.expressions.expressions.AdditiveOperator <em>Additive Operator</em>}' enum.
@@ -1223,7 +1296,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getAdditiveOperator()
 	 * @generated
 	 */
-	int ADDITIVE_OPERATOR = 34;
+	int ADDITIVE_OPERATOR = 35;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.base.expressions.expressions.MultiplicativeOperator <em>Multiplicative Operator</em>}' enum.
@@ -1233,7 +1306,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getMultiplicativeOperator()
 	 * @generated
 	 */
-	int MULTIPLICATIVE_OPERATOR = 35;
+	int MULTIPLICATIVE_OPERATOR = 36;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.base.expressions.expressions.UnaryOperator <em>Unary Operator</em>}' enum.
@@ -1243,7 +1316,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getUnaryOperator()
 	 * @generated
 	 */
-	int UNARY_OPERATOR = 36;
+	int UNARY_OPERATOR = 37;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.base.expressions.expressions.RelationalOperator <em>Relational Operator</em>}' enum.
@@ -1253,7 +1326,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getRelationalOperator()
 	 * @generated
 	 */
-	int RELATIONAL_OPERATOR = 37;
+	int RELATIONAL_OPERATOR = 38;
 
 
 	/**
@@ -1264,7 +1337,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getLogicalOperator()
 	 * @generated
 	 */
-	int LOGICAL_OPERATOR = 38;
+	int LOGICAL_OPERATOR = 39;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.base.expressions.expressions.BitwiseOperator <em>Bitwise Operator</em>}' enum.
@@ -1274,7 +1347,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getBitwiseOperator()
 	 * @generated
 	 */
-	int BITWISE_OPERATOR = 39;
+	int BITWISE_OPERATOR = 40;
 
 
 	/**
@@ -1907,6 +1980,27 @@ public interface ExpressionsPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getArgument_Value();
+
+	/**
+	 * Returns the meta object for class '{@link org.yakindu.base.expressions.expressions.NewInstanceExpression <em>New Instance Expression</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>New Instance Expression</em>'.
+	 * @see org.yakindu.base.expressions.expressions.NewInstanceExpression
+	 * @generated
+	 */
+	EClass getNewInstanceExpression();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.yakindu.base.expressions.expressions.NewInstanceExpression#getType <em>Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Type</em>'.
+	 * @see org.yakindu.base.expressions.expressions.NewInstanceExpression#getType()
+	 * @see #getNewInstanceExpression()
+	 * @generated
+	 */
+	EReference getNewInstanceExpression_Type();
 
 	/**
 	 * Returns the meta object for class '{@link org.yakindu.base.expressions.expressions.ArgumentExpression <em>Argument Expression</em>}'.
@@ -2621,6 +2715,24 @@ public interface ExpressionsPackage extends EPackage {
 		 * @generated
 		 */
 		EReference ARGUMENT__VALUE = eINSTANCE.getArgument_Value();
+
+		/**
+		 * The meta object literal for the '{@link org.yakindu.base.expressions.expressions.impl.NewInstanceExpressionImpl <em>New Instance Expression</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.yakindu.base.expressions.expressions.impl.NewInstanceExpressionImpl
+		 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getNewInstanceExpression()
+		 * @generated
+		 */
+		EClass NEW_INSTANCE_EXPRESSION = eINSTANCE.getNewInstanceExpression();
+
+		/**
+		 * The meta object literal for the '<em><b>Type</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference NEW_INSTANCE_EXPRESSION__TYPE = eINSTANCE.getNewInstanceExpression_Type();
 
 		/**
 		 * The meta object literal for the '{@link org.yakindu.base.expressions.expressions.impl.ArgumentExpressionImpl <em>Argument Expression</em>}' class.

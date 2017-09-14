@@ -16,6 +16,7 @@ import org.yakindu.base.types.Annotation;
 import org.yakindu.base.types.AnnotationType;
 import org.yakindu.base.types.ArrayTypeSpecifier;
 import org.yakindu.base.types.ComplexType;
+import org.yakindu.base.types.Constructor;
 import org.yakindu.base.types.Direction;
 import org.yakindu.base.types.Domain;
 import org.yakindu.base.types.EnumerationType;
@@ -101,6 +102,7 @@ public class TypesFactoryImpl extends EFactoryImpl implements TypesFactory {
 			case TypesPackage.ANNOTATION: return createAnnotation();
 			case TypesPackage.ARRAY_TYPE_SPECIFIER: return createArrayTypeSpecifier();
 			case TypesPackage.ANNOTATION_TYPE: return createAnnotationType();
+			case TypesPackage.CONSTRUCTOR: return createConstructor();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -344,6 +346,16 @@ public class TypesFactoryImpl extends EFactoryImpl implements TypesFactory {
 	public AnnotationType createAnnotationType() {
 		AnnotationTypeImpl annotationType = new AnnotationTypeImpl();
 		return annotationType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Constructor createConstructor() {
+		ConstructorImpl constructor = new ConstructorImpl();
+		return constructor;
 	}
 
 	/**
