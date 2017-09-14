@@ -10,6 +10,7 @@
  */
 package org.yakindu.sct.model.sgraph.test;
 
+import static org.junit.Assert.assertTrue;
 import static org.yakindu.sct.model.sgraph.validation.FinalStateJavaValidator.ISSUE_FINAL_STATE_OUTGOING_TRANSITION;
 
 import org.eclipse.xtext.junit4.InjectWith;
@@ -45,4 +46,21 @@ public class FinalStateJavaValidationTest extends AbstractSGraphJavaValidationTe
 		assertWarning(diagnostics, ISSUE_FINAL_STATE_OUTGOING_TRANSITION);
 	}
 
+	/**
+	 * A positive case for a valid final state.
+	 */
+	@Test
+	public void finalStateValid() {
+		statechart = factory.createStatechart();
+		Region region = factory.createRegion();
+		statechart.getRegions().add(region);
+		FinalState finalState = factory.createFinalState();
+		region.getVertices().add(finalState);
+		State state = factory.createState();
+		region.getVertices().add(state);
+		createTransition(state, finalState);
+
+		assertTrue(validate(finalState));
+		assertIssueCount(diagnostics, 0);
+	}
 }

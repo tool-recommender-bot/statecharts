@@ -11,6 +11,7 @@
 package org.yakindu.sct.model.sgraph.test;
 
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 import static org.yakindu.sct.model.sgraph.validation.ExitJavaValidator.*;
 
 import org.eclipse.xtext.junit4.InjectWith;
@@ -81,5 +82,27 @@ public class ExitJavaValidationTest extends AbstractSGraphJavaValidationTest {
 
 		assertError(diagnostics, ISSUE_EXIT_ON_STATECHART);
 	}
+	
+	/**
+	 * Tests a scenario where no issues for an exit nodes exists.
+	 */
+	@Test
+	public void cleanExit() {
+		prepareStateTest();
 
+		Region subRegion = factory.createRegion();
+		state.getRegions().add(subRegion);
+		Exit exit = factory.createExit();
+		subRegion.getVertices().add(exit);
+
+		State s = factory.createState();
+		subRegion.getVertices().add(s);
+
+		Transition t = factory.createTransition();
+		t.setTarget(exit);
+		t.setSource(s);
+
+		assertTrue(validate(exit));
+		assertNoIssues(diagnostics);
+	}
 }

@@ -107,6 +107,7 @@ public class EntryJavaValidationTest extends AbstractSGraphJavaValidationTest {
 		assertFalse(validator.validate(entry, diagnostics, new HashMap<Object, Object>()));
 		assertError(diagnostics, ISSUE_ENTRY_WITH_TRIGGER);
 	}
+	
 	@Test
 	public void regionCantBeEnteredUsingShallowHistory() {
 		statechart = AbstractTestModelsUtil
@@ -130,5 +131,21 @@ public class EntryJavaValidationTest extends AbstractSGraphJavaValidationTest {
 				ISSUE_REGION_CANT_BE_ENTERED_USING_SHALLOW_HISTORY_NON_CONNECTED_DEFAULT_ENTRY);
 		assertTrue(issue.getSeverity() == Diagnostic.ERROR);
 		assertEquals("r_c", ((NamedElement) issue.getData().get(0)).getName());
+	}
+
+	/**
+	 * A valid entry should have No issues
+	 */
+	@Test
+	public void validInitialEntry() {
+		prepareStateTest();
+
+		Entry entry = factory.createEntry();
+		region.getVertices().add(entry);
+		createTransition(entry, state);
+
+		assertEquals(EntryKind.INITIAL, entry.getKind());
+		assertTrue(validator.validate(entry, diagnostics, new HashMap<Object, Object>()));
+		assertIssueCount(diagnostics, 0);
 	}
 }

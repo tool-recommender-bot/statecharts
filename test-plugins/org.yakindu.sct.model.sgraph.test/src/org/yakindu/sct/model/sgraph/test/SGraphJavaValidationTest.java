@@ -174,63 +174,6 @@ public class SGraphJavaValidationTest extends AbstractSGraphJavaValidationTest {
 		assertIssueCount(diagnostics, 0);
 	}
 
-	/**
-	 * A valid entry should have No issues
-	 */
-	@Test
-	public void validInitialEntry() {
-		prepareStateTest();
-
-		Entry entry = factory.createEntry();
-		region.getVertices().add(entry);
-		createTransition(entry, state);
-
-		assertEquals(EntryKind.INITIAL, entry.getKind());
-		assertTrue(validator.validate(entry, diagnostics, new HashMap<Object, Object>()));
-		assertIssueCount(diagnostics, 0);
-	}
-
-	/**
-	 * Tests a scenario where no issues for an exit nodes exists.
-	 */
-	@Test
-	public void cleanExit() {
-		prepareStateTest();
-
-		Region subRegion = factory.createRegion();
-		state.getRegions().add(subRegion);
-		Exit exit = factory.createExit();
-		subRegion.getVertices().add(exit);
-
-		State s = factory.createState();
-		subRegion.getVertices().add(s);
-
-		Transition t = factory.createTransition();
-		t.setTarget(exit);
-		t.setSource(s);
-
-		assertTrue(validate(exit));
-		assertNoIssues(diagnostics);
-	}
-
-	/**
-	 * A positive case for a valid final state.
-	 */
-	@Test
-	public void finalStateValid() {
-		statechart = factory.createStatechart();
-		Region region = factory.createRegion();
-		statechart.getRegions().add(region);
-		FinalState finalState = factory.createFinalState();
-		region.getVertices().add(finalState);
-		State state = factory.createState();
-		region.getVertices().add(state);
-		createTransition(state, finalState);
-
-		assertTrue(validate(finalState));
-		assertIssueCount(diagnostics, 0);
-	}
-
 	@Test
 	public void orthogonalTransition() {
 		statechart = loadStatechart("OrthogonalTransition.sct");
