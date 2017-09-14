@@ -175,7 +175,7 @@ enum TimeUnit:
 	second='s' | millisecond='ms' | microsecond='us' | nanosecond='ns';
 
 XID:
-	ID | 'namespace' | 'interface' | 'internal' | 'event' | 'local' | 'in' | 'out' | 'var' | 'readonly' | 'external' |
+	ID | 'namespace' | 'new' | 'interface' | 'internal' | 'event' | 'local' | 'in' | 'out' | 'var' | 'readonly' | 'external' |
 	'operation' | 'default' | 'else' | 'entry' | 'exit' | 'always' | 'oncycle' | 'raise' | 'valueof' | 'active';
 
 FQN:
