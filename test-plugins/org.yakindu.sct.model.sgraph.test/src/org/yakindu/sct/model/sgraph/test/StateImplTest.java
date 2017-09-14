@@ -10,14 +10,14 @@
  */
 package org.yakindu.sct.model.sgraph.test;
 
-import junit.framework.TestCase;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.yakindu.sct.model.sgraph.Region;
 import org.yakindu.sct.model.sgraph.SGraphFactory;
 import org.yakindu.sct.model.sgraph.State;
 import org.yakindu.sct.model.sgraph.Statechart;
+
+import junit.framework.TestCase;
 /**
  * 
  * @author schwertfeger

@@ -1,3 +1,13 @@
+/**
+ * Copyright (c) 2012-2017 committers of YAKINDU and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *     committers of YAKINDU - initial API and implementation
+ */
 package org.yakindu.sct.model.sgraph.test;
 
 import static org.junit.Assert.*;
@@ -22,8 +32,7 @@ import org.yakindu.sct.test.models.AbstractTestModelsUtil;
 
 @RunWith(XtextRunner.class)
 @InjectWith(SGraphTestInjectorProvider.class)
-public class EntryJavaValidationTest extends AbstractSGraphJavaValidationTest{
-	
+public class EntryJavaValidationTest extends AbstractSGraphJavaValidationTest {
 
 	/**
 	 * An initial entry should have no incoming transition
@@ -40,7 +49,7 @@ public class EntryJavaValidationTest extends AbstractSGraphJavaValidationTest{
 		validator.validate(entry, diagnostics, new HashMap<Object, Object>());
 		assertWarning(diagnostics, ISSUE_INITIAL_ENTRY_WITH_IN_TRANS);
 	}
-	
+
 	/**
 	 * An initial entry should have an outgoing transition
 	 */
@@ -55,7 +64,7 @@ public class EntryJavaValidationTest extends AbstractSGraphJavaValidationTest{
 		validator.validate(entry, diagnostics, new HashMap<Object, Object>());
 		assertWarning(diagnostics, ISSUE_INITIAL_ENTRY_WITHOUT_OUT_TRANS);
 	}
-	
+
 	/**
 	 * An entry should not have more than one outgoing transition
 	 */
@@ -69,26 +78,23 @@ public class EntryJavaValidationTest extends AbstractSGraphJavaValidationTest{
 		createTransition(entry, state);
 
 		assertEquals(EntryKind.INITIAL, entry.getKind());
-		assertFalse(validator.validate(entry, diagnostics,
-				new HashMap<Object, Object>()));
+		assertFalse(validator.validate(entry, diagnostics, new HashMap<Object, Object>()));
 		assertError(diagnostics, ISSUE_ENTRY_WITH_MULTIPLE_OUT_TRANS);
 
 		entry.setKind(EntryKind.SHALLOW_HISTORY);
 
 		diagnostics = new BasicDiagnostic();
-		assertFalse(validator.validate(entry, diagnostics,
-				new HashMap<Object, Object>()));
+		assertFalse(validator.validate(entry, diagnostics, new HashMap<Object, Object>()));
 		assertError(diagnostics, ISSUE_ENTRY_WITH_MULTIPLE_OUT_TRANS);
 
 		entry.setKind(EntryKind.DEEP_HISTORY);
 
 		diagnostics = new BasicDiagnostic();
-		assertFalse(validator.validate(entry, diagnostics,
-				new HashMap<Object, Object>()));
+		assertFalse(validator.validate(entry, diagnostics, new HashMap<Object, Object>()));
 		assertError(diagnostics, ISSUE_ENTRY_WITH_MULTIPLE_OUT_TRANS);
 
 	}
-	
+
 	@Test
 	public void disallowTrigger() {
 		prepareStateTest();
@@ -98,21 +104,18 @@ public class EntryJavaValidationTest extends AbstractSGraphJavaValidationTest{
 		Transition trans = createTransition(entry, state);
 		trans.setTrigger(sTextFactory.createReactionTrigger());
 		diagnostics = new BasicDiagnostic();
-		assertFalse(validator.validate(entry, diagnostics,
-				new HashMap<Object, Object>()));
+		assertFalse(validator.validate(entry, diagnostics, new HashMap<Object, Object>()));
 		assertError(diagnostics, ISSUE_ENTRY_WITH_TRIGGER);
 	}
 	@Test
 	public void regionCantBeEnteredUsingShallowHistory() {
 		statechart = AbstractTestModelsUtil
-				.loadStatechart(VALIDATION_TESTMODEL_DIR
-						+ "RegionCantBeEnteredUsingShallowHistory.sct");
+				.loadStatechart(VALIDATION_TESTMODEL_DIR + "RegionCantBeEnteredUsingShallowHistory.sct");
 		Iterator<EObject> iter = statechart.eAllContents();
 		while (iter.hasNext()) {
 			EObject element = iter.next();
 			if (element instanceof Entry) {
-				validator.validate(element, diagnostics,
-						new HashMap<Object, Object>());
+				validator.validate(element, diagnostics, new HashMap<Object, Object>());
 			}
 		}
 

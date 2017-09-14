@@ -12,46 +12,37 @@ package org.yakindu.sct.model.sgraph.test;
 
 import static org.junit.Assert.*;
 import static org.yakindu.sct.model.sgraph.util.SGgraphUtil.firstNamed;
-import static org.yakindu.sct.model.sgraph.validation.SGraphJavaValidator.*;
+import static org.yakindu.sct.model.sgraph.validation.SGraphJavaValidator.ISSUE_STATE_WITHOUT_OUTGOING_TRANSITION;
 import static org.yakindu.sct.test.models.AbstractTestModelsUtil.VALIDATION_TESTMODEL_DIR;
 
 import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Iterator;
 
-import org.eclipse.emf.common.util.BasicDiagnostic;
-import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
 import org.eclipse.xtext.validation.Check;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.yakindu.base.base.NamedElement;
 import org.yakindu.sct.model.sgraph.Choice;
 import org.yakindu.sct.model.sgraph.Entry;
 import org.yakindu.sct.model.sgraph.EntryKind;
 import org.yakindu.sct.model.sgraph.Exit;
 import org.yakindu.sct.model.sgraph.FinalState;
 import org.yakindu.sct.model.sgraph.Region;
-import org.yakindu.sct.model.sgraph.SGraphFactory;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
 import org.yakindu.sct.model.sgraph.State;
-import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.model.sgraph.Synchronization;
 import org.yakindu.sct.model.sgraph.Transition;
-import org.yakindu.sct.model.sgraph.Vertex;
 import org.yakindu.sct.model.sgraph.validation.SGraphJavaValidator;
-import org.yakindu.sct.model.stext.stext.StextFactory;
 import org.yakindu.sct.model.stext.validation.STextJavaValidator;
 import org.yakindu.sct.test.models.AbstractTestModelsUtil;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
-import com.google.inject.Inject;
 
 /**
  * Test of all validation rules that test very basic properties of statecharts.
@@ -72,10 +63,6 @@ public class SGraphJavaValidationTest extends AbstractSGraphJavaValidationTest {
 		}
 		SGraphPackage.eINSTANCE.eClass();
 	}
-
-
-
-
 
 	/**
 	 * A transition to a sub entry is considered implies reachability.
@@ -160,10 +147,6 @@ public class SGraphJavaValidationTest extends AbstractSGraphJavaValidationTest {
 		assertNoIssues(diagnostics);
 	}
 
-
-
-
-
 	/**
 	 * A regular state may be a dead end.
 	 */
@@ -230,8 +213,6 @@ public class SGraphJavaValidationTest extends AbstractSGraphJavaValidationTest {
 		assertNoIssues(diagnostics);
 	}
 
-
-
 	/**
 	 * A positive case for a valid final state.
 	 */
@@ -250,8 +231,6 @@ public class SGraphJavaValidationTest extends AbstractSGraphJavaValidationTest {
 		assertIssueCount(diagnostics, 0);
 	}
 
-
-
 	@Test
 	public void orthogonalTransition() {
 		statechart = loadStatechart("OrthogonalTransition.sct");
@@ -262,7 +241,6 @@ public class SGraphJavaValidationTest extends AbstractSGraphJavaValidationTest {
 		assertTrue(validator.validate(trans, diagnostics, new HashMap<Object, Object>()));
 		assertNoIssues(diagnostics);
 	}
-
 
 	@Test
 	public void orthogonalSourceStates() {
@@ -300,9 +278,6 @@ public class SGraphJavaValidationTest extends AbstractSGraphJavaValidationTest {
 
 		assertIssueCount(diagnostics, 0);
 	}
-
-
-
 
 	/**
 	 * checks that each @Check method of {@link STextJavaValidator} has a @Test

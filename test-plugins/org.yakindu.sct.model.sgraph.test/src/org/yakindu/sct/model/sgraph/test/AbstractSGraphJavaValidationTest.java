@@ -1,5 +1,15 @@
 package org.yakindu.sct.model.sgraph.test;
 
+/**
+ * Copyright (c) 2012-2017 committers of YAKINDU and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *     committers of YAKINDU - initial API and implementation
+ */
 import static org.junit.Assert.*;
 import static org.yakindu.sct.test.models.AbstractTestModelsUtil.VALIDATION_TESTMODEL_DIR;
 
@@ -21,7 +31,7 @@ import org.yakindu.sct.test.models.AbstractTestModelsUtil;
 
 import com.google.inject.Inject;
 
-public abstract class AbstractSGraphJavaValidationTest{
+public abstract class AbstractSGraphJavaValidationTest {
 	protected BasicDiagnostic diagnostics;
 
 	protected Statechart statechart;
@@ -29,10 +39,10 @@ public abstract class AbstractSGraphJavaValidationTest{
 	protected State state;
 	protected SGraphFactory factory;
 	protected StextFactory sTextFactory;
-	
+
 	@Inject
 	protected SGraphJavaValidator validator;
-	
+
 	@Before
 	public void setUp() throws Exception {
 		diagnostics = new BasicDiagnostic();
@@ -41,7 +51,7 @@ public abstract class AbstractSGraphJavaValidationTest{
 		statechart = factory.createStatechart();
 		statechart.setName("SC");
 	}
-	
+
 	protected void prepareStateTest() {
 		region = factory.createRegion();
 		statechart.getRegions().add(region);
@@ -49,7 +59,7 @@ public abstract class AbstractSGraphJavaValidationTest{
 		state.setName(getClass().getSimpleName());
 		region.getVertices().add(state);
 	}
-	
+
 	protected Transition createTransition(Vertex source, Vertex target) {
 		Transition trans = factory.createTransition();
 		trans.setSource(source);
@@ -58,23 +68,19 @@ public abstract class AbstractSGraphJavaValidationTest{
 		target.getIncomingTransitions().add(trans);
 		return trans;
 	}
-	
+
 	protected void assertError(BasicDiagnostic diag, String message) {
 		Diagnostic d = issueByName(diag, message);
-		assertNotNull("Issue '" + message + "' does not exist.",
-				issueByName(diag, message));
-		assertEquals("Issue '" + message + "' is no error.", Diagnostic.ERROR,
-				d.getSeverity());
+		assertNotNull("Issue '" + message + "' does not exist.", issueByName(diag, message));
+		assertEquals("Issue '" + message + "' is no error.", Diagnostic.ERROR, d.getSeverity());
 	}
 
 	protected void assertWarning(BasicDiagnostic diag, String message) {
 		Diagnostic d = issueByName(diag, message);
-		assertNotNull("Issue '" + message + "' does not exist.",
-				issueByName(diag, message));
-		assertEquals("Issue '" + message + "' is no warning.",
-				Diagnostic.WARNING, d.getSeverity());
+		assertNotNull("Issue '" + message + "' does not exist.", issueByName(diag, message));
+		assertEquals("Issue '" + message + "' is no warning.", Diagnostic.WARNING, d.getSeverity());
 	}
-	
+
 	protected Diagnostic issueByName(BasicDiagnostic diag, String message) {
 		for (Diagnostic issue : diag.getChildren()) {
 			if (message.equals(issue.getMessage()))
@@ -83,32 +89,26 @@ public abstract class AbstractSGraphJavaValidationTest{
 
 		return null;
 	}
-	
+
 	protected void assertIssueCount(BasicDiagnostic diag, int count) {
 		int c = diagnostics.getChildren().size();
-		assertEquals("expected " + count + " issue(s) but were " + c + " ["
-				+ diag.toString() + "]", count, c);
+		assertEquals("expected " + count + " issue(s) but were " + c + " [" + diag.toString() + "]", count, c);
 	}
-	
+
 	protected boolean validate(EObject obj) {
-		return validator.validate(obj, diagnostics,
-				new HashMap<Object, Object>());
+		return validator.validate(obj, diagnostics, new HashMap<Object, Object>());
 	}
-	
+
 	protected Statechart loadStatechart(String modelName) {
-		return AbstractTestModelsUtil
-				.loadStatechart(VALIDATION_TESTMODEL_DIR
-						+ modelName);
+		return AbstractTestModelsUtil.loadStatechart(VALIDATION_TESTMODEL_DIR + modelName);
 	}
 
 	protected void assertIssue(BasicDiagnostic diag, String message) {
-		assertNotNull("Issue '" + message + "' does not exist.",
-				issueByName(diag, message));
+		assertNotNull("Issue '" + message + "' does not exist.", issueByName(diag, message));
 	}
 
 	protected void assertNoIssue(BasicDiagnostic diag, String message) {
-		assertNull("Issue '" + message + "' does exist.",
-				issueByName(diag, message));
+		assertNull("Issue '" + message + "' does exist.", issueByName(diag, message));
 	}
 
 	protected void assertNoIssues(BasicDiagnostic diag) {
