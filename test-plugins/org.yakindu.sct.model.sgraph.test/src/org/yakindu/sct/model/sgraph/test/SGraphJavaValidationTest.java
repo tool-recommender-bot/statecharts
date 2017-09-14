@@ -62,45 +62,15 @@ import com.google.inject.Inject;
  */
 @RunWith(XtextRunner.class)
 @InjectWith(SGraphTestInjectorProvider.class)
-public class SGraphJavaValidationTest {
+public class SGraphJavaValidationTest extends AbstractSGraphJavaValidationTest {
 
 	static {
 		// set up EMF - the EPackage.Registry requires a context class loader
 		// ...
 		if (Thread.currentThread().getContextClassLoader() == null) {
-			Thread.currentThread().setContextClassLoader(
-					SGraphJavaValidationTest.class.getClassLoader());
+			Thread.currentThread().setContextClassLoader(SGraphJavaValidationTest.class.getClassLoader());
 		}
 		SGraphPackage.eINSTANCE.eClass();
-	}
-
-	protected SGraphFactory factory;
-	protected StextFactory sTextFactory;
-
-	@Inject
-	protected SGraphJavaValidator validator;
-
-	protected BasicDiagnostic diagnostics;
-
-	protected Statechart statechart;
-	protected Region region;
-	private State state;
-
-	@Before
-	public void setUp() throws Exception {
-		diagnostics = new BasicDiagnostic();
-		factory = SGraphFactory.eINSTANCE;
-		sTextFactory = StextFactory.eINSTANCE;
-		statechart = factory.createStatechart();
-		statechart.setName("SC");
-	}
-
-	protected void prepareStateTest() {
-		region = factory.createRegion();
-		statechart.getRegions().add(region);
-		state = factory.createState();
-		state.setName(getClass().getSimpleName());
-		region.getVertices().add(state);
 	}
 
 	/**
@@ -111,8 +81,7 @@ public class SGraphJavaValidationTest {
 		prepareStateTest();
 
 		state.setName(null);
-		assertFalse(validator.validate(state, diagnostics,
-				new HashMap<Object, Object>()));
+		assertFalse(validator.validate(state, diagnostics, new HashMap<Object, Object>()));
 		assertError(diagnostics, ISSUE_STATE_WITHOUT_NAME);
 	}
 
@@ -124,8 +93,7 @@ public class SGraphJavaValidationTest {
 		prepareStateTest();
 
 		state.setName("");
-		assertFalse(validator.validate(state, diagnostics,
-				new HashMap<Object, Object>()));
+		assertFalse(validator.validate(state, diagnostics, new HashMap<Object, Object>()));
 		assertError(diagnostics, ISSUE_STATE_WITHOUT_NAME);
 	}
 
@@ -137,8 +105,7 @@ public class SGraphJavaValidationTest {
 		prepareStateTest();
 
 		state.setName(" 	");
-		assertFalse(validator.validate(state, diagnostics,
-				new HashMap<Object, Object>()));
+		assertFalse(validator.validate(state, diagnostics, new HashMap<Object, Object>()));
 		assertError(diagnostics, ISSUE_STATE_WITHOUT_NAME);
 	}
 
@@ -149,8 +116,7 @@ public class SGraphJavaValidationTest {
 	public void vertexNotReachable() {
 		prepareStateTest();
 
-		assertFalse(validator.validate(state, diagnostics,
-				new HashMap<Object, Object>()));
+		assertFalse(validator.validate(state, diagnostics, new HashMap<Object, Object>()));
 		assertError(diagnostics, ISSUE_NODE_NOT_REACHABLE);
 	}
 
@@ -311,22 +277,6 @@ public class SGraphJavaValidationTest {
 	}
 
 	/**
-	 * An initial entry should have no incoming transition
-	 */
-	@Test
-	public void initialEntryWithoutIncomingTransitions() {
-		prepareStateTest();
-
-		Entry entry = factory.createEntry();
-		region.getVertices().add(entry);
-		createTransition(state, entry);
-
-		assertEquals(EntryKind.INITIAL, entry.getKind());
-		validator.validate(entry, diagnostics, new HashMap<Object, Object>());
-		assertWarning(diagnostics, ISSUE_INITIAL_ENTRY_WITH_IN_TRANS);
-	}
-
-	/**
 	 * A valid entry should have No issues
 	 */
 	@Test
@@ -338,113 +288,8 @@ public class SGraphJavaValidationTest {
 		createTransition(entry, state);
 
 		assertEquals(EntryKind.INITIAL, entry.getKind());
-		assertTrue(validator.validate(entry, diagnostics,
-				new HashMap<Object, Object>()));
+		assertTrue(validator.validate(entry, diagnostics, new HashMap<Object, Object>()));
 		assertIssueCount(diagnostics, 0);
-	}
-
-	/**
-	 * An initial entry should have an outgoing transition
-	 */
-	@Test
-	public void initialEntryWithoutOutgoingTransition() {
-		prepareStateTest();
-
-		Entry entry = factory.createEntry();
-		region.getVertices().add(entry);
-
-		assertEquals(EntryKind.INITIAL, entry.getKind());
-		validator.validate(entry, diagnostics, new HashMap<Object, Object>());
-		assertWarning(diagnostics, ISSUE_INITIAL_ENTRY_WITHOUT_OUT_TRANS);
-	}
-
-	/**
-	 * An entry should not have more than one outgoing transition
-	 */
-	@Test
-	public void initialEntryWithMultipleOutgoingTransition() {
-		prepareStateTest();
-
-		Entry entry = factory.createEntry();
-		region.getVertices().add(entry);
-		createTransition(entry, state);
-		createTransition(entry, state);
-
-		assertEquals(EntryKind.INITIAL, entry.getKind());
-		assertFalse(validator.validate(entry, diagnostics,
-				new HashMap<Object, Object>()));
-		assertError(diagnostics, ISSUE_ENTRY_WITH_MULTIPLE_OUT_TRANS);
-
-		entry.setKind(EntryKind.SHALLOW_HISTORY);
-
-		diagnostics = new BasicDiagnostic();
-		assertFalse(validator.validate(entry, diagnostics,
-				new HashMap<Object, Object>()));
-		assertError(diagnostics, ISSUE_ENTRY_WITH_MULTIPLE_OUT_TRANS);
-
-		entry.setKind(EntryKind.DEEP_HISTORY);
-
-		diagnostics = new BasicDiagnostic();
-		assertFalse(validator.validate(entry, diagnostics,
-				new HashMap<Object, Object>()));
-		assertError(diagnostics, ISSUE_ENTRY_WITH_MULTIPLE_OUT_TRANS);
-
-	}
-
-	/**
-	 * An exit node should have at leat one incoming transition.
-	 */
-	@Test
-	public void exitWithoutIncomingTransition() {
-		prepareStateTest();
-
-		Region subRegion = factory.createRegion();
-		state.getRegions().add(subRegion);
-		Exit exit = factory.createExit();
-		subRegion.getVertices().add(exit);
-
-		assertFalse(validate(exit));
-
-		assertWarning(diagnostics, ISSUE_EXIT_WITHOUT_IN_TRANS);
-	}
-
-	/**
-	 * An exit node must have no outgoing transitions.
-	 */
-	@Test
-	public void exitWithOutgoingTransition() {
-		prepareStateTest();
-
-		Region subRegion = factory.createRegion();
-		state.getRegions().add(subRegion);
-		Exit exit = factory.createExit();
-		subRegion.getVertices().add(exit);
-
-		State s = factory.createState();
-		subRegion.getVertices().add(s);
-
-		Transition t = factory.createTransition();
-		t.setSource(exit);
-		t.setTarget(s);
-
-		assertFalse(validate(exit));
-
-		assertError(diagnostics, ISSUE_EXIT_WITH_OUT_TRANS);
-	}
-
-	/**
-	 * An exit node must not be used in top level regions.
-	 */
-	@Test
-	public void exitOnStatechart() {
-		prepareStateTest();
-
-		Exit exit = factory.createExit();
-		region.getVertices().add(exit);
-
-		assertFalse(validate(exit));
-
-		assertError(diagnostics, ISSUE_EXIT_ON_STATECHART);
 	}
 
 	/**
@@ -468,20 +313,6 @@ public class SGraphJavaValidationTest {
 
 		assertTrue(validate(exit));
 		assertNoIssues(diagnostics);
-	}
-
-	@Test
-	public void disallowTrigger() {
-		prepareStateTest();
-
-		Entry entry = factory.createEntry();
-		region.getVertices().add(entry);
-		Transition trans = createTransition(entry, state);
-		trans.setTrigger(sTextFactory.createReactionTrigger());
-		diagnostics = new BasicDiagnostic();
-		assertFalse(validator.validate(entry, diagnostics,
-				new HashMap<Object, Object>()));
-		assertError(diagnostics, ISSUE_ENTRY_WITH_TRIGGER);
 	}
 
 	/**
@@ -556,210 +387,78 @@ public class SGraphJavaValidationTest {
 
 		createTransition(state, choice);
 
-		assertFalse(validator.validate(choice, diagnostics,
-				new HashMap<Object, Object>()));
+		assertFalse(validator.validate(choice, diagnostics, new HashMap<Object, Object>()));
 
 		assertIssueCount(diagnostics, 1);
 		assertError(diagnostics, ISSUE_CHOICE_WITHOUT_OUTGOING_TRANSITION);
 	}
 
 	@Test
-	public void synchronizationTransitionCount() {
-		statechart = AbstractTestModelsUtil
-				.loadStatechart(VALIDATION_TESTMODEL_DIR
-						+ "SynchronizationTransitionCount.sct");
-		Iterator<EObject> iter = statechart.eAllContents();
-		while (iter.hasNext()) {
-			EObject element = iter.next();
-			if (element instanceof Synchronization) {
-				assertTrue(validator.validate(element, diagnostics,
-						new HashMap<Object, Object>()));
-			}
-		}
-
-		assertIssueCount(diagnostics, 2);
-		assertWarning(diagnostics, ISSUE_SYNCHRONIZATION_TRANSITION_COUNT);
-	}
-
-	
-	@Test public void orthogonalTransition() {
+	public void orthogonalTransition() {
 		statechart = loadStatechart("OrthogonalTransition.sct");
-		
+
 		State state = firstNamed(EcoreUtil2.eAllOfType(statechart, State.class), "B2");
 		Transition trans = state.getOutgoingTransitions().get(0);
-		
+
 		assertTrue(validator.validate(trans, diagnostics, new HashMap<Object, Object>()));
 		assertNoIssues(diagnostics);
 	}
 
-
-	@Test public void orthogonalTransition_BetweenTopLevelRegions() {
+	@Test
+	public void orthogonalTransition_BetweenTopLevelRegions() {
 		statechart = loadStatechart("OrthogonalTransition.sct");
-		
+
 		State state = firstNamed(EcoreUtil2.eAllOfType(statechart, State.class), "A");
 		Transition trans = state.getOutgoingTransitions().get(0);
-		
+
 		assertFalse(validator.validate(trans, diagnostics, new HashMap<Object, Object>()));
 		assertIssueCount(diagnostics, 1);
 		assertError(diagnostics, ISSUE_TRANSITION_ORTHOGONAL);
 	}
-	
-	
-	@Test public void orthogonalTransition_BetweenStateRegions() {
-		statechart = loadStatechart("OrthogonalTransition.sct");
-		
-		State state = firstNamed(EcoreUtil2.eAllOfType(statechart, State.class), "B1");
-		Transition trans = state.getOutgoingTransitions().get(0);
-		
-		assertFalse(validator.validate(trans, diagnostics, new HashMap<Object, Object>()));
-		assertIssueCount(diagnostics, 1);
-		assertError(diagnostics, ISSUE_TRANSITION_ORTHOGONAL);
-	}
-
-
-	@Test public void orthogonalSourceStates() {
-		statechart = loadStatechart("OrthogonalRegion01.sct");
-		
-		State b = firstNamed(EcoreUtil2.eAllOfType(statechart, State.class), "AA");
-		Synchronization sync = (Synchronization) b.getOutgoingTransitions().get(0).getTarget();
-		
-		assertTrue(validator.validate(sync, diagnostics, new HashMap<Object, Object>()));
-		assertNoIssues(diagnostics);
-	}
-		
-	@Test public void orthogonalSourceStates_StateInParentStateRegion() {
-		statechart = loadStatechart("NotOrthogonalRegion01.sct");
-
-		State b = firstNamed(EcoreUtil2.eAllOfType(statechart, State.class), "AA");
-		Synchronization sync = (Synchronization) b.getOutgoingTransitions().get(0).getTarget();
-		
-		assertFalse(validator.validate(sync, diagnostics, new HashMap<Object, Object>()));
-		assertIssueCount(diagnostics, 1);
-		assertError(diagnostics, ISSUE_SYNCHRONIZATION_SOURCE_STATES_NOT_ORTHOGONAL);
-	}
-
-	@Test public void orthogonalSourceStates_StateInTopLevelRegion() {
-		statechart = loadStatechart("NotOrthogonalRegion02.sct");
-
-		State b = firstNamed(EcoreUtil2.eAllOfType(statechart, State.class), "AA");
-		Synchronization sync = (Synchronization) b.getOutgoingTransitions().get(0).getTarget();
-		
-		assertFalse(validator.validate(sync, diagnostics, new HashMap<Object, Object>()));
-		assertIssueCount(diagnostics, 1);
-		assertError(diagnostics, ISSUE_SYNCHRONIZATION_SOURCE_STATES_NOT_ORTHOGONAL);
-	}
-
-
-	
-	@Test public void orthogonalTargetStates() {
-		statechart = loadStatechart("OrthogonalRegion01.sct");
-		
-		State b = firstNamed(EcoreUtil2.eAllOfType(statechart, State.class), "B");
-		Synchronization sync = (Synchronization) b.getOutgoingTransitions().get(0).getTarget();
-		
-		assertTrue(validator.validate(sync, diagnostics, new HashMap<Object, Object>()));
-		assertNoIssues(diagnostics);
-	}
-		
-	@Test public void orthogonalTargetStates_StateInParentStateRegion() {
-		statechart = loadStatechart("NotOrthogonalRegion01.sct");
-
-		State b = firstNamed(EcoreUtil2.eAllOfType(statechart, State.class), "B");
-		Synchronization sync = (Synchronization) b.getOutgoingTransitions().get(0).getTarget();
-		
-		assertFalse(validator.validate(sync, diagnostics, new HashMap<Object, Object>()));
-		assertIssueCount(diagnostics, 1);
-		assertError(diagnostics, ISSUE_SYNCHRONIZATION_TARGET_STATES_NOT_ORTHOGONAL);
-	}
-
-
-	@Test public void orthogonalTargetStates_StateInTopLevelRegion() {
-		statechart = loadStatechart("NotOrthogonalRegion02.sct");
-
-		State b = firstNamed(EcoreUtil2.eAllOfType(statechart, State.class), "B");
-		Synchronization sync = (Synchronization) b.getOutgoingTransitions().get(0).getTarget();
-		
-		assertFalse(validator.validate(sync, diagnostics, new HashMap<Object, Object>()));
-		assertIssueCount(diagnostics, 1);
-		assertError(diagnostics, ISSUE_SYNCHRONIZATION_TARGET_STATES_NOT_ORTHOGONAL);
-	}
-
-	
-		
-	@Test public void orthogonalSynchronizedTransition() {
-		statechart = loadStatechart("NotOrthogonalRegion03.sct");
-		
-		State stateB = firstNamed(EcoreUtil2.eAllOfType(statechart, State.class), "B");
-		Synchronization sync = (Synchronization) stateB.getOutgoingTransitions().get(0).getTarget();
-		
-		assertFalse(validator.validate(sync, diagnostics, new HashMap<Object, Object>()));
-		assertIssueCount(diagnostics, 1);
-		assertError(diagnostics, ISSUE_SYNCHRONIZATION_TARGET_STATES_NOT_WITHIN_SAME_PARENTSTATE);
-	}
-
-
-	@Test public void orthogonalSynchronizedTransition_Source() {
-		statechart = loadStatechart("NotOrthogonalRegion03.sct");
-		
-		State stateC = firstNamed(EcoreUtil2.eAllOfType(statechart, State.class), "C");
-		Synchronization sync = (Synchronization) stateC.getOutgoingTransitions().get(0).getTarget();
-		
-		assertFalse(validator.validate(sync, diagnostics, new HashMap<Object, Object>()));
-		assertIssueCount(diagnostics, 1);
-		assertError(diagnostics, ISSUE_SYNCHRONIZATION_SOURCE_STATES_NOT_WITHIN_SAME_PARENTSTATE);
-	}
-
-
-	@Test public void syncLocation_Issue58() {
-		statechart = loadStatechart("SyncLocation_Issue58.sct");
-		
-		State state = firstNamed(EcoreUtil2.eAllOfType(statechart, State.class), "AA");
-		Synchronization sync = (Synchronization) state.getOutgoingTransitions().get(0).getTarget();
-		
-		assertTrue(validator.validate(sync, diagnostics, new HashMap<Object, Object>()));
-		assertNoIssues(diagnostics);
-	}
-		
-
 
 	@Test
-	public void regionCantBeEnteredUsingShallowHistory() {
-		statechart = AbstractTestModelsUtil
-				.loadStatechart(VALIDATION_TESTMODEL_DIR
-						+ "RegionCantBeEnteredUsingShallowHistory.sct");
-		Iterator<EObject> iter = statechart.eAllContents();
-		while (iter.hasNext()) {
-			EObject element = iter.next();
-			if (element instanceof Entry) {
-				validator.validate(element, diagnostics,
-						new HashMap<Object, Object>());
-			}
-		}
+	public void orthogonalTransition_BetweenStateRegions() {
+		statechart = loadStatechart("OrthogonalTransition.sct");
 
-		assertIssueCount(diagnostics, 2);
+		State state = firstNamed(EcoreUtil2.eAllOfType(statechart, State.class), "B1");
+		Transition trans = state.getOutgoingTransitions().get(0);
 
-		Diagnostic issue = issueByName(diagnostics,
-				ISSUE_REGION_CANT_BE_ENTERED_USING_SHALLOW_HISTORY_NO_DEFAULT_ENTRY);
-		assertTrue(issue.getSeverity() == Diagnostic.ERROR);
-		assertEquals("r_a", ((NamedElement) issue.getData().get(0)).getName());
+		assertFalse(validator.validate(trans, diagnostics, new HashMap<Object, Object>()));
+		assertIssueCount(diagnostics, 1);
+		assertError(diagnostics, ISSUE_TRANSITION_ORTHOGONAL);
+	}
 
-		issue = issueByName(diagnostics,
-				ISSUE_REGION_CANT_BE_ENTERED_USING_SHALLOW_HISTORY_NON_CONNECTED_DEFAULT_ENTRY);
-		assertTrue(issue.getSeverity() == Diagnostic.ERROR);
-		assertEquals("r_c", ((NamedElement) issue.getData().get(0)).getName());
+	@Test
+	public void orthogonalSourceStates() {
+		statechart = loadStatechart("OrthogonalRegion01.sct");
+
+		State b = firstNamed(EcoreUtil2.eAllOfType(statechart, State.class), "AA");
+		Synchronization sync = (Synchronization) b.getOutgoingTransitions().get(0).getTarget();
+
+		assertTrue(validator.validate(sync, diagnostics, new HashMap<Object, Object>()));
+		assertNoIssues(diagnostics);
+	}
+
+	@Test
+	public void orthogonalTargetStates() {
+		statechart = loadStatechart("OrthogonalRegion01.sct");
+
+		State b = firstNamed(EcoreUtil2.eAllOfType(statechart, State.class), "B");
+		Synchronization sync = (Synchronization) b.getOutgoingTransitions().get(0).getTarget();
+
+		assertTrue(validator.validate(sync, diagnostics, new HashMap<Object, Object>()));
+		assertNoIssues(diagnostics);
 	}
 
 	@Test
 	public void validTransitionToInnerChoice() {
 		statechart = AbstractTestModelsUtil
-				.loadStatechart(VALIDATION_TESTMODEL_DIR
-						+ "ValidTransitionToInnerChoice.sct");
+				.loadStatechart(VALIDATION_TESTMODEL_DIR + "ValidTransitionToInnerChoice.sct");
 		Iterator<EObject> iter = statechart.eAllContents();
 		while (iter.hasNext()) {
 			EObject element = iter.next();
 			if (element instanceof State) {
-				validator.validate(element, diagnostics,
-						new HashMap<Object, Object>());
+				validator.validate(element, diagnostics, new HashMap<Object, Object>());
 			}
 		}
 
@@ -769,44 +468,36 @@ public class SGraphJavaValidationTest {
 	@Test
 	public void initialEntryWithTransitionToContainer() {
 		statechart = AbstractTestModelsUtil
-				.loadStatechart(VALIDATION_TESTMODEL_DIR
-						+ "EntryTransitionToParentState.sct");
+				.loadStatechart(VALIDATION_TESTMODEL_DIR + "EntryTransitionToParentState.sct");
 		Iterator<EObject> iter = statechart.eAllContents();
 		while (iter.hasNext()) {
 			EObject element = iter.next();
 			if (element instanceof Transition) {
-				validator.validate(element, diagnostics,
-						new HashMap<Object, Object>());
+				validator.validate(element, diagnostics, new HashMap<Object, Object>());
 			}
 		}
 
 		assertIssueCount(diagnostics, 1);
-		assertError(diagnostics,
-				ISSUE_INITIAL_ENTRY_WITH_TRANSITION_TO_CONTAINER);
+		assertError(diagnostics, ISSUE_INITIAL_ENTRY_WITH_TRANSITION_TO_CONTAINER);
 	}
-	
+
 	@Test
-	public void checkStatechartNameIsIdentifier(){
+	public void checkStatechartNameIsIdentifier() {
 		Statechart statechart = SGraphFactory.eINSTANCE.createStatechart();
 		statechart.setName("Not a valid identifier");
-		validator.validate(statechart, diagnostics,
-				new HashMap<Object, Object>());
+		validator.validate(statechart, diagnostics, new HashMap<Object, Object>());
 		assertIssueCount(diagnostics, 1);
-		assertError(diagnostics,
-				String.format(ISSUE_STATECHART_NAME_NO_IDENTIFIER, statechart.getName()));
-		
+		assertError(diagnostics, String.format(ISSUE_STATECHART_NAME_NO_IDENTIFIER, statechart.getName()));
+
 		diagnostics = new BasicDiagnostic();
 		statechart.setName("0Notavalididentifier");
-		validator.validate(statechart, diagnostics,
-				new HashMap<Object, Object>());
+		validator.validate(statechart, diagnostics, new HashMap<Object, Object>());
 		assertIssueCount(diagnostics, 1);
-		assertError(diagnostics,
-				String.format(ISSUE_STATECHART_NAME_NO_IDENTIFIER, statechart.getName()));
-		
+		assertError(diagnostics, String.format(ISSUE_STATECHART_NAME_NO_IDENTIFIER, statechart.getName()));
+
 		diagnostics = new BasicDiagnostic();
 		statechart.setName("ValidIdentifier");
-		validator.validate(statechart, diagnostics,
-				new HashMap<Object, Object>());
+		validator.validate(statechart, diagnostics, new HashMap<Object, Object>());
 		assertIssueCount(diagnostics, 0);
 	}
 
@@ -818,8 +509,7 @@ public class SGraphJavaValidationTest {
 	// STextJAvaValidatorTest
 	@Test
 	public void testAllChecksHaveTests() throws Exception {
-		Iterable<Method> methods = Lists.newArrayList(SGraphJavaValidator.class
-				.getMethods());
+		Iterable<Method> methods = Lists.newArrayList(SGraphJavaValidator.class.getMethods());
 		methods = Iterables.filter(methods, new Predicate<Method>() {
 			public boolean apply(Method input) {
 				return input.getAnnotation(Check.class) != null;
@@ -827,13 +517,11 @@ public class SGraphJavaValidationTest {
 		});
 		for (Method checkMethod : methods) {
 			Method testMethod = getClass().getMethod(checkMethod.getName());
-			assertNotNull(
-					"Missing @Test Annotation for method "
-							+ checkMethod.getName(),
+			assertNotNull("Missing @Test Annotation for method " + checkMethod.getName(),
 					testMethod.getAnnotation(Test.class));
 		}
 	}
-	
+
 	/**
 	 * checks that no two @Check method of {@link STextJavaValidator} have the
 	 * same name. Avoiding overloaded check methods in the validator class
@@ -843,8 +531,7 @@ public class SGraphJavaValidationTest {
 	 */
 	@Test
 	public void testOverloadedCheckMethods() throws Exception {
-		Iterable<Method> methods = Lists.newArrayList(SGraphJavaValidator.class
-				.getMethods());
+		Iterable<Method> methods = Lists.newArrayList(SGraphJavaValidator.class.getMethods());
 		methods = Iterables.filter(methods, new Predicate<Method>() {
 			public boolean apply(Method input) {
 				return input.getAnnotation(Check.class) != null;
@@ -854,80 +541,11 @@ public class SGraphJavaValidationTest {
 		for (Method methodToCheck : methods) {
 			for (Method method : methods) {
 				if (methodToCheck != method) {
-					assertFalse("@Check method '" + methodToCheck
-							+ "' is overloaded.", methodToCheck.getName()
-							.equals(method.getName()));
+					assertFalse("@Check method '" + methodToCheck + "' is overloaded.",
+							methodToCheck.getName().equals(method.getName()));
 				}
 			}
 		}
 	}
-
-	
-	protected Transition createTransition(Vertex source, Vertex target) {
-		Transition trans = factory.createTransition();
-		trans.setSource(source);
-		trans.setTarget(target);
-		source.getOutgoingTransitions().add(trans);
-		target.getIncomingTransitions().add(trans);
-		return trans;
-	}
-
-	protected void assertError(BasicDiagnostic diag, String message) {
-		Diagnostic d = issueByName(diag, message);
-		assertNotNull("Issue '" + message + "' does not exist.",
-				issueByName(diag, message));
-		assertEquals("Issue '" + message + "' is no error.", Diagnostic.ERROR,
-				d.getSeverity());
-	}
-
-	protected void assertWarning(BasicDiagnostic diag, String message) {
-		Diagnostic d = issueByName(diag, message);
-		assertNotNull("Issue '" + message + "' does not exist.",
-				issueByName(diag, message));
-		assertEquals("Issue '" + message + "' is no warning.",
-				Diagnostic.WARNING, d.getSeverity());
-	}
-
-	protected void assertIssue(BasicDiagnostic diag, String message) {
-		assertNotNull("Issue '" + message + "' does not exist.",
-				issueByName(diag, message));
-	}
-
-	protected void assertNoIssue(BasicDiagnostic diag, String message) {
-		assertNull("Issue '" + message + "' does exist.",
-				issueByName(diag, message));
-	}
-
-	protected void assertNoIssues(BasicDiagnostic diag) {
-		assertIssueCount(diag, 0);
-	}
-
-	protected void assertIssueCount(BasicDiagnostic diag, int count) {
-		int c = diagnostics.getChildren().size();
-		assertEquals("expected " + count + " issue(s) but were " + c + " ["
-				+ diag.toString() + "]", count, c);
-	}
-
-	protected Diagnostic issueByName(BasicDiagnostic diag, String message) {
-		for (Diagnostic issue : diag.getChildren()) {
-			if (message.equals(issue.getMessage()))
-				return issue;
-		}
-
-		return null;
-	}
-
-	protected boolean validate(EObject obj) {
-		return validator.validate(obj, diagnostics,
-				new HashMap<Object, Object>());
-	}
-	
-	protected Statechart loadStatechart(String modelName) {
-		return AbstractTestModelsUtil
-				.loadStatechart(VALIDATION_TESTMODEL_DIR
-						+ modelName);
-	}
-
-
 
 }

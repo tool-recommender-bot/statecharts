@@ -19,7 +19,7 @@ import org.junit.runners.Suite.SuiteClasses;
  * @author terfloth
  */
 @RunWith(value = Suite.class)
-@SuiteClasses(value = { SGraphJavaValidationTest.class, StateImplTest.class })
+@SuiteClasses(value = { SGraphJavaValidationTest.class, EntryJavaValidationTest.class, ExitJavaValidationTest.class, SynchronizationJavaValidatorTest.class, StateImplTest.class })
 public class AllTests {
 
 }

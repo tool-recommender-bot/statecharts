@@ -17,12 +17,9 @@ import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
 import org.eclipse.xtext.validation.AbstractDeclarativeValidator;
 import org.eclipse.xtext.validation.Check;
 import org.eclipse.xtext.validation.CheckType;
-import org.eclipse.xtext.validation.EValidatorRegistrar;
 import org.yakindu.sct.model.sgraph.SpecificationElement;
 import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.model.sgraph.resource.AbstractSCTResource;
-
-import com.google.inject.Inject;
 
 /**
  * This validator is intended to be used by a compositeValidator (See
@@ -70,11 +67,5 @@ public class SCTResourceValidator extends AbstractDeclarativeValidator {
 	@Override
 	public boolean isLanguageSpecific() {
 		return false;
-	}
-
-	@Override
-	@Inject
-	public void register(EValidatorRegistrar registrar) {
-		// Do not register because this validator is only a composite #398987
 	}
 }

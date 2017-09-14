@@ -44,13 +44,13 @@ public class DomainValidator implements EValidator {
 			DomainStatus status = DomainRegistry.getDomainStatus(((DomainElement) eObject).getDomainID());
 			if (status.getSeverity() == Severity.ERROR) {
 				diagnostics.add(new BasicDiagnostic(Diagnostic.ERROR, "DomainValidator", 0, status.getShortMessage(),
-						new Object[] { eObject }));
+						new Object[]{eObject}));
 			} else if (status.getSeverity() == Severity.WARNING) {
 				diagnostics.add(new BasicDiagnostic(Diagnostic.WARNING, "DomainValidator", 0, status.getMessage(),
-						new Object[] { eObject }));
+						new Object[]{eObject}));
 			} else if (status.getSeverity() == Severity.INFO) {
 				diagnostics.add(new BasicDiagnostic(Diagnostic.INFO, "DomainValidator", 0, status.getShortMessage(),
-						new Object[] { eObject }));
+						new Object[]{eObject}));
 			}
 		}
 		return true;
