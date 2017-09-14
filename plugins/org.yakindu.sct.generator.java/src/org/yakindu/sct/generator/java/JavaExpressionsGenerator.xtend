@@ -20,6 +20,7 @@ import org.yakindu.base.expressions.expressions.ElementReferenceExpression
 import org.yakindu.base.expressions.expressions.Expression
 import org.yakindu.base.expressions.expressions.FeatureCall
 import org.yakindu.base.expressions.expressions.LogicalRelationExpression
+import org.yakindu.base.expressions.expressions.NewInstanceExpression
 import org.yakindu.base.expressions.expressions.PrimitiveValueExpression
 import org.yakindu.base.expressions.expressions.RelationalOperator
 import org.yakindu.base.types.Declaration
@@ -141,9 +142,13 @@ class JavaExpressionsGenerator extends ExpressionsGenerator {
 	}
 
 	def protected String operationCall(Operation it, List<Expression> args) {
-		'''«code»(«FOR arg : args SEPARATOR ", "»«arg.code»«ENDFOR»)'''
+		'''«code»(«args.arguments»)'''
 	}
-
+	
+	def String arguments(List<Expression> args) {
+		'''«FOR arg : args SEPARATOR ", "»«arg.code»«ENDFOR»'''
+	}
+	
 	def dispatch String code(Declaration it) {
 		getContext + identifier
 	}
@@ -154,6 +159,10 @@ class JavaExpressionsGenerator extends ExpressionsGenerator {
 
 	def dispatch String code(TimeEvent it) {
 		"timeEvents[" + getTimeEvents.indexOf(it) + "]"
+	}
+	
+	def dispatch String code(NewInstanceExpression it) {
+		'''new «type»(«expressions.arguments»)'''
 	}
 
 	def dispatch String getContext(Property it) {

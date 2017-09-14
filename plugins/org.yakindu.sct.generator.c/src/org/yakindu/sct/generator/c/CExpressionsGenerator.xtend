@@ -35,6 +35,7 @@ import org.yakindu.sct.model.stext.stext.EventRaisingExpression
 import org.yakindu.sct.model.stext.stext.EventValueReferenceExpression
 import org.yakindu.sct.model.stext.stext.OperationDefinition
 import org.yakindu.sct.model.stext.stext.VariableDefinition
+import org.yakindu.base.expressions.expressions.NewInstanceExpression
 
 class CExpressionsGenerator extends ExpressionsGenerator {
 
@@ -107,6 +108,11 @@ class CExpressionsGenerator extends ExpressionsGenerator {
 
 	override dispatch CharSequence code(BoolLiteral it) '''«IF value»bool_true«ELSE»bool_false«ENDIF»'''
 
+
+	def dispatch CharSequence code(NewInstanceExpression it) {
+		'''(«type») {«FOR arg : expressions SEPARATOR ", "»«arg.code»«ENDFOR»}'''
+	}
+	
 	// ensure we obtain an expression of type sc_boolean
 	def dispatch CharSequence sc_boolean_code(Expression it) '''«it.code»'''
 
