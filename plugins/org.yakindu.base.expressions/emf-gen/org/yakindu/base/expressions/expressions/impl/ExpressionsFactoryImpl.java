@@ -117,6 +117,7 @@ public class ExpressionsFactoryImpl extends EFactoryImpl implements ExpressionsF
 			case ExpressionsPackage.PARENTHESIZED_EXPRESSION: return createParenthesizedExpression();
 			case ExpressionsPackage.TYPE_CAST_EXPRESSION: return createTypeCastExpression();
 			case ExpressionsPackage.ARGUMENT: return createArgument();
+			case ExpressionsPackage.NEW_INSTANCE_EXPRESSION: return createNewInstanceExpression();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -448,6 +449,16 @@ public class ExpressionsFactoryImpl extends EFactoryImpl implements ExpressionsF
 	public Argument createArgument() {
 		ArgumentImpl argument = new ArgumentImpl();
 		return argument;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NewInstanceExpression createNewInstanceExpression() {
+		NewInstanceExpressionImpl newInstanceExpression = new NewInstanceExpressionImpl();
+		return newInstanceExpression;
 	}
 
 	/**

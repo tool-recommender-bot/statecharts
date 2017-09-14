@@ -168,7 +168,7 @@ ActiveStateReferenceExpression returns exp::Expression:
 	{ActiveStateReferenceExpression} 'active' '(' value=[sgraph::State|FQN] ')';
 
 PrimaryExpression returns exp::Expression:
-	PrimitiveValueExpression | FeatureCall | ActiveStateReferenceExpression | EventValueReferenceExpression |
+	PrimitiveValueExpression | NewInstanceExpression | FeatureCall | ActiveStateReferenceExpression | EventValueReferenceExpression |
 	ParenthesizedExpression;
 
 enum TimeUnit:
