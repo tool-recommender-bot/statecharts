@@ -18,6 +18,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
+import org.yakindu.base.expressions.expressions.NewInstanceExpression;
 import org.yakindu.base.expressions.expressions.PrimitiveValueExpression;
 import org.yakindu.sct.model.stext.stext.DefaultTrigger;
 import org.yakindu.sct.model.stext.stext.EventDefinition;
@@ -206,6 +207,12 @@ public class StextParserRuleTest extends AbstractSTextTest {
 		parseExpression("ABC.paramOp(null)", rule, interfaceScope());
 		parseExpression("ABC.paramOp(); raise ABC.voidEvent ", rule, interfaceScope());
 
+	}
+	
+	@Test
+	public void testNewInstanceExpression() {
+		String rule = NewInstanceExpression.class.getSimpleName();
+		parseExpression("new integer(3)", rule);
 	}
 
 	@Test
