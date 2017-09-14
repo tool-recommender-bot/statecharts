@@ -47,6 +47,7 @@ import org.yakindu.sct.model.stext.stext.OperationDefinition
 import org.yakindu.sct.model.stext.stext.VariableDefinition
 import org.yakindu.base.expressions.expressions.ConditionalExpression
 import org.yakindu.base.expressions.expressions.BinaryLiteral
+import org.yakindu.base.expressions.expressions.NewInstanceExpression
 
 class ExpressionCode extends Expressions {
 
@@ -144,6 +145,10 @@ class ExpressionCode extends Expressions {
 	def dispatch CharSequence code(ParenthesizedExpression it) '''(«expression.code»)'''
 	
 	def dispatch CharSequence code(TypeCastExpression it) '''((«type.getTargetLanguageName») «operand.code»)'''
+	
+	def dispatch CharSequence code(NewInstanceExpression it) {
+		'''(«type») {«FOR arg : expressions SEPARATOR ", "»«arg.code»«ENDFOR»}'''
+	}
 	
 	// ensure we obtain an expression of type sc_boolean
 	

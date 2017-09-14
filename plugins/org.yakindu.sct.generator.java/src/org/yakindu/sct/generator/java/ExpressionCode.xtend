@@ -45,6 +45,7 @@ import org.yakindu.sct.model.stext.stext.ActiveStateReferenceExpression
 import org.yakindu.sct.model.stext.stext.EventRaisingExpression
 import org.yakindu.sct.model.stext.stext.EventValueReferenceExpression
 import org.yakindu.sct.model.stext.stext.OperationDefinition
+import org.yakindu.base.expressions.expressions.NewInstanceExpression
 
 class ExpressionCode extends Expressions {
 
@@ -195,9 +196,13 @@ class ExpressionCode extends Expressions {
 	}
 
 	def protected String operationCall(Operation it, List<Expression> args) {
-		'''«code»(«FOR arg : args SEPARATOR ", "»«arg.code»«ENDFOR»)'''
+		'''«code»(«args.arguments»)'''
 	}
-
+	
+	def String arguments(List<Expression> args) {
+		'''«FOR arg : args SEPARATOR ", "»«arg.code»«ENDFOR»'''
+	}
+	
 	def dispatch String code(Declaration it) {
 		getContext + identifier
 	}
@@ -212,6 +217,10 @@ class ExpressionCode extends Expressions {
 
 	def dispatch String code(TypeCastExpression it) {
 		'''((«type.getTargetLanguageName») «operand.code»)'''
+	}
+	
+	def dispatch String code(NewInstanceExpression it) {
+		'''new «type»(«expressions.arguments»)'''
 	}
 
 	def dispatch String getContext(Property it) {
