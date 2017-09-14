@@ -73,52 +73,9 @@ public class SGraphJavaValidationTest extends AbstractSGraphJavaValidationTest {
 		SGraphPackage.eINSTANCE.eClass();
 	}
 
-	/**
-	 * A regular state must have a name.
-	 */
-	@Test
-	public void stateWithoutName() {
-		prepareStateTest();
 
-		state.setName(null);
-		assertFalse(validator.validate(state, diagnostics, new HashMap<Object, Object>()));
-		assertError(diagnostics, ISSUE_STATE_WITHOUT_NAME);
-	}
 
-	/**
-	 * A states name must not be empty.
-	 */
-	@Test
-	public void nameIsNotEmpty() {
-		prepareStateTest();
 
-		state.setName("");
-		assertFalse(validator.validate(state, diagnostics, new HashMap<Object, Object>()));
-		assertError(diagnostics, ISSUE_STATE_WITHOUT_NAME);
-	}
-
-	/**
-	 * A state name with just white spaces is not valid.
-	 */
-	@Test
-	public void stateWithWhitespaceName() {
-		prepareStateTest();
-
-		state.setName(" 	");
-		assertFalse(validator.validate(state, diagnostics, new HashMap<Object, Object>()));
-		assertError(diagnostics, ISSUE_STATE_WITHOUT_NAME);
-	}
-
-	/**
-	 * A state must be reachable.
-	 */
-	@Test
-	public void vertexNotReachable() {
-		prepareStateTest();
-
-		assertFalse(validator.validate(state, diagnostics, new HashMap<Object, Object>()));
-		assertError(diagnostics, ISSUE_NODE_NOT_REACHABLE);
-	}
 
 	/**
 	 * A transition to a sub entry is considered implies reachability.
@@ -203,51 +160,9 @@ public class SGraphJavaValidationTest extends AbstractSGraphJavaValidationTest {
 		assertNoIssues(diagnostics);
 	}
 
-	/**
-	 * If an incoming transitions is part of an external transition path that
-	 * only consists of pseudo states and only has state predecessors within the
-	 * state then the state is not reachable and the validation must fail with
-	 * an error.
-	 */
-	@Test
-	public void vertexNotReachable_FailOnExternalPseudoPath() {
-		prepareStateTest();
 
-		Choice choice = factory.createChoice();
-		region.getVertices().add(choice);
 
-		createTransition(state, choice);
-		createTransition(choice, state);
 
-		validate(state);
-		assertIssue(diagnostics, ISSUE_NODE_NOT_REACHABLE);
-	}
-
-	/**
-	 * If an incoming transitions is part of an external transition path to an
-	 * internal state that only consists of pseudo states and only has state
-	 * predecessors within the state then the state is not reachable and the
-	 * validation must fail with an error.
-	 */
-	@Test
-	public void vertexNotReachable_FailOnExternalPseudoPathToSubstate() {
-		prepareStateTest();
-
-		Region subRegion = factory.createRegion();
-		state.getRegions().add(subRegion);
-
-		State stateA = factory.createState();
-		subRegion.getVertices().add(stateA);
-
-		Choice choice = factory.createChoice();
-		region.getVertices().add(choice);
-
-		createTransition(stateA, choice);
-		createTransition(choice, stateA);
-
-		validate(state);
-		assertIssue(diagnostics, ISSUE_NODE_NOT_REACHABLE);
-	}
 
 	/**
 	 * A regular state may be a dead end.
@@ -315,22 +230,7 @@ public class SGraphJavaValidationTest extends AbstractSGraphJavaValidationTest {
 		assertNoIssues(diagnostics);
 	}
 
-	/**
-	 * A final state should have at least one incoming transition.
-	 */
-	@Test
-	public void finalStateIsolated() {
-		statechart = factory.createStatechart();
-		Region region = factory.createRegion();
-		statechart.getRegions().add(region);
-		FinalState finalState = factory.createFinalState();
-		region.getVertices().add(finalState);
 
-		assertFalse(validate(finalState));
-
-		assertIssueCount(diagnostics, 1);
-		assertError(diagnostics, ISSUE_NODE_NOT_REACHABLE);
-	}
 
 	/**
 	 * A positive case for a valid final state.
@@ -350,48 +250,7 @@ public class SGraphJavaValidationTest extends AbstractSGraphJavaValidationTest {
 		assertIssueCount(diagnostics, 0);
 	}
 
-	/**
-	 * A final state should have no outgoing transitions
-	 */
-	@Test
-	public void finalStateWithOutgoingTransition() {
-		statechart = factory.createStatechart();
-		Region region = factory.createRegion();
-		statechart.getRegions().add(region);
-		FinalState finalState = factory.createFinalState();
-		region.getVertices().add(finalState);
-		State state = factory.createState();
-		region.getVertices().add(state);
 
-		createTransition(state, finalState);
-		createTransition(finalState, state);
-
-		validate(finalState);
-
-		assertIssueCount(diagnostics, 1);
-		assertWarning(diagnostics, ISSUE_FINAL_STATE_OUTGOING_TRANSITION);
-	}
-
-	/**
-	 * A choice must have at least one outgoing transition
-	 */
-	@Test
-	public void choiceWithoutOutgoingTransition() {
-		statechart = factory.createStatechart();
-		Region region = factory.createRegion();
-		statechart.getRegions().add(region);
-		Choice choice = factory.createChoice();
-		region.getVertices().add(choice);
-		State state = factory.createState();
-		region.getVertices().add(state);
-
-		createTransition(state, choice);
-
-		assertFalse(validator.validate(choice, diagnostics, new HashMap<Object, Object>()));
-
-		assertIssueCount(diagnostics, 1);
-		assertError(diagnostics, ISSUE_CHOICE_WITHOUT_OUTGOING_TRANSITION);
-	}
 
 	@Test
 	public void orthogonalTransition() {
@@ -404,29 +263,6 @@ public class SGraphJavaValidationTest extends AbstractSGraphJavaValidationTest {
 		assertNoIssues(diagnostics);
 	}
 
-	@Test
-	public void orthogonalTransition_BetweenTopLevelRegions() {
-		statechart = loadStatechart("OrthogonalTransition.sct");
-
-		State state = firstNamed(EcoreUtil2.eAllOfType(statechart, State.class), "A");
-		Transition trans = state.getOutgoingTransitions().get(0);
-
-		assertFalse(validator.validate(trans, diagnostics, new HashMap<Object, Object>()));
-		assertIssueCount(diagnostics, 1);
-		assertError(diagnostics, ISSUE_TRANSITION_ORTHOGONAL);
-	}
-
-	@Test
-	public void orthogonalTransition_BetweenStateRegions() {
-		statechart = loadStatechart("OrthogonalTransition.sct");
-
-		State state = firstNamed(EcoreUtil2.eAllOfType(statechart, State.class), "B1");
-		Transition trans = state.getOutgoingTransitions().get(0);
-
-		assertFalse(validator.validate(trans, diagnostics, new HashMap<Object, Object>()));
-		assertIssueCount(diagnostics, 1);
-		assertError(diagnostics, ISSUE_TRANSITION_ORTHOGONAL);
-	}
 
 	@Test
 	public void orthogonalSourceStates() {
@@ -465,41 +301,8 @@ public class SGraphJavaValidationTest extends AbstractSGraphJavaValidationTest {
 		assertIssueCount(diagnostics, 0);
 	}
 
-	@Test
-	public void initialEntryWithTransitionToContainer() {
-		statechart = AbstractTestModelsUtil
-				.loadStatechart(VALIDATION_TESTMODEL_DIR + "EntryTransitionToParentState.sct");
-		Iterator<EObject> iter = statechart.eAllContents();
-		while (iter.hasNext()) {
-			EObject element = iter.next();
-			if (element instanceof Transition) {
-				validator.validate(element, diagnostics, new HashMap<Object, Object>());
-			}
-		}
 
-		assertIssueCount(diagnostics, 1);
-		assertError(diagnostics, ISSUE_INITIAL_ENTRY_WITH_TRANSITION_TO_CONTAINER);
-	}
 
-	@Test
-	public void checkStatechartNameIsIdentifier() {
-		Statechart statechart = SGraphFactory.eINSTANCE.createStatechart();
-		statechart.setName("Not a valid identifier");
-		validator.validate(statechart, diagnostics, new HashMap<Object, Object>());
-		assertIssueCount(diagnostics, 1);
-		assertError(diagnostics, String.format(ISSUE_STATECHART_NAME_NO_IDENTIFIER, statechart.getName()));
-
-		diagnostics = new BasicDiagnostic();
-		statechart.setName("0Notavalididentifier");
-		validator.validate(statechart, diagnostics, new HashMap<Object, Object>());
-		assertIssueCount(diagnostics, 1);
-		assertError(diagnostics, String.format(ISSUE_STATECHART_NAME_NO_IDENTIFIER, statechart.getName()));
-
-		diagnostics = new BasicDiagnostic();
-		statechart.setName("ValidIdentifier");
-		validator.validate(statechart, diagnostics, new HashMap<Object, Object>());
-		assertIssueCount(diagnostics, 0);
-	}
 
 	/**
 	 * checks that each @Check method of {@link STextJavaValidator} has a @Test
