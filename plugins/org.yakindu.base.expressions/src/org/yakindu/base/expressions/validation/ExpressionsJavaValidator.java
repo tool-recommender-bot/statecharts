@@ -11,6 +11,7 @@
  */
 package org.yakindu.base.expressions.validation;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -27,9 +28,12 @@ import org.yakindu.base.expressions.expressions.ElementReferenceExpression;
 import org.yakindu.base.expressions.expressions.Expression;
 import org.yakindu.base.expressions.expressions.ExpressionsPackage;
 import org.yakindu.base.expressions.expressions.FeatureCall;
+import org.yakindu.base.expressions.expressions.NewInstanceExpression;
 import org.yakindu.base.types.AnnotatableElement;
 import org.yakindu.base.types.Annotation;
 import org.yakindu.base.types.ComplexType;
+import org.yakindu.base.types.Constructor;
+import org.yakindu.base.types.Declaration;
 import org.yakindu.base.types.GenericElement;
 import org.yakindu.base.types.Operation;
 import org.yakindu.base.types.Parameter;
@@ -94,6 +98,13 @@ public class ExpressionsJavaValidator extends org.yakindu.base.expressions.valid
 	public static final String ERROR_OPTIONAL_MUST_BE_LAST_CODE = "OptionalParametersLast";
 	public static final String ERROR_OPTIONAL_MUST_BE_LAST_MSG = "Required parameters must not be defined after optional parameters.";
 
+	public static final String ERROR_CONSTRUCTOR_SIMPLE_TYPE_CODE = "SimpleTypeConstructor";
+	public static final String ERROR_CONSTRUCTOR_SIMPLE_TYPE_MSG = "Only complex types have constructors.";
+	
+	public static final String ERROR_NO_SUCH_CONSTRUCTOR_CODE = "NoSuchConstructor";
+	public static final String ERROR_NO_SUCH_CONSTRUCTOR_MSG = "This constructor does not exist for type %s";
+	
+	
 	@Inject
 	private GenericsPrettyPrinter printer;
 	@Inject
@@ -278,11 +289,17 @@ public class ExpressionsJavaValidator extends org.yakindu.base.expressions.valid
 	}
 
 	protected void assertOperationArguments(Operation operation, List<Expression> args) {
-		EList<Parameter> parameters = operation.getParameters();
-		if ((operation.isVariadic() && operation.getVarArgIndex() > args.size())
-				|| !operation.isVariadic() && parameters.size() != args.size()) {
-			error(String.format(ERROR_WRONG_NUMBER_OF_ARGUMENTS_MSG, parameters), null, ERROR_WRONG_NUMBER_OF_ARGUMENTS_CODE);
+		if (!checkOperationArguments(operation, args)) {
+			error(String.format(ERROR_WRONG_NUMBER_OF_ARGUMENTS_MSG, operation.getParameters()),
+					null, 
+					ERROR_WRONG_NUMBER_OF_ARGUMENTS_CODE);
 		}
+	}
+	
+	protected boolean checkOperationArguments(Operation operation, List<Expression> args) {
+		EList<Parameter> parameters = operation.getParameters();
+		return !((operation.isVariadic() && operation.getVarArgIndex() > args.size())
+				|| !operation.isVariadic() && parameters.size() != args.size());
 	}
 	
 	@Check(CheckType.FAST)
@@ -325,6 +342,55 @@ public class ExpressionsJavaValidator extends org.yakindu.base.expressions.valid
 				foundOptional = true;
 			}
 		}
+	}
+	
+	@Check(CheckType.FAST)
+	public void checkNewInstanceExpressionType(NewInstanceExpression exp) {
+		if(!(exp.getType().getType() instanceof ComplexType)) {
+			error(ERROR_CONSTRUCTOR_SIMPLE_TYPE_MSG, exp, null, ERROR_CONSTRUCTOR_SIMPLE_TYPE_CODE);
+		}
+	}
+	
+	@Check(CheckType.FAST)
+	public void checkNewInstanceExpressionArguments(NewInstanceExpression exp) {
+		List<Argument> expArgs = exp.getArguments();
+		ComplexType cls = (ComplexType) exp.getType().getType();
+		for(Declaration decl: cls.getFeatures()) {
+			if(decl instanceof Constructor) {
+				if(compareParameters((Constructor)decl, expArgs)) {
+					return;
+				}
+			}
+		}
+		error(String.format(ERROR_NO_SUCH_CONSTRUCTOR_MSG, cls), exp, null, ERROR_NO_SUCH_CONSTRUCTOR_CODE);
+	}
+	
+	/**
+	 * Compares a list of parameters for compatibility.
+	 * @param args1
+	 * @param args2
+	 * @return
+	 */
+	protected boolean compareParameters(Operation operation, List<Argument> callExpressions) {
+		List<Expression> args = new ArrayList<>();
+		for(Argument arg : callExpressions) {
+			args.add(arg.getValue());
+		}
+		if(!checkOperationArguments(operation, args)) {
+			return false;
+		}
+		
+		List<Parameter> operationParameters = operation.getParameters();
+		for(int i = 0; i < operationParameters.size(); i++) {
+			Parameter p = operationParameters.get(i);
+			Expression e = callExpressions.get(i).getValue();
+			Type callType = typeInferrer.infer(e).getType();
+			Type parameterType = p.getType();
+			if(!typeSystem.isSuperType(callType, parameterType)) {
+				return false;
+			}
+		}
+		return true;
 	}
 
 }

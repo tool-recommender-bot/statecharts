@@ -11,9 +11,9 @@
  */
 package org.yakindu.sct.model.stext.validation;
 
-import static org.yakindu.sct.model.stext.lib.StatechartAnnotations.EVENT_DRIVEN_ANNOTATION;
-import static org.yakindu.sct.model.stext.lib.StatechartAnnotations.CYCLE_BASED_ANNOTATION;
 import static org.yakindu.sct.model.stext.lib.StatechartAnnotations.CHILD_FIRST_ANNOTATION;
+import static org.yakindu.sct.model.stext.lib.StatechartAnnotations.CYCLE_BASED_ANNOTATION;
+import static org.yakindu.sct.model.stext.lib.StatechartAnnotations.EVENT_DRIVEN_ANNOTATION;
 import static org.yakindu.sct.model.stext.lib.StatechartAnnotations.PARENT_FIRST_ANNOTATION;
 
 import java.util.Collections;
@@ -50,8 +50,10 @@ import org.yakindu.base.expressions.expressions.ElementReferenceExpression;
 import org.yakindu.base.expressions.expressions.Expression;
 import org.yakindu.base.expressions.expressions.ExpressionsPackage;
 import org.yakindu.base.expressions.expressions.FeatureCall;
+import org.yakindu.base.expressions.expressions.NewInstanceExpression;
 import org.yakindu.base.expressions.validation.ExpressionsJavaValidator;
 import org.yakindu.base.types.Annotation;
+import org.yakindu.base.types.ComplexType;
 import org.yakindu.base.types.Declaration;
 import org.yakindu.base.types.Direction;
 import org.yakindu.base.types.Event;
@@ -553,7 +555,7 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 					ERROR_WRONG_NUMBER_OF_ARGUMENTS_CODE);
 		}
 	}
-
+	
 	@Check(CheckType.FAST)
 	public void checkAssignmentExpression(final AssignmentExpression exp) {
 		final String name = getVariableName(exp);
