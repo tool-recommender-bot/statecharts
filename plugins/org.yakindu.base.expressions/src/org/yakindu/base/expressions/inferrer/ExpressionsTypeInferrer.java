@@ -42,6 +42,7 @@ import org.yakindu.base.expressions.expressions.LogicalAndExpression;
 import org.yakindu.base.expressions.expressions.LogicalNotExpression;
 import org.yakindu.base.expressions.expressions.LogicalOrExpression;
 import org.yakindu.base.expressions.expressions.LogicalRelationExpression;
+import org.yakindu.base.expressions.expressions.NewInstanceExpression;
 import org.yakindu.base.expressions.expressions.NullLiteral;
 import org.yakindu.base.expressions.expressions.NumericalAddSubtractExpression;
 import org.yakindu.base.expressions.expressions.NumericalMultiplyDivideExpression;
@@ -242,6 +243,10 @@ public class ExpressionsTypeInferrer extends AbstractTypeSystemInferrer implemen
 			}
 		}
 		return inferTypeDispatch(e.getReference());
+	}
+	
+	public InferenceResult doInfer(NewInstanceExpression e) {
+		return inferTypeDispatch(e.getType());
 	}
 
 	protected InferenceResult inferOperation(ArgumentExpression e, Operation op,
