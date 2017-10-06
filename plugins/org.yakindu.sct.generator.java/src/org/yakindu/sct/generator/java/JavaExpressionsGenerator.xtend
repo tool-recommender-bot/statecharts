@@ -165,10 +165,6 @@ class JavaExpressionsGenerator extends ExpressionsGenerator {
 	def dispatch String code(NewInstanceExpression it) {
 		'''new «type»(«expressions.arguments»)'''
 	}
-	
-	def dispatch String code(NewInstanceExpression it) {
-		'''new «type»(«expressions.arguments»)'''
-	}
 
 	def dispatch String getContext(Property it) {
 		if (scope !== null) {
