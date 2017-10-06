@@ -108,7 +108,6 @@ class CExpressionsGenerator extends ExpressionsGenerator {
 
 	override dispatch CharSequence code(BoolLiteral it) '''«IF value»bool_true«ELSE»bool_false«ENDIF»'''
 
-
 	def dispatch CharSequence code(NewInstanceExpression it) {
 		'''(«type») {«FOR arg : expressions SEPARATOR ", "»«arg.code»«ENDFOR»}'''
 	}

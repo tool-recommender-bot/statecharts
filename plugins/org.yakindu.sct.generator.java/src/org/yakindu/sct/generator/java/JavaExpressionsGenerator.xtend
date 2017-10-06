@@ -35,6 +35,7 @@ import org.yakindu.sct.model.stext.stext.ActiveStateReferenceExpression
 import org.yakindu.sct.model.stext.stext.EventRaisingExpression
 import org.yakindu.sct.model.stext.stext.EventValueReferenceExpression
 import org.yakindu.sct.model.stext.stext.OperationDefinition
+import org.yakindu.base.expressions.expressions.NewInstanceExpression
 
 class JavaExpressionsGenerator extends ExpressionsGenerator {
 
@@ -159,6 +160,10 @@ class JavaExpressionsGenerator extends ExpressionsGenerator {
 
 	def dispatch String code(TimeEvent it) {
 		"timeEvents[" + getTimeEvents.indexOf(it) + "]"
+	}
+	
+	def dispatch String code(NewInstanceExpression it) {
+		'''new «type»(«expressions.arguments»)'''
 	}
 	
 	def dispatch String code(NewInstanceExpression it) {
