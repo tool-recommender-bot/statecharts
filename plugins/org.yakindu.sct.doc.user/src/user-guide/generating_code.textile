@@ -2133,7 +2133,7 @@ To register or unregister a listener, use the _getListeners()_ method of the nes
 A callback method specified by the listener interface should complete its operations quickly, because otherwise the state machine execution might be delayed for too long, potentially leading to unexpected runtime behavior.
 
 
-h3(#codegen_java_operation_callback). Operation callbacks
+h3(#codegen_java_operation_callbacks). Operation callbacks
 
 YAKINDU Statechart Tools support _operations_ that are executed by a state machine as actions, but are implemented by client-side code. The figure below shows a sample statechart using an operation:
 
