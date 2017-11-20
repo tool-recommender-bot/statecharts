@@ -28,6 +28,7 @@ import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.ui.refactoring.ui.IRenameElementContext;
 import org.eclipse.xtext.ui.refactoring.ui.IRenameSupport;
+import org.yakindu.base.types.PrimitiveType;
 import org.yakindu.sct.model.sgraph.util.EmbeddedContextUtil;
 
 import com.google.inject.Injector;
@@ -138,8 +139,9 @@ public class RenameEmbeddedXtextReferenceHandler extends AbstractHandler {
 
     protected EObject getReferringElement(final EObject selectedElement) {
         EObject firstWithReference = null;
-        if (!selectedElement.eCrossReferences().isEmpty())
+        if (!selectedElement.eCrossReferences().isEmpty()) {
             firstWithReference = selectedElement;
+        }
         else {
             while (selectedElement.eAllContents().hasNext()) {
                 EObject withRef = selectedElement.eAllContents().next();
@@ -158,7 +160,8 @@ public class RenameEmbeddedXtextReferenceHandler extends AbstractHandler {
         if (eCrossReferences.isEmpty()) {
             return null;
         }
-        return eCrossReferences.iterator().next();
+        EObject next = eCrossReferences.iterator().next();
+		return next instanceof PrimitiveType ? null : next;
     }
 
     protected Shell getShell() {

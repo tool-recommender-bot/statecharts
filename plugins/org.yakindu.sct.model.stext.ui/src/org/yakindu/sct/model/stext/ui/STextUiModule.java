@@ -24,6 +24,7 @@ import org.eclipse.xtext.ui.editor.model.IResourceForEditorInputFactory;
 import org.eclipse.xtext.ui.editor.model.JavaClassPathResourceForIEditorInputFactory;
 import org.eclipse.xtext.ui.editor.model.ResourceForIEditorInputFactory;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightingConfiguration;
+import org.eclipse.xtext.ui.refactoring.IReferenceUpdater;
 import org.eclipse.xtext.ui.resource.IResourceSetProvider;
 import org.eclipse.xtext.ui.resource.SimpleResourceSetProvider;
 import org.eclipse.xtext.ui.resource.XtextResourceSetProvider;
@@ -69,6 +70,10 @@ public class STextUiModule extends org.yakindu.sct.model.stext.ui.AbstractSTextU
 
 	public Class<? extends IEObjectHoverProvider> bindIEObjectHoverProvider() {
 		return CustomCSSHelpHoverProvider.class;
+	}
+	@Override
+	public Class<? extends IReferenceUpdater> bindIReferenceUpdater() {
+		return SCTXtextSpecificationReferenceUpdater.class;
 	}
 
 	@Override
