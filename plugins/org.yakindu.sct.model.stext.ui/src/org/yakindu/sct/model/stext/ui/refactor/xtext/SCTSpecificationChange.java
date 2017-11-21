@@ -1,4 +1,4 @@
-package org.yakindu.sct.model.stext.ui;
+package org.yakindu.sct.model.stext.ui.refactor.xtext;
 
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;

@@ -34,6 +34,7 @@ import org.yakindu.sct.model.stext.ui.contentassist.STextStatefulFactory;
 import org.yakindu.sct.model.stext.ui.help.CustomCSSHelpHoverProvider;
 import org.yakindu.sct.model.stext.ui.help.STextUserHelpDocumentationProvider;
 import org.yakindu.sct.model.stext.ui.highlighting.SCTHighlightingConfiguration;
+import org.yakindu.sct.model.stext.ui.refactor.xtext.SCTXtextSpecificationReferenceUpdater;
 import org.yakindu.sct.model.stext.ui.tasks.STextTaskFinder;
 
 import com.google.inject.Binder;

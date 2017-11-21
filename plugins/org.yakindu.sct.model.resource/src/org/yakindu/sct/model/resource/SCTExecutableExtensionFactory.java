@@ -39,40 +39,42 @@ import com.google.inject.Module;
 import com.google.inject.name.Names;
 
 /**
+ * 
  * @author andreas muelder - Initial contribution and API
+ * 
  */
+ @SuppressWarnings("restriction")
 public class SCTExecutableExtensionFactory extends AbstractGuiceAwareExecutableExtensionFactory {
 
-    @Override
-    protected Bundle getBundle() {
-        return Activator.getDefault().getBundle();
-    }
+	@Override
+	protected Bundle getBundle() {
+		return Activator.getDefault().getBundle();
+	}
 
-    @Override
-    protected Injector getInjector() {
-        // TODO: Provide a sharedDomainModule via DomainRegistry to allow
-        // overriding of generic bindings
-        return Guice.createInjector(new SharedStateModule(), new Module() {
-            @Override
-            @SuppressWarnings("restriction")
-            public void configure(Binder binder) {
-                binder.bind(IResourceValidator.class).to(SCTResourceValidatorImpl.class);
-                binder.bind(String.class).annotatedWith(Names.named(Constants.FILE_EXTENSIONS)).toInstance("sct");
-                binder.bind(IEncodingProvider.class).to(IEncodingProvider.Runtime.class);
-                binder.bind(IQualifiedNameProvider.class).to(StextNameProvider.class);
-                binder.bind(org.eclipse.jface.viewers.ILabelProvider.class)
-                        .annotatedWith(org.eclipse.xtext.ui.resource.ResourceServiceDescriptionLabelProvider.class)
-                        .to(DefaultDescriptionLabelProvider.class);
-                binder.bind(IDefaultResourceDescriptionStrategy.class).to(SCTResourceDescriptionStrategy.class);
-
-                binder.bind(MarkerCreator.class).to(SCTMarkerCreator.class);
-                binder.bind(MarkerTypeProvider.class).to(SCTMarkerTypeProvider.class);
-                binder.bind(IDiagnosticConverter.class).to(SCTDiagnosticConverterImpl.class);
-                binder.bind(IURIEditorOpener.class).annotatedWith(LanguageSpecific.class).to(SCTFileEditorOpener.class);
-
-                binder.bind(IReferenceUpdater.class).to(DomainAwareReferenceUpdater.class);
-            }
-        });
-    }
+	@Override
+	protected Injector getInjector() {
+		// TODO: Provide a sharedDomainModule via DomainRegistry to allow
+		// overriding of generic bindings
+		return Guice.createInjector(new SharedStateModule(), new Module() {
+			@Override
+			public void configure(Binder binder) {
+				binder.bind(IResourceValidator.class).to(SCTResourceValidatorImpl.class);
+				binder.bind(String.class).annotatedWith(Names.named(Constants.FILE_EXTENSIONS)).toInstance("sct");
+				binder.bind(IEncodingProvider.class).to(IEncodingProvider.Runtime.class);
+				binder.bind(IQualifiedNameProvider.class).to(StextNameProvider.class);
+				binder.bind(org.eclipse.jface.viewers.ILabelProvider.class)
+						.annotatedWith(org.eclipse.xtext.ui.resource.ResourceServiceDescriptionLabelProvider.class)
+						.to(DefaultDescriptionLabelProvider.class);
+				binder.bind(IDefaultResourceDescriptionStrategy.class).to(SCTResourceDescriptionStrategy.class);
+				
+				binder.bind(MarkerCreator.class).to(SCTMarkerCreator.class);
+				binder.bind(MarkerTypeProvider.class).to(SCTMarkerTypeProvider.class);
+				binder.bind(IDiagnosticConverter.class).to(SCTDiagnosticConverterImpl.class);
+				binder.bind(IURIEditorOpener.class).annotatedWith(LanguageSpecific.class).to(SCTFileEditorOpener.class);
+				
+				binder.bind(IReferenceUpdater.class).to(DomainAwareReferenceUpdater.class);
+			}
+		});
+	}
 
 }

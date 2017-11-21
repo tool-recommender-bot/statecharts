@@ -47,12 +47,15 @@ import com.google.inject.Inject;
  * 
  * @author benjamin schwertfeger
  * @author andreas muelder
+ * 
  */
 public class SGraphNameProvider extends DefaultDeclarativeQualifiedNameProvider {
 
     /** "Default" */
-    private static final QualifiedName DEFAULT_ENTRY_NAME = QualifiedName.create("_entry_Default");
-    private static final QualifiedName DEFAULT_EXIT_NAME = QualifiedName.create("_exit_Default");
+	private static final QualifiedName DEFAULT_ENTRY_NAME = QualifiedName
+			.create("_entry_Default");
+	private static final QualifiedName DEFAULT_EXIT_NAME = QualifiedName
+			.create("_exit_Default");
     private static final String _FINAL_STATE_NAME = "_final_";
     private static final String _CHOICE_NAME = "_choice_";
     private static final String _TRANSITION_NAME = "_transition_to_";
@@ -83,9 +86,11 @@ public class SGraphNameProvider extends DefaultDeclarativeQualifiedNameProvider 
         if (Strings.isEmpty(scName)) {
             return null;
         }
-        QualifiedName name = QualifiedName.create(identifierConverter.toIdentifier(ele.getName()));
+		QualifiedName name = QualifiedName.create(identifierConverter
+				.toIdentifier(ele.getName()));
         if (!Strings.isEmpty(ele.getNamespace())) {
-            name = nameConverter.toQualifiedName(ele.getNamespace()).append(name);
+			name = nameConverter.toQualifiedName(ele.getNamespace()).append(
+					name);
         }
         return name;
     }
@@ -98,8 +103,11 @@ public class SGraphNameProvider extends DefaultDeclarativeQualifiedNameProvider 
             qualifiedNameFromConverter = QualifiedName.create(ele.getName());
         } else {
             LinkedList<Synchronization> list = new LinkedList<Synchronization>();
-            Iterables.addAll(list, Iterables.filter(((Region) ele.eContainer()).getVertices(), Synchronization.class));
-            qualifiedNameFromConverter = QualifiedName.create(_SYNC_NAME + list.indexOf(ele));
+			Iterables.addAll(list, Iterables.filter(
+					((Region) ele.eContainer()).getVertices(),
+					Synchronization.class));
+			qualifiedNameFromConverter = QualifiedName.create(_SYNC_NAME
+					+ list.indexOf(ele));
         }
 
         return getParentQualifiedName(ele, qualifiedNameFromConverter);
@@ -109,14 +117,17 @@ public class SGraphNameProvider extends DefaultDeclarativeQualifiedNameProvider 
 
         // first get order number of choice node
         List<Vertex> choiceList = new ArrayList<Vertex>();
-        choiceList.addAll(Collections2.filter(((Region) ele.eContainer()).getVertices(), new Predicate<Vertex>() {
+		choiceList.addAll(Collections2.filter(
+				((Region) ele.eContainer()).getVertices(),
+				new Predicate<Vertex>() {
             public boolean apply(Vertex input) {
                 return input instanceof Choice;
             }
         }));
         int index = choiceList.indexOf(ele);
 
-        QualifiedName qualifiedNameFromConverter = QualifiedName.create(_CHOICE_NAME + index);
+		QualifiedName qualifiedNameFromConverter = QualifiedName
+				.create(_CHOICE_NAME + index);
 
         return getParentQualifiedName(ele, qualifiedNameFromConverter);
     }
@@ -141,7 +152,8 @@ public class SGraphNameProvider extends DefaultDeclarativeQualifiedNameProvider 
         return getParentQualifiedName(ele, name);
     }
 
-    protected QualifiedName getParentQualifiedName(final EObject ele, final QualifiedName childName) {
+	protected QualifiedName getParentQualifiedName(final EObject ele,
+			final QualifiedName childName) {
         EObject temp = ele;
         while (temp.eContainer() != null) {
             temp = temp.eContainer();
@@ -171,7 +183,8 @@ public class SGraphNameProvider extends DefaultDeclarativeQualifiedNameProvider 
         if (Strings.isEmpty(ele.getName())) {
             qfn = QualifiedName.create(_FINAL_STATE_NAME);
         } else {
-            qfn = QualifiedName.create(identifierConverter.toIdentifier(ele.getName()));
+			qfn = QualifiedName.create(identifierConverter.toIdentifier(ele
+					.getName()));
         }
 
         return getParentQualifiedName(ele, qfn);
@@ -181,8 +194,8 @@ public class SGraphNameProvider extends DefaultDeclarativeQualifiedNameProvider 
         if (ele.getName() == null) {
             return null;
         }
-        QualifiedName qualifiedNameFromConverter =
-                QualifiedName.create(identifierConverter.toIdentifier(ele.getName()));
+		QualifiedName qualifiedNameFromConverter = QualifiedName
+				.create(identifierConverter.toIdentifier(ele.getName()));
 
         return getParentQualifiedName(ele, qualifiedNameFromConverter);
     }
@@ -194,14 +207,16 @@ public class SGraphNameProvider extends DefaultDeclarativeQualifiedNameProvider 
                 CompositeElement parent = (CompositeElement) ele.eContainer();
                 int index = parent.getRegions().indexOf(ele);
                 if (index != -1) {
-                    qualifiedNameFromConverter = QualifiedName.create("_region" + index);
+					qualifiedNameFromConverter = QualifiedName.create("_region"
+							+ index);
                 }
             }
             if (qualifiedNameFromConverter == null) {
                 return null;
             }
         } else {
-            qualifiedNameFromConverter = QualifiedName.create(identifierConverter.toIdentifier(ele.getName()));
+			qualifiedNameFromConverter = QualifiedName
+					.create(identifierConverter.toIdentifier(ele.getName()));
         }
 
         return getParentQualifiedName(ele, qualifiedNameFromConverter);
@@ -222,9 +237,12 @@ public class SGraphNameProvider extends DefaultDeclarativeQualifiedNameProvider 
     protected QualifiedName getNamespace(EObject child) {
         QualifiedName name = null;
         if (!(child instanceof ScopedElement)) {
-            ScopedElement interfaceScope = EcoreUtil2.getContainerOfType(child, ScopedElement.class);
-            if (interfaceScope != null && !Strings.isEmpty(interfaceScope.getNamespace())) {
-                name = nameConverter.toQualifiedName(interfaceScope.getNamespace());
+			ScopedElement interfaceScope = EcoreUtil2.getContainerOfType(child,
+					ScopedElement.class);
+			if (interfaceScope != null
+					&& !Strings.isEmpty(interfaceScope.getNamespace())) {
+				name = nameConverter.toQualifiedName(interfaceScope
+						.getNamespace());
             }
         }
         return name;
