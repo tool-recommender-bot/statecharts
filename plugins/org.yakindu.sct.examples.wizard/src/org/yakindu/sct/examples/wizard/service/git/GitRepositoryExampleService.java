@@ -29,6 +29,7 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Status;
+import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jgit.api.FetchCommand;
 import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.api.PullResult;
@@ -63,8 +64,12 @@ public class GitRepositoryExampleService implements IExampleService {
 	private IExampleDataReader reader;
 
 	protected java.nio.file.Path getStorageLocation() {
-		return java.nio.file.Paths.get(ExampleActivator.getDefault().getPreferenceStore()
+		return java.nio.file.Paths.get(getPreferenceStore()
 				.getString(ExamplesPreferenceConstants.STORAGE_LOCATION));
+	}
+
+	protected IPreferenceStore getPreferenceStore() {
+		return ExampleActivator.getDefault().getPreferenceStore();
 	}
 
 	@Override
@@ -106,7 +111,7 @@ public class GitRepositoryExampleService implements IExampleService {
 	}
 	
 	protected String getPreference(String constant){
-		return ExampleActivator.getDefault().getPreferenceStore().getString(constant);
+		return getPreferenceStore().getString(constant);
 	}
 	
 	protected IStatus cloneRepository(IProgressMonitor monitor) {

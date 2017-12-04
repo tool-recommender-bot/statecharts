@@ -19,3 +19,7 @@ Require-Bundle: org.eclipse.core.runtime,
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-ActivationPolicy: lazy
 Import-Package: org.eclipse.xtext.resource
+Export-Package: org.yakindu.sct.examples.wizard,
+ org.yakindu.sct.examples.wizard.preferences,
+ org.yakindu.sct.examples.wizard.service,
+ org.yakindu.sct.examples.wizard.service.git
