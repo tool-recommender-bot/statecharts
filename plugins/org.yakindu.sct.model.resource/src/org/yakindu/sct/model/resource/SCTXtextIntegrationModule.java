@@ -30,8 +30,8 @@ import org.yakindu.sct.model.sgraph.ui.validation.SCTDiagnosticConverterImpl;
 import org.yakindu.sct.model.sgraph.ui.validation.SCTMarkerCreator;
 import org.yakindu.sct.model.sgraph.ui.validation.SCTMarkerTypeProvider;
 import org.yakindu.sct.model.stext.naming.StextNameProvider;
-import org.yakindu.sct.model.stext.resource.SCTResourceDescriptionStrategy;
 import org.yakindu.sct.model.stext.resource.SCTResourceValidatorImpl;
+import org.yakindu.sct.model.stext.resource.TypeResourceDescriptionStrategy;
 import org.yakindu.sct.model.stext.ui.tasks.SCTTaskMarkerCreator;
 import org.yakindu.sct.model.stext.ui.tasks.SCTTaskMarkerTypeProvider;
 import org.yakindu.sct.ui.editor.editor.SCTFileEditorOpener;
@@ -53,7 +53,7 @@ public class SCTXtextIntegrationModule implements Module {
 		binder.bind(org.eclipse.jface.viewers.ILabelProvider.class)
 				.annotatedWith(org.eclipse.xtext.ui.resource.ResourceServiceDescriptionLabelProvider.class)
 				.to(DefaultDescriptionLabelProvider.class);
-		binder.bind(IDefaultResourceDescriptionStrategy.class).to(SCTResourceDescriptionStrategy.class);
+		binder.bind(IDefaultResourceDescriptionStrategy.class).to(TypeResourceDescriptionStrategy.class);
 		
 		binder.bind(MarkerCreator.class).to(SCTMarkerCreator.class);
 		binder.bind(MarkerTypeProvider.class).to(SCTMarkerTypeProvider.class);

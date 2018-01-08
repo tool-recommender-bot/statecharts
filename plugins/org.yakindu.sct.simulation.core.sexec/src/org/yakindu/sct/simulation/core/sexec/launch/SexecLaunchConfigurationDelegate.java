@@ -10,6 +10,8 @@
  */
 package org.yakindu.sct.simulation.core.sexec.launch;
 
+import java.util.List;
+
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.CoreException;
@@ -42,7 +44,7 @@ public class SexecLaunchConfigurationDelegate extends AbstractSCTLaunchConfigura
 	private ISimulationEngineFactory factory;
 
 	@Override
-	protected ISimulationEngine createExecutionContainer(final ILaunch launch, Statechart statechart) {
+	protected List<ISimulationEngine> createExecutionContainer(final ILaunch launch, Statechart statechart) {
 		try {
 
 			Injector injector = getInjector(statechart, launch);
