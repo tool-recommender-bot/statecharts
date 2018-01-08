@@ -10,7 +10,9 @@
  */
 package org.yakindu.sct.simulation.core.launch;
 
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
@@ -35,13 +37,12 @@ import org.yakindu.sct.simulation.core.util.ResourceUtil;
  * 
  */
 public abstract class AbstractSCTLaunchConfigurationDelegate extends LaunchConfigurationDelegate
-		implements
-			ILaunchConfigurationDelegate {
+		implements ILaunchConfigurationDelegate {
 
 	public String FILE_NAME = "filename";
 	public String DEFAULT_FILE_NAME = "";
 
-	protected abstract ISimulationEngine createExecutionContainer(ILaunch launch, Statechart statechart);
+	protected abstract List<ISimulationEngine> createExecutionContainer(ILaunch launch, Statechart statechart);
 
 	@Override
 	public boolean preLaunchCheck(ILaunchConfiguration configuration, String mode, IProgressMonitor monitor)
@@ -57,19 +58,27 @@ public abstract class AbstractSCTLaunchConfigurationDelegate extends LaunchConfi
 			throws CoreException {
 		String filename = configuration.getAttribute(FILE_NAME, DEFAULT_FILE_NAME);
 		Statechart statechart = loadStatechart(filename);
-		SCTDebugTarget target = createDebugTarget(launch, statechart);
-		launch.addDebugTarget(target);
-		try {
-			target.init();
-			target.start();
-		} catch (InitializationException e) {
-			// handled in AbstractExecutionFlowSimulationEngine
+		List<SCTDebugTarget> targets = createDebugTarget(launch, statechart);
+		for (SCTDebugTarget target : targets) {
+			launch.addDebugTarget(target);
+			try {
+				target.init();
+				target.start();
+			} catch (InitializationException e) {
+				// handled in AbstractExecutionFlowSimulationEngine
+			}
 		}
 	}
 
-	protected SCTDebugTarget createDebugTarget(ILaunch launch, Statechart statechart) throws CoreException {
+	protected List<SCTDebugTarget> createDebugTarget(ILaunch launch, Statechart statechart) throws CoreException {
 		Assert.isNotNull(statechart);
-		return new SCTDebugTarget(launch, statechart, createExecutionContainer(launch, statechart));
+		List<SCTDebugTarget> targets = new ArrayList<>();
+		List<ISimulationEngine> container = createExecutionContainer(launch, statechart);
+		for (ISimulationEngine engine : container) {
+			targets.add(new SCTDebugTarget(launch, engine.getStatechart(), engine));
+		}
+		return targets;
+
 	}
 
 	protected Statechart loadStatechart(String filename) {
@@ -81,7 +90,7 @@ public abstract class AbstractSCTLaunchConfigurationDelegate extends LaunchConfi
 			throws CoreException {
 		String filename = configuration.getAttribute(FILE_NAME, "");
 		IResource resource = ResourcesPlugin.getWorkspace().getRoot().findMember(filename);
-		return new IProject[]{resource.getProject()};
+		return new IProject[] { resource.getProject() };
 
 	}
 
