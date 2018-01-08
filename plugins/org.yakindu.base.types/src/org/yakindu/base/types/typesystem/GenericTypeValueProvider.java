@@ -67,7 +67,8 @@ public class GenericTypeValueProvider implements ITypeValueProvider {
 	}
 
 	protected boolean is(Type type, String typeName) {
-		return typeSystem.isSame(type, typeSystem.getType(typeName));
+		return type.getName().equals(typeName);
+//		return typeSystem.isSame(type, typeSystem.getType(typeName));
 	}
 
 }
