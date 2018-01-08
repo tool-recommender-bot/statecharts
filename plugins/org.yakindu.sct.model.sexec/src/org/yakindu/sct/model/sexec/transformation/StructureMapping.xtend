@@ -85,6 +85,7 @@ class StructureMapping {
 					if(packageForNamespace instanceof Package)
 					packageForNamespace.member.filter(Declaration).toList.forEach[createImportDeclaration(_scope)]
 			}
+			
 		}
 		return _scope
 	}
