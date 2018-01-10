@@ -202,6 +202,7 @@ class StatemachineHeader extends org.yakindu.sct.generator.c.StatemachineHeader 
 		{
 			
 			public:
+				«scope.interfaceName»();
 				«FOR d : scope.declarations»
 					«d.functionPrototypes»
 				«ENDFOR»

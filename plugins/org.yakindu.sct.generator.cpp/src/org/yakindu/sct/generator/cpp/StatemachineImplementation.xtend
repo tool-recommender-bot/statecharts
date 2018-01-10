@@ -29,6 +29,7 @@ import org.yakindu.sct.model.stext.stext.StatechartScope
 import org.yakindu.sct.model.stext.stext.VariableDefinition
 
 import static org.eclipse.xtext.util.Strings.*
+import org.yakindu.sct.model.sgraph.Scope
 
 class StatemachineImplementation implements IContentTemplate {
 	
@@ -108,11 +109,21 @@ class StatemachineImplementation implements IContentTemplate {
 
 	def constructorDefinition(ExecutionFlow it){
 	'''
+		«FOR s : scopes.filter[!interfaceName.nullOrEmpty]»
+		
+		«module»::«s.interfaceName»::«s.interfaceName»():«init(s)»{}
+		«ENDFOR»
 		«module»::«module»():
 			«initialisationList»
 		{
 			«constructorBody(it)»
 		}
+	'''
+	}
+	
+	def init(Scope it) {
+	'''
+		«FOR v:getVariableDefinitions()»«v.name»()«ENDFOR»
 	'''
 	}
 	

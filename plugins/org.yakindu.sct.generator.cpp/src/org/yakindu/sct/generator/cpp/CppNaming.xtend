@@ -106,9 +106,7 @@ class CppNaming extends Naming {
 		it.instance + "_OCB"
 	}
 
-	def dispatch String getInterfaceName(Scope it) '''
-		no interfaceName for «it»
-	'''
+	def dispatch String getInterfaceName(Scope it) {return null}
 
 	def dispatch String getInterfaceName(InterfaceScope it) {
 		if (name !== null) {
