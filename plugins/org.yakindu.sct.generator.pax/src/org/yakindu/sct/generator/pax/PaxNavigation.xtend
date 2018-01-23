@@ -5,6 +5,10 @@ import org.yakindu.base.types.Declaration
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sexec.extensions.SExecExtensions
 import org.yakindu.sct.model.sgraph.Scope
+import org.yakindu.sct.model.stext.stext.EventDefinition
+import java.util.ArrayList
+import org.yakindu.sct.model.stext.stext.OperationDefinition
+import org.yakindu.sct.model.sexec.TimeEvent
 
 class PaxNavigation extends SExecExtensions {
 
@@ -30,24 +34,24 @@ class PaxNavigation extends SExecExtensions {
 		else null
 	}
 	
-//	def getAllEvents(ExecutionFlow it) {
-//		return scopes.map[declarations.filter(EventDefinition)].reduce[i1, i2 | i1 + i2]
-//	}
-//	
-//	def hasValue (EventDefinition it) {
-//		type != null && type.name != 'void'
-//	}
-//	
-//	def operations(ExecutionFlow it) {
-//		scopes.fold(new ArrayList<OperationDefinition>(), [ l, s | l.addAll(s.declarations.filter( typeof(OperationDefinition))) return l ])
-//	}
-//	
-//	def Scope getTimeEventScope(ExecutionFlow it) {
-//		return 	scopes.filter[declarations.filter( typeof(TimeEvent) ).size > 0].head
-//	}
-//	
-//	def boolean hasLocalScope(ExecutionFlow it) {
-//		return internalScope != null;
-//	}
+	def getAllEvents(ExecutionFlow it) {
+		return scopes.map[declarations.filter(EventDefinition)].reduce[i1, i2 | i1 + i2]
+	}
+	
+	def hasValue (EventDefinition it) {
+		type != null && type.name != 'void'
+	}
+	
+	def operations(ExecutionFlow it) {
+		scopes.fold(new ArrayList<OperationDefinition>(), [ l, s | l.addAll(s.declarations.filter( typeof(OperationDefinition))) return l ])
+	}
+	
+	def Scope getTimeEventScope(ExecutionFlow it) {
+		return 	scopes.filter[declarations.filter( typeof(TimeEvent) ).size > 0].head
+	}
+	
+	def boolean hasLocalScope(ExecutionFlow it) {
+		return internalScope != null;
+	}
 	
 }

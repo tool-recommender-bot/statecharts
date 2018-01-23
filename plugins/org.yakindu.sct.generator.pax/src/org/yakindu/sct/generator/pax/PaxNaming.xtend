@@ -1,11 +1,10 @@
 package org.yakindu.sct.generator.pax
 
-import com.google.inject.Inject
 import org.yakindu.sct.model.sexec.ExecutionFlow
 
 class PaxNaming {
 	
-	@Inject extension PaxNavigation
+//	@Inject extension PaxNavigation
 	
 	def enumName(ExecutionFlow it) {
 		'States'

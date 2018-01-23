@@ -6,7 +6,6 @@ import org.eclipse.xtext.generator.IFileSystemAccess;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.yakindu.sct.generator.core.IExecutionFlowGenerator;
 import org.yakindu.sct.generator.core.filesystem.ISCTFileSystemAccess;
-import org.yakindu.sct.generator.pax.IContentTemplate;
 import org.yakindu.sct.generator.pax.IGenArtifactConfigurations;
 import org.yakindu.sct.generator.pax.PaxApplication;
 import org.yakindu.sct.generator.pax.PaxNaming;
@@ -21,15 +20,11 @@ public class PaxGenerator implements IExecutionFlowGenerator {
   
   @Inject
   @Extension
-  protected PaxNavigation _paxNavigation;
+  private PaxNavigation _paxNavigation;
   
   @Inject
   @Extension
-  protected PaxNaming _paxNaming;
-  
-  @Inject
-  @Extension
-  protected IContentTemplate _iContentTemplate;
+  private PaxNaming _paxNaming;
   
   @Inject
   @Extension

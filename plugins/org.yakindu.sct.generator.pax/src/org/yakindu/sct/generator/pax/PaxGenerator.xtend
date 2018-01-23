@@ -13,9 +13,8 @@ class PaxGenerator implements IExecutionFlowGenerator {
 
 	@Inject
 	IGenArtifactConfigurations configs
-	@Inject protected extension PaxNavigation
-	@Inject protected extension PaxNaming
-	@Inject protected extension IContentTemplate
+	@Inject extension PaxNavigation
+	@Inject extension PaxNaming
 	@Inject extension PaxApplication application
 
 	override generate(ExecutionFlow flow, GeneratorEntry entry, IFileSystemAccess fsa) {
