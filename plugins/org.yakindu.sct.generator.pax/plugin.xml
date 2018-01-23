@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.yakindu.sct.generator.core.generator">
+      <SCTGenerator
+            contentType="org.yakindu.sct.generator.pax.SCTGenerator1"
+            elementRefType="org.yakindu.sct.generator.pax.EObject1"
+            executor="org.yakindu.sct.generator.pax.GeneratorEntryExecutor1"
+            id="org.yakindu.sct.generator.pax.SCTGenerator1"
+            name="org.yakindu.sct.generator.pax.SCTGenerator1">
+      </SCTGenerator>
+   </extension>
+   <extension
+         point="org.yakindu.sct.generator.core.featuretypes">
+      <FeatureLibrary
+            defaultProvider="org.yakindu.sct.generator.pax.AbstractDefaultFeatureValueProvider:1"
+            library_id="org.yakindu.sct.generator.pax.FeatureLibrary1"
+            uri="org.yakindu.sct.generator.pax.FeatureLibrary1">
+      </FeatureLibrary>
+   </extension>
+   <extension
+         point="org.yakindu.sct.generator.core.extensions">
+      <ExtensionGeneratorMapping></ExtensionGeneratorMapping>
+   </extension>
+
+</plugin>

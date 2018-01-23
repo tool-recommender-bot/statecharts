@@ -1,7 +1,18 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Pax
-Bundle-SymbolicName: org.yakindu.sct.generator.pax
+Bundle-SymbolicName: org.yakindu.sct.generator.pax;singleton:=true
 Bundle-Version: 1.0.0.qualifier
 Bundle-Vendor: Itemis AG
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Require-Bundle: com.google.guava,
+ org.eclipse.xtext.xbase.lib,
+ org.eclipse.xtend.lib,
+ org.eclipse.xtend.lib.macro,
+ org.yakindu.sct.model.sexec,
+ org.yakindu.sct.model.sgen,
+ org.yakindu.sct.generator.core
+Import-Package: org.yakindu.sct.generator.c,
+ org.yakindu.sct.generator.core
+Export-Package: org.yakindu.sct.generator.pax
+
