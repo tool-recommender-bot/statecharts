@@ -4,24 +4,26 @@
    <extension
          point="org.yakindu.sct.generator.core.generator">
       <SCTGenerator
-            contentType="org.yakindu.sct.generator.pax.SCTGenerator1"
-            elementRefType="org.yakindu.sct.generator.pax.EObject1"
+            bindings="org.yakindu.sct.generator.pax.PaxCodeGeneratorModule"
+            contentType="statechart"
+            elementRefType="org.yakindu.sct.model.sgraph.Statechart"
             executor="org.yakindu.sct.generator.pax.GeneratorEntryExecutor1"
-            id="org.yakindu.sct.generator.pax.SCTGenerator1"
-            name="org.yakindu.sct.generator.pax.SCTGenerator1">
+            id="yakindu::pax"
+            name="YAKINDU SCT PAX Code Generator">
       </SCTGenerator>
+   </extension>
+   <extension
+         point="org.yakindu.sct.generator.core.extensions">
+      <ExtensionGeneratorMapping
+            fileExtension="sct"></ExtensionGeneratorMapping>
    </extension>
    <extension
          point="org.yakindu.sct.generator.core.featuretypes">
       <FeatureLibrary
-            defaultProvider="org.yakindu.sct.generator.pax.AbstractDefaultFeatureValueProvider:1"
-            library_id="org.yakindu.sct.generator.pax.FeatureLibrary1"
-            uri="org.yakindu.sct.generator.pax.FeatureLibrary1">
+            defaultProvider="org.yakindu.sct.generator.pax.features.PaxDefaultFeatureValueProvider"
+            library_id="org.yakindu.sct.generator.feature.pax"
+            uri="platform:/plugin/org.yakindu.sct.generator.pax/library/FeatureTypeLibrary.xmi">
       </FeatureLibrary>
-   </extension>
-   <extension
-         point="org.yakindu.sct.generator.core.extensions">
-      <ExtensionGeneratorMapping></ExtensionGeneratorMapping>
    </extension>
 
 </plugin>
