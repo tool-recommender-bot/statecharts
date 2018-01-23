@@ -12,16 +12,16 @@ class PaxApplication implements IContentTemplate {
 
 	override content(ExecutionFlow flow, GeneratorEntry entry, IGenArtifactConfigurations locations) {
 		'''
-			Â«StatesEnum(flow)Â»
+			«StatesEnum(flow)»
 		'''
 	}
 
 	def StatesEnum(ExecutionFlow it) {
 		'''
-			enum Â«enumNameÂ» {
-				Â«FOR state : states SEPARATOR ","Â»
-					Â«state.shortNameÂ»
-				Â«ENDFORÂ»
+			enum «enumName» {
+				«FOR state : states SEPARATOR ","»
+					«state.shortName»
+				«ENDFOR»
 			}
 		'''
 	}
