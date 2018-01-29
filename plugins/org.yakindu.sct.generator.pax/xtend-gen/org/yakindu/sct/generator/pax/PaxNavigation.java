@@ -73,7 +73,7 @@ public class PaxNavigation extends SExecExtensions {
   }
   
   public boolean hasValue(final EventDefinition it) {
-    return ((!Objects.equal(it.getType(), null)) && (!Objects.equal(it.getType().getName(), "void")));
+    return ((it.getType() != null) && (!Objects.equal(it.getType().getName(), "void")));
   }
   
   public ArrayList<OperationDefinition> operations(final ExecutionFlow it) {
@@ -96,7 +96,7 @@ public class PaxNavigation extends SExecExtensions {
   
   public boolean hasLocalScope(final ExecutionFlow it) {
     InternalScope _internalScope = this.getInternalScope(it);
-    return (!Objects.equal(_internalScope, null));
+    return (_internalScope != null);
   }
   
   public ExecutionFlow flow(final EObject it) {

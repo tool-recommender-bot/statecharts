@@ -1,14 +1,14 @@
 package org.yakindu.sct.generator.pax
 
+import java.util.ArrayList
 import org.eclipse.emf.ecore.EObject
 import org.yakindu.base.types.Declaration
 import org.yakindu.sct.model.sexec.ExecutionFlow
+import org.yakindu.sct.model.sexec.TimeEvent
 import org.yakindu.sct.model.sexec.extensions.SExecExtensions
 import org.yakindu.sct.model.sgraph.Scope
 import org.yakindu.sct.model.stext.stext.EventDefinition
-import java.util.ArrayList
 import org.yakindu.sct.model.stext.stext.OperationDefinition
-import org.yakindu.sct.model.sexec.TimeEvent
 
 class PaxNavigation extends SExecExtensions {
 
@@ -39,7 +39,7 @@ class PaxNavigation extends SExecExtensions {
 	}
 	
 	def hasValue (EventDefinition it) {
-		type != null && type.name != 'void'
+		type !== null && type.name != 'void'
 	}
 	
 	def operations(ExecutionFlow it) {
@@ -51,7 +51,7 @@ class PaxNavigation extends SExecExtensions {
 	}
 	
 	def boolean hasLocalScope(ExecutionFlow it) {
-		return internalScope != null;
+		return internalScope !== null;
 	}
 	
 }

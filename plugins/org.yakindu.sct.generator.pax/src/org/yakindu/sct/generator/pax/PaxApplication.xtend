@@ -13,7 +13,7 @@ import org.yakindu.sct.model.stext.stext.VariableDefinition
 class PaxApplication implements IContentTemplate {
 
 	@Inject extension PaxNaming;
-	@Inject extension INamingService
+	@Inject extension INamingService	
 
 	override content(ExecutionFlow flow, GeneratorEntry entry, IGenArtifactConfigurations locations) {
 		'''

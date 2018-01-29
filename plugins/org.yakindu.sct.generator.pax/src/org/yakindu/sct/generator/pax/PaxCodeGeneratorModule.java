@@ -17,19 +17,6 @@ public class PaxCodeGeneratorModule implements IGeneratorModule{
 		binder.bind(INamingService.class).to(PaxNamingService.class);
 		binder.bind(ICodegenTypeSystemAccess.class).to(PaxTypeSystemAccess.class);
 		binder.bind(IExecutionFlowGenerator.class).to(PaxGenerator.class);
-		binder.bind(IGenArtifactConfigurations.class).to(DefaultGenArtifactConfigurations.class);
-		//bindIGenArtifactConfigurations(entry, binder);
+	//	binder.bind(IGenArtifactConfigurations.class).to(DefaultGenArtifactConfigurations.class);
 	}
-	
-	protected void bindIGenArtifactConfigurations(GeneratorEntry entry, Binder binder) {
-//		FeatureParameterValue useRelativePathParam = entry.getFeatureParameterValue(FEATURE_INCLUDES,
-//				PARAMETER_INCLUDES_USE_RELATIVE_PATHS);
-//		boolean useRelativePath = useRelativePathParam != null ? useRelativePathParam.getBooleanValue() : true;
-//		if (useRelativePath) {
-			
-//		} else {
-//			binder.bind(IGenArtifactConfigurations.class).to(SimpleGenArtifactConfigurations.class);
-//		}
-	}
-	
 }
