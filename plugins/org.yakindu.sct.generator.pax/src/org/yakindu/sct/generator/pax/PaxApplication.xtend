@@ -9,36 +9,117 @@ import org.yakindu.sct.model.sgraph.Scope
 import org.yakindu.sct.model.stext.stext.EventDefinition
 import org.yakindu.sct.model.stext.stext.InternalScope
 import org.yakindu.sct.model.stext.stext.VariableDefinition
+import java.util.List
+import org.yakindu.sct.model.sexec.Step
 
 class PaxApplication implements IContentTemplate {
 
 	@Inject extension PaxNaming;
-	@Inject extension INamingService	
+	@Inject extension INamingService
 
 	override content(ExecutionFlow flow, GeneratorEntry entry, IGenArtifactConfigurations locations) {
 		'''
 			«StatesEnum(flow)»
 			
+			«StatemachineVariables(flow)»
+			 
 			«FOR s : flow.scopes»
 				«s.scopeVarDecl»
+				«s.scopeConstDecl»
 			«ENDFOR»
 			
+			«initAndEnterFunctino(flow)»
+			
+			«runCycleFunction(flow)»
+			
+			«periodicRunCylceTrigger(flow)»
+			
+			«functionImplementations(flow)»
+			
 			«Events»
+		'''
+	}
+	
+	def functionImplementations(ExecutionFlow flow) {
+
+	}
+	
+		def toImplementation(List<Step> steps) '''
+		«FOR s : steps»
+			
+		«ENDFOR»
+	'''
+
+	def periodicRunCylceTrigger(ExecutionFlow flow) {
+		'''
+			«every» «timeTrigger» {
+				«runCycleFunctionName»();
+			}
+		'''
+	}
+	
+	
+
+	def StatemachineVariables(ExecutionFlow flow) {
+		'''
+			«variablePrefix» initialized = 0;
+			«variablePrefix» activeState : «enumName(flow)»;
+		'''
+	}
+
+	def initAndEnterFunctino(ExecutionFlow flow) {
+		val defaultTimeTrigger = "100 " + PaxTypes.MS.unit;
+//		TODO handle trigger time for Statemachine correctly
+		'''
+			«functionPrefix» «initAndEnterFunctionName»() {
+				
+				«timeTrigger = defaultTimeTrigger»
+				initialized = 1;
+			}
+		'''
+	}
+
+	def runCycleFunction(ExecutionFlow flow) {
+		'''
+			«functionPrefix» «runCycleFunctionName»() {
+				if(initialized == 0) {
+					«initAndEnterFunctionName»()
+				}
+				«runCycleIfElse(flow)»
+			}
+		'''
+	}
+	
+	def runCycleIfElse(ExecutionFlow it) {
+		'''
+			«FOR state: states»
+				else if («enumName».«state.shortName» == activeState){
+					// do sth
+				}
+			«ENDFOR»
 		'''
 	}
 
 	def scopeVarDecl(Scope s) {
 		'''
-		«val vars = s.typeRelevantDeclarations»
-		«FOR variable : vars»
-		var «variable.name»
+			// Declare used variables
+			«val vars = s.typeRelevantDeclarations»
+			«FOR variable : vars»
+				«variablePrefix» «variable.name»
+			«««		TODO add initial values
 		«ENDFOR»
 		'''
 	}
-	
-		def scopeTypeDeclMember(TimeEvent it) '''
-		sc_boolean «shortName»;
-	'''
+
+	def scopeConstDecl(Scope s) {
+		'''
+			«val consts = s.constDeclarations»
+			«FOR constant : consts»
+				«variablePrefix» «constant.name» = «constant»
+			«««		TODO add initial values
+		«ENDFOR»
+		'''
+	}
 
 	private def typeRelevantDeclarations(Scope scope) {
 		return scope.declarations.filter [
@@ -50,8 +131,8 @@ class PaxApplication implements IContentTemplate {
 			}
 		]
 	}
-	
-	private def constDeclarations(Scope scope){
+
+	private def constDeclarations(Scope scope) {
 		return scope.declarations.filter(typeof(VariableDefinition)).filter[const]
 	}
 
@@ -70,4 +151,5 @@ class PaxApplication implements IContentTemplate {
 			}
 		'''
 	}
+
 }

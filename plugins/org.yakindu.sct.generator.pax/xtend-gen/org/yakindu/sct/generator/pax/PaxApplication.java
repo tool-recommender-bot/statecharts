@@ -2,6 +2,7 @@ package org.yakindu.sct.generator.pax;
 
 import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
+import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.xbase.lib.Extension;
@@ -11,8 +12,10 @@ import org.yakindu.base.types.Declaration;
 import org.yakindu.sct.generator.pax.IContentTemplate;
 import org.yakindu.sct.generator.pax.IGenArtifactConfigurations;
 import org.yakindu.sct.generator.pax.PaxNaming;
+import org.yakindu.sct.generator.pax.PaxTypes;
 import org.yakindu.sct.model.sexec.ExecutionFlow;
 import org.yakindu.sct.model.sexec.ExecutionState;
+import org.yakindu.sct.model.sexec.Step;
 import org.yakindu.sct.model.sexec.TimeEvent;
 import org.yakindu.sct.model.sexec.naming.INamingService;
 import org.yakindu.sct.model.sgen.GeneratorEntry;
@@ -37,14 +40,38 @@ public class PaxApplication implements IContentTemplate {
     _builder.append(_StatesEnum);
     _builder.newLineIfNotEmpty();
     _builder.newLine();
+    CharSequence _StatemachineVariables = this.StatemachineVariables(flow);
+    _builder.append(_StatemachineVariables);
+    _builder.newLineIfNotEmpty();
+    _builder.append(" ");
+    _builder.newLine();
     {
       EList<Scope> _scopes = flow.getScopes();
       for(final Scope s : _scopes) {
         CharSequence _scopeVarDecl = this.scopeVarDecl(s);
         _builder.append(_scopeVarDecl);
         _builder.newLineIfNotEmpty();
+        CharSequence _scopeConstDecl = this.scopeConstDecl(s);
+        _builder.append(_scopeConstDecl);
+        _builder.newLineIfNotEmpty();
       }
     }
+    _builder.newLine();
+    CharSequence _initAndEnterFunctino = this.initAndEnterFunctino(flow);
+    _builder.append(_initAndEnterFunctino);
+    _builder.newLineIfNotEmpty();
+    _builder.newLine();
+    CharSequence _runCycleFunction = this.runCycleFunction(flow);
+    _builder.append(_runCycleFunction);
+    _builder.newLineIfNotEmpty();
+    _builder.newLine();
+    CharSequence _periodicRunCylceTrigger = this.periodicRunCylceTrigger(flow);
+    _builder.append(_periodicRunCylceTrigger);
+    _builder.newLineIfNotEmpty();
+    _builder.newLine();
+    Object _functionImplementations = this.functionImplementations(flow);
+    _builder.append(_functionImplementations);
+    _builder.newLineIfNotEmpty();
     _builder.newLine();
     CharSequence _Events = this.Events();
     _builder.append(_Events);
@@ -52,13 +79,146 @@ public class PaxApplication implements IContentTemplate {
     return _builder.toString();
   }
   
+  public Object functionImplementations(final ExecutionFlow flow) {
+    return null;
+  }
+  
+  public CharSequence toImplementation(final List<Step> steps) {
+    StringConcatenation _builder = new StringConcatenation();
+    {
+      for(final Step s : steps) {
+        _builder.append("\t");
+        _builder.newLine();
+      }
+    }
+    return _builder;
+  }
+  
+  public CharSequence periodicRunCylceTrigger(final ExecutionFlow flow) {
+    StringConcatenation _builder = new StringConcatenation();
+    String _every = this._paxNaming.every();
+    _builder.append(_every);
+    _builder.append(" ");
+    String _timeTrigger = this._paxNaming.getTimeTrigger();
+    _builder.append(_timeTrigger);
+    _builder.append(" {");
+    _builder.newLineIfNotEmpty();
+    _builder.append("\t");
+    String _runCycleFunctionName = this._paxNaming.runCycleFunctionName();
+    _builder.append(_runCycleFunctionName, "\t");
+    _builder.append("();");
+    _builder.newLineIfNotEmpty();
+    _builder.append("}");
+    _builder.newLine();
+    return _builder;
+  }
+  
+  public CharSequence StatemachineVariables(final ExecutionFlow flow) {
+    StringConcatenation _builder = new StringConcatenation();
+    String _variablePrefix = this._paxNaming.variablePrefix();
+    _builder.append(_variablePrefix);
+    _builder.append(" initialized = 0;");
+    _builder.newLineIfNotEmpty();
+    String _variablePrefix_1 = this._paxNaming.variablePrefix();
+    _builder.append(_variablePrefix_1);
+    _builder.append(" activeState : ");
+    String _enumName = this._paxNaming.enumName(flow);
+    _builder.append(_enumName);
+    _builder.append(";");
+    _builder.newLineIfNotEmpty();
+    return _builder;
+  }
+  
+  public CharSequence initAndEnterFunctino(final ExecutionFlow flow) {
+    CharSequence _xblockexpression = null;
+    {
+      final String defaultTimeTrigger = ("100 " + PaxTypes.MS.unit);
+      StringConcatenation _builder = new StringConcatenation();
+      String _functionPrefix = this._paxNaming.functionPrefix();
+      _builder.append(_functionPrefix);
+      _builder.append(" ");
+      String _initAndEnterFunctionName = this._paxNaming.initAndEnterFunctionName();
+      _builder.append(_initAndEnterFunctionName);
+      _builder.append("() {");
+      _builder.newLineIfNotEmpty();
+      _builder.append("\t");
+      _builder.newLine();
+      _builder.append("\t");
+      this._paxNaming.setTimeTrigger(defaultTimeTrigger);
+      _builder.newLineIfNotEmpty();
+      _builder.append("\t");
+      _builder.append("initialized = 1;");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      _xblockexpression = _builder;
+    }
+    return _xblockexpression;
+  }
+  
+  public CharSequence runCycleFunction(final ExecutionFlow flow) {
+    StringConcatenation _builder = new StringConcatenation();
+    String _functionPrefix = this._paxNaming.functionPrefix();
+    _builder.append(_functionPrefix);
+    _builder.append(" ");
+    String _runCycleFunctionName = this._paxNaming.runCycleFunctionName();
+    _builder.append(_runCycleFunctionName);
+    _builder.append("() {");
+    _builder.newLineIfNotEmpty();
+    _builder.append("\t");
+    _builder.append("if(initialized == 0) {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    String _initAndEnterFunctionName = this._paxNaming.initAndEnterFunctionName();
+    _builder.append(_initAndEnterFunctionName, "\t\t");
+    _builder.append("()");
+    _builder.newLineIfNotEmpty();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t");
+    CharSequence _runCycleIfElse = this.runCycleIfElse(flow);
+    _builder.append(_runCycleIfElse, "\t");
+    _builder.newLineIfNotEmpty();
+    _builder.append("}");
+    _builder.newLine();
+    return _builder;
+  }
+  
+  public CharSequence runCycleIfElse(final ExecutionFlow it) {
+    StringConcatenation _builder = new StringConcatenation();
+    {
+      EList<ExecutionState> _states = it.getStates();
+      for(final ExecutionState state : _states) {
+        _builder.append("else if (");
+        String _enumName = this._paxNaming.enumName(it);
+        _builder.append(_enumName);
+        _builder.append(".");
+        String _shortName = this._iNamingService.getShortName(state);
+        _builder.append(_shortName);
+        _builder.append(" == activeState){");
+        _builder.newLineIfNotEmpty();
+        _builder.append("\t");
+        _builder.append("// do sth");
+        _builder.newLine();
+        _builder.append("}");
+        _builder.newLine();
+      }
+    }
+    return _builder;
+  }
+  
   public CharSequence scopeVarDecl(final Scope s) {
     StringConcatenation _builder = new StringConcatenation();
+    _builder.append("// Declare used variables");
+    _builder.newLine();
     final Iterable<Declaration> vars = this.typeRelevantDeclarations(s);
     _builder.newLineIfNotEmpty();
     {
       for(final Declaration variable : vars) {
-        _builder.append("var ");
+        String _variablePrefix = this._paxNaming.variablePrefix();
+        _builder.append(_variablePrefix);
+        _builder.append(" ");
         String _name = variable.getName();
         _builder.append(_name);
         _builder.newLineIfNotEmpty();
@@ -67,13 +227,22 @@ public class PaxApplication implements IContentTemplate {
     return _builder;
   }
   
-  public CharSequence scopeTypeDeclMember(final TimeEvent it) {
+  public CharSequence scopeConstDecl(final Scope s) {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append("sc_boolean ");
-    String _shortName = this._iNamingService.getShortName(it);
-    _builder.append(_shortName);
-    _builder.append(";");
+    final Iterable<VariableDefinition> consts = this.constDeclarations(s);
     _builder.newLineIfNotEmpty();
+    {
+      for(final VariableDefinition constant : consts) {
+        String _variablePrefix = this._paxNaming.variablePrefix();
+        _builder.append(_variablePrefix);
+        _builder.append(" ");
+        String _name = constant.getName();
+        _builder.append(_name);
+        _builder.append(" = ");
+        _builder.append(constant);
+        _builder.newLineIfNotEmpty();
+      }
+    }
     return _builder;
   }
   
