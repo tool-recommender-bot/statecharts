@@ -5,6 +5,7 @@ import java.util.Arrays;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.xbase.lib.Extension;
+import org.yakindu.base.base.NamedElement;
 import org.yakindu.sct.generator.pax.PaxExpressionsGenerator;
 import org.yakindu.sct.generator.pax.PaxNaming;
 import org.yakindu.sct.generator.pax.PaxNamingService;
@@ -12,6 +13,7 @@ import org.yakindu.sct.generator.pax.PaxNavigation;
 import org.yakindu.sct.model.sexec.StateCase;
 import org.yakindu.sct.model.sexec.StateSwitch;
 import org.yakindu.sct.model.sexec.Step;
+import org.yakindu.sct.model.sgraph.State;
 
 @SuppressWarnings("all")
 public class PaxFlowCode {
@@ -77,11 +79,17 @@ public class PaxFlowCode {
     return _builder;
   }
   
-  public CharSequence code(final Step it) {
-    if (it instanceof StateSwitch) {
+  protected CharSequence _code(final State it) {
+    return null;
+  }
+  
+  public CharSequence code(final NamedElement it) {
+    if (it instanceof State) {
+      return _code((State)it);
+    } else if (it instanceof StateSwitch) {
       return _code((StateSwitch)it);
-    } else if (it != null) {
-      return _code(it);
+    } else if (it instanceof Step) {
+      return _code((Step)it);
     } else {
       throw new IllegalArgumentException("Unhandled parameter types: " +
         Arrays.<Object>asList(it).toString());

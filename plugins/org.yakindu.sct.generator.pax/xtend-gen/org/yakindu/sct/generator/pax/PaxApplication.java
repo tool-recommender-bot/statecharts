@@ -11,12 +11,14 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.yakindu.base.types.Declaration;
 import org.yakindu.sct.generator.pax.IContentTemplate;
 import org.yakindu.sct.generator.pax.IGenArtifactConfigurations;
+import org.yakindu.sct.generator.pax.PaxFlowCode;
 import org.yakindu.sct.generator.pax.PaxNaming;
 import org.yakindu.sct.generator.pax.PaxTypes;
 import org.yakindu.sct.model.sexec.ExecutionFlow;
 import org.yakindu.sct.model.sexec.ExecutionState;
 import org.yakindu.sct.model.sexec.Step;
 import org.yakindu.sct.model.sexec.TimeEvent;
+import org.yakindu.sct.model.sexec.extensions.SExecExtensions;
 import org.yakindu.sct.model.sexec.naming.INamingService;
 import org.yakindu.sct.model.sgen.GeneratorEntry;
 import org.yakindu.sct.model.sgraph.Scope;
@@ -32,6 +34,14 @@ public class PaxApplication implements IContentTemplate {
   @Inject
   @Extension
   private INamingService _iNamingService;
+  
+  @Inject
+  @Extension
+  private SExecExtensions _sExecExtensions;
+  
+  @Inject
+  @Extension
+  private PaxFlowCode _paxFlowCode;
   
   @Override
   public String content(final ExecutionFlow flow, final GeneratorEntry entry, final IGenArtifactConfigurations locations) {
@@ -69,7 +79,7 @@ public class PaxApplication implements IContentTemplate {
     _builder.append(_periodicRunCylceTrigger);
     _builder.newLineIfNotEmpty();
     _builder.newLine();
-    Object _functionImplementations = this.functionImplementations(flow);
+    CharSequence _functionImplementations = this.functionImplementations(flow);
     _builder.append(_functionImplementations);
     _builder.newLineIfNotEmpty();
     _builder.newLine();
@@ -79,7 +89,15 @@ public class PaxApplication implements IContentTemplate {
     return _builder.toString();
   }
   
-  public Object functionImplementations(final ExecutionFlow flow) {
+  public CharSequence functionImplementations(final ExecutionFlow it) {
+    return this.toImplementation(this._sExecExtensions.enterSequenceFunctions(it));
+  }
+  
+  public Object doStateFunction() {
+    return null;
+  }
+  
+  public Object exitStateFunction() {
     return null;
   }
   
@@ -87,10 +105,30 @@ public class PaxApplication implements IContentTemplate {
     StringConcatenation _builder = new StringConcatenation();
     {
       for(final Step s : steps) {
-        _builder.append("\t");
-        _builder.newLine();
+        CharSequence _functionImplementation = this.toFunctionImplementation(s);
+        _builder.append(_functionImplementation);
+        _builder.newLineIfNotEmpty();
       }
     }
+    return _builder;
+  }
+  
+  protected CharSequence _toFunctionImplementation(final Step it) {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("function ");
+    String _shortName = this._iNamingService.getShortName(it);
+    _builder.append(_shortName);
+    _builder.append("()");
+    _builder.newLineIfNotEmpty();
+    _builder.append("{");
+    _builder.newLine();
+    _builder.append("\t");
+    CharSequence _code = this._paxFlowCode.code(it);
+    _builder.append(_code, "\t");
+    _builder.newLineIfNotEmpty();
+    _builder.append("}");
+    _builder.newLine();
+    _builder.newLine();
     return _builder;
   }
   
@@ -314,5 +352,9 @@ public class PaxApplication implements IContentTemplate {
     _builder.append("}");
     _builder.newLine();
     return _builder;
+  }
+  
+  public CharSequence toFunctionImplementation(final Step it) {
+    return _toFunctionImplementation(it);
   }
 }

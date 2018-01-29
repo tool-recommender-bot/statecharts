@@ -1,69 +1,85 @@
 package org.yakindu.sct.generator.pax
 
 import com.google.inject.Inject
+import java.util.List
 import org.yakindu.sct.model.sexec.ExecutionFlow
+import org.yakindu.sct.model.sexec.Step
 import org.yakindu.sct.model.sexec.TimeEvent
+import org.yakindu.sct.model.sexec.extensions.SExecExtensions
 import org.yakindu.sct.model.sexec.naming.INamingService
 import org.yakindu.sct.model.sgen.GeneratorEntry
 import org.yakindu.sct.model.sgraph.Scope
 import org.yakindu.sct.model.stext.stext.EventDefinition
-import org.yakindu.sct.model.stext.stext.InternalScope
 import org.yakindu.sct.model.stext.stext.VariableDefinition
-import java.util.List
-import org.yakindu.sct.model.sexec.Step
 
 class PaxApplication implements IContentTemplate {
 
 	@Inject extension PaxNaming;
 	@Inject extension INamingService
+	@Inject extension SExecExtensions
+	@Inject extension PaxFlowCode
 
 	override content(ExecutionFlow flow, GeneratorEntry entry, IGenArtifactConfigurations locations) {
 		'''
-			«StatesEnum(flow)»
+			Â«StatesEnum(flow)Â»
 			
-			«StatemachineVariables(flow)»
+			Â«StatemachineVariables(flow)Â»
 			 
-			«FOR s : flow.scopes»
-				«s.scopeVarDecl»
-				«s.scopeConstDecl»
-			«ENDFOR»
+			Â«FOR s : flow.scopesÂ»
+				Â«s.scopeVarDeclÂ»
+				Â«s.scopeConstDeclÂ»
+			Â«ENDFORÂ»
 			
-			«initAndEnterFunctino(flow)»
+			Â«initAndEnterFunctino(flow)Â»
 			
-			«runCycleFunction(flow)»
+			Â«runCycleFunction(flow)Â»
 			
-			«periodicRunCylceTrigger(flow)»
+			Â«periodicRunCylceTrigger(flow)Â»
 			
-			«functionImplementations(flow)»
+			Â«functionImplementations(flow)Â»
 			
-			«Events»
+			Â«EventsÂ»
 		'''
 	}
-	
-	def functionImplementations(ExecutionFlow flow) {
 
+	def functionImplementations(ExecutionFlow it) {
+		enterSequenceFunctions.toImplementation
 	}
-	
-		def toImplementation(List<Step> steps) '''
-		«FOR s : steps»
-			
-		«ENDFOR»
+
+	def doStateFunction() {
+//		throw new UnsupportedOperationException("TODO: auto-generated method stub")
+	}
+
+	def exitStateFunction() {
+//		throw new UnsupportedOperationException("TODO: auto-generated method stub")
+	}
+
+	def toImplementation(List<Step> steps) '''
+		Â«FOR s : stepsÂ»
+			Â«s.toFunctionImplementationÂ»
+		Â«ENDFORÂ»
+	'''
+
+	def dispatch toFunctionImplementation(Step it) '''
+		function Â«shortNameÂ»()
+		{
+			Â«codeÂ»
+		}
+		
 	'''
 
 	def periodicRunCylceTrigger(ExecutionFlow flow) {
 		'''
-			«every» «timeTrigger» {
-				«runCycleFunctionName»();
+			Â«everyÂ» Â«timeTriggerÂ» {
+				Â«runCycleFunctionNameÂ»();
 			}
 		'''
 	}
-	
-	
 
 	def StatemachineVariables(ExecutionFlow flow) {
 		'''
-			«variablePrefix» initialized = 0;
-			«variablePrefix» activeState : «enumName(flow)»;
+			Â«variablePrefixÂ» initialized = 0;
+			Â«variablePrefixÂ» activeState : Â«enumName(flow)Â»;
 		'''
 	}
 
@@ -71,9 +87,9 @@ class PaxApplication implements IContentTemplate {
 		val defaultTimeTrigger = "100 " + PaxTypes.MS.unit;
 //		TODO handle trigger time for Statemachine correctly
 		'''
-			«functionPrefix» «initAndEnterFunctionName»() {
+			Â«functionPrefixÂ» Â«initAndEnterFunctionNameÂ»() {
 				
-				«timeTrigger = defaultTimeTrigger»
+				Â«timeTrigger = defaultTimeTriggerÂ»
 				initialized = 1;
 			}
 		'''
@@ -81,43 +97,43 @@ class PaxApplication implements IContentTemplate {
 
 	def runCycleFunction(ExecutionFlow flow) {
 		'''
-			«functionPrefix» «runCycleFunctionName»() {
+			Â«functionPrefixÂ» Â«runCycleFunctionNameÂ»() {
 				if(initialized == 0) {
-					«initAndEnterFunctionName»()
+					Â«initAndEnterFunctionNameÂ»()
 				}
-				«runCycleIfElse(flow)»
+				Â«runCycleIfElse(flow)Â»
 			}
 		'''
 	}
-	
+
 	def runCycleIfElse(ExecutionFlow it) {
 		'''
-			«FOR state: states»
-				else if («enumName».«state.shortName» == activeState){
+			Â«FOR state : statesÂ»
+				else if (Â«enumNameÂ».Â«state.shortNameÂ» == activeState){
 					// do sth
 				}
-			«ENDFOR»
+			Â«ENDFORÂ»
 		'''
 	}
 
 	def scopeVarDecl(Scope s) {
 		'''
 			// Declare used variables
-			«val vars = s.typeRelevantDeclarations»
-			«FOR variable : vars»
-				«variablePrefix» «variable.name»
-			«««		TODO add initial values
-		«ENDFOR»
+			Â«val vars = s.typeRelevantDeclarationsÂ»
+			Â«FOR variable : varsÂ»
+				Â«variablePrefixÂ» Â«variable.nameÂ»
+			Â«Â«Â«					TODO add initial values
+		Â«ENDFORÂ»
 		'''
 	}
 
 	def scopeConstDecl(Scope s) {
 		'''
-			«val consts = s.constDeclarations»
-			«FOR constant : consts»
-				«variablePrefix» «constant.name» = «constant»
-			«««		TODO add initial values
-		«ENDFOR»
+			Â«val consts = s.constDeclarationsÂ»
+			Â«FOR constant : constsÂ»
+				Â«variablePrefixÂ» Â«constant.nameÂ» = Â«constantÂ»
+			Â«Â«Â«				TODO add initial values
+		Â«ENDFORÂ»
 		'''
 	}
 
@@ -144,10 +160,10 @@ class PaxApplication implements IContentTemplate {
 
 	def StatesEnum(ExecutionFlow it) {
 		'''
-			enum «enumName» {
-				«FOR state : states SEPARATOR ","»
-					«state.shortName»
-				«ENDFOR»
+			enum Â«enumNameÂ» {
+				Â«FOR state : states SEPARATOR ","Â»
+					Â«state.shortNameÂ»
+				Â«ENDFORÂ»
 			}
 		'''
 	}

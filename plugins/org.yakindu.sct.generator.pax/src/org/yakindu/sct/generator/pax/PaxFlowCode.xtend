@@ -1,8 +1,9 @@
 package org.yakindu.sct.generator.pax
 
 import com.google.inject.Inject
-import org.yakindu.sct.model.sexec.Step
 import org.yakindu.sct.model.sexec.StateSwitch
+import org.yakindu.sct.model.sexec.Step
+import org.yakindu.sct.model.sgraph.State
 
 class PaxFlowCode {
 	@Inject extension PaxNaming
@@ -11,22 +12,26 @@ class PaxFlowCode {
 	@Inject extension PaxNamingService
 
 	def dispatch CharSequence code(Step it) '''
-		//ActionCode for Step '«getClass().name»' not defined
+		//ActionCode for Step 'Â«getClass().nameÂ»' not defined
 	'''
 
 	def dispatch CharSequence code(StateSwitch it) {
 		'''
-			«FOR caseid : cases»
-			«IF caseid.isEnterSequence(it) == true»
-			if	(«caseid.step.shortName») {
+			Â«FOR caseid : casesÂ»
+			Â«IF caseid.isEnterSequence(it) == trueÂ»
+			if	(Â«caseid.step.shortNameÂ») {
 				// code
-			}
-			«ELSE»
-			else if («caseid.step.shortName») {
+			}Â«Â»
+			Â«ELSEÂ»
+			else if (Â«caseid.step.shortNameÂ») {
 				
 			}
-			«ENDIF»
-			«ENDFOR»
+			Â«ENDIFÂ»
+			Â«ENDFORÂ»
 		'''
+	}
+	
+	def dispatch CharSequence code(State it){
+		
 	}
 }
