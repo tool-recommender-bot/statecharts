@@ -2,6 +2,7 @@ package org.yakindu.sct.generator.pax;
 
 import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
+import java.util.Arrays;
 import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtend2.lib.StringConcatenation;
@@ -14,6 +15,7 @@ import org.yakindu.sct.generator.pax.IGenArtifactConfigurations;
 import org.yakindu.sct.generator.pax.PaxFlowCode;
 import org.yakindu.sct.generator.pax.PaxNaming;
 import org.yakindu.sct.generator.pax.PaxTypes;
+import org.yakindu.sct.model.sexec.Check;
 import org.yakindu.sct.model.sexec.ExecutionFlow;
 import org.yakindu.sct.model.sexec.ExecutionState;
 import org.yakindu.sct.model.sexec.Step;
@@ -44,19 +46,19 @@ public class PaxApplication implements IContentTemplate {
   private PaxFlowCode _paxFlowCode;
   
   @Override
-  public String content(final ExecutionFlow flow, final GeneratorEntry entry, final IGenArtifactConfigurations locations) {
+  public String content(final ExecutionFlow it, final GeneratorEntry entry, final IGenArtifactConfigurations locations) {
     StringConcatenation _builder = new StringConcatenation();
-    CharSequence _StatesEnum = this.StatesEnum(flow);
+    CharSequence _StatesEnum = this.StatesEnum(it);
     _builder.append(_StatesEnum);
     _builder.newLineIfNotEmpty();
     _builder.newLine();
-    CharSequence _StatemachineVariables = this.StatemachineVariables(flow);
+    CharSequence _StatemachineVariables = this.StatemachineVariables(it);
     _builder.append(_StatemachineVariables);
     _builder.newLineIfNotEmpty();
     _builder.append(" ");
     _builder.newLine();
     {
-      EList<Scope> _scopes = flow.getScopes();
+      EList<Scope> _scopes = it.getScopes();
       for(final Scope s : _scopes) {
         CharSequence _scopeVarDecl = this.scopeVarDecl(s);
         _builder.append(_scopeVarDecl);
@@ -67,45 +69,45 @@ public class PaxApplication implements IContentTemplate {
       }
     }
     _builder.newLine();
-    CharSequence _initAndEnterFunctino = this.initAndEnterFunctino(flow);
+    CharSequence _initAndEnterFunctino = this.initAndEnterFunctino(it);
     _builder.append(_initAndEnterFunctino);
     _builder.newLineIfNotEmpty();
     _builder.newLine();
-    CharSequence _runCycleFunction = this.runCycleFunction(flow);
+    CharSequence _runCycleFunction = this.runCycleFunction(it);
     _builder.append(_runCycleFunction);
     _builder.newLineIfNotEmpty();
     _builder.newLine();
-    CharSequence _periodicRunCylceTrigger = this.periodicRunCylceTrigger(flow);
+    CharSequence _periodicRunCylceTrigger = this.periodicRunCylceTrigger(it);
     _builder.append(_periodicRunCylceTrigger);
     _builder.newLineIfNotEmpty();
     _builder.newLine();
-    CharSequence _functionImplementations = this.functionImplementations(flow);
+    List<Step> _functionImplementations = this.functionImplementations(it);
     _builder.append(_functionImplementations);
     _builder.newLineIfNotEmpty();
     _builder.newLine();
-    CharSequence _Events = this.Events();
-    _builder.append(_Events);
-    _builder.newLineIfNotEmpty();
     return _builder.toString();
   }
   
-  public CharSequence functionImplementations(final ExecutionFlow it) {
-    return this.toImplementation(this._sExecExtensions.enterSequenceFunctions(it));
-  }
-  
-  public Object doStateFunction() {
-    return null;
-  }
-  
-  public Object exitStateFunction() {
-    return null;
+  public List<Step> functionImplementations(final ExecutionFlow it) {
+    List<Step> _xblockexpression = null;
+    {
+      this.toImplementation(this._sExecExtensions.checkFunctions(it));
+      this.toImplementation(this._sExecExtensions.effectFunctions(it));
+      this.toImplementation(this._sExecExtensions.entryActionFunctions(it));
+      this.toImplementation(this._sExecExtensions.exitActionFunctions(it));
+      this.toImplementation(this._sExecExtensions.enterSequenceFunctions(it));
+      this.toImplementation(this._sExecExtensions.exitSequenceFunctions(it));
+      this.toImplementation(this._sExecExtensions.reactFunctions(it));
+      _xblockexpression = this._sExecExtensions.exitSequenceFunctions(it);
+    }
+    return _xblockexpression;
   }
   
   public CharSequence toImplementation(final List<Step> steps) {
     StringConcatenation _builder = new StringConcatenation();
     {
       for(final Step s : steps) {
-        CharSequence _functionImplementation = this.toFunctionImplementation(s);
+        CharSequence _functionImplementation = this.functionImplementation(s);
         _builder.append(_functionImplementation);
         _builder.newLineIfNotEmpty();
       }
@@ -113,7 +115,7 @@ public class PaxApplication implements IContentTemplate {
     return _builder;
   }
   
-  protected CharSequence _toFunctionImplementation(final Step it) {
+  protected CharSequence _functionImplementation(final Step it) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("function ");
     String _shortName = this._iNamingService.getShortName(it);
@@ -128,6 +130,24 @@ public class PaxApplication implements IContentTemplate {
     _builder.newLineIfNotEmpty();
     _builder.append("}");
     _builder.newLine();
+    return _builder;
+  }
+  
+  protected CharSequence _functionImplementation(final Check it) {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("bool function ");
+    String _shortName = this._iNamingService.getShortName(it);
+    _builder.append(_shortName);
+    _builder.append("()");
+    _builder.newLineIfNotEmpty();
+    _builder.append("{");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("return ");
+    CharSequence _code = this._paxFlowCode.code(it);
+    _builder.append(_code, "\t");
+    _builder.newLineIfNotEmpty();
+    _builder.append("}");
     _builder.newLine();
     return _builder;
   }
@@ -237,8 +257,10 @@ public class PaxApplication implements IContentTemplate {
         _builder.append(" == activeState){");
         _builder.newLineIfNotEmpty();
         _builder.append("\t");
-        _builder.append("// do sth");
-        _builder.newLine();
+        String _shortName_1 = this._iNamingService.getShortName(state.getReactSequence());
+        _builder.append(_shortName_1, "\t");
+        _builder.append("();");
+        _builder.newLineIfNotEmpty();
         _builder.append("}");
         _builder.newLine();
       }
@@ -320,13 +342,6 @@ public class PaxApplication implements IContentTemplate {
     return IterableExtensions.<VariableDefinition>filter(Iterables.<VariableDefinition>filter(scope.getDeclarations(), VariableDefinition.class), _function);
   }
   
-  public CharSequence Events() {
-    StringConcatenation _builder = new StringConcatenation();
-    _builder.append("\t\t\t");
-    _builder.newLine();
-    return _builder;
-  }
-  
   public CharSequence StatesEnum(final ExecutionFlow it) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("enum ");
@@ -354,7 +369,14 @@ public class PaxApplication implements IContentTemplate {
     return _builder;
   }
   
-  public CharSequence toFunctionImplementation(final Step it) {
-    return _toFunctionImplementation(it);
+  public CharSequence functionImplementation(final Step it) {
+    if (it instanceof Check) {
+      return _functionImplementation((Check)it);
+    } else if (it != null) {
+      return _functionImplementation(it);
+    } else {
+      throw new IllegalArgumentException("Unhandled parameter types: " +
+        Arrays.<Object>asList(it).toString());
+    }
   }
 }

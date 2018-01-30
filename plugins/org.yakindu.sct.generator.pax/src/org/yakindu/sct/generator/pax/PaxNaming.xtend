@@ -30,4 +30,8 @@ class PaxNaming {
 	def runCycleFunctionName() {"runCycle"}
 	
 	def every(){"every"}
+	
+	def isStateActiveFctID(ExecutionFlow it) {
+		functionPrefix + "isStateActive"
+	}
 }

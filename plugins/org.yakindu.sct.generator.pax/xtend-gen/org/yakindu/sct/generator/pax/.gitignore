@@ -11,3 +11,6 @@
 /.GenmodelEntries.java._trace
 /.PaxExpressionsGenerator.java._trace
 /.PaxFlowCode.java._trace
+/PaxExpressionsGenerator.java
+/PaxFlowCode.java
+/PaxNamingService.java

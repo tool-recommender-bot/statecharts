@@ -2,6 +2,7 @@ package org.yakindu.sct.generator.pax
 
 import com.google.inject.Inject
 import java.util.List
+import org.yakindu.sct.model.sexec.Check
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sexec.Step
 import org.yakindu.sct.model.sexec.TimeEvent
@@ -19,53 +20,59 @@ class PaxApplication implements IContentTemplate {
 	@Inject extension SExecExtensions
 	@Inject extension PaxFlowCode
 
-	override content(ExecutionFlow flow, GeneratorEntry entry, IGenArtifactConfigurations locations) {
+	override content(ExecutionFlow it, GeneratorEntry entry, IGenArtifactConfigurations locations) {
 		'''
-			«StatesEnum(flow)»
-			
-			«StatemachineVariables(flow)»
-			 
-			«FOR s : flow.scopes»
-				«s.scopeVarDecl»
-				«s.scopeConstDecl»
-			«ENDFOR»
-			
-			«initAndEnterFunctino(flow)»
-			
-			«runCycleFunction(flow)»
-			
-			«periodicRunCylceTrigger(flow)»
-			
-			«functionImplementations(flow)»
-			
-			«Events»
+		«StatesEnum»
+		
+		«StatemachineVariables»
+		 
+		«FOR s : scopes»
+			«s.scopeVarDecl»
+			«s.scopeConstDecl»
+		«ENDFOR»
+		
+		«initAndEnterFunctino»
+		
+		«runCycleFunction»
+		
+		«periodicRunCylceTrigger»
+		
+		«functionImplementations»
+		
+		«««			«Events»
 		'''
 	}
 
 	def functionImplementations(ExecutionFlow it) {
+		checkFunctions.toImplementation
+		effectFunctions.toImplementation
+		entryActionFunctions.toImplementation
+		exitActionFunctions.toImplementation
 		enterSequenceFunctions.toImplementation
-	}
-
-	def doStateFunction() {
-//		throw new UnsupportedOperationException("TODO: auto-generated method stub")
-	}
-
-	def exitStateFunction() {
-//		throw new UnsupportedOperationException("TODO: auto-generated method stub")
+		exitSequenceFunctions.toImplementation
+		reactFunctions.toImplementation
+		
+		exitSequenceFunctions
 	}
 
 	def toImplementation(List<Step> steps) '''
 		«FOR s : steps»
-			«s.toFunctionImplementation»
+			«s.functionImplementation»
 		«ENDFOR»
 	'''
 
-	def dispatch toFunctionImplementation(Step it) '''
+	def dispatch functionImplementation(Step it) '''
 		function «shortName»()
 		{
 			«code»
 		}
-		
+	'''
+
+	def dispatch functionImplementation(Check it) '''
+		bool function «shortName»()
+		{
+			return «code»
+		}
 	'''
 
 	def periodicRunCylceTrigger(ExecutionFlow flow) {
@@ -105,12 +112,33 @@ class PaxApplication implements IContentTemplate {
 			}
 		'''
 	}
+	
+//	def isStateActiveFunction(ExecutionFlow it) '''
+//		sc_boolean «stateActiveFctID»()
+//		{
+//			sc_boolean result = bool_false;
+//			switch (state)
+//			{
+//				«FOR s : states»
+//				case «s.shortName» :
+//					result = (sc_boolean) («IF s.leaf» == «s.shortName»
+//					«ELSE»«s.shortName»
+//						«s.subStates.last.shortName»«ENDIF»);
+//					break;
+//				«ENDFOR»
+//				default:
+//					result = bool_false;
+//					break;
+//			}
+//			return result;
+//		}
+//	'''
 
 	def runCycleIfElse(ExecutionFlow it) {
 		'''
 			«FOR state : states»
 				else if («enumName».«state.shortName» == activeState){
-					// do sth
+					«state.reactSequence.shortName»();
 				}
 			«ENDFOR»
 		'''
@@ -150,12 +178,6 @@ class PaxApplication implements IContentTemplate {
 
 	private def constDeclarations(Scope scope) {
 		return scope.declarations.filter(typeof(VariableDefinition)).filter[const]
-	}
-
-	def Events() {
-		'''
-			
-		'''
 	}
 
 	def StatesEnum(ExecutionFlow it) {

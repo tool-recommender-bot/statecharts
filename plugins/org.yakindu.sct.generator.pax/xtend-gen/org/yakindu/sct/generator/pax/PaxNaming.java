@@ -41,6 +41,11 @@ public class PaxNaming {
     return "every";
   }
   
+  public String isStateActiveFctID(final ExecutionFlow it) {
+    String _functionPrefix = this.functionPrefix();
+    return (_functionPrefix + "isStateActive");
+  }
+  
   @Pure
   public String getTimeTrigger() {
     return this.timeTrigger;
