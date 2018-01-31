@@ -1,77 +1,82 @@
 package org.yakindu.sct.generator.pax
 
-import org.yakindu.base.expressions.expressions.ElementReferenceExpression
+import com.google.inject.Inject
+import org.eclipse.emf.ecore.EObject
+import org.yakindu.base.expressions.expressions.AssignmentExpression
+import org.yakindu.base.expressions.expressions.BinaryExpression
+import org.yakindu.base.expressions.expressions.BinaryLiteral
+import org.yakindu.base.expressions.expressions.BoolLiteral
+import org.yakindu.base.expressions.expressions.ConditionalExpression
+import org.yakindu.base.expressions.expressions.DoubleLiteral
+import org.yakindu.base.expressions.expressions.FloatLiteral
+import org.yakindu.base.expressions.expressions.HexLiteral
+import org.yakindu.base.expressions.expressions.IntLiteral
+import org.yakindu.base.expressions.expressions.Literal
+import org.yakindu.base.expressions.expressions.NullLiteral
+import org.yakindu.base.expressions.expressions.ParenthesizedExpression
+import org.yakindu.base.expressions.expressions.PostFixUnaryExpression
+import org.yakindu.base.expressions.expressions.PrimitiveValueExpression
+import org.yakindu.base.expressions.expressions.StringLiteral
+import org.yakindu.base.expressions.expressions.TypeCastExpression
+import org.yakindu.base.expressions.expressions.UnaryExpression
 import org.yakindu.sct.generator.core.templates.ExpressionsGenerator
+import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
 
 class PaxExpressionsGenerator extends ExpressionsGenerator {
 
-	def dispatch CharSequence code(ElementReferenceExpression it) {
-		it.code(it.definition)
+	@Inject protected extension ICodegenTypeSystemAccess
+
+	override dispatch CharSequence code(EObject it) {
+		throw new IllegalStateException("No dispatch function for " + getClass().name)
 	}
 
-//	
-//	/* Referring to declared elements */
-//	def dispatch CharSequence code(ElementReferenceExpression it) {
-//		it.code(it.definition)
-//	}
-//	
-//	/* Expressions */
-//	def dispatch CharSequence code(Expression it, Event target) ''' tbd '''
-//
-//	def dispatch CharSequence code(Expression it, VariableDefinition target) ''' tbd '''
-//
-//	/* TODO: check if event is active */
-//	def dispatch CharSequence code(EventValueReferenceExpression it) ''' tbd '''
-//
-//	def dispatch CharSequence code(ElementReferenceExpression it, VariableDefinition target) ''' tbd '''
-//
-//	def dispatch CharSequence code(ElementReferenceExpression it,
-//		OperationDefinition target) ''' tbd '''
-//
-//	def dispatch CharSequence code(ElementReferenceExpression it,
-//		Operation target) ''' tbd '''
-//
-//	def dispatch CharSequence code(ElementReferenceExpression it, Property target) ''' tbd '''
-//
-//	def dispatch CharSequence code(EventRaisingExpression it) ''' tbd '''
-//
-//	def dispatch CharSequence code(
-//		ActiveStateReferenceExpression it)''' tbd '''
-//
-//	def dispatch CharSequence code(LogicalRelationExpression it) ''' tbd '''
-//
-//	override dispatch CharSequence code(AssignmentExpression it)''' tbd '''
-//
-//	def dispatch CharSequence code(NumericalMultiplyDivideExpression expression)''' tbd '''
-//
-//	/* Feature call */
-//	def dispatch CharSequence code(FeatureCall it)''' tbd '''
-//
-//	def dispatch CharSequence code(FeatureCall it, VariableDefinition target)''' tbd '''
-//
-//	def dispatch CharSequence code(FeatureCall it,
-//		OperationDefinition target) ''' tbd '''
-//
-//	def dispatch CharSequence code(FeatureCall it,
-//		Operation target)''' tbd '''
-//
-//	def dispatch CharSequence code(FeatureCall it, Property target) ''' tbd '''
-//
-//	def dispatch CharSequence code(FeatureCall it, Enumerator target)''' tbd '''
-//
-//	/* Literals */
-//	override dispatch CharSequence code(NullLiteral it)''' tbd '''
-//
-//	override dispatch CharSequence code(BoolLiteral it)''' tbd '''
-//
-//	// ensure we obtain an expression of type sc_boolean
-//	def dispatch CharSequence sc_boolean_code(Expression it)''' tbd '''
-//
-//	def dispatch CharSequence sc_boolean_code(LogicalOrExpression it) ''' tbd '''
-//
-//	def dispatch CharSequence sc_boolean_code(LogicalAndExpression it)''' tbd '''
-//
-//	def dispatch CharSequence sc_boolean_code(LogicalNotExpression it) ''' tbd '''
-//
-//	def dispatch CharSequence sc_boolean_code(LogicalRelationExpression it) ''' tbd '''
+	/* Expressions */
+	override dispatch CharSequence code(BinaryExpression it) {
+		leftOperand.code.toString.trim + " " + operator.literal.toString.trim + " " + rightOperand.code
+	}
+
+	override dispatch CharSequence code(UnaryExpression it) {
+		operator.literal + operand.code
+	}
+
+	override dispatch CharSequence code(PostFixUnaryExpression it) {
+		operand.code + operator.literal
+	}
+
+	override dispatch CharSequence code(AssignmentExpression it) '''«varRef.code» «operator.literal» «expression.code»'''
+
+	override dispatch CharSequence code(ConditionalExpression it) '''«condition.code» ? «trueCase.code» : «falseCase.code»'''
+
+	override dispatch CharSequence code(PrimitiveValueExpression it) '''«value.code»'''
+
+	override dispatch CharSequence code(ParenthesizedExpression it) '''(«expression.code»)'''
+
+	override dispatch CharSequence code(TypeCastExpression it) '''((«type.getTargetLanguageName») «operand.code»)'''
+
+	/* Literals */
+	override dispatch CharSequence code(Literal it){
+		throw new IllegalStateException("No dispatch function for " + getClass().name)
+	}
+
+	override dispatch CharSequence code(StringLiteral it) '''"«value.escaped»"'''
+
+	override protected String escaped(String it) {
+		return it.replace("\"", "\\\"");
+	}
+
+	override dispatch CharSequence code(IntLiteral it) '''«value.toString»'''
+
+	override dispatch CharSequence code(DoubleLiteral it) '''«value.toString»'''
+
+	override dispatch CharSequence code(FloatLiteral it) '''«value.toString»'''
+
+	override dispatch CharSequence code(HexLiteral it) '''0x«Integer::toHexString(value)»'''
+
+	override dispatch CharSequence code(BinaryLiteral it) '''0b«Integer::toBinaryString(value)»'''
+
+	override dispatch CharSequence code(BoolLiteral it) '''«value.toString»'''
+
+	override dispatch CharSequence code(NullLiteral expression) {
+		'null'
+	}	
 }

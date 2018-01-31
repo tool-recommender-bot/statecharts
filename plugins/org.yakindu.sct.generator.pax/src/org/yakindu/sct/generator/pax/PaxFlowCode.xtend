@@ -87,7 +87,7 @@ class PaxFlowCode {
 	'''
 
 	def dispatch CharSequence code(Check it) 
-	''''«IF condition != null»«condition.sc_boolean_code»«ELSE»bool_true«ENDIF»'''
+	''''«IF condition != null»false«ELSE»true«ENDIF»'''
 
 	def dispatch CharSequence code(CheckRef it) 
 	'''«IF check !== null»«check.shortName»()«ELSE»true«ENDIF»'''
