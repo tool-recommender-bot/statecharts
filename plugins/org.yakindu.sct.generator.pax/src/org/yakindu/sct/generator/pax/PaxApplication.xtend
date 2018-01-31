@@ -6,7 +6,6 @@ import org.yakindu.sct.model.sexec.Check
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sexec.Step
 import org.yakindu.sct.model.sexec.TimeEvent
-import org.yakindu.sct.model.sexec.extensions.SExecExtensions
 import org.yakindu.sct.model.sexec.naming.INamingService
 import org.yakindu.sct.model.sgen.GeneratorEntry
 import org.yakindu.sct.model.sgraph.Scope
@@ -17,19 +16,23 @@ class PaxApplication implements IContentTemplate {
 
 	@Inject extension PaxNaming;
 	@Inject extension INamingService
-	@Inject extension SExecExtensions
 	@Inject extension PaxFlowCode
+	@Inject extension PaxNavigation
+
 
 	override content(ExecutionFlow it, GeneratorEntry entry, IGenArtifactConfigurations locations) {
 		'''
-		«StatesEnum»
+		«statesEnum»
 		
-		«StatemachineVariables»
-		 
-		«FOR s : scopes»
-			«s.scopeVarDecl»
-			«s.scopeConstDecl»
-		«ENDFOR»
+		«declareVariables»
+		
+		«globalVariables»
+		
+		«functionImplementations»
+		
+		«clearInEventsFunction»
+		
+		«clearOutEventsFunction»
 		
 		«initAndEnterFunctino»
 		
@@ -37,23 +40,75 @@ class PaxApplication implements IContentTemplate {
 		
 		«periodicRunCylceTrigger»
 		
-		«functionImplementations»
 		
-		«««			«Events»
+		«««			«Events»	}
+		'''
+	}
+	
+	def clearInEventsFunction(ExecutionFlow it){'''
+		«functionPrefix» clearInEvents()
+		{
+			«FOR scope : it.scopes»
+				«FOR event : scope.incomingEvents»
+				«event.access» = false;
+				«ENDFOR»
+			«ENDFOR»
+			«IF hasLocalScope»
+				«FOR event : internalScope.events»
+				«event.access» = false;
+				«ENDFOR»
+			«ENDIF»
+		}
+	'''
+	}
+	
+	def clearOutEventsFunction(ExecutionFlow it){
+		
+	}
+
+	def declareVariables(ExecutionFlow it) {
+		'''
+			«FOR s : scopes»
+				«s.scopeVarDecl»
+			«ENDFOR»		
 		'''
 	}
 
-	def functionImplementations(ExecutionFlow it) {
-		checkFunctions.toImplementation
-		effectFunctions.toImplementation
-		entryActionFunctions.toImplementation
-		exitActionFunctions.toImplementation
-		enterSequenceFunctions.toImplementation
-		exitSequenceFunctions.toImplementation
-		reactFunctions.toImplementation
-		
-		exitSequenceFunctions
+	def variableStruct(ExecutionFlow it) {
+		'''
+			struct «statechartVariablesName» {
+				«FOR s : scopes»
+					«s.scopeVarDecl»
+			«««					«s.scopeConstDecl» TODO consts
+				«ENDFOR»
+			}
+			
+			«variablePrefix» «statechartVariables» : «statechartVariablesName»;
+		'''
 	}
+
+	def globalVariables(ExecutionFlow it) {
+		'''
+			«variablePrefix» «initializedVariable» : uint32_t = 0;
+			«variablePrefix» «activeState» : «enumName»;
+		'''
+	}
+
+	def functionImplementations(ExecutionFlow it) '''
+		«checkFunctions.toImplementation»
+		
+		«effectFunctions.toImplementation»
+		
+		«entryActionFunctions.toImplementation»
+		
+		«exitActionFunctions.toImplementation»
+		
+		«enterSequenceFunctions.toImplementation»
+		
+		«exitSequenceFunctions.toImplementation»
+		
+		«reactFunctions.toImplementation»
+	'''
 
 	def toImplementation(List<Step> steps) '''
 		«FOR s : steps»
@@ -69,7 +124,7 @@ class PaxApplication implements IContentTemplate {
 	'''
 
 	def dispatch functionImplementation(Check it) '''
-		bool function «shortName»()
+		function «shortName»() : bool
 		{
 			return «code»
 		}
@@ -86,7 +141,7 @@ class PaxApplication implements IContentTemplate {
 	def StatemachineVariables(ExecutionFlow flow) {
 		'''
 			«variablePrefix» initialized = 0;
-			«variablePrefix» activeState : «enumName(flow)»;
+			«variablePrefix» activeState : «enumName»;
 		'''
 	}
 
@@ -97,6 +152,8 @@ class PaxApplication implements IContentTemplate {
 			«functionPrefix» «initAndEnterFunctionName»() {
 				
 				«timeTrigger = defaultTimeTrigger»
+				«activeState» = ; //tbd
+				clearInEvents();
 				initialized = 1;
 			}
 		'''
@@ -106,33 +163,14 @@ class PaxApplication implements IContentTemplate {
 		'''
 			«functionPrefix» «runCycleFunctionName»() {
 				if(initialized == 0) {
-					«initAndEnterFunctionName»()
+					«initAndEnterFunctionName»();
 				}
 				«runCycleIfElse(flow)»
+				
+				clearInEvents();
 			}
 		'''
 	}
-	
-//	def isStateActiveFunction(ExecutionFlow it) '''
-//		sc_boolean «stateActiveFctID»()
-//		{
-//			sc_boolean result = bool_false;
-//			switch (state)
-//			{
-//				«FOR s : states»
-//				case «s.shortName» :
-//					result = (sc_boolean) («IF s.leaf» == «s.shortName»
-//					«ELSE»«s.shortName»
-//						«s.subStates.last.shortName»«ENDIF»);
-//					break;
-//				«ENDFOR»
-//				default:
-//					result = bool_false;
-//					break;
-//			}
-//			return result;
-//		}
-//	'''
 
 	def runCycleIfElse(ExecutionFlow it) {
 		'''
@@ -149,10 +187,18 @@ class PaxApplication implements IContentTemplate {
 			// Declare used variables
 			«val vars = s.typeRelevantDeclarations»
 			«FOR variable : vars»
-				«variablePrefix» «variable.name»
-			«««					TODO add initial values
-		«ENDFOR»
+				«variablePrefix» «variable.name» : «variable.scopeTypeDeclMember»;
+			«ENDFOR»
 		'''
+	}
+
+	def dispatch scopeTypeDeclMember(EventDefinition it) {
+		'''bool '''
+	}
+
+	def dispatch scopeTypeDeclMember(VariableDefinition it) {
+		'''uint32_t'''
+	// müsste eigentlich übers c type system gehen
 	}
 
 	def scopeConstDecl(Scope s) {
@@ -180,7 +226,7 @@ class PaxApplication implements IContentTemplate {
 		return scope.declarations.filter(typeof(VariableDefinition)).filter[const]
 	}
 
-	def StatesEnum(ExecutionFlow it) {
+	def statesEnum(ExecutionFlow it) {
 		'''
 			enum «enumName» {
 				«FOR state : states SEPARATOR ","»

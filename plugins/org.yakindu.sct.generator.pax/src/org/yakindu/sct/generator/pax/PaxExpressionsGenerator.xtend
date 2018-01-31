@@ -8,10 +8,16 @@ import org.yakindu.base.expressions.expressions.BinaryLiteral
 import org.yakindu.base.expressions.expressions.BoolLiteral
 import org.yakindu.base.expressions.expressions.ConditionalExpression
 import org.yakindu.base.expressions.expressions.DoubleLiteral
+import org.yakindu.base.expressions.expressions.ElementReferenceExpression
+import org.yakindu.base.expressions.expressions.Expression
 import org.yakindu.base.expressions.expressions.FloatLiteral
 import org.yakindu.base.expressions.expressions.HexLiteral
 import org.yakindu.base.expressions.expressions.IntLiteral
 import org.yakindu.base.expressions.expressions.Literal
+import org.yakindu.base.expressions.expressions.LogicalAndExpression
+import org.yakindu.base.expressions.expressions.LogicalNotExpression
+import org.yakindu.base.expressions.expressions.LogicalOrExpression
+import org.yakindu.base.expressions.expressions.LogicalRelationExpression
 import org.yakindu.base.expressions.expressions.NullLiteral
 import org.yakindu.base.expressions.expressions.ParenthesizedExpression
 import org.yakindu.base.expressions.expressions.PostFixUnaryExpression
@@ -19,12 +25,21 @@ import org.yakindu.base.expressions.expressions.PrimitiveValueExpression
 import org.yakindu.base.expressions.expressions.StringLiteral
 import org.yakindu.base.expressions.expressions.TypeCastExpression
 import org.yakindu.base.expressions.expressions.UnaryExpression
+import org.yakindu.base.types.Event
+import org.yakindu.base.types.inferrer.ITypeSystemInferrer
+import org.yakindu.base.types.typesystem.ITypeSystem
 import org.yakindu.sct.generator.core.templates.ExpressionsGenerator
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
+import org.yakindu.sct.model.stext.stext.VariableDefinition
 
 class PaxExpressionsGenerator extends ExpressionsGenerator {
 
-	@Inject protected extension ICodegenTypeSystemAccess
+	@Inject extension ICodegenTypeSystemAccess
+	@Inject extension PaxNaming
+	@Inject extension PaxNavigation
+	@Inject extension ITypeSystem
+	@Inject extension ITypeSystemInferrer
+	@Inject extension PaxNamingService
 
 	override dispatch CharSequence code(EObject it) {
 		throw new IllegalStateException("No dispatch function for " + getClass().name)
@@ -79,4 +94,25 @@ class PaxExpressionsGenerator extends ExpressionsGenerator {
 	override dispatch CharSequence code(NullLiteral expression) {
 		'null'
 	}	
+	
+	// ab hier aus CExpressionCode
+	
+	def dispatch CharSequence code(ElementReferenceExpression it){
+		it.code(it.definition)
+	}
+	
+	def dispatch CharSequence code(Expression it, Event target) '''«target.access»'''
+	
+	def dispatch CharSequence code(Expression it, VariableDefinition target) '''«target.access»'''
+	
+	// ensure we obtain an expression of type sc_boolean
+	def dispatch CharSequence sc_boolean_code(Expression it) '''«it.code»'''
+
+	def dispatch CharSequence sc_boolean_code(LogicalOrExpression it) '''(«code») ? true : false;'''
+
+	def dispatch CharSequence sc_boolean_code(LogicalAndExpression it) '''(«code») ? true : false;'''
+
+	def dispatch CharSequence sc_boolean_code(LogicalNotExpression it) '''(«code») ? true : false;'''
+
+	def dispatch CharSequence sc_boolean_code(LogicalRelationExpression it) '''(«code») ? true : false;'''
 }

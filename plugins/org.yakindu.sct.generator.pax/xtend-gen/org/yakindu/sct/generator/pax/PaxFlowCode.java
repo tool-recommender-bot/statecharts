@@ -1,10 +1,12 @@
 package org.yakindu.sct.generator.pax;
 
+import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import java.util.Arrays;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.xbase.lib.Extension;
+import org.yakindu.base.expressions.expressions.Expression;
 import org.yakindu.sct.generator.pax.PaxExpressionsGenerator;
 import org.yakindu.sct.generator.pax.PaxNaming;
 import org.yakindu.sct.generator.pax.PaxNamingService;
@@ -193,8 +195,18 @@ public class PaxFlowCode {
   }
   
   protected CharSequence _code(final Check it) {
-    throw new Error("Unresolved compilation problems:"
-      + "\nThe method or field sc_boolean_code is undefined for the type Expression");
+    StringConcatenation _builder = new StringConcatenation();
+    {
+      Expression _condition = it.getCondition();
+      boolean _notEquals = (!Objects.equal(_condition, null));
+      if (_notEquals) {
+        CharSequence _sc_boolean_code = this._paxExpressionsGenerator.sc_boolean_code(it.getCondition());
+        _builder.append(_sc_boolean_code);
+      } else {
+        _builder.append("true;");
+      }
+    }
+    return _builder;
   }
   
   protected CharSequence _code(final CheckRef it) {
@@ -248,10 +260,15 @@ public class PaxFlowCode {
   
   protected CharSequence _code(final EnterState it) {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append("//ActionCode for EnterState \'");
-    String _name = it.getClass().getName();
-    _builder.append(_name);
-    _builder.append("\' not defined");
+    String _activeState = this._paxNaming.activeState();
+    _builder.append(_activeState);
+    _builder.append(" = ");
+    String _enumName = this._paxNaming.enumName();
+    _builder.append(_enumName);
+    _builder.append(".");
+    String _shortName = this._paxNamingService.getShortName(it.getState());
+    _builder.append(_shortName);
+    _builder.append(";");
     _builder.newLineIfNotEmpty();
     return _builder;
   }
