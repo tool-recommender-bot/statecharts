@@ -108,11 +108,11 @@ class PaxExpressionsGenerator extends ExpressionsGenerator {
 	// ensure we obtain an expression of type sc_boolean
 	def dispatch CharSequence sc_boolean_code(Expression it) '''«it.code»'''
 
-	def dispatch CharSequence sc_boolean_code(LogicalOrExpression it) '''(«code») ? true : false;'''
+	def dispatch CharSequence sc_boolean_code(LogicalOrExpression it) '''(«code») ? true : false'''
 
-	def dispatch CharSequence sc_boolean_code(LogicalAndExpression it) '''(«code») ? true : false;'''
+	def dispatch CharSequence sc_boolean_code(LogicalAndExpression it) '''(«code») ? true : false'''
 
-	def dispatch CharSequence sc_boolean_code(LogicalNotExpression it) '''(«code») ? true : false;'''
+	def dispatch CharSequence sc_boolean_code(LogicalNotExpression it) '''(«code») ? true : false'''
 
-	def dispatch CharSequence sc_boolean_code(LogicalRelationExpression it) '''(«code») ? true : false;'''
+	def dispatch CharSequence sc_boolean_code(LogicalRelationExpression it) '''(«code») ? true : false'''
 }

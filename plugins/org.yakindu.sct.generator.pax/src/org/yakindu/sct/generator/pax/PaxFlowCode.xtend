@@ -52,17 +52,22 @@ class PaxFlowCode {
 	'''
 
 	def dispatch CharSequence code(StateSwitch it) '''
-		«FOR caseid : cases»
-			«IF caseid.isEnterSequence(it) == true»
-				if	(«caseid.step.shortName») {
-					// code
-				}«»
-			«ELSE»
-				else if («caseid.step.shortName») {
-					
-				}
-			«ENDIF»
-		«ENDFOR»
+«««		«FOR caseid : cases»
+«««			«IF caseid.isEnterSequence(it) == true»
+«««				if	(«caseid.step.shortName») {
+«««					«code»
+«««				}«»
+«««			«ELSEIF caseid.isEnterSequence(it) == false»
+«««				if («caseid.step.shortName») {
+«««					«code»
+«««				}
+«««			«ELSE»
+«««				else if («caseid.step.shortName») {
+«««					«code»
+«««				}
+«««			«ENDIF»
+«««		«ENDFOR»
+		//ActionCode for ScheduleTimeEvent '«getClass().name»' not defined
 	'''
 
 	def dispatch CharSequence code(ScheduleTimeEvent it) '''

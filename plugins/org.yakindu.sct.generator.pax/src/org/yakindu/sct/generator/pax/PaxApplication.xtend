@@ -89,7 +89,7 @@ class PaxApplication implements IContentTemplate {
 
 	def globalVariables(ExecutionFlow it) {
 		'''
-			«variablePrefix» «initializedVariable» : uint32_t = 0;
+			«variablePrefix» «initializedVariable» : uint32 = 0;
 			«variablePrefix» «activeState» : «enumName»;
 		'''
 	}
@@ -121,13 +121,15 @@ class PaxApplication implements IContentTemplate {
 		{
 			«code»
 		}
+		
 	'''
 
 	def dispatch functionImplementation(Check it) '''
 		function «shortName»() : bool
 		{
-			return «code»
+			return «code»;
 		}
+		
 	'''
 
 	def periodicRunCylceTrigger(ExecutionFlow flow) {
@@ -145,23 +147,27 @@ class PaxApplication implements IContentTemplate {
 		'''
 	}
 
-	def initAndEnterFunctino(ExecutionFlow flow) {
+	def initAndEnterFunctino(ExecutionFlow it) {
 		val defaultTimeTrigger = "100 " + PaxTypes.MS.unit;
 //		TODO handle trigger time for Statemachine correctly
 		'''
 			«functionPrefix» «initAndEnterFunctionName»() {
-				
 				«timeTrigger = defaultTimeTrigger»
-				«activeState» = ; //tbd
+				«activeState» = « enumName».«firstState.shortName»;
+				«firstState.entryAction.shortName»();
 				clearInEvents();
 				initialized = 1;
 			}
 		'''
 	}
+	
+	def firstState(ExecutionFlow it){
+		return states.findFirst[s | s.shortName != null]
+	}
 
 	def runCycleFunction(ExecutionFlow flow) {
 		'''
-			«functionPrefix» «runCycleFunctionName»() {
+			«functionPrefix» «runCycleFunctionName»() { 
 				if(initialized == 0) {
 					«initAndEnterFunctionName»();
 				}
@@ -197,7 +203,7 @@ class PaxApplication implements IContentTemplate {
 	}
 
 	def dispatch scopeTypeDeclMember(VariableDefinition it) {
-		'''uint32_t'''
+		'''uint32'''
 	// müsste eigentlich übers c type system gehen
 	}
 
