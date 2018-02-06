@@ -53,24 +53,49 @@ public class DefaultSCTPaletteFactory implements ISCTPaletteFactory {
 	public static final String FINALSTATE_ID = "FinalState";
 	public static final String SYNCHRONIZATION_ID = "Synchronization";
 
-	public void createPaletteEntries(PaletteRoot root) {
-		PaletteContainer container = createToolsCategory(root);
-		createTransitionEntry(container);
-		createStateEntry(container);
-		createCompositeStateEntry(container);
-		createOrthogonalStateEntry(container);
-		createRegionEntry(container);
-		createInitialStateEntry(container);
-		createShallowHistoryEntry(container);
-		createDeepHistoryEntry(container);
-		createFinalStateEntry(container);
-		createExitEntry(container);
-		createChoiceEntry(container);
-		createSynchronizationEntry(container);
-	}
+    
+    protected enum Category {
+        TRANSITIONS("Transitions"), 
+        STATES_AND_REGIONS("States & Regions"), 
+        ENTRIES("Entry States"), 
+        EXITS("End States"), 
+        FLOW_CONTROL("Flow Control");
 
-	protected PaletteContainer createToolsCategory(PaletteRoot root) {
-		PaletteDrawer drawer = new PaletteDrawer("Tools");
+        private String category;
+
+        Category(String category) {
+            this.category = category;
+        }
+
+        public String category() {
+            return category;
+        }
+    }
+
+    public void createPaletteEntries(PaletteRoot root) {
+        PaletteContainer transitionCategory = createCategory(root, Category.TRANSITIONS, findIcon("icons/obj16/transition-16.png"));
+        createTransitionEntry(transitionCategory);
+        PaletteContainer stateCategory = createCategory(root, Category.STATES_AND_REGIONS,findIcon("icons/obj16/State-16.png"));
+        createStateEntry(stateCategory);
+        createRegionEntry(stateCategory);
+        createCompositeStateEntry(stateCategory);
+        createOrthogonalStateEntry(stateCategory);
+        PaletteContainer entryCategory = createCategory(root, Category.ENTRIES,findIcon("icons/obj16/Initial-State-16.png"));
+        createInitialStateEntry(entryCategory);
+        createShallowHistoryEntry(entryCategory);
+        createDeepHistoryEntry(entryCategory);
+        PaletteContainer endCategory = createCategory(root, Category.EXITS, findIcon("icons/obj16/Final-State-16.png"));
+        createFinalStateEntry(endCategory);
+        createExitEntry(endCategory);
+        PaletteContainer flowCategory = createCategory(root, Category.FLOW_CONTROL,findIcon("icons/obj16/Choice-16.png"));
+        createChoiceEntry(flowCategory);
+        createSynchronizationEntry(flowCategory);
+    }
+
+    protected PaletteContainer createCategory(PaletteRoot root, Category cat, ImageDescriptor categorySmallIcon) {
+        PaletteDrawer drawer = new PaletteDrawer(cat.category());
+        drawer.setSmallIcon(categorySmallIcon);
+
 		root.add(drawer);
 		return drawer;
 	}
