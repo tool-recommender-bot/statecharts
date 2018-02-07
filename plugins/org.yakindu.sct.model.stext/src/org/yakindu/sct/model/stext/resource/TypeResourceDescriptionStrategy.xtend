@@ -3,17 +3,19 @@ package org.yakindu.sct.model.stext.resource
 import org.eclipse.core.resources.IFile
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.emf.ecore.util.EcoreUtil
+import org.eclipse.emf.workspace.util.WorkspaceSynchronizer
 import org.eclipse.xtext.naming.QualifiedName
 import org.eclipse.xtext.resource.EObjectDescription
 import org.eclipse.xtext.resource.IEObjectDescription
 import org.eclipse.xtext.resource.impl.DefaultResourceDescriptionStrategy
 import org.eclipse.xtext.util.IAcceptor
+import org.yakindu.base.types.Type
 import org.yakindu.base.types.TypesFactory
 import org.yakindu.base.types.typesystem.GenericTypeSystem
 import org.yakindu.base.types.typesystem.ITypeSystem
+import org.yakindu.sct.model.sgraph.RegularState
 import org.yakindu.sct.model.sgraph.Statechart
 import org.yakindu.sct.model.stext.stext.InterfaceScope
-import org.eclipse.emf.workspace.util.WorkspaceSynchronizer
 
 class TypeResourceDescriptionStrategy extends DefaultResourceDescriptionStrategy {
 
@@ -30,10 +32,20 @@ class TypeResourceDescriptionStrategy extends DefaultResourceDescriptionStrategy
 	}
 
 	def protected createTypeDescription(Statechart sc) {
-		createPackage => [
-			name = computePackageName(WorkspaceSynchronizer.getFile(sc.eResource))
-			member += createComplexType => [ scType |
+		createPackage => [ package |
+			package.name = computePackageName(WorkspaceSynchronizer.getFile(sc.eResource))
+			package.member += createEnumerationType => [
+				name = "States"
+				sc.eAllContents.filter(RegularState).forEach [ state |
+					enumerator += createEnumerator => [
+						name = state.name
+					]
+				]
+			]
+
+			package.member += createComplexType => [ scType |
 				scType.name = sc.name
+				scType.superTypes += createStatemachineType
 				// Named Interfaces
 				sc.scopes.filter(InterfaceScope).filter[name !== null].forEach [ iface |
 					scType.features += createProperty => [ prop |
@@ -50,47 +62,67 @@ class TypeResourceDescriptionStrategy extends DefaultResourceDescriptionStrategy
 				sc.scopes.filter(InterfaceScope).filter[name === null].forEach [ iface |
 					iface.declarations.forEach[decl|scType.features += EcoreUtil.copy(decl)]
 				]
-				// Implicit operations
+				// State enumerations
+				// isStateActive Operation
 				scType.features += createOperation => [
-					name = "init"
-					typeSpecifier = createTypeSpecifier => [
-						type = ts.getType(ITypeSystem.VOID)
-					]
-				]
-				scType.features += createOperation => [
-					name = "enter"
-					typeSpecifier = createTypeSpecifier => [
-						type = ts.getType(ITypeSystem.VOID)
-					]
-				]
-				scType.features += createOperation => [
-					name = "exit"
-					typeSpecifier = createTypeSpecifier => [
-						type = ts.getType(ITypeSystem.VOID)
-					]
-				]
-				scType.features += createOperation => [
-					name = "isActive"
-					typeSpecifier = createTypeSpecifier => [
-						type = ts.getType(ITypeSystem.BOOLEAN)
-					]
-				]
-				scType.features += createOperation => [
-					name = "isFinal"
-					typeSpecifier = createTypeSpecifier => [
-						type = ts.getType(ITypeSystem.BOOLEAN)
-					]
-				]
+					name = "isStateActive"
+					parameters += createParameter => [
+						name = "state"
+						typeSpecifier = createTypeSpecifier => [
+							type = package.member.head as Type
 
-				scType.features += createOperation => [
-					name = "runCycle"
+						]
+					]
 					typeSpecifier = createTypeSpecifier => [
 						type = ts.getType(ITypeSystem.BOOLEAN)
 					]
 				]
 			]
 		]
+	}
 
+	def createStatemachineType() {
+		createComplexType => [
+			name = "Statemachine"
+			// Implicit operations
+			features += createOperation => [
+				name = "init"
+				typeSpecifier = createTypeSpecifier => [
+					type = ts.getType(ITypeSystem.VOID)
+				]
+			]
+			features += createOperation => [
+				name = "enter"
+				typeSpecifier = createTypeSpecifier => [
+					type = ts.getType(ITypeSystem.VOID)
+				]
+			]
+			features += createOperation => [
+				name = "exit"
+				typeSpecifier = createTypeSpecifier => [
+					type = ts.getType(ITypeSystem.VOID)
+				]
+			]
+			features += createOperation => [
+				name = "isActive"
+				typeSpecifier = createTypeSpecifier => [
+					type = ts.getType(ITypeSystem.BOOLEAN)
+				]
+			]
+			features += createOperation => [
+				name = "isFinal"
+				typeSpecifier = createTypeSpecifier => [
+					type = ts.getType(ITypeSystem.BOOLEAN)
+				]
+			]
+
+			features += createOperation => [
+				name = "runCycle"
+				typeSpecifier = createTypeSpecifier => [
+					type = ts.getType(ITypeSystem.BOOLEAN)
+				]
+			]
+		]
 	}
 
 	// Copied From CHeader Resource TODO
