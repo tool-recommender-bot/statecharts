@@ -7,6 +7,9 @@
       <file-association
             content-type="org.eclipse.emf.compare.content.type"
             file-extensions="sct"/>
+       <file-association
+            content-type="org.eclipse.emf.compare.content.type"
+            file-extensions="ysc"/>
    </extension>
    <extension
          point="org.eclipse.emf.compare.rcp.matchEngine">

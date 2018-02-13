@@ -16,6 +16,10 @@
             class="org.yakindu.sct.model.stext.resource.StextResourceFactory"
             type="sct">
       </parser>
+        <parser
+            class="org.yakindu.sct.model.stext.resource.StextResourceFactory"
+            type="ysc">
+      </parser>
    </extension>
        <!-- Shared Editing Domain-->
      <extension

@@ -34,6 +34,10 @@
             fileExtension="sct"
             generatorId="yakindu::java">
       </ExtensionGeneratorMapping>
+       <ExtensionGeneratorMapping
+            fileExtension="ysc"
+            generatorId="yakindu::java">
+      </ExtensionGeneratorMapping>
    </extension>
 
 </plugin>

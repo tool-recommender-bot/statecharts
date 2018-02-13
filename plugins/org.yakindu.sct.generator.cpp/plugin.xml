@@ -27,6 +27,10 @@
             fileExtension="sct"
             generatorId="yakindu::cpp">
       </ExtensionGeneratorMapping>
+       <ExtensionGeneratorMapping
+            fileExtension="ysc"
+            generatorId="yakindu::cpp">
+      </ExtensionGeneratorMapping>
    </extension>
    <extension
          point="org.yakindu.sct.generator.core.featuretypes">

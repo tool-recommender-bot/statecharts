@@ -34,6 +34,10 @@
             fileExtension="sct"
             generatorId="yakindu::csharp">
       </ExtensionGeneratorMapping>
+      <ExtensionGeneratorMapping
+            fileExtension="ysc"
+            generatorId="yakindu::csharp">
+      </ExtensionGeneratorMapping>
    </extension>
 
 </plugin>

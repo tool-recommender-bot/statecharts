@@ -316,7 +316,7 @@ class GeneratorProjectTemplate {
 		   </extension>
 		«ENDIF»
 		 <extension point="org.yakindu.sct.generator.core.extensions">
-			 	<ExtensionGeneratorMapping fileExtension="sct" generatorId="«data.generatorId»">
+			 	<ExtensionGeneratorMapping fileExtension="ysc" generatorId="«data.generatorId»">
 			 	</ExtensionGeneratorMapping>
 		 	</extension>
 		</plugin>
