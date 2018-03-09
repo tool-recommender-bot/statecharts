@@ -78,14 +78,12 @@ class StructureMapping {
 		val _scope = scope.createScope
 		for (String importString : scope.imports){
 			val pkgImport = mapper.findPackageImport(scope.eResource,importString)
-			
 			if (pkgImport.present && URIConverter.INSTANCE.exists(pkgImport.get.getUri(), null)) {
 				val packageForNamespace = scope.eResource.resourceSet.getResource(pkgImport.get.uri, true).contents.
 					head
 					if(packageForNamespace instanceof Package)
 					packageForNamespace.member.filter(Declaration).toList.forEach[createImportDeclaration(_scope)]
-			}
-			
+			}	
 		}
 		return _scope
 	}
