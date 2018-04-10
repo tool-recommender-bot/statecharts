@@ -121,7 +121,7 @@ import com.google.inject.name.Named;
  * 
  */
 @ComposedChecks(validators = { SGraphJavaValidator.class, SCTResourceValidator.class, ExpressionsJavaValidator.class,
-		STextNamesAreUniqueValidator.class })
+		STextNamesAreUniqueValidator.class, StaticExpressionValidator.class })
 public class STextJavaValidator extends AbstractSTextJavaValidator implements STextValidationMessages {
 
 	@Inject
