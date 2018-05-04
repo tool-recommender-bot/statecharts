@@ -30,6 +30,7 @@ import org.yakindu.sct.model.stext.stext.StatechartScope
 import org.yakindu.sct.model.stext.stext.VariableDefinition
 
 import static org.eclipse.xtext.util.Strings.*
+import org.yakindu.sct.generator.cpp.submodules.APIGenerator
 
 class StatemachineImplementation implements IContentTemplate {
 	
@@ -43,6 +44,8 @@ class StatemachineImplementation implements IContentTemplate {
 	@Inject protected extension StateVectorExtensions
 	@Inject protected extension EventCode
 	@Inject protected extension ExpressionsChecker
+	
+	@Inject protected extension APIGenerator
 	
 	protected GeneratorEntry entry
 	
@@ -66,25 +69,25 @@ class StatemachineImplementation implements IContentTemplate {
 		
 		«constantDefinitions»
 		
-		«initFunction»
+		«init(entry)»
 		
-		«enterFunction»
+		«enter»
 		
-		«exitFunction»
+		«exit»
 		
-		«activeFunction»
+		«isActive»
 		
-		«finalFunction»
+		«isFinal»
 		
-		«runCycleFunction»
+		«runCycle»
 		
+		«isStateActive»
+
 		«clearInEventsFunction»
 		
 		«clearOutEventsFunction»
 
 		«timedStatemachineFunctions»
-
-		«isStateActiveFunction»
 		
 		«interfaceFunctions»
 		
