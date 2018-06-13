@@ -412,7 +412,7 @@ class StatemachineImplementation implements IContentTemplate {
 					«IF scope.defaultInterface»
 						void «module»::«variable.asSetter»(«variable.typeSpecifier.targetLanguageName» value)
 						{
-							«variable.access» = value;
+							«scope.instance».«variable.asSetter»(value);
 						}
 						
 					«ENDIF»

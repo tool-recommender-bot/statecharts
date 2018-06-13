@@ -188,7 +188,7 @@ class CppNaming extends Naming {
 		if (const) {
 			return '''«flow.module»::«scope.interfaceName»::«name.asEscapedIdentifier»'''
 		} else {
-			return '''«scope.instance».«name.asEscapedIdentifier»'''
+			return '''«scope.instance».«asGetter»()'''
 		}
 	}
 
