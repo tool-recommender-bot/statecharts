@@ -404,15 +404,15 @@ class StatemachineImplementation implements IContentTemplate {
 					
 				«ENDIF»
 				«IF !variable.readonly && !variable.const»
-					void «module»::«scope.interfaceName»::«variable.asSetter»(«variable.typeSpecifier.targetLanguageName» value)
+					void «module»::«scope.interfaceName»::«variable.asSetter»(«variable.typeSpecifier.targetLanguageName» «IF (variable.name != "value")»value«ELSE»v«ENDIF»)
 					{
-						«variable.localAccess» = value;
+						«variable.localAccess» = «IF (variable.name != "value")»value«ELSE»v«ENDIF»;
 					}
 					
 					«IF scope.defaultInterface»
-						void «module»::«variable.asSetter»(«variable.typeSpecifier.targetLanguageName» value)
+						void «module»::«variable.asSetter»(«variable.typeSpecifier.targetLanguageName» «IF (variable.name != "value")»value«ELSE»v«ENDIF»)
 						{
-							«scope.instance».«variable.asSetter»(value);
+							«scope.instance».«variable.asSetter»(«IF (variable.name != "value")»value«ELSE»v«ENDIF»);
 						}
 						
 					«ENDIF»
