@@ -405,6 +405,7 @@ The first variant of the _assert called_ statement begins with the keywords @ass
 
 In the second variant of the _assert called_ statement the keyword @with@ follows the structure described above. It is followed by a parenthesized list of parameters. This variant of the _assert called_ statement not only checks whether the named operation has been called, but for the test not to fail it also requires that the operation has been called with the specified parameters.
 
+Note that it is also possible to negate the assertion with the expression @assert !called@.
 ==<!-- End sctunit_keyword_called -->==
 
 h5. Asserting an outgoing event
