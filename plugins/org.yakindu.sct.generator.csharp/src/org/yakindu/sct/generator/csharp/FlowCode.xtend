@@ -122,7 +122,7 @@ class FlowCode {
 	
 	def dispatch CharSequence code(HistoryEntry it) '''
 		«stepComment»
-		if (historyVector[«region.historyVector.offset»] != State.$NullState$) {
+		if (historyVector[«region.historyVector.offset»] != State.NullState) {
 			«historyStep.code»
 		} «IF initialStep !== null»else {
 			«initialStep.code»

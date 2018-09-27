@@ -30,7 +30,7 @@ class CSharpTypeSystemAccess implements ICodegenTypeSystemAccess {
 		switch (type) {
 			case type === null || ts.isSame(type, getType(VOID)): 'void'
 			case ts.isSame(type, getType(REAL)): "double"
-			case ts.isSame(type, getType(INTEGER)): "long"
+			case ts.isSame(type, getType(INTEGER)): "int"
 			case ts.isSame(type, getType(BOOLEAN)): "bool"
 			case ts.isSame(type, getType(STRING)): "string"
 			default: "//" + this

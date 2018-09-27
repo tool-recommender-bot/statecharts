@@ -83,20 +83,20 @@ class Statemachine {
 	
 	def protected createFieldDeclarations(ExecutionFlow flow, GeneratorEntry entry) '''
 		«FOR event : flow.internalScopeEvents»
-		private bool «event.symbol»;
+		protected bool «event.symbol»;
 
 		«IF event.type !== null && !isSame(event.type, getType(GenericTypeSystem.VOID))»
-			private «event.typeSpecifier.targetLanguageName» «event.valueIdentifier»;
+			protected «event.typeSpecifier.targetLanguageName» «event.valueIdentifier»;
 
 		«ENDIF»
 		«ENDFOR»
 		«IF flow.timed»
-			private bool[] timeEvents = new bool[«flow.timeEvents.size»];
+			protected bool[] timeEvents = new bool[«flow.timeEvents.size»];
 		«ENDIF»
 		«FOR scope : flow.interfaceScopes»
 			«scope.toImplementation(entry)»
 
-			private «scope.interfaceImplName» «scope.interfaceName.asEscapedIdentifier»;
+			protected «scope.interfaceImplName» «scope.interfaceName.asEscapedIdentifier»;
 
 		«ENDFOR»
 		public enum State {
@@ -112,17 +112,17 @@ class Statemachine {
 		«ENDFOR»
 
 		«IF flow.hasHistory»
-		private State[] historyVector = new State[«flow.historyVector.size»];
+		protected State[] historyVector = new State[«flow.historyVector.size»];
 		«ENDIF»
-		private readonly State[] stateVector = new State[«flow.stateVector.size»];
+		protected readonly State[] stateVector = new State[«flow.stateVector.size»];
 		
-		private int nextStateIndex;
+		protected int nextStateIndex;
 		«IF flow.timed»
-		private ITimer timer;
+		protected ITimer timer;
 		«ENDIF»
 		«FOR internal : flow.internalScopes»
 		«IF internal.hasOperations()»
-			private «internal.getInternalOperationCallbackName()» operationCallback;
+			protected «internal.getInternalOperationCallbackName()» operationCallback;
 		«ENDIF»
 		«ENDFOR»
 	'''
@@ -144,18 +144,21 @@ class Statemachine {
 	def protected initFunction(ExecutionFlow flow) '''
 		public void init() {
 			«IF flow.timed»
-			if (timer == null) {
+			if (timer == null) 
+			{
 				throw new System.InvalidOperationException("timer not set.");
 			}
 			«ENDIF»
-			for (int i = 0; i < «flow.stateVector.size»; i++) {
+			for (int i = 0; i < «flow.stateVector.size»; i++) 
+			{
 				stateVector[i] = State.NullState;
 			}
 			
 			«IF flow.hasHistory»
-			for (int i = 0; i < «flow.historyVector.size»; i++) {
+			for (int i = 0; i < «flow.historyVector.size»; i++) 
+			{
 				historyVector[i] = State.NullState;
-			
+			}
 			«ENDIF»
 			clearEvents();
 			clearOutEvents();
@@ -300,7 +303,7 @@ class Statemachine {
 	'''
 	
 	def protected toImplementation(InterfaceScope scope, GeneratorEntry entry) '''
-		private sealed class «scope.getInterfaceImplName» : «scope.getInterfaceName» {
+		protected sealed class «scope.getInterfaceImplName» : «scope.getInterfaceName» {
 			«IF entry.createInterfaceObserver && scope.hasOutgoingEvents»
 			«scope.generateListeners»
 		«ENDIF»
@@ -381,7 +384,7 @@ class Statemachine {
 			}
 		
 		«IF event.type !== null && !isSame(event.type, getType(GenericTypeSystem.VOID))»
-				private void raise«event.name.asName»(«event.typeSpecifier.targetLanguageName» value) {
+				public void raise«event.name.asName»(«event.typeSpecifier.targetLanguageName» value) {
 					«event.symbol» = true;
 					«event.valueIdentifier» = value;
 					«IF entry.createInterfaceObserver»
@@ -395,7 +398,7 @@ class Statemachine {
 					«event.getIllegalAccessValidation()»
 					return «event.valueIdentifier»;
 				}
-			«ELSE»	private void raise«event.name.asName»() {
+			«ELSE»	public void raise«event.name.asName»() {
 				«event.symbol» = true;
 				«IF entry.createInterfaceObserver»
 					foreach («scope.interfaceListenerName» listener in listeners) {
@@ -414,7 +417,7 @@ class Statemachine {
 				«event.valueIdentifier» = value;
 			}
 			
-			private «event.typeSpecifier.targetLanguageName» get«event.name.asName»Value() {
+			public «event.typeSpecifier.targetLanguageName» get«event.name.asName»Value() {
 				«event.getIllegalAccessValidation()»
 				return «event.valueIdentifier»;
 			}
@@ -453,18 +456,18 @@ class Statemachine {
 	def protected internalScopeFunctions (ExecutionFlow flow) '''
 		«FOR event : flow.internalScopeEvents»
 			«IF event.type !== null && !isSame(event.type, getType(GenericTypeSystem.VOID))»
-				private void raise«event.name.asEscapedName»(«event.typeSpecifier.targetLanguageName» value) {
+				protected void raise«event.name.asEscapedName»(«event.typeSpecifier.targetLanguageName» value) {
 					«event.valueIdentifier» = value;
 					«event.symbol» = true;
 				}
 				
-				private «event.typeSpecifier.targetLanguageName» get«event.name.asEscapedName»Value() {
+				protected «event.typeSpecifier.targetLanguageName» get«event.name.asEscapedName»Value() {
 					«event.getIllegalAccessValidation()»
 					return «event.valueIdentifier»;
 				}
 			«ELSE»
 			
-				private void raise«event.name.asEscapedName»() {
+				protected void raise«event.name.asEscapedName»() {
 					«event.symbol» = true;
 				}
 			«ENDIF»
@@ -585,7 +588,7 @@ class Statemachine {
 	
 	def dispatch functionImplementation(Check it) '''
 		«stepComment»
-		private bool «functionName»() {
+		protected bool «functionName»() {
 			return «code.toString.trim»;
 		}
 		
@@ -593,7 +596,7 @@ class Statemachine {
 	
 	def dispatch functionImplementation(Step it) '''
 		«stepComment»
-		private void «functionName»() {
+		protected void «functionName»() {
 			«code.toString.trim»
 		}
 		
