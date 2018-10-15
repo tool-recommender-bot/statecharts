@@ -40,6 +40,7 @@ public class DefaultTimeTaskScheduler implements ITimeTaskScheduler {
 	protected boolean canceled;
 	protected boolean suspended;
 	protected boolean terminated;
+	private Thread thread;
 
 	public DefaultTimeTaskScheduler() {
 		tasks = new PriorityQueue<TimeTask>();
@@ -99,7 +100,9 @@ public class DefaultTimeTaskScheduler implements ITimeTaskScheduler {
 
 	@Override
 	public void start() {
-		Thread thread = new Thread(queueWorker);
+		if(thread != null)
+			return;
+		thread = new Thread(queueWorker);
 		thread.start();
 	}
 

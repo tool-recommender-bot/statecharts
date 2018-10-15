@@ -13,12 +13,17 @@ package org.yakindu.sct.simulation.core.sexec.container;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.util.EContentAdapter;
+import org.eclipse.xtext.EcoreUtil2;
 import org.yakindu.base.types.Direction;
 import org.yakindu.sct.model.sgraph.Statechart;
+import org.yakindu.sct.model.sruntime.ExecutionContext;
 import org.yakindu.sct.model.sruntime.ExecutionEvent;
 import org.yakindu.sct.model.sruntime.SRuntimePackage;
 import org.yakindu.sct.simulation.core.engine.ISimulationEngine;
 import org.yakindu.sct.simulation.core.sexec.interpreter.IExecutionFlowInterpreter;
+import org.yakindu.sct.simulation.core.util.ExecutionContextExtensions;
+
+import com.google.inject.Inject;
 
 /**
  * Event Driven implementation of the {@link ISimulationEngine}.
@@ -28,7 +33,10 @@ import org.yakindu.sct.simulation.core.sexec.interpreter.IExecutionFlowInterpret
  */
 public class EventDrivenSimulationEngine extends AbstractExecutionFlowSimulationEngine {
 
-	private EventDrivenCycleAdapter cycleAdapter;
+	@Inject
+	protected ExecutionContextExtensions extensions;
+
+	protected EventDrivenCycleAdapter cycleAdapter;
 
 	public EventDrivenSimulationEngine(Statechart statechart) {
 		super(statechart);
@@ -92,16 +100,22 @@ public class EventDrivenSimulationEngine extends AbstractExecutionFlowSimulation
 					&& notification.getFeature() == SRuntimePackage.Literals.EXECUTION_EVENT__RAISED) {
 				ExecutionEvent event = (ExecutionEvent) notification.getNotifier();
 				if (notification.getNewBooleanValue() != notification.getOldBooleanValue()) {
-					if (notification.getNewBooleanValue() && event.getDirection() != Direction.OUT) {
-						if (!suspended)
+					if (notification.getNewBooleanValue()
+							&& (event.getDirection() != Direction.OUT || isSubContext(event))) {
+						if (!suspended) {
+							System.out.println(
+									"Raised " + event + " runcycle on " + interpreter.getExecutionContext().getName());
 							interpreter.runCycle();
-						else {
+						} else {
 							cycleAfterResume = true;
 						}
 					}
 				}
 			}
+		}
 
+		protected boolean isSubContext(ExecutionEvent event) {
+			return EcoreUtil2.getContainerOfType(event, ExecutionContext.class) != interpreter.getExecutionContext();
 		}
 
 		@Override
@@ -119,5 +133,10 @@ public class EventDrivenSimulationEngine extends AbstractExecutionFlowSimulation
 				interpreter.runCycle();
 			cycleAfterResume = false;
 		}
+	}
+
+	public boolean isSubContext(ExecutionEvent event) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 }

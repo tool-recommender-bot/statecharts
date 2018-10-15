@@ -11,7 +11,6 @@
 package org.yakindu.sct.simulation.core.sexec.interpreter
 
 import com.google.inject.Inject
-import com.google.inject.Singleton
 import java.util.LinkedList
 import java.util.List
 import java.util.Map
@@ -47,8 +46,8 @@ import org.yakindu.sct.model.sruntime.ExecutionEvent
 import org.yakindu.sct.model.stext.lib.StatechartAnnotations
 import org.yakindu.sct.simulation.core.engine.scheduling.ITimeTaskScheduler
 import org.yakindu.sct.simulation.core.engine.scheduling.ITimeTaskScheduler.TimeTask
-import org.yakindu.sct.simulation.core.util.ExecutionContextExtensions
 import org.yakindu.sct.simulation.core.sexec.container.EventDrivenSimulationEngine.EventDrivenCycleAdapter
+import org.yakindu.sct.simulation.core.util.ExecutionContextExtensions
 
 /**
  * 
@@ -56,7 +55,6 @@ import org.yakindu.sct.simulation.core.sexec.container.EventDrivenSimulationEngi
  * @author axel terfloth - minimized changes on execution context
  * 
  */
-@Singleton
 class DefaultExecutionFlowInterpreter implements IExecutionFlowInterpreter, IEventRaiser {
 
 	@Data static class Event {
@@ -84,8 +82,6 @@ class DefaultExecutionFlowInterpreter implements IExecutionFlowInterpreter, IEve
 	protected StateVectorExtensions stateVectorExtensions;
 	@Inject
 	protected extension StatechartAnnotations
-	@Inject
-	extension ITypeValueProvider
 
 	protected ExecutionFlow flow
 	protected ExecutionContext executionContext
@@ -153,33 +149,34 @@ class DefaultExecutionFlowInterpreter implements IExecutionFlowInterpreter, IEve
 	}
 
 	override runCycle() {
-		val cycleAdapter = EcoreUtil.getExistingAdapter(executionContext, EventDrivenCycleAdapter) as EventDrivenCycleAdapter
+		val cycleAdapter = EcoreUtil.getExistingAdapter(executionContext,
+			EventDrivenCycleAdapter) as EventDrivenCycleAdapter
 		try {
-			if(cycleAdapter !== null )
+			if (cycleAdapter !== null)
 				executionContext.eAdapters.remove(cycleAdapter)
-		var Event event = null
-		do {
-			traceInterpreter.evaluate(beginRunCycleTrace, executionContext)
-			// activate an event if there is one
-			if (event !== null) {
-				event.event.raised = true
-				event.event.value = event.value
-				event = null
-			}
-			// perform a run to completion step
-			rtcStep
-			// get next event if available
-			if(! internalEventQueue.empty) event = internalEventQueue.poll
-			traceInterpreter.evaluate(endRunCycleTrace, executionContext)
-		} while (event !== null)
-		}finally{
-			if(cycleAdapter !== null)
+			var Event event = null
+			do {
+				traceInterpreter.evaluate(beginRunCycleTrace, executionContext)
+				// activate an event if there is one
+				if (event !== null) {
+					event.event.raised = true
+					event.event.value = event.value
+					event = null
+				}
+				// perform a run to completion step
+				rtcStep
+				// get next event if available
+				if(! internalEventQueue.empty) event = internalEventQueue.poll
+				traceInterpreter.evaluate(endRunCycleTrace, executionContext)
+			} while (event !== null)
+		} finally {
+			if (cycleAdapter !== null)
 				executionContext.eAdapters.add(cycleAdapter)
 		}
 	}
 
 	def rtcStep() {
-		
+
 		activeStateIndex = 0
 		if(executionContext.executedElements.size > 0) executionContext.executedElements.clear
 		executionContext.clearOutEvents
@@ -189,15 +186,6 @@ class DefaultExecutionFlowInterpreter implements IExecutionFlowInterpreter, IEve
 			activeStateIndex = activeStateIndex + 1
 		}
 		executionContext.clearLocalAndInEvents
-	}
-
-	def protected clearLocalAndInEvents(ExecutionContext executionContext) {
-		executionContext.allEvents.filter[direction == Direction.IN || direction == Direction.LOCAL].forEach [
-			if (raised) {
-				raised = false;
-				value = if(type !== null) type.defaultValue else null
-			}
-		]
 	}
 
 	override exit() {
@@ -352,5 +340,9 @@ class DefaultExecutionFlowInterpreter implements IExecutionFlowInterpreter, IEve
 			}
 			return true;
 		}
+	}
+
+	override getExecutionContext() {
+		return executionContext;
 	}
 }

@@ -10,16 +10,40 @@
  */
 package org.yakindu.sct.simulation.core.util
 
+import com.google.inject.Inject
 import java.util.ArrayList
 import java.util.List
 import org.yakindu.base.types.Direction
+import org.yakindu.base.types.typesystem.ITypeValueProvider
 import org.yakindu.sct.model.sgraph.RegularState
 import org.yakindu.sct.model.sruntime.ExecutionContext
+import org.yakindu.sct.model.sruntime.ExecutionEvent
+
+import static extension org.eclipse.xtext.EcoreUtil2.*
 
 class ExecutionContextExtensions {
 
+	@Inject
+	extension ITypeValueProvider
+
 	def clearOutEvents(ExecutionContext executionContext) {
-		executionContext.allEvents.filter[direction == Direction.OUT].forEach[if(raised) raised = false]
+		executionContext.allEvents.filter[direction == Direction.OUT && isContained(executionContext)].forEach [
+			if(raised) raised = false
+		]
+	}
+
+	def clearLocalAndInEvents(ExecutionContext executionContext) {
+		executionContext.allEvents.filter[direction == Direction.IN || direction == Direction.LOCAL].forEach [
+			if (raised) {
+				raised = false;
+				value = if(type !== null) type.defaultValue else null
+			}
+		]
+	}
+
+	def boolean isContained(ExecutionEvent event, ExecutionContext context) {
+		val eventContext = event.getContainerOfType(ExecutionContext);
+		return (context === eventContext)
 	}
 
 	def List<RegularState> getAllActiveStates(ExecutionContext context) {
