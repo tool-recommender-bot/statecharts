@@ -18,44 +18,44 @@ import org.eclipse.core.runtime.Path;
 import com.google.common.collect.Lists;
 
 public class CompileGTestCommand {
-
+	
 	private String dir;
 	private List<String> includes = Lists.newArrayList();
 	private List<String> sources = Lists.newArrayList();
 	private String compiler;
 	private String program;
-	
+
 	public CompileGTestCommand directory(String dir) {
 		this.dir = dir;
 		return this;
 	}
-	
+
 	public CompileGTestCommand includes(List<String> includes) {
 		this.includes = includes;
 		return this;
 	}
-	
+
 	public CompileGTestCommand sources(List<String> sources) {
 		this.sources  = sources;
 		return this;
 	}
-	
+
 	public CompileGTestCommand compiler(String compiler) {
 		this.compiler = compiler;
 		return this;
 	}
-	
+
 	public CompileGTestCommand program(String program) {
 		this.program = program;
 		return this;
 	}
-	
+
 	public List<String> build() {
-		List<String> command = new ArrayList<String>();
+		List<String> command = new ArrayList<>();
 		command.add(compiler);
 		command.add("-o");
 		command.add(getFileName(program));
-		command.add("-O2");
+		command.add("-O0");
 		if (dir != null)
 			command.add("-I" + dir + "/include");
 		for (String include : includes) {
@@ -72,11 +72,11 @@ public class CompileGTestCommand {
 		command.add("-lstdc++");
 		command.add("-pthread");
 		// command.add("-pg");
-		
+
 		System.out.println(command);
 		return command;
 	}
-	
+
 	protected String getFileName(String path) {
 		return new Path(path).lastSegment();
 	}
