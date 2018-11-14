@@ -38,12 +38,6 @@ public class STextTypeInferrer extends ExpressionsTypeInferrer {
 	public static final String TIME_SPEC = "The evaluation result of a time expression must be of type integer.";
 	public static final String MISSING_VALUE = "Need to assign a value to an event of type %s.";
 
-	public InferenceResult doInfer(Event e) {
-		// if an event is used within an expression, the type is boolean and the
-		// value indicates if the event is raised or not
-		return getResultFor(BOOLEAN);
-	}
-
 	public InferenceResult doInfer(Guard e) {
 		InferenceResult result = inferTypeDispatch(e.getExpression());
 		assertIsSubType(result, getResultFor(BOOLEAN), GUARD);

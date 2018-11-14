@@ -24,7 +24,7 @@ import com.google.common.collect.Lists;
 import com.google.inject.Inject;
 
 import junit.framework.TestCase;
-
+@Deprecated
 public abstract class AbstractTypeInferrerTest extends AbstractSTextTest {
 
 	@Rule
@@ -71,30 +71,6 @@ public abstract class AbstractTypeInferrerTest extends AbstractSTextTest {
 		return typeSystem.isSame(type, typeSystem.getType(typeName));
 	}
 
-	protected boolean isVoidType(Type type) {
-		return isType(type, ITypeSystem.VOID);
-	}
-
-	protected boolean isIntegerType(Type type) {
-		return isType(type, ITypeSystem.INTEGER);
-	}
-
-	protected boolean isRealType(Type type) {
-		return isType(type, ITypeSystem.REAL);
-	}
-
-	protected boolean isBooleanType(Type type) {
-		return isType(type, ITypeSystem.BOOLEAN);
-	}
-
-	protected boolean isStringType(Type type) {
-		return isType(type, ITypeSystem.STRING);
-	}
-	
-	protected boolean isAnyType(Type type) {
-		return isType(type, ITypeSystem.ANY);
-	}
-	
 	protected void expectIssue(Type object, String message) {
 		if (acceptor.getTraces(
 				org.yakindu.base.types.validation.IValidationIssueAcceptor.ValidationIssue.Severity.ERROR).isEmpty()) {

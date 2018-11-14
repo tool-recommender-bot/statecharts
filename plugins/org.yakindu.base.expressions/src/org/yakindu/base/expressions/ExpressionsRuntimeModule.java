@@ -11,6 +11,7 @@
 package org.yakindu.base.expressions;
 
 import org.yakindu.base.expressions.inferrer.ExpressionsTypeInferrer;
+import org.yakindu.base.expressions.terminals.ExpressionsValueConverterService;
 import org.yakindu.base.types.inferrer.ITypeSystemInferrer;
 import org.yakindu.base.types.typesystem.GenericTypeSystem;
 import org.yakindu.base.types.typesystem.ITypeSystem;
@@ -28,9 +29,14 @@ public class ExpressionsRuntimeModule extends org.yakindu.base.expressions.Abstr
 	protected ITypeSystem getTypeSystem() {
 		return GenericTypeSystem.getInstance();
 	}
-	
+
 	public Class<? extends ITypeSystemInferrer> bindITypeSystemInferrer() {
 		return ExpressionsTypeInferrer.class;
+	}
+
+	@Override
+	public Class<? extends org.eclipse.xtext.conversion.IValueConverterService> bindIValueConverterService() {
+		return ExpressionsValueConverterService.class;
 	}
 
 }

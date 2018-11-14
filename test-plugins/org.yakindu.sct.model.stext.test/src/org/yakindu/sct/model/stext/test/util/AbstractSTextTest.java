@@ -11,7 +11,7 @@
 package org.yakindu.sct.model.stext.test.util;
 
 import org.eclipse.emf.ecore.EObject;
-import org.yakindu.sct.model.stext.expressions.IExpressionParser;
+import org.yakindu.base.expressions.test.utils.IExpressionParser;
 
 import com.google.inject.Inject;
 

@@ -56,6 +56,7 @@ import org.yakindu.base.types.Annotation;
 import org.yakindu.base.types.AnnotationType;
 import org.yakindu.base.types.EnumerationType;
 import org.yakindu.base.types.Enumerator;
+import org.yakindu.base.types.Event;
 import org.yakindu.base.types.Expression;
 import org.yakindu.base.types.GenericElement;
 import org.yakindu.base.types.Operation;
@@ -116,19 +117,19 @@ public class ExpressionsTypeInferrer extends AbstractTypeSystemInferrer implemen
 		return getResultFor(BOOLEAN);
 	}
 
-	public InferenceResult doInfer(BitwiseXorExpression e) {
-		InferenceResult result1 = inferTypeDispatch(e.getLeftOperand());
-		InferenceResult result2 = inferTypeDispatch(e.getRightOperand());
-		assertIsSubType(result1, getResultFor(INTEGER), String.format(BITWISE_OPERATORS, "^", result1, result2));
-		assertIsSubType(result2, getResultFor(INTEGER), String.format(BITWISE_OPERATORS, "^", result1, result2));
-		return getResultFor(INTEGER);
-	}
-
 	public InferenceResult doInfer(BitwiseOrExpression e) {
 		InferenceResult result1 = inferTypeDispatch(e.getLeftOperand());
 		InferenceResult result2 = inferTypeDispatch(e.getRightOperand());
 		assertIsSubType(result1, getResultFor(INTEGER), String.format(BITWISE_OPERATORS, "|", result1, result2));
 		assertIsSubType(result2, getResultFor(INTEGER), String.format(BITWISE_OPERATORS, "|", result1, result2));
+		return getResultFor(INTEGER);
+	}
+
+	public InferenceResult doInfer(BitwiseXorExpression e) {
+		InferenceResult result1 = inferTypeDispatch(e.getLeftOperand());
+		InferenceResult result2 = inferTypeDispatch(e.getRightOperand());
+		assertIsSubType(result1, getResultFor(INTEGER), String.format(BITWISE_OPERATORS, "^", result1, result2));
+		assertIsSubType(result2, getResultFor(INTEGER), String.format(BITWISE_OPERATORS, "^", result1, result2));
 		return getResultFor(INTEGER);
 	}
 
@@ -139,6 +140,14 @@ public class ExpressionsTypeInferrer extends AbstractTypeSystemInferrer implemen
 		assertIsSubType(result2, getResultFor(INTEGER), String.format(BITWISE_OPERATORS, "&", result1, result2));
 		return getResultFor(INTEGER);
 	}
+	
+	public InferenceResult doInfer(LogicalRelationExpression e) {
+		InferenceResult result1 = inferTypeDispatch(e.getLeftOperand());
+		InferenceResult result2 = inferTypeDispatch(e.getRightOperand());
+		assertCompatible(result1, result2, String.format(COMPARSION_OPERATOR, e.getOperator(), result1, result2));
+		InferenceResult result = getResultFor(BOOLEAN);
+		return result;
+	}
 
 	public InferenceResult doInfer(ShiftExpression e) {
 		InferenceResult result1 = inferTypeDispatch(e.getLeftOperand());
@@ -148,14 +157,6 @@ public class ExpressionsTypeInferrer extends AbstractTypeSystemInferrer implemen
 		assertIsSubType(result2, getResultFor(INTEGER),
 				String.format(BITWISE_OPERATORS, e.getOperator(), result1, result2));
 		return getResultFor(INTEGER);
-	}
-
-	public InferenceResult doInfer(LogicalRelationExpression e) {
-		InferenceResult result1 = inferTypeDispatch(e.getLeftOperand());
-		InferenceResult result2 = inferTypeDispatch(e.getRightOperand());
-		assertCompatible(result1, result2, String.format(COMPARSION_OPERATOR, e.getOperator(), result1, result2));
-		InferenceResult result = getResultFor(BOOLEAN);
-		return result;
 	}
 
 	public InferenceResult doInfer(NumericalAddSubtractExpression e) {
@@ -391,6 +392,12 @@ public class ExpressionsTypeInferrer extends AbstractTypeSystemInferrer implemen
 		InferenceResult result2 = inferTypeDispatch(e.getInitialValue());
 		assertAssignable(result, result2, String.format(PROPERTY_INITIAL_VALUE, result2, result));
 		return result;
+	}
+
+	public InferenceResult doInfer(Event e) {
+		// if an event is used within an expression, the type is boolean and the
+		// value indicates if the event is raised or not
+		return getResultFor(BOOLEAN);
 	}
 
 	public InferenceResult doInfer(Operation e) {
