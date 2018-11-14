@@ -11,7 +11,10 @@
 package org.yakindu.sct.model.stext.test.util;
 
 import org.eclipse.xtext.junit4.IInjectorProvider;
+import org.eclipse.xtext.linking.LinkingScopeProviderBinding;
+import org.eclipse.xtext.scoping.IScopeProvider;
 import org.yakindu.base.base.BasePackage;
+import org.yakindu.base.expressions.test.utils.ExpressionsTestScopeProvider;
 import org.yakindu.base.types.inferrer.ITypeSystemInferrer;
 import org.yakindu.sct.domain.extension.DomainRegistry;
 import org.yakindu.sct.model.stext.inferrer.STextTypeInferrer;
@@ -35,12 +38,14 @@ public class STextInjectorProvider implements IInjectorProvider {
 	}
 
 	protected Module getModule() {
-		return Modules.combine(new STextRuntimeTestModule(), new AbstractModule() {
+		return Modules.override(new STextRuntimeTestModule()).with(new AbstractModule() {
 			@Override
 			protected void configure() {
 				bind(String.class).annotatedWith(Names.named(DomainRegistry.DOMAIN_ID))
 						.toInstance(BasePackage.Literals.DOMAIN_ELEMENT__DOMAIN_ID.getDefaultValueLiteral());
 				bind(ITypeSystemInferrer.class).to(STextTypeInferrer.class);
+				bind(IScopeProvider.class).annotatedWith(LinkingScopeProviderBinding.class)
+						.to(STextTestScopeProvider.class);
 			}
 		});
 	}

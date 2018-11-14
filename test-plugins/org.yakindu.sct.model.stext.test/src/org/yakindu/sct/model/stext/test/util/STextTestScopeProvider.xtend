@@ -21,6 +21,7 @@ import org.eclipse.xtext.resource.IEObjectDescription
 import org.eclipse.xtext.resource.impl.DefaultResourceDescriptionStrategy
 import org.eclipse.xtext.scoping.IScope
 import org.eclipse.xtext.scoping.impl.SimpleScope
+import org.yakindu.base.expressions.test.utils.TypesTestFactory
 import org.yakindu.base.types.ComplexType
 import org.yakindu.base.types.Declaration
 import org.yakindu.base.types.EnumerationType
@@ -32,13 +33,15 @@ import org.yakindu.sct.model.sgraph.State
 import org.yakindu.sct.model.stext.scoping.STextScopeProvider
 
 import static org.yakindu.base.types.typesystem.ITypeSystem.*
+import com.google.inject.Singleton
 
 /** 
  * @author andreas muelder - Initial contribution and API
  */
+@Singleton
 class STextTestScopeProvider extends STextScopeProvider {
-	
-	@Inject 
+
+	@Inject
 	protected IQualifiedNameProvider qfnProvider
 	@Inject
 	protected DefaultResourceDescriptionStrategy descriptionStrategy
@@ -46,24 +49,32 @@ class STextTestScopeProvider extends STextScopeProvider {
 	protected extension TypesTestFactory = TypesTestFactory.INSTANCE
 	protected extension SGraphFactory sgraphfactory = SGraphFactory.eINSTANCE
 	protected extension TypesFactory factory = TypesFactory.eINSTANCE;
-	
+
+	List<IEObjectDescription> descriptions = Lists.newArrayList
+
+	def setContext(EObject ... objects) {
+		descriptions.clear
+		ts.concreteTypes.forEach[addToIndex(descriptions, it)]
+		addToIndex(descriptions, objects)
+	}
+
 	protected ComplexType cmplxParamType
 
 	override IScope getScope(EObject context, EReference reference) {
 		var IScope parentScope = super.getScope(context, reference)
 		var List<IEObjectDescription> descriptions = Lists.newArrayList(parentScope.getAllElements())
-		
+		descriptions += this.descriptions
 		addToIndex(descriptions, createDummyModel)
 		addToIndex(descriptions, createComplexType)
 		addToIndex(descriptions, createEnumType)
 		cmplxParamType = createComplexParameterizedType()
 		addToIndex(descriptions, cmplxParamType)
 		addToIndex(descriptions, createParameterizedMethodOwner)
-		
+
 		val simpleTemplate = createPackageWithTemplateFunction()
 		addToIndex(descriptions, simpleTemplate)
 		addToIndex(descriptions, simpleTemplate.member.head)
-		
+
 		val intTemplate = createPackageWithTemplateFunctionInt()
 		addToIndex(descriptions, intTemplate)
 		addToIndex(descriptions, intTemplate.member.head)
@@ -71,48 +82,49 @@ class STextTestScopeProvider extends STextScopeProvider {
 		val boolTemplate = createPackageWithTemplateFunctionBool()
 		addToIndex(descriptions, boolTemplate)
 		addToIndex(descriptions, boolTemplate.member.head)
-		
+
 		val mixedTemplate = createPackageWithTemplateFunctionTwoParams()
 		addToIndex(descriptions, mixedTemplate)
 		addToIndex(descriptions, mixedTemplate.member.head)
-		
+
 		val cptTemplate = createComplexParameterizedTypeTemplateTest()
 		addToIndex(descriptions, cptTemplate)
 		addToIndex(descriptions, cptTemplate.member.head)
-		
-		
+
 		val nestedTemplate = createPackageWithNestedComplexTypeFunction()
 		addToIndex(descriptions, nestedTemplate)
 		addToIndex(descriptions, nestedTemplate.member.head)
-		
+
 		val nestedNestedTemplate = createPackageWithNestedNestedComplexTypeFunction()
 		addToIndex(descriptions, nestedNestedTemplate)
 		addToIndex(descriptions, nestedNestedTemplate.member.head)
-		
+
 		addToIndex(descriptions, createPrimitiveType("SubBool", BOOLEAN))
 		addToIndex(descriptions, createPrimitiveType("SubReal", REAL))
 		addToIndex(descriptions, createPrimitiveType("SubInt", INTEGER))
 		addToIndex(descriptions, createPrimitiveType("SubString", STRING))
-		
+
 		addToIndex(descriptions, createOperationWithOptionalParameter)
 		addToIndex(descriptions, createOperationWithMultipleOptionalParameters)
 		addToIndex(descriptions, createOperationWithMixedOptionalParameters)
 		addToIndex(descriptions, createOperationWithMixedOptionalAndVarargsParameters)
-		
+
 		addToIndex(descriptions, createComplexTypeWithOverloadedOperations)
-		
+
 		return new SimpleScope(descriptions)
 	}
-	
-	def protected void addToIndex(List<IEObjectDescription> descriptions, EObject element) {
-		descriptionStrategy.createEObjectDescriptions(element, [descriptions+=it])
-		if (element instanceof ComplexType) {
-			for (Declaration feature : element.features) {
-				descriptionStrategy.createEObjectDescriptions(element, [descriptions+=it])
+
+	def protected void addToIndex(List<IEObjectDescription> descriptions, EObject ... elements) {
+		elements.forEach [ element |
+			descriptionStrategy.createEObjectDescriptions(element, [descriptions += it])
+			if (element instanceof ComplexType) {
+				for (Declaration feature : element.features) {
+					descriptionStrategy.createEObjectDescriptions(element, [descriptions += it])
+				}
 			}
-		}
+		]
 	}
-	
+
 	def protected Operation createOperationWithOptionalParameter() {
 		val op = createOperation("optOp1", ts.getType(VOID))
 		val p1 = createParameter("p1", ts.getType(INTEGER))
@@ -120,7 +132,7 @@ class STextTestScopeProvider extends STextScopeProvider {
 		op.parameters += p1
 		op
 	}
-	
+
 	def protected Operation createOperationWithMultipleOptionalParameters() {
 		val op = createOperation("optOp2", ts.getType(VOID))
 		val p1 = createParameter("p1", ts.getType(INTEGER))
@@ -131,7 +143,7 @@ class STextTestScopeProvider extends STextScopeProvider {
 		op.parameters += p2
 		op
 	}
-	
+
 	def protected Operation createOperationWithMixedOptionalParameters() {
 		val op = createOperation("optOp3", ts.getType(VOID))
 		val p1 = createParameter("p1", ts.getType(INTEGER))
@@ -141,7 +153,7 @@ class STextTestScopeProvider extends STextScopeProvider {
 		op.parameters += p2
 		op
 	}
-	
+
 	def protected Operation createOperationWithMixedOptionalAndVarargsParameters() {
 		val op = createOperation("optOp4", ts.getType(VOID))
 		val p1 = createParameter("p1", ts.getType(INTEGER))
@@ -154,7 +166,7 @@ class STextTestScopeProvider extends STextScopeProvider {
 		op.parameters += p3
 		op
 	}
-	
+
 	def protected State createDummyModel() {
 		val stateA = createState => [
 			name = "A"
@@ -188,7 +200,7 @@ class STextTestScopeProvider extends STextScopeProvider {
 		enumType.addToResource
 		enumType
 	}
-	
+
 	// TODO: check if needed to add into resource
 	def protected addToResource(EObject element) {
 		val resource = new ResourceImpl(URI.createURI("types2"))
@@ -208,23 +220,23 @@ class STextTestScopeProvider extends STextScopeProvider {
 	 * @return
 	 */
 	def protected ComplexType createComplexParameterizedType() {
-		val complexType = createComplexType => [ct |
+		val complexType = createComplexType => [ ct |
 			ct.name = "ComplexParameterizedType"
 			ct.typeParameters += createTypeParameter("T1")
 			ct.typeParameters += createTypeParameter("T2")
 			ct.features += createProperty("prop1", ct.typeParameters.get(0))
 			ct.features += createProperty("prop2", ct.typeParameters.get(1))
 			ct.features += createProperty("prop3", ct.toTypeSpecifier => [
-				typeArguments+=ct.typeParameters.get(1).toTypeSpecifier
-				typeArguments+=ct.typeParameters.get(0).toTypeSpecifier
+				typeArguments += ct.typeParameters.get(1).toTypeSpecifier
+				typeArguments += ct.typeParameters.get(0).toTypeSpecifier
 			])
-			ct.features += createOperation => [op |
+			ct.features += createOperation => [ op |
 				op.name = "op"
 				op.typeSpecifier = ct.typeParameters.get(0).toTypeSpecifier
 				op.parameters += createParameter("param1", ct.typeParameters.get(0).toTypeSpecifier)
 				op.parameters += createParameter("param2", ct.typeParameters.get(1).toTypeSpecifier)
 			]
-			ct.features += createOperation => [op |
+			ct.features += createOperation => [ op |
 				op.name = "op2"
 				op.typeSpecifier = ct.typeParameters.get(1).toTypeSpecifier
 			]
@@ -232,7 +244,7 @@ class STextTestScopeProvider extends STextScopeProvider {
 		complexType.addToResource
 		complexType
 	}
-	
+
 	/** 
 	 * ComplexTypeWithOverloadedOperations {
 	 *   integer overloaded(integer p);
@@ -240,14 +252,14 @@ class STextTestScopeProvider extends STextScopeProvider {
 	 * }
 	 */
 	def protected ComplexType createComplexTypeWithOverloadedOperations() {
-		val complexType = createComplexType => [ct |
+		val complexType = createComplexType => [ ct |
 			ct.name = "ComplexTypeWithOverloadedOperations"
-			ct.features += createOperation => [op |
+			ct.features += createOperation => [ op |
 				op.name = "overloaded"
 				op.parameters += createParameter("p", ts.getType(INTEGER))
 				op.typeSpecifier = ts.getType(INTEGER).toTypeSpecifier
 			]
-			ct.features += createOperation => [op |
+			ct.features += createOperation => [ op |
 				op.name = "overloaded"
 				op.parameters += createParameter("p", ts.getType(BOOLEAN))
 				op.typeSpecifier = ts.getType(BOOLEAN).toTypeSpecifier
@@ -256,27 +268,27 @@ class STextTestScopeProvider extends STextScopeProvider {
 		complexType.addToResource
 		complexType
 	}
-	
+
 	/**
 	 * ParameterizedMethodOwner {
 	 * 	T1 genericOp<T1, T2>(T1 p1, T2 p1);
 	 * }
 	 */
 	def protected ComplexType createParameterizedMethodOwner() {
-		val complexType = createComplexType => [ct |
-	 		ct.name = "ParameterizedMethodOwner"
-	 		ct.features += createOperation => [op |
-	 			op.name = "genericOp"
-	 			op.typeParameters += createTypeParameter("T1")
-	 			op.typeParameters += createTypeParameter("T2")
-	 			op.typeSpecifier = op.typeParameters.get(0).toTypeSpecifier
-	 			op.parameters += createParameter("p1", op.typeParameters.get(0).toTypeSpecifier)
-	 			op.parameters += createParameter("p2", op.typeParameters.get(1).toTypeSpecifier)
-	 		]
-	 	]
+		val complexType = createComplexType => [ ct |
+			ct.name = "ParameterizedMethodOwner"
+			ct.features += createOperation => [ op |
+				op.name = "genericOp"
+				op.typeParameters += createTypeParameter("T1")
+				op.typeParameters += createTypeParameter("T2")
+				op.typeSpecifier = op.typeParameters.get(0).toTypeSpecifier
+				op.parameters += createParameter("p1", op.typeParameters.get(0).toTypeSpecifier)
+				op.parameters += createParameter("p2", op.typeParameters.get(1).toTypeSpecifier)
+			]
+		]
 		complexType
 	}
-	
+
 	/**
 	 * Returns a model of the following function:
 	 * 
@@ -302,7 +314,7 @@ class STextTestScopeProvider extends STextScopeProvider {
 			]
 		]
 	}
-	
+
 	/**
 	 * Returns a model of the following function:
 	 * 
@@ -330,7 +342,7 @@ class STextTestScopeProvider extends STextScopeProvider {
 			]
 		]
 	}
-	
+
 	/**
 	 * Returns a model of the following function:
 	 * 
@@ -361,7 +373,7 @@ class STextTestScopeProvider extends STextScopeProvider {
 			]
 		]
 	}
-	
+
 	/**
 	 * Returns a model of the following function:
 	 * 
@@ -393,7 +405,7 @@ class STextTestScopeProvider extends STextScopeProvider {
 			]
 		]
 	}
-	
+
 	/**
 	 * Returns a model of the following function:
 	 * 
@@ -419,7 +431,7 @@ class STextTestScopeProvider extends STextScopeProvider {
 			]
 		]
 	}
-	
+
 	/**
 	 * Returns a model of the following function:
 	 * 
@@ -447,8 +459,6 @@ class STextTestScopeProvider extends STextScopeProvider {
 			]
 		]
 	}
-	
-
 
 	/**
 	 * Returns a model of the following function:
@@ -458,13 +468,13 @@ class STextTestScopeProvider extends STextScopeProvider {
 	 * 	   return ctp.prop1;
 	 * }
 	 */
-	def createComplexParameterizedTypeTemplateTest() { 
+	def createComplexParameterizedTypeTemplateTest() {
 		createRootPackage("cptTemplate") => [ types |
 			types.member += factory.createOperation => [ op |
 				op.name = "getProp"
 				op.typeParameters += createTypeParameter("T")
 				op.typeParameters += createTypeParameter("T2")
-				
+
 				op.parameters += factory.createParameter => [
 					name = "cpt"
 					typeSpecifier = factory.createTypeSpecifier => [
@@ -477,5 +487,5 @@ class STextTestScopeProvider extends STextScopeProvider {
 			]
 		]
 	}
-	
+
 }

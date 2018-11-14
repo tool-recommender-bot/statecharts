@@ -11,10 +11,10 @@
 package org.yakindu.base.expressions.test.utils;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.scoping.IScopeProvider;
 import org.yakindu.base.types.Expression;
 import org.yakindu.base.types.Type;
 import org.yakindu.base.types.inferrer.ITypeSystemInferrer;
@@ -58,7 +58,11 @@ public class TypeInferrerTester {
 		assertTrue(isType(inferType(expression), ITypeSystem.STRING));
 	}
 
-	protected boolean isType(Type type, String typeName) {
+	public void assertVoid(String expression) {
+		assertTrue(isType(inferType(expression), ITypeSystem.VOID));
+	}
+
+	public boolean isType(Type type, String typeName) {
 		return typeSystem.isSame(type, typeSystem.getType(typeName));
 	}
 
@@ -67,7 +71,7 @@ public class TypeInferrerTester {
 	}
 
 	public Type inferType(String expression, String ruleName) {
-		EObject parseResult = expressionParser.parseExpression(expression, Expression.class.getSimpleName());
+		EObject parseResult = expressionParser.parseExpression(expression, ruleName);
 		assertNotNull(parseResult);
 		acceptor = new ListBasedValidationIssueAcceptor();
 		InferenceResult result = inferrer.infer(parseResult, acceptor);
@@ -76,9 +80,7 @@ public class TypeInferrerTester {
 		return result.getType();
 	}
 
-	public void expectIssue(String expression, String message) {
-		@SuppressWarnings("unused")
-		Type type = inferType(expression);
+	public void expectIssue(Type type, String message) {
 		if (acceptor
 				.getTraces(org.yakindu.base.types.validation.IValidationIssueAcceptor.ValidationIssue.Severity.ERROR)
 				.isEmpty()) {
@@ -89,9 +91,15 @@ public class TypeInferrerTester {
 				.iterator().next().getMessage());
 	}
 
+	public void expectIssue(String expression, String message) {
+		expectIssue(inferType(expression), message);
+	}
+
 	public void expectNoIssues(String expression) {
-		@SuppressWarnings("unused")
-		Type type = inferType(expression);
+		expectNoIssues(inferType(expression));
+	}
+
+	public void expectNoIssues(Type type) {
 		if (!acceptor
 				.getTraces(org.yakindu.base.types.validation.IValidationIssueAcceptor.ValidationIssue.Severity.ERROR)
 				.isEmpty()) {

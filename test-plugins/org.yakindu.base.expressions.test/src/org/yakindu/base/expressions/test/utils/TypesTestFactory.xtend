@@ -22,7 +22,7 @@ class TypesTestFactory {
 	public static final TypesTestFactory INSTANCE = new TypesTestFactory();
 
 	@Inject
-	protected ITypeSystem ts;
+	public ITypeSystem ts;
 
 	protected TypesFactory factory = TypesFactory.eINSTANCE
 

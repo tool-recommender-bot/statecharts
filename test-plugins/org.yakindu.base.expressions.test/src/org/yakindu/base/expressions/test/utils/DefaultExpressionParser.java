@@ -14,6 +14,8 @@ import java.io.StringReader;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.XtextFactory;
@@ -42,7 +44,9 @@ public class DefaultExpressionParser {
 	private Provider<XtextResource> xtextResourceProvider;
 
 	public EObject parseExpression(String expression, String ruleName) {
+		ResourceSet resourceSet = new ResourceSetImpl();
 		XtextResource resource = xtextResourceProvider.get();
+		resourceSet.getResources().add(resource);
 		resource.setURI(URI.createURI("test", true));
 		ParserRule parserRule = XtextFactory.eINSTANCE.createParserRule();
 		parserRule.setName(ruleName);

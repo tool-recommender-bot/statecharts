@@ -508,4 +508,198 @@ class ExpressionsTypeInferrerTest {
 		assertBoolean("(true) ? false : true")
 		expectIssue("(true) ? 4 : false", "Could not determine a common type for integer and boolean.")
 	}
+	
+	//TBD: Introduce TypesTypeInferrer?
+	//
+//	@Test def void testParameterizedType() {
+//		assertTrue(
+//			assertBoolean(
+//				inferTypeResultForExpression("t.prop1", "internal var t:ComplexParameterizedType<boolean, integer>").
+//					getType()))
+//		assertTrue(
+//			assertInteger(
+//				inferTypeResultForExpression("t.prop2", "internal var t:ComplexParameterizedType<boolean, integer>").
+//					getType()))
+//		assertTrue(
+//			assertBoolean(
+//				inferTypeResultForExpression("t.prop1.prop1",
+//					"internal var t:ComplexParameterizedType<ComplexParameterizedType<boolean, integer>, integer>").
+//					getType()))
+//		expectNoIssues("b = t.op(true, 10)", "internal var t:ComplexParameterizedType<boolean, integer> var b:boolean")
+//		expectErrors("b = t.op(true, 10.5)", "internal var t:ComplexParameterizedType<boolean, integer> var b:boolean",
+//			ITypeSystemInferrer.NOT_COMPATIBLE_CODE, 1)
+//		assertTrue(
+//			assertBoolean(
+//				inferTypeResultForExpression("b = t.op(true, 10)",
+//					"internal var t:ComplexParameterizedType<integer> var b:boolean").getType()))
+//		assertTrue(
+//			isAnyType(inferTypeResultForExpression("t.prop1", "internal var t:ComplexParameterizedType<>").getType()))
+//		assertTrue(
+//			isAnyType(inferTypeResultForExpression("t.prop1", "internal var t:ComplexParameterizedType").getType()))
+//		assertTrue(
+//			assertInteger(
+//				inferTypeResultForExpression("t.op(1, 2)", "internal var t:ComplexParameterizedType").getType()))
+//		expectNoIssues("b = t.op2()", "internal: var t:ComplexParameterizedType<integer, boolean> var b: boolean")
+//		assertTrue(
+//			isAnyType(
+//				inferTypeResultForExpression("t.prop1.prop1",
+//					"internal var t:ComplexParameterizedType<ComplexParameterizedType<>, integer>").getType()))
+//		expectNoIssues(
+//			"t2 = t.prop3", '''internal var t:ComplexParameterizedType<boolean, integer> var t2:ComplexParameterizedType<integer, boolean>''')
+//		expectErrors(
+//			"t = t.prop3", '''internal var t:ComplexParameterizedType<boolean, integer> var t2:ComplexParameterizedType<integer, boolean>''',
+//			ITypeSystemInferrer.NOT_SAME_CODE, 2)
+//	}
+//
+//	@Test def void testOperationWithParameterizedType() {
+//		var String scopes = '''internal var t1:ComplexParameterizedType<boolean, integer>var t2:ComplexParameterizedType<integer, boolean>operation op(p:ComplexParameterizedType<boolean, integer>) : void'''
+//		expectNoIssues("op(t1)", scopes)
+//		expectErrors("op(t2)", scopes, ITypeSystemInferrer.NOT_SAME_CODE, 2)
+//	}
+//
+//	@Test def void testNullType() {
+//		var String scope = "internal var cp:ComplexType var i:integer"
+//		expectNoIssues("cp == null", scope)
+//		expectNoIssues("null != cp", scope)
+//		expectNoIssues("cp = null", scope)
+//		expectIssue(inferTypeResult("null = cp", Expression.getSimpleName(), scope).getType(),
+//			"Assignment operator '=' may only be applied on compatible types, not on null and ComplexType.")
+//		expectIssue(inferTypeResult("i == null", Expression.getSimpleName(), scope).getType(),
+//			"Comparison operator '==' may only be applied on compatible types, not on integer and null.")
+//		expectIssue(inferTypeResult("i = null", Expression.getSimpleName(), scope).getType(),
+//			"Assignment operator '=' may only be applied on compatible types, not on integer and null.")
+//	}
+//
+//	/** 
+//	 * Uses a model of the following function:
+//	 * template <typename T>
+//	 * T templateOp(T a, T b) {
+//	 * return a > b ? a : b;
+//	 * }
+//	 */
+//	@Test def void testOperationWithTypeParameters() {
+//		var String scopes = '''internal var myI : integer var myF : real var myB: boolean var myCPT: ComplexParameterizedType<boolean, integer> var myCPT2: ComplexParameterizedType<integer, boolean> '''
+//		expectNoIssues("myI = templateOp(myI, myI)", scopes)
+//		assertTrue(assertInteger(inferTypeResultForExpression("myI = templateOp(myI, myI)", scopes).getType()))
+//		expectNoIssues("myF = templateOp(3+5, 2.3)", scopes)
+//		assertTrue(isRealType(inferTypeResultForExpression("myF = templateOp(3+5, 2.3)", scopes).getType()))
+//		expectNoIssues("myCPT = templateOp(myCPT, myCPT)", scopes)
+//		expectError("myB = templateOp(myI, myI)", scopes, ITypeSystemInferrer.NOT_COMPATIBLE_CODE)
+//		expectError("myB = templateOp(3+5, boolean)", scopes, ITypeSystemInferrer.NOT_INFERRABLE_TYPE_PARAMETER_CODE)
+//		expectErrors("myCPT2 = templateOp(myCPT, myCPT)", scopes, ITypeSystemInferrer.NOT_SAME_CODE, 2)
+//		expectErrors("myCPT = templateOp(myCPT, myCPT2)", scopes, ITypeSystemInferrer.NOT_SAME_CODE, 2)
+//	}
+//
+//	@Test def void testNestedGenericElementInferrer() {
+//		var String scope = '''import nestedTemplate internal: var nestedCPT: ComplexParameterizedType<boolean, integer> var myI: integer var myB: boolean '''
+//		expectError("myI = nestedOp(3)", scope, ITypeSystemInferrer.NOT_COMPATIBLE_CODE)
+//		expectNoIssues("myI = nestedOp(nestedCPT)", scope)
+//		expectError("myB = nestedOp(nestedCPT)", scope, ITypeSystemInferrer.NOT_COMPATIBLE_CODE)
+//	}
+//
+//	@Test def void testNestedNestedGenericElementInferrer() {
+//		var String scope = '''import nestedNestedTemplate internal: var nestedCPT: ComplexParameterizedType<ComplexParameterizedType<boolean, string>, integer> var myS: string var b: boolean '''
+//		expectNoIssues("myS = nestedNestedOp(nestedCPT)", scope)
+//		expectError("b = nestedNestedOp(nestedCPT)", scope, ITypeSystemInferrer.NOT_COMPATIBLE_CODE)
+//	}
+//
+//	@Test def void testGenericFeatureCall() {
+//		var String scope = '''internal: var cmo: ParameterizedMethodOwner var i: integer var r: real var b: boolean '''
+//		expectNoIssues("i = cmo.genericOp(1, 2)", scope)
+//		expectNoIssues("r = cmo.genericOp(1.3, 2)", scope)
+//		expectNoIssues("r = cmo.genericOp(1, 2)", scope)
+//		expectNoIssues("b = cmo.genericOp(true, 2)", scope)
+//		expectNoIssues("b = cmo.genericOp(true, 2)", scope)
+//		expectError("i = cmo.genericOp(1.3, 2)", scope, ITypeSystemInferrer.NOT_COMPATIBLE_CODE)
+//		expectError("r = cmo.genericOp(false, 2)", scope, ITypeSystemInferrer.NOT_COMPATIBLE_CODE)
+//		expectError("b = cmo.genericOp(1.3, 2)", scope, ITypeSystemInferrer.NOT_COMPATIBLE_CODE)
+//	}
+//
+//	@Test def void testOperationOverloading() {
+//		var String scopes = '''internal var b : boolean var i : integer var owner: ComplexTypeWithOverloadedOperations '''
+//		expectNoIssues("i = owner.overloaded(1)", scopes)
+//		assertTrue(assertInteger(inferTypeResultForExpression("i = owner.overloaded(1)", scopes).getType()))
+//		expectNoIssues("b = owner.overloaded(true)", scopes)
+//		assertTrue(assertBoolean(inferTypeResultForExpression("b = owner.overloaded(true)", scopes).getType()))
+//	}
+//
+//	@Test
+//	def void testOperationCall() {
+//		expectNoIssues("opInt(1)")
+//		expectNoIssues("opInt(vi)")
+//		expectNoIssues("opInt(vsi)")
+//		expectNoIssues("opReal(1.1)")
+//		expectNoIssues("opReal(1)")
+//		expectNoIssues("opReal(vr)")
+//		expectNoIssues("opReal(vsr)")
+//		expectNoIssues("opString(\"hello\")")
+//		expectNoIssues("opString(vs)")
+//		expectNoIssues("opString(vss)")
+//		expectNoIssues("opBoolean(true)")
+//		expectNoIssues("opBoolean(vb)")
+//		expectNoIssues("opBoolean(vsb)")
+//		expectIssue("opInt(1.1)", ITypeSystemInferrer.NOT_COMPATIBLE_CODE, 1)
+//		expectIssue("opInt(vr)", ITypeSystemInferrer.NOT_COMPATIBLE_CODE, 1)
+//		expectIssue("opInt(vsr)", ITypeSystemInferrer.NOT_COMPATIBLE_CODE, 1)
+//		expectIssue("opSubInt(vi)", ITypeSystemInferrer.NOT_COMPATIBLE_CODE, 1)
+//		expectIssue("opSubReal(vr)", ITypeSystemInferrer.NOT_COMPATIBLE_CODE, 1)
+//		expectIssue("opSubBool(vb)", ITypeSystemInferrer.NOT_COMPATIBLE_CODE, 1)
+//		expectIssue("opSubString(vs)", ITypeSystemInferrer.NOT_COMPATIBLE_CODE, 1) // TODO: actually one would expect these to work
+//		expectNoIssues("opSubInt(1)");
+//		expectNoIssues("opSubReal(1.1)");
+//		expectNoIssues("opSubBool(true)");
+//		expectNoIssues("opSubString(\"hello\")");
+//	}
+//
+//	@Test
+//	def void testOperationCallVarArgs() {
+//		expectNoIssues("opInt(1)")
+//		expectNoIssues("opInt(vi)")
+//		expectNoIssues("opInt(vsi)")
+//		expectNoIssues("opInt(1, vi, vsi)")
+//		expectNoIssues("opReal(1.1)")
+//		expectNoIssues("opReal(1)")
+//		expectNoIssues("opReal(vr)")
+//		expectNoIssues("opReal(vsr)")
+//		expectNoIssues("opReal(1.1, 1, vr, vsr)")
+//		expectNoIssues("opString(\"hello\")")
+//		expectNoIssues("opString(vs)")
+//		expectNoIssues("opString(vss)")
+//		expectNoIssues("opString(\"hello\", vs, vss)")
+//		expectNoIssues("opBoolean(true)")
+//		expectNoIssues("opBoolean(vb)")
+//		expectNoIssues("opBoolean(vsb)")
+//		expectNoIssues("opBoolean(true, vb, vsb)")
+////		expectErrors("opInt(1.1)", ITypeSystemInferrer.NOT_COMPATIBLE_CODE, 1)
+////		expectErrors("opInt(vr)", ITypeSystemInferrer.NOT_COMPATIBLE_CODE, 1)
+////		expectErrors("opInt(vsr)", ITypeSystemInferrer.NOT_COMPATIBLE_CODE, 1)
+////		expectErrors("opInt(1.1, vr, vsr)", ITypeSystemInferrer.NOT_COMPATIBLE_CODE, 3)
+////		expectErrors("opSubInt(vi, vi)", ITypeSystemInferrer.NOT_COMPATIBLE_CODE, 2)
+////		expectErrors("opSubReal(vr, vr)", ITypeSystemInferrer.NOT_COMPATIBLE_CODE, 2)
+////		expectErrors("opSubBool(vb, vb)", ITypeSystemInferrer.NOT_COMPATIBLE_CODE, 2)
+////		expectErrors("opSubString(vs, vs)", ITypeSystemInferrer.NOT_COMPATIBLE_CODE, 2)
+//	}
+//
+////	@Test
+////	def void testOperationCallWithOptionalParameter() {
+////		var OperationDefinition opDef = StextTestFactory._createOperation("opWithOptionals",
+////			StextFactory.eINSTANCE.createInternalScope())
+////		var Parameter pReq = typesFactory.createParameter("pReq", ITypeSystem.INTEGER, false)
+////		var Parameter pOpt = typesFactory.createParameter("pOpt", ITypeSystem.INTEGER, true)
+////		opDef.getParameters().add(pReq)
+////		opDef.getParameters().add(pOpt)
+////		var Argument boolArg = (parseExpression("true", Argument.getSimpleName()) as Argument)
+////		var Argument intArg = (parseExpression("17", Argument.getSimpleName()) as Argument)
+////		// opWithOptionals(17, 17) => valid
+////		var ElementReferenceExpression opCall1 = StextTestFactory._createOperationCall(opDef, intArg, intArg)
+////		expectNoIssues(opCall1)
+////		// opWithOptionals(17) => valid, because of optional parameter
+////		var ElementReferenceExpression opCall2 = StextTestFactory._createOperationCall(opDef, intArg)
+////		expectNoIssues(opCall2)
+////		// opWithOptionals(true) => invalid
+////		var ElementReferenceExpression opCall3 = StextTestFactory._createOperationCall(opDef, boolArg)
+////		expectError(opCall3, ITypeSystemInferrer.NOT_COMPATIBLE_CODE)
+////	}
+	
+
 }

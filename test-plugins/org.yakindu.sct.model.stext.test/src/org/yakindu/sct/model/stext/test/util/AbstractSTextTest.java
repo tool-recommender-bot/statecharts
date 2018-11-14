@@ -11,7 +11,7 @@
 package org.yakindu.sct.model.stext.test.util;
 
 import org.eclipse.emf.ecore.EObject;
-import org.yakindu.base.expressions.test.utils.IExpressionParser;
+import org.yakindu.sct.model.stext.expressions.STextExpressionParser;
 
 import com.google.inject.Inject;
 
@@ -23,7 +23,7 @@ import com.google.inject.Inject;
 public abstract class AbstractSTextTest {
 
 	@Inject
-	private IExpressionParser expressionParser;
+	private STextExpressionParser expressionParser;
 
 	protected EObject parseExpression(String expression, String ruleName) {
 		return expressionParser.parseExpression(expression, ruleName);
