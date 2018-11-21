@@ -93,6 +93,14 @@ class CppNaming extends Naming {
 		TIME_EVENTS
 	}
 	
+	override enterStateTracingFctID(ExecutionFlow it) {
+		STATE_ENTERED
+	}
+	
+	override exitStateTracingFctID(ExecutionFlow it) {
+		STATE_EXITED
+	}
+	
 	override dispatch scopeTypeDeclMember(VariableDefinition it) '''
 		«IF type.name != 'void'»«IF const»static const «ENDIF»«typeSpecifier.targetLanguageName» «name.asEscapedIdentifier»;«ENDIF»
 	'''
@@ -118,6 +126,10 @@ class CppNaming extends Naming {
 
 	def OCB_Instance(Scope it) {
 		it.instance + "_OCB"
+	}
+	
+	def tracingInstance(ExecutionFlow it) {
+		"iface_TR"
 	}
 
 	def dispatch String getInterfaceName(Scope it) '''
@@ -240,6 +252,10 @@ class CppNaming extends Naming {
 			typeSpecifier.targetLanguageName + ' value'
 		else
 			''
+	}
+	
+	def tracingModule(ExecutionFlow it) {
+		module + '_TR'
 	}
 	
 	def List<String> statechartNamespace(ExecutionFlow it) {

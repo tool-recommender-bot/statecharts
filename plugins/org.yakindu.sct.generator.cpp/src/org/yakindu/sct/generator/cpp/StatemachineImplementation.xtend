@@ -139,6 +139,7 @@ class StatemachineImplementation implements IContentTemplate {
 	def protected initialisationList(ExecutionFlow it) {
 		'''
 			«IF timed»«timerInstance»(«NULL_STRING»),«ENDIF»
+			«IF entry.tracingUsed»«tracingInstance»(0),«ENDIF»
 			«STATEVECTOR_POS»(0)«FOR s : getInterfaces»,
 			«s.instance»()«IF s.hasOperations && !entry.useStaticOPC»,
 			«s.OCB_Instance»(«NULL_STRING»)«ENDIF»«ENDFOR»
@@ -405,6 +406,11 @@ class StatemachineImplementation implements IContentTemplate {
 				}
 			«ENDIF»
 		«ENDFOR»
+		«IF entry.tracingUsed»
+		void «module»::set«tracingModule»(«tracingModule»* tracingcallback) {
+			«tracingInstance» = tracingcallback;
+		}
+		«ENDIF»
 	'''
 	
 	def generateVariables(ExecutionFlow it, StatechartScope scope)
