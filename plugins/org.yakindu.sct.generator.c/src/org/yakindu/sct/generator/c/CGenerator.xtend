@@ -37,11 +37,11 @@ class CGenerator implements IExecutionFlowGenerator {
 	@Inject extension Types types
 	@Inject extension StatemachineHeader statemachineHeader
 	@Inject extension StatemachineSource statemachineSource
-	@Inject extension StatemachineRequiredHeader statemachineRequiredHeader
-	@Inject extension SExecExtensions
-	@Inject extension GenmodelEntries
-	@Inject extension Naming
-	@Inject extension ICoreLibraryHelper
+	@Inject protected extension StatemachineRequiredHeader statemachineRequiredHeader
+	@Inject protected extension SExecExtensions
+	@Inject protected extension GenmodelEntries
+	@Inject protected extension Naming
+	@Inject protected extension ICoreLibraryHelper
 
 	@Inject
 	IGenArtifactConfigurations configs
